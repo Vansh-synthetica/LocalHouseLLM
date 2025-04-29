@@ -1,99 +1,168 @@
 
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
+
+  // Animation variants
+  const navVariants = {
+    hidden: { y: -20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" }
+    }
+  };
+
+  const linkVariants = {
+    hidden: { opacity: 0, y: -5 },
+    visible: (custom: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: custom * 0.1, duration: 0.5, ease: "easeOut" }
+    })
+  };
 
   return (
-    <nav className="fixed w-full z-50 bg-richBlack/80 backdrop-blur-md border-b border-white/5">
+    <motion.nav
+      initial="hidden"
+      animate="visible"
+      variants={navVariants}
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/90 backdrop-blur-md shadow-md' : 'bg-transparent'
+      }`}
+    >
       <div className="max-container py-4 flex items-center justify-between">
-        <div className="flex items-center">
-          <Link to="/" className="text-2xl font-bold text-white flex items-center gap-2">
-            <div className="w-8 h-8 rounded-md bg-gradient-to-tr from-cyberBlue to-neonMint flex items-center justify-center text-richBlack">
-              LH
-            </div>
-            <span>LocalHouseLLM</span>
-          </Link>
-        </div>
+        <Link to="/" className="text-2xl text-white flex items-center gap-2 group">
+          <motion.div
+            className="w-10 h-10 rounded-md bg-white flex items-center justify-center text-black font-playfair relative overflow-hidden"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+          >
+            <span className="font-bold text-lg relative z-10">LH</span>
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+              initial={{ x: -100 }}
+              animate={{ x: 100 }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            />
+          </motion.div>
+          <div className="overflow-hidden">
+            <motion.span 
+              className="font-playfair text-xl font-bold tracking-tight"
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              LocalHouseLLM
+            </motion.span>
+          </div>
+        </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
-          <Link to="/demo" className="text-white hover:text-cyberBlue transition-colors">
-            Demo
-          </Link>
-          <Link to="/vision" className="text-white hover:text-cyberBlue transition-colors">
-            Vision
-          </Link>
-          <Link to="/blog" className="text-white hover:text-cyberBlue transition-colors">
-            Research
-          </Link>
-          <Link to="/about" className="text-white hover:text-cyberBlue transition-colors">
-            About
-          </Link>
-          <Link to="/contact" className="ml-4">
-            <Button variant="outline" className="border-cyberBlue text-cyberBlue hover:bg-cyberBlue/10">
-              Contact
-            </Button>
-          </Link>
+        <div className="hidden md:flex items-center gap-8">
+          {['demo', 'vision', 'blog', 'about'].map((item, index) => (
+            <motion.div
+              key={item}
+              custom={index}
+              variants={linkVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <Link 
+                to={`/${item}`} 
+                className={`text-white relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+                  location.pathname === `/${item}` ? 'after:scale-x-100' : ''
+                }`}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </Link>
+            </motion.div>
+          ))}
+          <motion.div
+            custom={4}
+            variants={linkVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Link to="/contact">
+              <Button 
+                variant="outline" 
+                className="border-white text-white bg-transparent hover:bg-white/5 hover:border-white/70"
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                Contact
+              </Button>
+            </Link>
+          </motion.div>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <button 
+          <motion.button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-white p-2"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </motion.button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-richBlack/95 backdrop-blur-md border-b border-white/5">
+        <motion.div 
+          className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/5 shadow-lg"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="max-container py-4 flex flex-col gap-4">
-            <Link 
-              to="/demo" 
-              className="text-white px-4 py-2 rounded-md hover:bg-white/5"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Demo
-            </Link>
-            <Link 
-              to="/vision" 
-              className="text-white px-4 py-2 rounded-md hover:bg-white/5"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Vision
-            </Link>
-            <Link 
-              to="/blog" 
-              className="text-white px-4 py-2 rounded-md hover:bg-white/5"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Research
-            </Link>
-            <Link 
-              to="/about" 
-              className="text-white px-4 py-2 rounded-md hover:bg-white/5"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </Link>
-            <Link 
-              to="/contact" 
-              className="text-cyberBlue px-4 py-2 rounded-md border border-cyberBlue/50 hover:bg-cyberBlue/10"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
+            {['demo', 'vision', 'blog', 'about', 'contact'].map((item, index) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.3 }}
+              >
+                <Link 
+                  to={`/${item}`} 
+                  className={`text-white px-4 py-2 block transition-all duration-300 hover:bg-white/5 rounded-md ${
+                    location.pathname === `/${item}` ? 'bg-white/10' : ''
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </Link>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 

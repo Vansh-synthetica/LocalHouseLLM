@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 98%;
 
-    --card: 240 10% 3.9%;
+    --card: 0 0% 3%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 10% 3.9%;
+    --popover: 0 0% 3%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 192 100% 50%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 240 3.7% 15.9%;
+    --secondary: 0 0% 9%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 157 100% 76%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 192 100% 50%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 80%;
 
     --radius: 0.5rem;
   }
@@ -41,39 +41,108 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border selection:bg-white/20 selection:text-white;
   }
+  
   body {
-    @apply bg-richBlack text-foreground font-inter antialiased;
+    @apply bg-black text-foreground font-inter antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    @apply font-playfair font-bold tracking-tight;
   }
   
   .glass {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-lg transition-all duration-300;
+  }
+  
+  .premium-glass {
+    @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/15 rounded-lg shadow-xl transition-all duration-300;
+  }
+  
+  .luxury-card {
+    @apply relative overflow-hidden bg-gradient-to-b from-white/8 to-white/3 backdrop-blur-md border border-white/10 rounded-lg shadow-xl;
+  }
+  
+  .luxury-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 opacity-0 transition-opacity duration-700;
+  }
+  
+  .luxury-card:hover::before {
+    @apply opacity-100 animate-shimmer;
   }
   
   .glow-border {
-    @apply border border-cyberBlue/50 shadow-[0_0_10px_rgba(0,224,255,0.5)];
+    @apply border border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-all duration-500;
   }
   
   .hover-glow {
-    @apply transition-all duration-300 hover:border-cyberBlue hover:shadow-[0_0_15px_rgba(0,224,255,0.7)];
+    @apply transition-all duration-500 hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)];
   }
   
   .card-shadow {
-    @apply shadow-[0_8px_30px_rgb(0,0,0,0.12)];
+    @apply shadow-[0_10px_50px_rgba(0,0,0,0.5)];
   }
   
   .feature-card {
-    @apply bg-secondary p-6 rounded-lg hover:-translate-y-1 transition-all duration-300 hover:glow-border;
+    @apply luxury-card p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)];
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent;
+  }
+  
+  .btn-premium {
+    @apply relative overflow-hidden bg-white text-black px-8 py-3 rounded-md font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-white/10 after:absolute after:inset-0 after:bg-gradient-to-r after:from-white/0 after:via-white/30 after:to-white/0 after:translate-x-[-100%] after:hover:animate-shimmer;
+  }
+  
+  .btn-outline-premium {
+    @apply relative overflow-hidden bg-transparent px-8 py-3 rounded-md font-medium border border-white/30 transition-all duration-300 hover:bg-white/5 hover:border-white/50 after:absolute after:inset-0 after:bg-gradient-to-r after:from-white/0 after:via-white/10 after:to-white/0 after:translate-x-[-100%] after:hover:animate-shimmer;
   }
 }
 
 @layer utilities {
   .max-container {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .mask-radial {
+    mask-image: radial-gradient(circle at center, black, transparent 70%);
+  }
+  
+  .animate-fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.17, 0.67, 0.26, 1);
   }
 }
