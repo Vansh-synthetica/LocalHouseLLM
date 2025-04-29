@@ -106,14 +106,14 @@ const Navbar = () => {
             animate="visible"
           >
             <Link to="/contact">
-              <Button 
-                variant="outline" 
-                className="border-white text-white bg-transparent hover:bg-white/5 hover:border-white/70"
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                Contact
-              </Button>
+              <motion.div whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300 }}>
+                <Button 
+                  variant="outline" 
+                  className="border-white text-white bg-transparent hover:bg-white/5 hover:border-white/70"
+                >
+                  Contact
+                </Button>
+              </motion.div>
             </Link>
           </motion.div>
         </div>
