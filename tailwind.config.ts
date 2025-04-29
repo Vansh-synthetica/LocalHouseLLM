@@ -148,7 +148,8 @@ export default {
       },
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
-        'playfair': ['Playfair Display', 'serif']
+        'playfair': ['Playfair Display', 'serif'],
+        'raleway': ['Raleway', 'sans-serif']
       }
     }
   },
