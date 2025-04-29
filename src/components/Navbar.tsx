@@ -53,13 +53,13 @@ const Navbar = () => {
       }`}
     >
       <div className="max-container py-4 flex items-center justify-between">
-        <Link to="/" className="text-2xl text-white flex items-center gap-2 group">
+        <Link to="/" className="text-xl text-white flex items-center gap-2 group">
           <motion.div
-            className="w-10 h-10 rounded-md bg-white flex items-center justify-center text-black font-playfair relative overflow-hidden"
+            className="w-9 h-9 rounded-md bg-white flex items-center justify-center text-black font-playfair relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >
-            <span className="font-bold text-lg relative z-10">LH</span>
+            <span className="font-bold text-base relative z-10">LH</span>
             <motion.div 
               className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
               initial={{ x: -100 }}
@@ -69,7 +69,7 @@ const Navbar = () => {
           </motion.div>
           <div className="overflow-hidden">
             <motion.span 
-              className="font-playfair text-xl font-bold tracking-tight"
+              className="font-playfair text-lg font-bold tracking-tight"
               initial={{ y: 20 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.5 }}
@@ -80,8 +80,8 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          {['demo', 'vision', 'blog', 'about'].map((item, index) => (
+        <div className="hidden md:flex items-center gap-6">
+          {['demo', 'vision', 'about'].map((item, index) => (
             <motion.div
               key={item}
               custom={index}
@@ -91,7 +91,7 @@ const Navbar = () => {
             >
               <Link 
                 to={`/${item}`} 
-                className={`text-white relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+                className={`text-white text-sm relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                   location.pathname === `/${item}` ? 'after:scale-x-100' : ''
                 }`}
               >
@@ -100,7 +100,7 @@ const Navbar = () => {
             </motion.div>
           ))}
           <motion.div
-            custom={4}
+            custom={3}
             variants={linkVariants}
             initial="hidden"
             animate="visible"
@@ -109,7 +109,7 @@ const Navbar = () => {
               <motion.div whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300 }}>
                 <Button 
                   variant="outline" 
-                  className="border-white text-white bg-transparent hover:bg-white/5 hover:border-white/70"
+                  className="border-white text-white text-sm bg-transparent hover:bg-white/5 hover:border-white/70"
                 >
                   Contact
                 </Button>
@@ -126,7 +126,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </motion.button>
         </div>
       </div>
@@ -140,8 +140,8 @@ const Navbar = () => {
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="max-container py-4 flex flex-col gap-4">
-            {['demo', 'vision', 'blog', 'about', 'contact'].map((item, index) => (
+          <div className="max-container py-4 flex flex-col gap-3">
+            {['demo', 'vision', 'about', 'contact'].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -20 }}
@@ -150,7 +150,7 @@ const Navbar = () => {
               >
                 <Link 
                   to={`/${item}`} 
-                  className={`text-white px-4 py-2 block transition-all duration-300 hover:bg-white/5 rounded-md ${
+                  className={`text-white text-sm px-4 py-2 block transition-all duration-300 hover:bg-white/5 rounded-md ${
                     location.pathname === `/${item}` ? 'bg-white/10' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}

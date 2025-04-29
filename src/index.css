@@ -86,19 +86,11 @@
   }
   
   .feature-card {
-    @apply luxury-card p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)];
+    @apply luxury-card p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)];
   }
   
   .text-gradient {
     @apply bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent;
-  }
-  
-  .btn-premium {
-    @apply relative overflow-hidden bg-white text-black px-8 py-3 rounded-md font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-white/10 after:absolute after:inset-0 after:bg-gradient-to-r after:from-white/0 after:via-white/30 after:to-white/0 after:translate-x-[-100%] after:hover:animate-shimmer;
-  }
-  
-  .btn-outline-premium {
-    @apply relative overflow-hidden bg-transparent px-8 py-3 rounded-md font-medium border border-white/30 transition-all duration-300 hover:bg-white/5 hover:border-white/50 after:absolute after:inset-0 after:bg-gradient-to-r after:from-white/0 after:via-white/10 after:to-white/0 after:translate-x-[-100%] after:hover:animate-shimmer;
   }
 }
 

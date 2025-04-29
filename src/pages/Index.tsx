@@ -27,7 +27,6 @@ const Index = () => {
     const featureElements = document.querySelectorAll('.feature-item');
     featureElements.forEach((el) => {
       observer.observe(el);
-      // Using opacity/transform directly in TS since we're not manipulating HTMLElement style anymore
       el.classList.add('opacity-0', 'translate-y-5');
     });
 
@@ -76,7 +75,7 @@ const Index = () => {
           <div className="absolute w-[200px] h-[200px] right-[15%] bottom-[20%] rounded-full bg-white/5 blur-[60px] opacity-20"></div>
         </div>
         
-        <div className="max-container relative z-10 pt-20">
+        <div className="max-container relative z-10 pt-16">
           <motion.div 
             className="w-full flex flex-col items-center text-center"
             initial="hidden"
@@ -84,7 +83,7 @@ const Index = () => {
             variants={staggerContainer}
           >
             <motion.div 
-              className="w-20 h-20 mb-8 rounded-xl bg-white flex items-center justify-center text-black font-bold text-2xl relative overflow-hidden"
+              className="w-16 h-16 mb-6 rounded-xl bg-white flex items-center justify-center text-black font-bold text-xl relative overflow-hidden"
               variants={fadeIn}
               custom={0}
             >
@@ -98,7 +97,7 @@ const Index = () => {
             </motion.div>
             
             <motion.h1 
-              className="text-5xl md:text-7xl font-playfair font-bold mb-8 tracking-tight text-white max-w-4xl leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 tracking-tight text-white max-w-4xl leading-tight"
               variants={fadeIn}
               custom={1}
             >
@@ -107,7 +106,7 @@ const Index = () => {
             </motion.h1>
             
             <motion.div
-              className="overflow-hidden w-20 mb-8"
+              className="overflow-hidden w-16 mb-6"
               variants={fadeIn}
               custom={2}
             >
@@ -118,7 +117,7 @@ const Index = () => {
             </motion.div>
 
             <motion.p 
-              className="text-xl md:text-2xl text-gray-300 mb-16 max-w-2xl"
+              className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl"
               variants={fadeIn}
               custom={3}
             >
@@ -126,20 +125,20 @@ const Index = () => {
             </motion.p>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-6"
+              className="flex flex-col sm:flex-row gap-4"
               variants={fadeIn}
               custom={4}
             >
               <Link to="/vision">
-                <Button className="btn-premium text-lg group">
+                <Button className="bg-white text-black hover:bg-white/90 text-base group px-6 py-2">
                   Explore Our Vision
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </Link>
               <Link to="/demo">
-                <Button variant="outline" className="btn-outline-premium text-lg group">
+                <Button variant="outline" className="border-white/50 text-white bg-transparent hover:bg-white/5 hover:border-white/70 text-base">
                   Try the Demo
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </Link>
             </motion.div>
@@ -155,17 +154,17 @@ const Index = () => {
         >
           <motion.button 
             onClick={() => featuresRef.current?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-white/10 rounded-full p-3 hover:bg-white/20 transition-colors"
+            className="bg-white/10 rounded-full p-2 hover:bg-white/20 transition-colors"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
           >
-            <ArrowRight className="w-6 h-6 text-white rotate-90" />
+            <ArrowRight className="w-5 h-5 text-white rotate-90" />
           </motion.button>
         </motion.div>
       </section>
       
       {/* Features Grid */}
-      <section ref={featuresRef} className="py-32 bg-black relative overflow-hidden">
+      <section ref={featuresRef} className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900/50 via-black to-black"></div>
         </div>
@@ -176,10 +175,10 @@ const Index = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
             <motion.h2 
-              className="text-4xl md:text-5xl font-playfair font-bold mb-6"
+              className="text-3xl md:text-4xl font-playfair font-bold mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -189,15 +188,15 @@ const Index = () => {
             </motion.h2>
             
             <motion.div 
-              className="h-[2px] w-20 bg-white/30 mx-auto mb-6"
+              className="h-[2px] w-16 bg-white/30 mx-auto mb-5"
               initial={{ width: 0 }}
-              whileInView={{ width: 80 }}
+              whileInView={{ width: 64 }}
               transition={{ duration: 1 }}
               viewport={{ once: true }}
             />
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <motion.div 
               className="feature-item feature-card"
               initial={{ opacity: 0, y: 30 }}
@@ -210,8 +209,8 @@ const Index = () => {
                 transition: { duration: 0.3 }
               }}
             >
-              <div className="mb-6 w-14 h-14 rounded-md bg-white/10 flex items-center justify-center relative overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="mb-5 w-12 h-12 rounded-md bg-white/10 flex items-center justify-center relative overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
                 <motion.div 
@@ -221,8 +220,8 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Modular Intelligence</h3>
-              <p className="text-gray-300 leading-relaxed">Specialized models for word categories leading to more accurate and context-aware responses, with precision built into every interaction.</p>
+              <h3 className="text-xl font-playfair font-bold mb-3">Modular Intelligence</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">Specialized models for word categories leading to more accurate and context-aware responses, with precision built into every interaction.</p>
             </motion.div>
             
             <motion.div 
@@ -237,8 +236,8 @@ const Index = () => {
                 transition: { duration: 0.3 }
               }}
             >
-              <div className="mb-6 w-14 h-14 rounded-md bg-white/10 flex items-center justify-center relative overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="mb-5 w-12 h-12 rounded-md bg-white/10 flex items-center justify-center relative overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
                 <motion.div 
@@ -248,8 +247,8 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Live Learning</h3>
-              <p className="text-gray-300 leading-relaxed">Adaptive models that grow smarter from usage while maintaining privacy and safety guardrails, ensuring continuous improvement.</p>
+              <h3 className="text-xl font-playfair font-bold mb-3">Live Learning</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">Adaptive models that grow smarter from usage while maintaining privacy and safety guardrails, ensuring continuous improvement.</p>
             </motion.div>
             
             <motion.div 
@@ -264,8 +263,8 @@ const Index = () => {
                 transition: { duration: 0.3 }
               }}
             >
-              <div className="mb-6 w-14 h-14 rounded-md bg-white/10 flex items-center justify-center relative overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="mb-5 w-12 h-12 rounded-md bg-white/10 flex items-center justify-center relative overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
                 <motion.div 
@@ -275,15 +274,15 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Verified Safety</h3>
-              <p className="text-gray-300 leading-relaxed">1,000-point funnel-based verification layer ensures outputs are reliable, accurate, and safe for all applications.</p>
+              <h3 className="text-xl font-playfair font-bold mb-3">Verified Safety</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">1,000-point funnel-based verification layer ensures outputs are reliable, accurate, and safe for all applications.</p>
             </motion.div>
           </div>
         </div>
       </section>
       
       {/* Demo Teaser */}
-      <section className="py-32 bg-black relative overflow-hidden">
+      <section className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900/30 via-black to-black"></div>
         </div>
@@ -296,7 +295,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <motion.h2 
-              className="text-4xl md:text-5xl font-playfair font-bold mb-6"
+              className="text-3xl md:text-4xl font-playfair font-bold mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -306,15 +305,15 @@ const Index = () => {
             </motion.h2>
             
             <motion.div 
-              className="h-[2px] w-20 bg-white/30 mx-auto mb-8"
+              className="h-[2px] w-16 bg-white/30 mx-auto mb-6"
               initial={{ width: 0 }}
-              whileInView={{ width: 80 }}
+              whileInView={{ width: 64 }}
               transition={{ duration: 1 }}
               viewport={{ once: true }}
             />
             
             <motion.p 
-              className="text-gray-300 max-w-2xl mx-auto mb-12 text-lg leading-relaxed"
+              className="text-gray-300 max-w-2xl mx-auto mb-10 text-base leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -331,29 +330,29 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <Link to="/demo">
-              <Button className="btn-premium text-lg group px-10 py-7 text-xl">
-                Jump to Demo <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+              <Button className="bg-white text-black hover:bg-white/90 text-base group px-6 py-5">
+                Jump to Demo <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
             </Link>
           </motion.div>
           
           {/* Terminal illustration */}
           <motion.div 
-            className="mt-20 w-full max-w-4xl"
+            className="mt-16 w-full max-w-3xl"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="premium-glass p-6 rounded-xl border border-white/10 shadow-2xl">
-              <div className="flex items-center gap-2 mb-4">
+            <div className="premium-glass p-5 rounded-xl border border-white/10 shadow-2xl">
+              <div className="flex items-center gap-2 mb-3">
                 <div className="w-3 h-3 rounded-full bg-white/30"></div>
                 <div className="w-3 h-3 rounded-full bg-white/30"></div>
                 <div className="w-3 h-3 rounded-full bg-white/30"></div>
-                <div className="ml-4 text-sm text-gray-400">LocalHouseLLM Terminal</div>
+                <div className="ml-3 text-xs text-gray-400">LocalHouseLLM Terminal</div>
               </div>
               
-              <div className="h-64 overflow-hidden text-left p-4 space-y-4">
+              <div className="h-56 overflow-hidden text-left p-4 space-y-3">
                 <div className="flex gap-3">
                   <span className="text-gray-500">$</span>
                   <span className="text-gray-300">localhouse --run --module="science"</span>
@@ -411,42 +410,42 @@ const Index = () => {
       </section>
       
       {/* Vision Teaser */}
-      <section className="py-32 bg-black relative overflow-hidden">
+      <section className="py-24 bg-black relative overflow-hidden">
         <div className="max-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-6">Our Vision</h2>
+              <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-5">Our Vision</h2>
               <motion.div 
-                className="h-[2px] w-20 bg-white/30 mb-8"
+                className="h-[2px] w-16 bg-white/30 mb-6"
                 initial={{ width: 0 }}
-                whileInView={{ width: 80 }}
+                whileInView={{ width: 64 }}
                 transition={{ duration: 1 }}
                 viewport={{ once: true }}
               />
-              <p className="text-gray-300 mb-8 text-lg leading-relaxed">
+              <p className="text-gray-300 mb-6 text-base leading-relaxed">
                 The age of brute-force scaling is fading. We're building language models the way nature builds intelligence: with specialization, adaptation, and caution.
               </p>
               <Link to="/vision">
-                <Button variant="outline" className="btn-outline-premium group">
-                  Learn More <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <Button variant="outline" className="border-white/50 text-white bg-transparent hover:bg-white/5 hover:border-white/70 text-sm group">
+                  Learn More <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </Link>
             </motion.div>
             
             <motion.div 
-              className="premium-glass p-10 border border-white/15"
+              className="premium-glass p-8 border border-white/15"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              whileHover={{ boxShadow: "0 25px 50px rgba(255, 255, 255, 0.05)" }}
+              whileHover={{ boxShadow: "0 20px 40px rgba(255, 255, 255, 0.05)" }}
             >
-              <div className="space-y-8">
+              <div className="space-y-6">
                 <motion.div 
                   className="flex items-start"
                   initial={{ opacity: 0, y: 20 }}
@@ -454,12 +453,12 @@ const Index = () => {
                   transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-5 mt-1">
-                    <span className="text-white font-medium font-playfair text-xl">1</span>
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                    <span className="text-white font-medium font-playfair text-base">1</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold font-playfair mb-2">Modular Knowledge</h3>
-                    <p className="text-gray-300 leading-relaxed">We segment words and concepts into micro-expert modules for precise contextual understanding.</p>
+                    <h3 className="text-lg font-bold font-playfair mb-2">Modular Knowledge</h3>
+                    <p className="text-gray-300 text-sm leading-relaxed">We segment words and concepts into micro-expert modules for precise contextual understanding.</p>
                   </div>
                 </motion.div>
                 
@@ -470,12 +469,12 @@ const Index = () => {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-5 mt-1">
-                    <span className="text-white font-medium font-playfair text-xl">2</span>
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                    <span className="text-white font-medium font-playfair text-base">2</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold font-playfair mb-2">Live Learning with Safety</h3>
-                    <p className="text-gray-300 leading-relaxed">Passive and active learning with a 1,000-funnel verification pipeline — allowing evolution without sacrificing control.</p>
+                    <h3 className="text-lg font-bold font-playfair mb-2">Live Learning with Safety</h3>
+                    <p className="text-gray-300 text-sm leading-relaxed">Passive and active learning with a 1,000-funnel verification pipeline — allowing evolution without sacrificing control.</p>
                   </div>
                 </motion.div>
                 
@@ -486,12 +485,12 @@ const Index = () => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-5 mt-1">
-                    <span className="text-white font-medium font-playfair text-xl">3</span>
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                    <span className="text-white font-medium font-playfair text-base">3</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold font-playfair mb-2">Replacing bloat with elegance</h3>
-                    <p className="text-gray-300 leading-relaxed">No more tens of billions of unused parameters. Only precision, activation-based computation.</p>
+                    <h3 className="text-lg font-bold font-playfair mb-2">Replacing bloat with elegance</h3>
+                    <p className="text-gray-300 text-sm leading-relaxed">No more tens of billions of unused parameters. Only precision, activation-based computation.</p>
                   </div>
                 </motion.div>
               </div>
