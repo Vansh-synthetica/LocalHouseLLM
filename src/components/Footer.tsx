@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -71,11 +72,6 @@ const Footer = () => {
                   Vision
                 </Link>
               </li>
-              <li>
-                <Link to="/blog" className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300">
-                  Research Blog
-                </Link>
-              </li>
             </ul>
           </motion.div>
           
@@ -114,9 +110,8 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a 
-                  href="https://github.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
                   className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
                   GitHub
@@ -124,9 +119,8 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://twitter.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                  href="#" 
                   className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
                   Twitter
@@ -134,9 +128,8 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://discord.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                  href="#" 
                   className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
                   Discord

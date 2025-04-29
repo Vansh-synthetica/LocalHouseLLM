@@ -4,34 +4,6 @@ import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
-// Sample team members - would be replaced with real team
-const teamMembers = [
-  {
-    id: 1,
-    name: "Alex Chen",
-    role: "Founder & AI Researcher",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop"
-  },
-  {
-    id: 2,
-    name: "Jordan Taylor",
-    role: "Chief Technology Officer",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop"
-  },
-  {
-    id: 3,
-    name: "Sam Rodriguez",
-    role: "Lead ML Engineer",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
-  },
-  {
-    id: 4,
-    name: "Taylor Morgan",
-    role: "Research Scientist",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop"
-  }
-];
-
 const About = () => {
   return (
     <Layout>
@@ -54,20 +26,12 @@ const About = () => {
             </p>
           </div>
           
-          {/* Team */}
-          <h2 className="text-3xl font-bold mb-8 text-center">Our Team</h2>
+          {/* Leadership */}
+          <h2 className="text-3xl font-bold mb-8 text-center">Leadership</h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {teamMembers.map(member => (
-              <div key={member.id} className="glass hover-glow text-center p-4">
-                <div 
-                  className="w-32 h-32 rounded-full mx-auto mb-4 bg-cover bg-center border-2 border-white/10"
-                  style={{ backgroundImage: `url(${member.image})` }}
-                />
-                <h3 className="text-lg font-semibold">{member.name}</h3>
-                <p className="text-sm text-secondaryText">{member.role}</p>
-              </div>
-            ))}
+          <div className="glass hover-glow text-center p-8 mb-16 max-w-md mx-auto">
+            <h3 className="text-xl font-semibold">Vansh Bukkarwal</h3>
+            <p className="text-secondaryText">Founder & CEO</p>
           </div>
           
           {/* Join Us */}
@@ -83,12 +47,12 @@ const About = () => {
                   Contact Us
                 </Button>
               </Link>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <a href="#" onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}>
                 <Button variant="outline" className="border-white/20 hover:bg-white/5">
                   GitHub
                 </Button>
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <a href="#" onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}>
                 <Button variant="outline" className="border-white/20 hover:bg-white/5">
                   Twitter
                 </Button>

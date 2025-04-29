@@ -1,7 +1,5 @@
 
 import Layout from '@/components/Layout';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
 
 const Vision = () => {
   return (
@@ -47,18 +45,12 @@ const Vision = () => {
                   No more tens of billions of unused parameters. Only precision, activation-based computation, and deep semantic traceability. Our approach focuses on efficiency and interpretability rather than raw parameter count.
                 </p>
               </div>
-              
-              <div className="pt-6">
-                <Button className="bg-secondary hover:bg-secondary/80">
-                  Download Whitepaper <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </div>
             </div>
             
-            <div className="glass p-8">
+            <div className="glass p-8 h-auto">
               <h3 className="text-xl font-semibold mb-6 text-center">Architecture Overview</h3>
               
-              <div className="w-full bg-black/30 rounded-lg p-6 h-[500px] flex flex-col">
+              <div className="w-full bg-black/30 rounded-lg p-6 flex flex-col">
                 {/* Simple architectural diagram */}
                 <div className="flex-grow flex flex-col items-center justify-center space-y-6">
                   {/* Input Layer */}
@@ -132,7 +124,7 @@ const Vision = () => {
             </div>
           </div>
           
-          <div className="glass p-8">
+          <div className="glass p-8 mt-12">
             <h3 className="text-2xl font-semibold mb-6">Technical Approach</h3>
             
             <div className="space-y-6">
@@ -168,12 +160,6 @@ const Vision = () => {
                     New knowledge is validated against existing knowledge bases before being integrated into the appropriate modules.
                   </p>
                 </div>
-              </div>
-              
-              <div className="pt-6 text-center">
-                <Button variant="outline" className="border-cyberBlue text-cyberBlue hover:bg-cyberBlue/10">
-                  View Technical Documentation
-                </Button>
               </div>
             </div>
           </div>

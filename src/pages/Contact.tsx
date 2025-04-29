@@ -133,12 +133,12 @@ const Contact = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Email</h3>
-                    <p className="text-secondaryText">contact@localhousellm.ai</p>
+                    <p className="text-secondaryText">contact@synthetica.online</p>
                   </div>
                   
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Location</h3>
-                    <p className="text-secondaryText">San Francisco, California</p>
+                    <p className="text-secondaryText">India</p>
                   </div>
                 </div>
               </div>
@@ -148,9 +148,8 @@ const Contact = () => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <a 
-                    href="https://github.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="#" 
+                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">GitHub</div>
@@ -158,9 +157,8 @@ const Contact = () => {
                   </a>
                   
                   <a 
-                    href="https://twitter.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="#" 
+                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">Twitter</div>
@@ -168,9 +166,8 @@ const Contact = () => {
                   </a>
                   
                   <a 
-                    href="https://discord.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="#" 
+                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">Discord</div>
@@ -178,9 +175,8 @@ const Contact = () => {
                   </a>
                   
                   <a 
-                    href="https://substack.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="#" 
+                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">Substack</div>
