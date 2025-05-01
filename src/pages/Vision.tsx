@@ -1,5 +1,6 @@
 
 import Layout from '@/components/Layout';
+import { ArrowRight } from 'lucide-react';
 
 const Vision = () => {
   return (
