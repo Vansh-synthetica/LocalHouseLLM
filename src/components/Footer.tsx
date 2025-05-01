@@ -111,7 +111,7 @@ const Footer = () => {
               <li>
                 <a 
                   href="#" 
-                  onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                  onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                   className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
                   GitHub
@@ -119,7 +119,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                  onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                   href="#" 
                   className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
@@ -128,7 +128,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                  onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                   href="#" 
                   className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >

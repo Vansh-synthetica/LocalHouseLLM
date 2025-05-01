@@ -149,7 +149,7 @@ const Contact = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                    onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">GitHub</div>
@@ -158,7 +158,7 @@ const Contact = () => {
                   
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                    onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">Twitter</div>
@@ -167,7 +167,7 @@ const Contact = () => {
                   
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                    onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">Discord</div>
@@ -176,7 +176,7 @@ const Contact = () => {
                   
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}
+                    onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">Substack</div>
