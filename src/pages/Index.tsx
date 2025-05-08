@@ -270,10 +270,10 @@ const Index = () => {
       </section>
       
       {/* Terminal Section */}
-      <section className="py-16 bg-black relative overflow-hidden">
+      <section className="py-24 bg-black relative overflow-hidden">
         <div className="max-container relative z-10">
           <motion.div 
-            className="premium-glass border-white/20 p-6 text-left font-mono text-sm mx-auto max-w-2xl relative"
+            className="premium-glass border-white/20 p-8 text-left font-mono text-base mx-auto max-w-3xl relative"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -283,19 +283,19 @@ const Index = () => {
               borderColor: "rgba(255, 255, 255, 0.3)",
             }}
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
               <span className="text-white/70 text-xs font-sans flex items-center">
-                <Terminal className="w-3 h-3 mr-1.5" />
+                <Terminal className="w-3.5 h-3.5 mr-1.5" />
                 LocalHouseLLM
               </span>
             </div>
 
-            <div className="space-y-1.5 text-emerald-400">
+            <div className="space-y-3 text-emerald-400 font-mono font-light tracking-tight">
               <div className="flex items-center gap-2">
                 <span className="text-white/60">$</span>
                 <motion.span 
@@ -312,6 +312,7 @@ const Index = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.7, duration: 0.5 }}
+                className="text-white/80"
               >
                 Loading modules...
               </motion.div>
@@ -322,7 +323,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.9, duration: 0.5 }}
               >
-                <span className="mr-1">✓</span>Core initialized
+                <span className="mr-1.5">✓</span>Core initialized
               </motion.div>
               <motion.div 
                 className="text-emerald-300"
@@ -331,7 +332,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 1.1, duration: 0.5 }}
               >
-                <span className="mr-1">✓</span>Module [science] loaded
+                <span className="mr-1.5">✓</span>Module [science] loaded
               </motion.div>
               <motion.div 
                 className="text-emerald-300"
@@ -340,17 +341,17 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 1.3, duration: 0.5 }}
               >
-                <span className="mr-1">✓</span>Verification layer active [1000/1000]
+                <span className="mr-1.5">✓</span>Verification layer active [1000/1000]
               </motion.div>
               <motion.div 
-                className="border-l-2 border-emerald-400 pl-2 mt-2 pt-1"
+                className="border-l border-emerald-400/70 pl-3 mt-4 pt-1"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 1.5, duration: 0.5 }}
               >
-                <div className="text-white/70">$LocalHouseLLM ready. Ask your question.</div>
-                <div className="h-4 w-1 bg-emerald-400 animate-pulse inline-block ml-1"></div>
+                <div className="text-white/90">$LocalHouseLLM ready. Ask your question.</div>
+                <div className="h-5 w-[1px] bg-emerald-400 animate-pulse inline-block ml-1"></div>
               </motion.div>
             </div>
           </motion.div>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -54,19 +53,13 @@ const Navbar = () => {
     >
       <div className="max-container py-4 flex items-center justify-between">
         <Link to="/" className="text-xl text-white flex items-center gap-2 group">
-          <motion.div
-            className="w-9 h-9 rounded-md bg-white flex items-center justify-center text-black font-playfair relative overflow-hidden"
+          <motion.span
+            className="text-2xl text-white font-playfair relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >
-            <span className="font-bold text-base relative z-10">LH</span>
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-              initial={{ x: -100 }}
-              animate={{ x: 100 }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            />
-          </motion.div>
+            \
+          </motion.span>
           <div className="overflow-hidden">
             <motion.span 
               className="font-playfair text-lg font-bold tracking-tight"
