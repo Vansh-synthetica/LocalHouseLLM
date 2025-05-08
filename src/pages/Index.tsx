@@ -83,17 +83,11 @@ const Index = () => {
             variants={staggerContainer}
           >
             <motion.div 
-              className="w-16 h-16 mb-6 rounded-xl bg-white flex items-center justify-center text-black font-bold text-xl relative overflow-hidden"
+              className="mb-6 text-white font-bold text-4xl relative"
               variants={fadeIn}
               custom={0}
             >
-              <span className="font-playfair relative z-10">LH</span>
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                initial={{ x: -100 }}
-                animate={{ x: 100 }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-              />
+              <span className="font-playfair relative z-10">\</span>
             </motion.div>
             
             <motion.h1 
@@ -135,83 +129,6 @@ const Index = () => {
                   <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </Link>
-              
-              {/* Terminal Section - Redesigned */}
-              <motion.div
-                className="premium-glass border-white/20 p-4 text-left font-mono text-sm w-full sm:w-auto sm:min-w-[350px] md:min-w-[450px] relative"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                whileHover={{ 
-                  boxShadow: "0 10px 30px rgba(255, 255, 255, 0.10)",
-                  borderColor: "rgba(255, 255, 255, 0.3)",
-                }}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-                  </div>
-                  <span className="text-white/70 text-xs font-sans flex items-center">
-                    <Terminal className="w-3 h-3 mr-1.5" />
-                    LocalHouseLLM
-                  </span>
-                </div>
-
-                <div className="space-y-1.5 text-emerald-400">
-                  <div className="flex items-center gap-2">
-                    <span className="text-white/60">$</span>
-                    <motion.span 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.7, duration: 0.5 }}
-                    >
-                      localhouse --run --module="science"
-                    </motion.span>
-                  </div>
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.9, duration: 0.5 }}
-                  >
-                    Loading modules...
-                  </motion.div>
-                  <motion.div 
-                    className="text-emerald-300"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.1, duration: 0.5 }}
-                  >
-                    <span className="mr-1">✓</span>Core initialized
-                  </motion.div>
-                  <motion.div 
-                    className="text-emerald-300"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.3, duration: 0.5 }}
-                  >
-                    <span className="mr-1">✓</span>Module [science] loaded
-                  </motion.div>
-                  <motion.div 
-                    className="text-emerald-300"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 0.5 }}
-                  >
-                    <span className="mr-1">✓</span>Verification layer active [1000/1000]
-                  </motion.div>
-                  <motion.div 
-                    className="border-l-2 border-emerald-400 pl-2 mt-2 pt-1"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.7, duration: 0.5 }}
-                  >
-                    <div className="text-white/70">$LocalHouseLLM ready. Ask your question.</div>
-                    <div className="h-4 w-1 bg-emerald-400 animate-pulse inline-block ml-1"></div>
-                  </motion.div>
-                </div>
-              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -349,6 +266,94 @@ const Index = () => {
               <p className="text-gray-300 text-sm leading-relaxed">1,000-point funnel-based verification layer ensures outputs are reliable, accurate, and safe for all applications.</p>
             </motion.div>
           </div>
+        </div>
+      </section>
+      
+      {/* Terminal Section */}
+      <section className="py-16 bg-black relative overflow-hidden">
+        <div className="max-container relative z-10">
+          <motion.div 
+            className="premium-glass border-white/20 p-6 text-left font-mono text-sm mx-auto max-w-2xl relative"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            whileHover={{ 
+              boxShadow: "0 10px 30px rgba(255, 255, 255, 0.10)",
+              borderColor: "rgba(255, 255, 255, 0.3)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+              </div>
+              <span className="text-white/70 text-xs font-sans flex items-center">
+                <Terminal className="w-3 h-3 mr-1.5" />
+                LocalHouseLLM
+              </span>
+            </div>
+
+            <div className="space-y-1.5 text-emerald-400">
+              <div className="flex items-center gap-2">
+                <span className="text-white/60">$</span>
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  localhouse --run --module="science"
+                </motion.span>
+              </div>
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+              >
+                Loading modules...
+              </motion.div>
+              <motion.div 
+                className="text-emerald-300"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.9, duration: 0.5 }}
+              >
+                <span className="mr-1">✓</span>Core initialized
+              </motion.div>
+              <motion.div 
+                className="text-emerald-300"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+              >
+                <span className="mr-1">✓</span>Module [science] loaded
+              </motion.div>
+              <motion.div 
+                className="text-emerald-300"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.3, duration: 0.5 }}
+              >
+                <span className="mr-1">✓</span>Verification layer active [1000/1000]
+              </motion.div>
+              <motion.div 
+                className="border-l-2 border-emerald-400 pl-2 mt-2 pt-1"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.5, duration: 0.5 }}
+              >
+                <div className="text-white/70">$LocalHouseLLM ready. Ask your question.</div>
+                <div className="h-4 w-1 bg-emerald-400 animate-pulse inline-block ml-1"></div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
       
