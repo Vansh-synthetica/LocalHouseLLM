@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -135,12 +134,32 @@ const Index = () => {
                   <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </Link>
-              <Link to="/demo">
-                <Button variant="outline" className="border-white/50 text-white bg-transparent hover:bg-white/5 hover:border-white/70 text-base">
-                  Try the Demo
-                  <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </Button>
-              </Link>
+              
+              {/* Terminal Section */}
+              <motion.div
+                className="bg-black border border-white/20 rounded-md p-4 text-left font-mono text-sm text-green-400 mt-8 w-full max-w-md mx-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                <div className="flex items-center gap-1 mb-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  <span className="ml-2 text-white/70 text-xs">LocalHouseLLM Terminal</span>
+                </div>
+                <div className="space-y-1">
+                  <div>$</div>
+                  <div className="flex">
+                    <span>localhouse --run --module="science"</span>
+                  </div>
+                  <div>Loading modules...</div>
+                  <div>✓ Core initialized</div>
+                  <div>✓ Module [science] loaded</div>
+                  <div>✓ Verification layer active [1000/1000]</div>
+                  <div>$LocalHouseLLM ready. Ask your question.</div>
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
