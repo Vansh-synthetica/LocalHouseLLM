@@ -1,6 +1,7 @@
+
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Terminal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout';
 import { motion } from 'framer-motion';
@@ -124,40 +125,91 @@ const Index = () => {
             </motion.p>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-6 items-center justify-center w-full max-w-4xl"
               variants={fadeIn}
               custom={4}
             >
-              <Link to="/vision">
-                <Button className="bg-white text-black hover:bg-white/90 text-base group px-6 py-2">
+              <Link to="/vision" className="w-full sm:w-auto">
+                <Button className="bg-white text-black hover:bg-white/90 text-base group px-6 py-2 w-full sm:w-auto">
                   Explore Our Vision
                   <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </Link>
               
-              {/* Terminal Section */}
+              {/* Terminal Section - Redesigned */}
               <motion.div
-                className="bg-black border border-white/20 rounded-md p-4 text-left font-mono text-sm text-green-400 mt-8 w-full max-w-md mx-auto"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                className="premium-glass border-white/20 p-4 text-left font-mono text-sm w-full sm:w-auto sm:min-w-[350px] md:min-w-[450px] relative"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
+                whileHover={{ 
+                  boxShadow: "0 10px 30px rgba(255, 255, 255, 0.10)",
+                  borderColor: "rgba(255, 255, 255, 0.3)",
+                }}
               >
-                <div className="flex items-center gap-1 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  <span className="ml-2 text-white/70 text-xs">LocalHouseLLM Terminal</span>
-                </div>
-                <div className="space-y-1">
-                  <div>$</div>
-                  <div className="flex">
-                    <span>localhouse --run --module="science"</span>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
                   </div>
-                  <div>Loading modules...</div>
-                  <div>✓ Core initialized</div>
-                  <div>✓ Module [science] loaded</div>
-                  <div>✓ Verification layer active [1000/1000]</div>
-                  <div>$LocalHouseLLM ready. Ask your question.</div>
+                  <span className="text-white/70 text-xs font-sans flex items-center">
+                    <Terminal className="w-3 h-3 mr-1.5" />
+                    LocalHouseLLM
+                  </span>
+                </div>
+
+                <div className="space-y-1.5 text-emerald-400">
+                  <div className="flex items-center gap-2">
+                    <span className="text-white/60">$</span>
+                    <motion.span 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.7, duration: 0.5 }}
+                    >
+                      localhouse --run --module="science"
+                    </motion.span>
+                  </div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.9, duration: 0.5 }}
+                  >
+                    Loading modules...
+                  </motion.div>
+                  <motion.div 
+                    className="text-emerald-300"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.1, duration: 0.5 }}
+                  >
+                    <span className="mr-1">✓</span>Core initialized
+                  </motion.div>
+                  <motion.div 
+                    className="text-emerald-300"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.3, duration: 0.5 }}
+                  >
+                    <span className="mr-1">✓</span>Module [science] loaded
+                  </motion.div>
+                  <motion.div 
+                    className="text-emerald-300"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.5, duration: 0.5 }}
+                  >
+                    <span className="mr-1">✓</span>Verification layer active [1000/1000]
+                  </motion.div>
+                  <motion.div 
+                    className="border-l-2 border-emerald-400 pl-2 mt-2 pt-1"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.7, duration: 0.5 }}
+                  >
+                    <div className="text-white/70">$LocalHouseLLM ready. Ask your question.</div>
+                    <div className="h-4 w-1 bg-emerald-400 animate-pulse inline-block ml-1"></div>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
