@@ -108,11 +108,12 @@ const Demo = () => {
           </p>
         </div>
         
-        <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto">
           {/* Chat Interface */}
-          <div className="glass min-h-[500px] mb-6 flex flex-col">
+          <div className="glass min-h-[600px] mb-6 flex flex-col h-[600px]">
             {/* Messages Area */}
-            <div className="flex-grow p-6 overflow-y-auto max-h-[500px]">
+            <div className="flex-grow p-6 overflow-y-auto"
+                 style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.3) transparent' }}>
               {messages.map((message) => (
                 <div 
                   key={message.id}

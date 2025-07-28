@@ -43,7 +43,7 @@ const About = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
-                <Button className="bg-cyberBlue text-black hover:bg-cyberBlue/90">
+                <Button className="bg-cyberBlue text-black hover:bg-cyberBlue/90 shadow-lg hover:shadow-cyberBlue/20">
                   Contact Us
                 </Button>
               </Link>
