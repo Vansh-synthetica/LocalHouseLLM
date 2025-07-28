@@ -35,7 +35,7 @@ const About = () => {
           </div>
           
           {/* Join Us */}
-          <div className="bg-gradient-to-r from-cyberBlue/20 to-neonMint/20 rounded-lg p-8 text-center">
+          <div className="bg-gradient-to-r from-cyberBlue/30 to-neonMint/30 rounded-lg p-8 text-center border border-white/10">
             <h2 className="text-2xl font-bold mb-4">Join Us</h2>
             <p className="text-lg text-secondaryText mb-6 max-w-2xl mx-auto">
               The team behind LocalHouseLLM is forming now. 
@@ -43,7 +43,7 @@ const About = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
-                <Button className="bg-cyberBlue text-black hover:bg-cyberBlue/90 shadow-lg hover:shadow-cyberBlue/20">
+                <Button className="bg-cyberBlue text-black hover:bg-cyberBlue/90 shadow-2xl hover:shadow-cyberBlue/40 transform hover:scale-105 transition-all">
                   Contact Us
                 </Button>
               </Link>

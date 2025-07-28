@@ -110,9 +110,9 @@ const Demo = () => {
         
           <div className="max-w-4xl mx-auto">
           {/* Chat Interface */}
-          <div className="glass min-h-[600px] mb-6 flex flex-col h-[600px]">
+          <div className="glass mb-6 flex flex-col h-[70vh] max-h-[600px]">
             {/* Messages Area */}
-            <div className="flex-grow p-6 overflow-y-auto"
+            <div className="flex-1 p-6 overflow-y-auto"
                  style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.3) transparent' }}>
               {messages.map((message) => (
                 <div 
