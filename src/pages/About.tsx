@@ -30,7 +30,7 @@ const About = () => {
           <h2 className="text-3xl font-bold mb-8 text-center">Leadership</h2>
           
           <div className="glass hover-glow text-center p-8 mb-16 max-w-md mx-auto">
-            <h3 className="text-xl font-semibold">Vansh Bukkarwal & Shandie Ventura</h3>
+            <h3 className="text-xl font-semibold">Vansh Bukkarwal & Shandie </h3>
             <p className="text-secondaryText">Founder & CEO</p>
           </div>
           
