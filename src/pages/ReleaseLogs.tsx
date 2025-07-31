@@ -10,93 +10,80 @@ import Layout from '@/components/Layout';
 // Simply add new releases to the beginning of this array
 const RELEASE_LOGS = [
   {
-    version: "v1.2.0",
-    date: "2024-01-25",
-    type: "major",
-    title: "Enhanced Modular Intelligence",
-    summary: "Major improvements to our specialized word category models with 40% better accuracy.",
+    version: "v0.1",
+    date: "2025-07-31",
+    type: "initial",
+    title: "Initial Build",
+    summary: "First functional version of AMA with basic module assignment and safety filtering.",
     features: [
-      "New specialized models for scientific terminology",
-      "Improved context understanding for technical documentation", 
-      "Enhanced safety verification layer with 1,200 verification points",
-      "Reduced response latency by 35%"
+      "Basic Streamlit UI for user input",
+      "Pipeline to process input and return module assignment",
+      "Keyword-based module matching in orchestrator",
+      "Basic safety filter to block unsafe terms",
+      "CSV logging of user requests"
     ],
-    fixes: [
-      "Fixed edge cases in mathematical expression parsing",
-      "Resolved memory optimization issues in large context windows"
-    ],
-    breaking: []
-  },
-  {
-    version: "v1.1.5",
-    date: "2024-01-20",
-    type: "minor",
-    title: "Performance Optimizations",
-    summary: "Significant performance improvements and bug fixes across all model modules.",
-    features: [
-      "Optimized model loading times",
-      "Enhanced multi-threading support",
-      "Improved error handling and recovery"
-    ],
-    fixes: [
-      "Fixed inconsistent responses in edge cases",
-      "Resolved API timeout issues",
-      "Fixed memory leaks in long-running sessions"
-    ],
-    breaking: []
-  },
-  {
-    version: "v1.1.0", 
-    date: "2024-01-15",
-    type: "major",
-    title: "Live Learning Integration",
-    summary: "Introduced adaptive learning capabilities that improve model performance over time.",
-    features: [
-      "Real-time model adaptation based on usage patterns",
-      "Privacy-preserving learning mechanisms",
-      "Advanced feedback integration system",
-      "Dynamic model weight optimization"
-    ],
-    fixes: [
-      "Improved model stability during adaptation",
-      "Fixed rare crashes during model updates"
-    ],
-    breaking: [
-      "API endpoint /v1/adapt now requires authentication",
-      "Changed response format for learning metrics"
+    fixes: [],
+    breaking: [],
+    known_issues: [
+      "Hardcoded paths caused file loading errors",
+      "Safety filter was minimal and inconsistent",
+      "Only first keyword was matched; no confidence scoring",
+      "Lacked error handling for unexpected inputs",
+      "Logs were not created if the directory was missing",
+      "Mixed logic between pipeline and orchestrator",
+      "UI lacked proper error messages; matched keywords often empty",
+      "Missing modules.json caused crashes",
+      "Mathematical expressions were treated as plain text"
     ]
   },
   {
-    version: "v1.0.8",
-    date: "2024-01-10", 
-    type: "patch",
-    title: "Critical Security Updates",
-    summary: "Important security patches and verification layer improvements.",
-    features: [],
-    fixes: [
-      "Enhanced input sanitization",
-      "Improved output verification algorithms",
-      "Fixed potential security vulnerabilities in API endpoints"
+    version: "v0.2",
+    date: "2025-07-31",
+    type: "stable",
+    title: "Final Stable Build of v0.2",
+    summary: "Improved structure, safety, and reliability of AMA.",
+    features: [
+      "Relative path handling with os.path.join",
+      "Centralized safety filter with consistent output",
+      "Error handling throughout the pipeline to prevent crashes",
+      "Improved module assignment with better keyword scanning",
+      "Confidence score calculation for module matches",
+      "Automatic log directory creation and CSV header management",
+      "Separated orchestrator logic for clarity",
+      "UI displays clear safety status, matched keywords, module, and confidence",
+      "Graceful handling of missing modules.json"
     ],
-    breaking: []
+    fixes: [
+      "Resolved path-related bugs",
+      "Fixed unpacking errors and missing values",
+      "Prevented crashes when modules.json is missing",
+      "Stabilized execution flow with error catching"
+    ],
+    breaking: [],
+    known_issues: [
+      "Mathematical expressions still treated as plain text",
+      "Confidence scoring is basic and rule-based",
+      "Safety filter remains keyword-based and not context-aware",
+      "Modules.json is static and not editable from UI"
+    ]
   },
   {
-    version: "v1.0.5",
-    date: "2024-01-05",
-    type: "minor",
-    title: "UI/UX Improvements", 
-    summary: "Enhanced user interface and developer experience improvements.",
+    version: "v0.3",
+    date: "upcoming",
+    type: "planned",
+    title: "Planned Features for v0.3",
+    summary: "Next version will introduce AI-driven safety and advanced module detection.",
     features: [
-      "New dashboard for model monitoring",
-      "Improved documentation and examples",
-      "Enhanced debugging tools",
-      "Better error messages and logging"
+      "Tiny ML-based text classifier (HuggingFace) for smarter safety detection",
+      "Multi-module detection for complex queries",
+      "Live dashboard to monitor logs and user interactions in real-time",
+      "NLP support for evaluating math expressions",
+      "AI-driven confidence scoring using similarity metrics or ML models",
+      "Dynamic editing of modules.json via UI",
+      "Color-coded safety alerts in Streamlit interface",
+      "Expanded safety filter with context-aware detection"
     ],
-    fixes: [
-      "Fixed UI responsiveness issues",
-      "Improved accessibility features",
-      "Fixed dark mode inconsistencies"
-    ],
+    fixes: [],
     breaking: []
   }
 ];
