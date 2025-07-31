@@ -10,31 +10,23 @@ import Layout from '@/components/Layout';
 // Simply add new releases to the beginning of this array
 const RELEASE_LOGS = [
   {
-    version: "v0.1",
-    date: "2025-07-31",
-    type: "initial",
-    title: "Initial Build",
-    summary: "First functional version of AMA with basic module assignment and safety filtering.",
+    version: "v0.3",
+    date: "upcoming",
+    type: "planned",
+    title: "Planned Features for v0.3",
+    summary: "Next version will introduce AI-driven safety and advanced module detection.",
     features: [
-      "Basic Streamlit UI for user input",
-      "Pipeline to process input and return module assignment",
-      "Keyword-based module matching in orchestrator",
-      "Basic safety filter to block unsafe terms",
-      "CSV logging of user requests"
+      "Tiny ML-based text classifier (HuggingFace) for smarter safety detection",
+      "Multi-module detection for complex queries",
+      "Live dashboard to monitor logs and user interactions in real-time",
+      "NLP support for evaluating math expressions",
+      "AI-driven confidence scoring using similarity metrics or ML models",
+      "Dynamic editing of modules.json via UI",
+      "Color-coded safety alerts in Streamlit interface",
+      "Expanded safety filter with context-aware detection"
     ],
     fixes: [],
-    breaking: [],
-    known_issues: [
-      "Hardcoded paths caused file loading errors",
-      "Safety filter was minimal and inconsistent",
-      "Only first keyword was matched; no confidence scoring",
-      "Lacked error handling for unexpected inputs",
-      "Logs were not created if the directory was missing",
-      "Mixed logic between pipeline and orchestrator",
-      "UI lacked proper error messages; matched keywords often empty",
-      "Missing modules.json caused crashes",
-      "Mathematical expressions were treated as plain text"
-    ]
+    breaking: []
   },
   {
     version: "v0.2",
@@ -68,23 +60,31 @@ const RELEASE_LOGS = [
     ]
   },
   {
-    version: "v0.3",
-    date: "upcoming",
-    type: "planned",
-    title: "Planned Features for v0.3",
-    summary: "Next version will introduce AI-driven safety and advanced module detection.",
+    version: "v0.1",
+    date: "2025-07-31",
+    type: "initial",
+    title: "Initial Build",
+    summary: "First functional version of AMA with basic module assignment and safety filtering.",
     features: [
-      "Tiny ML-based text classifier (HuggingFace) for smarter safety detection",
-      "Multi-module detection for complex queries",
-      "Live dashboard to monitor logs and user interactions in real-time",
-      "NLP support for evaluating math expressions",
-      "AI-driven confidence scoring using similarity metrics or ML models",
-      "Dynamic editing of modules.json via UI",
-      "Color-coded safety alerts in Streamlit interface",
-      "Expanded safety filter with context-aware detection"
+      "Basic Streamlit UI for user input",
+      "Pipeline to process input and return module assignment",
+      "Keyword-based module matching in orchestrator",
+      "Basic safety filter to block unsafe terms",
+      "CSV logging of user requests"
     ],
     fixes: [],
-    breaking: []
+    breaking: [],
+    known_issues: [
+      "Hardcoded paths caused file loading errors",
+      "Safety filter was minimal and inconsistent",
+      "Only first keyword was matched; no confidence scoring",
+      "Lacked error handling for unexpected inputs",
+      "Logs were not created if the directory was missing",
+      "Mixed logic between pipeline and orchestrator",
+      "UI lacked proper error messages; matched keywords often empty",
+      "Missing modules.json caused crashes",
+      "Mathematical expressions were treated as plain text"
+    ]
   }
 ];
 
