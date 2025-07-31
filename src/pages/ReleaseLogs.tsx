@@ -8,32 +8,55 @@ import Layout from '@/components/Layout';
 
 // Easy-to-update release logs data
 // Simply add new releases to the beginning of this array
+
 const RELEASE_LOGS = [
+  {
+    version: "v0.4",
+    date: "upcoming",
+    type: "planned",
+    title: "Next-Gen Transparency & Adaptive Intelligence",
+    summary: "v0.4 focuses on context-aware safety, explainability, feedback loops, and experimental self-learning capabilities.",
+    features: [
+      "Two-layer safety filtering (ML + rule-based) with reduced false positives",
+      "Confidence thresholds to issue warnings for borderline unsafe inputs",
+      "Explainability layer that logs reasoning and displays decisions to users",
+      "Improved logs with decision reasons, triggered keywords, and model vs. rule outcomes",
+      "Admin feedback button to flag incorrect decisions and store data for model improvement",
+      "Weighted multi-module detection with fallback to general modules for low-confidence queries",
+      "Enhanced UI and dashboard with filters, search, and color-coded statuses"
+    ],
+    experimental: [
+      "Lightweight fine-tuned model hosted locally to reduce reliance on external APIs",
+      "Adaptive learning mode using admin overrides to improve over time",
+      "Performance optimizations with rotating logs and memory control"
+    ],
+    fixes: [],
+    breaking: [],
+    known_issues: []
+  },
   {
     version: "v0.3",
     date: "2025-08-01",
     type: "stable",
-    title: "Advanced Modular Intelligence & Real-time Monitoring",
-    summary: "Major update introducing ML-based safety detection, multi-module assignment, and live dashboard with auto-refresh.",
+    title: "Advanced Modular Assignment with ML Safety",
+    summary: "Introduced ML-based safety detection, multi-module assignment, and real-time monitoring.",
     features: [
-      "Integrated tiny HuggingFace model for AI-driven safety classification",
-      "Real-time ML-based text classification with confidence scores",
-      "Multi-module detection for complex queries",
-      "Advanced logging system with real-time Streamlit dashboard",
-      "Enhanced pipeline with fallback rule-based safety check",
-      "Improved stability with full error handling and debugging logs"
+      "Integrated HuggingFace model for intelligent safety checks",
+      "Multi-module assignment for complex queries",
+      "Real-time live dashboard with auto-refresh and visual stats",
+      "Improved pipeline with robust error handling and logs",
+      "Streamlined code structure for stability and future expansion"
     ],
     fixes: [
-      "Resolved torch installation issues and dependency conflicts",
-      "Fixed improper blocking of safe text in several edge cases",
-      "Improved keyword extraction and logging accuracy",
-      "Optimized dashboard for continuous refresh without experimental features"
+      "Resolved path issues and ensured ML model loads correctly",
+      "Stabilized Streamlit dashboard auto-refresh",
+      "Reduced false negatives in safety classification"
     ],
     breaking: [],
     known_issues: [
-      "Some safe queries may still be flagged unsafe due to ML model bias",
-      "Blocked words are not fully visible in dashboard logs",
-      "Contextual safety detection can produce false positives in rare cases"
+      "False positives still occur in some safe queries",
+      "Blocked inputs are not fully visible in dashboard logs",
+      "ML model decisions lack reasoning transparency"
     ]
   },
   {
@@ -95,7 +118,6 @@ const RELEASE_LOGS = [
     ]
   }
 ];
-
 
 const ITEMS_PER_PAGE = 3;
 
