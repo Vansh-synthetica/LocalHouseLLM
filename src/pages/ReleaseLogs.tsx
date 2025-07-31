@@ -11,22 +11,30 @@ import Layout from '@/components/Layout';
 const RELEASE_LOGS = [
   {
     version: "v0.3",
-    date: "upcoming",
-    type: "planned",
-    title: "Planned Features for v0.3",
-    summary: "Next version will introduce AI-driven safety and advanced module detection.",
+    date: "2025-08-01",
+    type: "stable",
+    title: "Advanced Modular Intelligence & Real-time Monitoring",
+    summary: "Major update introducing ML-based safety detection, multi-module assignment, and live dashboard with auto-refresh.",
     features: [
-      "Tiny ML-based text classifier (HuggingFace) for smarter safety detection",
+      "Integrated tiny HuggingFace model for AI-driven safety classification",
+      "Real-time ML-based text classification with confidence scores",
       "Multi-module detection for complex queries",
-      "Live dashboard to monitor logs and user interactions in real-time",
-      "NLP support for evaluating math expressions",
-      "AI-driven confidence scoring using similarity metrics or ML models",
-      "Dynamic editing of modules.json via UI",
-      "Color-coded safety alerts in Streamlit interface",
-      "Expanded safety filter with context-aware detection"
+      "Advanced logging system with real-time Streamlit dashboard",
+      "Enhanced pipeline with fallback rule-based safety check",
+      "Improved stability with full error handling and debugging logs"
     ],
-    fixes: [],
-    breaking: []
+    fixes: [
+      "Resolved torch installation issues and dependency conflicts",
+      "Fixed improper blocking of safe text in several edge cases",
+      "Improved keyword extraction and logging accuracy",
+      "Optimized dashboard for continuous refresh without experimental features"
+    ],
+    breaking: [],
+    known_issues: [
+      "Some safe queries may still be flagged unsafe due to ML model bias",
+      "Blocked words are not fully visible in dashboard logs",
+      "Contextual safety detection can produce false positives in rare cases"
+    ]
   },
   {
     version: "v0.2",
@@ -87,6 +95,7 @@ const RELEASE_LOGS = [
     ]
   }
 ];
+
 
 const ITEMS_PER_PAGE = 3;
 
