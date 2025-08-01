@@ -47,7 +47,7 @@ const NotFound = () => {
             delay: 0.2
           }}
         >
-          <span className="font-playfair">404</span>
+          <span className="font-lato">404</span>
         </motion.div>
         
         <motion.div
@@ -55,7 +55,7 @@ const NotFound = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          <h1 className="text-4xl font-playfair font-bold mb-4 text-gradient">Page Not Found</h1>
+          <h1 className="text-4xl font-lato font-bold mb-4 text-gradient">Page Not Found</h1>
           
           <p className="text-gray-300 mb-10">
             The page you are looking for doesn't exist or has been moved.

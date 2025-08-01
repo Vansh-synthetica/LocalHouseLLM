@@ -31,7 +31,7 @@ const Footer = () => {
             custom={0}
           >
             <Link to="/" className="inline-flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center text-black font-playfair relative overflow-hidden">
+              <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center text-black font-lato relative overflow-hidden">
                 <span className="font-bold text-lg relative z-10">LH</span>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -40,7 +40,7 @@ const Footer = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <span className="font-playfair text-xl font-bold text-white">LocalHouseLLM</span>
+              <span className="font-lato text-xl font-bold text-white">LocalHouseLLM</span>
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Redefining language models — modular, adaptive, and safe.
@@ -55,7 +55,7 @@ const Footer = () => {
             variants={fadeIn}
             custom={1}
           >
-            <h4 className="text-lg font-playfair font-bold text-white">Navigation</h4>
+            <h4 className="text-lg font-lato font-bold text-white">Navigation</h4>
             <ul className="space-y-3">
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300">
@@ -83,7 +83,7 @@ const Footer = () => {
             variants={fadeIn}
             custom={2}
           >
-            <h4 className="text-lg font-playfair font-bold text-white">Company</h4>
+            <h4 className="text-lg font-lato font-bold text-white">Company</h4>
             <ul className="space-y-3">
               <li>
                 <Link to="/about" className="text-gray-400 hover:text-white transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-white after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300">
@@ -106,7 +106,7 @@ const Footer = () => {
             variants={fadeIn}
             custom={3}
           >
-            <h4 className="text-lg font-playfair font-bold text-white">Connect</h4>
+            <h4 className="text-lg font-lato font-bold text-white">Connect</h4>
             <ul className="space-y-3">
               <li>
                 <a 

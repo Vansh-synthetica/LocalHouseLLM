@@ -87,7 +87,7 @@ const Index = () => {
               variants={fadeIn}
               custom={0}
             >
-              <span className="font-playfair relative z-10">\</span>
+              <span className="font-lato relative z-10">\</span>
             </motion.div>
             
             <motion.h1 
@@ -166,7 +166,7 @@ const Index = () => {
             className="text-center mb-16"
           >
             <motion.h2 
-              className="text-3xl md:text-4xl font-playfair font-bold mb-5"
+              className="text-3xl md:text-4xl font-lato font-bold mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -208,7 +208,7 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-xl font-playfair font-bold mb-3">Modular Intelligence</h3>
+              <h3 className="text-xl font-lato font-bold mb-3">Modular Intelligence</h3>
               <p className="text-gray-300 text-sm leading-relaxed">Specialized models for word categories leading to more accurate and context-aware responses, with precision built into every interaction.</p>
             </motion.div>
             
@@ -235,7 +235,7 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-xl font-playfair font-bold mb-3">Live Learning</h3>
+              <h3 className="text-xl font-lato font-bold mb-3">Live Learning</h3>
               <p className="text-gray-300 text-sm leading-relaxed">Adaptive models that grow smarter from usage while maintaining privacy and safety guardrails, ensuring continuous improvement.</p>
             </motion.div>
             
@@ -262,7 +262,7 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-xl font-playfair font-bold mb-3">Verified Safety</h3>
+              <h3 className="text-xl font-lato font-bold mb-3">Verified Safety</h3>
               <p className="text-gray-300 text-sm leading-relaxed">1,000-point funnel-based verification layer ensures outputs are reliable, accurate, and safe for all applications.</p>
             </motion.div>
           </div>
@@ -368,7 +368,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-5">Our Vision</h2>
+              <h2 className="text-3xl md:text-4xl font-lato font-bold mb-5">Our Vision</h2>
               <motion.div 
                 className="h-[2px] w-16 bg-white/30 mb-6"
                 initial={{ width: 0 }}
@@ -403,10 +403,10 @@ const Index = () => {
                   viewport={{ once: true }}
                 >
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
-                    <span className="text-white font-medium font-playfair text-base">1</span>
+                    <span className="text-white font-medium font-lato text-base">1</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold font-playfair mb-2">Modular Knowledge</h3>
+                    <h3 className="text-lg font-bold font-lato mb-2">Modular Knowledge</h3>
                     <p className="text-gray-300 text-sm leading-relaxed">We segment words and concepts into micro-expert modules for precise contextual understanding.</p>
                   </div>
                 </motion.div>
@@ -419,10 +419,10 @@ const Index = () => {
                   viewport={{ once: true }}
                 >
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
-                    <span className="text-white font-medium font-playfair text-base">2</span>
+                    <span className="text-white font-medium font-lato text-base">2</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold font-playfair mb-2">Live Learning with Safety</h3>
+                    <h3 className="text-lg font-bold font-lato mb-2">Live Learning with Safety</h3>
                     <p className="text-gray-300 text-sm leading-relaxed">Passive and active learning with a 1,000-funnel verification pipeline — allowing evolution without sacrificing control.</p>
                   </div>
                 </motion.div>
@@ -435,10 +435,10 @@ const Index = () => {
                   viewport={{ once: true }}
                 >
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
-                    <span className="text-white font-medium font-playfair text-base">3</span>
+                    <span className="text-white font-medium font-lato text-base">3</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold font-playfair mb-2">Replacing bloat with elegance</h3>
+                    <h3 className="text-lg font-bold font-lato mb-2">Replacing bloat with elegance</h3>
                     <p className="text-gray-300 text-sm leading-relaxed">No more tens of billions of unused parameters. Only precision, activation-based computation.</p>
                   </div>
                 </motion.div>

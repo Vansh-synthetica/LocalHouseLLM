@@ -208,7 +208,7 @@ const ReleaseLogs = () => {
             variants={fadeInUp}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl font-playfair font-bold mb-6 text-white"
+              className="text-4xl md:text-5xl font-lato font-bold mb-6 text-white"
               variants={fadeInUp}
             >
               Release Logs
@@ -256,7 +256,7 @@ const ReleaseLogs = () => {
                           {getTypeIcon(release.type)}
                         </motion.div>
                         <div>
-                          <CardTitle className="text-xl font-playfair text-white mb-1">
+                          <CardTitle className="text-xl font-lato text-white mb-1">
                             {release.title} 
                             <span className="ml-2 text-emerald-400 font-mono text-base">
                               {release.version}
