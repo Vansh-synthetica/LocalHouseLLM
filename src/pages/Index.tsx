@@ -91,7 +91,7 @@ const Index = () => {
             </motion.div>
             
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 tracking-tight text-white max-w-4xl leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-lato font-bold mb-6 tracking-tight text-white max-w-4xl leading-tight"
               variants={fadeIn}
               custom={1}
             >
