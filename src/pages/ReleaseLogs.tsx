@@ -12,27 +12,36 @@ import Layout from '@/components/Layout';
 const RELEASE_LOGS = [
   {
     version: "v0.4",
-    date: "upcoming",
-    type: "planned",
-    title: "Next-Gen Transparency & Adaptive Intelligence",
-    summary: "v0.4 focuses on context-aware safety, explainability, feedback loops, and experimental self-learning capabilities.",
+    date: "2025-08-05",
+    type: "stable",
+    title: "Finalized Modular AMA with GPT-2 Backend",
+    summary: "AMA v0.4 stabilizes the modular pipeline, integrates safety checks, improves UI, and prepares the foundation for advanced NLP features in v0.5.",
     features: [
-      "Two-layer safety filtering (ML + rule-based) with reduced false positives",
-      "Confidence thresholds to issue warnings for borderline unsafe inputs",
-      "Explainability layer that logs reasoning and displays decisions to users",
-      "Improved logs with decision reasons, triggered keywords, and model vs. rule outcomes",
-      "Admin feedback button to flag incorrect decisions and store data for model improvement",
-      "Weighted multi-module detection with fallback to general modules for low-confidence queries",
-      "Enhanced UI and dashboard with filters, search, and color-coded statuses"
+      "Completed modular pipeline with logging, safety, and module routing",
+      "Finalized ai_responder with clean generation and fallback handling",
+      "Streamlit UI with chat layout and warning banner for experimental status",
+      "Integrated HuggingFace Roberta safety classifier with confidence scoring",
+      "Improved performance with cached model loading",
+      "Structured logging with tags for debugging and monitoring"
     ],
     experimental: [
-      "Lightweight fine-tuned model hosted locally to reduce reliance on external APIs",
-      "Adaptive learning mode using admin overrides to improve over time",
-      "Performance optimizations with rotating logs and memory control"
+      "Initial GPT-2 text generation (basic conversation, no context awareness)",
+      "Basic repetition cleaning in AI outputs",
+      "Safety-aware fallback responses on errors or unsafe content"
     ],
-    fixes: [],
+    fixes: [
+      "Resolved session_state modification error in Streamlit",
+      "Fixed KeyError caused by logging overwriting reserved keys",
+      "Handled missing model_name gracefully in pipeline",
+      "Removed deprecated st.experimental_rerun usage"
+    ],
     breaking: [],
-    known_issues: []
+    known_issues: [
+      "Responses may repeat or appear inconsistent due to GPT-2 limitations",
+      "No conversational memory; each response is stateless",
+      "Multi-turn dialogue and advanced NLP context not yet implemented",
+      "Model loading may be slow on first run"
+    ]
   },
   {
     version: "v0.3",
