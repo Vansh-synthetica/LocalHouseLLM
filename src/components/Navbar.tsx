@@ -48,13 +48,13 @@ const Navbar = () => {
       animate="visible"
       variants={navVariants}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/90 backdrop-blur-md shadow-md' : 'bg-transparent'
+        scrolled ? 'bg-background/90 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
     >
       <div className="max-container py-4 flex items-center justify-between">
-        <Link to="/" className="text-xl text-white flex items-center gap-2 group">
+        <Link to="/" className="text-xl text-foreground flex items-center gap-2 group">
           <motion.span
-            className="text-2xl text-white font-lato relative overflow-hidden"
+            className="text-2xl text-foreground font-lato relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >
@@ -84,7 +84,7 @@ const Navbar = () => {
             >
               <Link 
                 to={`/${item}`} 
-                className={`text-white text-sm relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+                className={`text-foreground text-sm relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-foreground after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                   location.pathname === `/${item}` ? 'after:scale-x-100' : ''
                 }`}
               >
@@ -102,7 +102,7 @@ const Navbar = () => {
               <motion.div whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300 }}>
                 <Button 
                   variant="outline" 
-                  className="border-white text-white text-sm bg-transparent hover:bg-white/5 hover:border-white/70"
+                  className="border-border text-foreground text-sm bg-transparent hover:bg-foreground/5 hover:border-border"
                 >
                   Contact
                 </Button>
@@ -115,7 +115,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <motion.button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white p-2"
+            className="text-foreground p-2"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -127,7 +127,7 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <motion.div 
-          className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/5 shadow-lg"
+          className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border shadow-lg"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
@@ -143,8 +143,8 @@ const Navbar = () => {
               >
                 <Link 
                   to={`/${item}`} 
-                  className={`text-white text-sm px-4 py-2 block transition-all duration-300 hover:bg-white/5 rounded-md ${
-                    location.pathname === `/${item}` ? 'bg-white/10' : ''
+                  className={`text-foreground text-sm px-4 py-2 block transition-all duration-300 hover:bg-foreground/5 rounded-md ${
+                    location.pathname === `/${item}` ? 'bg-foreground/10' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
