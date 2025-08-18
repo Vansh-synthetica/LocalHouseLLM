@@ -57,17 +57,19 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
-        // Custom colors for monochrome luxury theme
-        black: "#000000",
-        richBlack: "#0A0A0A",
-        charcoal: "#121212",
-        darkGray: "#1A1A1A",
-        mediumGray: "#333333",
-        lightGray: "#8A8A8A",
-        silver: "#C0C0C0",
-        platinum: "#E5E5E5",
-        white: "#FFFFFF",
-        secondaryText: "#999999",
+        // Custom semantic colors
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))'
+        },
+        warning: {
+          DEFAULT: 'hsl(var(--warning))',
+          foreground: 'hsl(var(--warning-foreground))'
+        },
+        info: {
+          DEFAULT: 'hsl(var(--info))',
+          foreground: 'hsl(var(--info-foreground))'
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

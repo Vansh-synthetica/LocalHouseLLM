@@ -50,7 +50,7 @@ const Contact = () => {
         <div className="max-container">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Let's Build the Future of AI</h1>
-            <p className="text-xl text-secondaryText max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Have ideas, questions, or want to collaborate? Reach out directly.
               We'll get back to you within 48 hours.
             </p>
@@ -63,7 +63,7 @@ const Contact = () => {
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-white mb-2">Name</label>
+                  <label htmlFor="name" className="block text-foreground mb-2">Name</label>
                   <Input
                     id="name"
                     name="name"
@@ -71,7 +71,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
-                    className="bg-secondary/50 border-white/10"
+                    className="bg-secondary/50 border-border"
                   />
                 </div>
                 

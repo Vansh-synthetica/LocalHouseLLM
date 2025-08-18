@@ -160,11 +160,11 @@ const ReleaseLogs = () => {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'major':
-        return 'bg-gradient-to-r from-emerald-500/20 to-blue-500/20 border-emerald-500/30';
+        return 'bg-gradient-to-r from-success/20 to-primary/20 border-success/30';
       case 'minor':
-        return 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-500/30';
+        return 'bg-gradient-to-r from-primary/20 to-accent/20 border-primary/30';
       default:
-        return 'bg-gradient-to-r from-gray-500/20 to-slate-500/20 border-gray-500/30';
+        return 'bg-gradient-to-r from-muted/20 to-secondary/20 border-muted/30';
     }
   };
 
@@ -200,12 +200,12 @@ const ReleaseLogs = () => {
 
   return (
     <Layout>
-      <section className="py-24 bg-black relative overflow-hidden min-h-screen">
+      <section className="py-24 bg-background relative overflow-hidden min-h-screen">
         {/* Background elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900/50 via-black to-black"></div>
-          <div className="absolute w-[400px] h-[400px] left-[10%] top-[20%] rounded-full bg-emerald-500/10 blur-[100px] opacity-30"></div>
-          <div className="absolute w-[300px] h-[300px] right-[15%] bottom-[30%] rounded-full bg-blue-500/10 blur-[80px] opacity-20"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-muted/50 via-background to-background"></div>
+          <div className="absolute w-[400px] h-[400px] left-[10%] top-[20%] rounded-full bg-success/10 blur-[100px] opacity-30"></div>
+          <div className="absolute w-[300px] h-[300px] right-[15%] bottom-[30%] rounded-full bg-primary/10 blur-[80px] opacity-20"></div>
         </div>
 
         <div className="max-container relative z-10">
@@ -217,21 +217,21 @@ const ReleaseLogs = () => {
             variants={fadeInUp}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl font-lato font-bold mb-6 text-white"
+              className="text-4xl md:text-5xl font-lato font-bold mb-6 text-foreground"
               variants={fadeInUp}
             >
               Release Logs
             </motion.h1>
             
             <motion.div 
-              className="h-[2px] w-16 bg-white/30 mx-auto mb-6"
+              className="h-[2px] w-16 bg-foreground/30 mx-auto mb-6"
               initial={{ width: 0 }}
               animate={{ width: 64 }}
               transition={{ duration: 1, delay: 0.3 }}
             />
             
             <motion.p 
-              className="text-lg text-gray-300 max-w-2xl mx-auto"
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
               variants={fadeInUp}
             >
               Stay updated with the latest improvements, features, and fixes to LocalHouseLLM. 
@@ -265,13 +265,13 @@ const ReleaseLogs = () => {
                           {getTypeIcon(release.type)}
                         </motion.div>
                         <div>
-                          <CardTitle className="text-xl font-lato text-white mb-1">
+                          <CardTitle className="text-xl font-lato text-foreground mb-1">
                             {release.title} 
-                            <span className="ml-2 text-emerald-400 font-mono text-base">
+                            <span className="ml-2 text-success font-mono text-base">
                               {release.version}
                             </span>
                           </CardTitle>
-                          <div className="flex items-center gap-2 text-gray-400 text-sm">
+                          <div className="flex items-center gap-2 text-muted-foreground text-sm">
                             <Calendar className="w-3 h-3" />
                             {new Date(release.date).toLocaleDateString('en-US', {
                               year: 'numeric',
@@ -279,7 +279,7 @@ const ReleaseLogs = () => {
                               day: 'numeric'
                             })}
                             <span className="mx-2">•</span>
-                            <span className="capitalize text-xs px-2 py-1 rounded-full bg-white/10">
+                            <span className="capitalize text-xs px-2 py-1 rounded-full bg-muted">
                               {release.type}
                             </span>
                           </div>
@@ -289,7 +289,7 @@ const ReleaseLogs = () => {
                   </CardHeader>
 
                   <CardContent className="space-y-4">
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed">
                       {release.summary}
                     </p>
 
@@ -297,7 +297,7 @@ const ReleaseLogs = () => {
                       <CollapsibleTrigger asChild>
                         <Button 
                           variant="ghost" 
-                          className="w-full justify-between text-white hover:bg-white/5 p-3"
+                          className="w-full justify-between text-foreground hover:bg-muted/50 p-3"
                           onClick={() => toggleExpanded(release.version)}
                         >
                           <span className="text-sm">View Details</span>
@@ -320,7 +320,7 @@ const ReleaseLogs = () => {
                           {/* Features */}
                           {release.features.length > 0 && (
                             <div className="space-y-2">
-                              <h4 className="text-emerald-400 font-medium text-sm flex items-center gap-2">
+                              <h4 className="text-success font-medium text-sm flex items-center gap-2">
                                 <Zap className="w-3 h-3" />
                                 New Features
                               </h4>
@@ -331,9 +331,9 @@ const ReleaseLogs = () => {
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="text-gray-300 text-sm flex items-start"
+                                    className="text-muted-foreground text-sm flex items-start"
                                   >
-                                    <span className="text-emerald-400 mr-2 mt-1">•</span>
+                                    <span className="text-success mr-2 mt-1">•</span>
                                     {feature}
                                   </motion.li>
                                 ))}
@@ -344,7 +344,7 @@ const ReleaseLogs = () => {
                           {/* Fixes */}
                           {release.fixes.length > 0 && (
                             <div className="space-y-2">
-                              <h4 className="text-blue-400 font-medium text-sm flex items-center gap-2">
+                              <h4 className="text-primary font-medium text-sm flex items-center gap-2">
                                 <Code2 className="w-3 h-3" />
                                 Bug Fixes
                               </h4>
@@ -355,9 +355,9 @@ const ReleaseLogs = () => {
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="text-gray-300 text-sm flex items-start"
+                                    className="text-muted-foreground text-sm flex items-start"
                                   >
-                                    <span className="text-blue-400 mr-2 mt-1">•</span>
+                                    <span className="text-primary mr-2 mt-1">•</span>
                                     {fix}
                                   </motion.li>
                                 ))}
@@ -368,7 +368,7 @@ const ReleaseLogs = () => {
                           {/* Breaking changes */}
                           {release.breaking.length > 0 && (
                             <div className="space-y-2">
-                              <h4 className="text-red-400 font-medium text-sm flex items-center gap-2">
+                              <h4 className="text-destructive font-medium text-sm flex items-center gap-2">
                                 ⚠️ Breaking Changes
                               </h4>
                               <ul className="space-y-1 ml-5">
@@ -378,9 +378,9 @@ const ReleaseLogs = () => {
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="text-gray-300 text-sm flex items-start"
+                                    className="text-muted-foreground text-sm flex items-start"
                                   >
-                                    <span className="text-red-400 mr-2 mt-1">•</span>
+                                    <span className="text-destructive mr-2 mt-1">•</span>
                                     {change}
                                   </motion.li>
                                 ))}
@@ -407,7 +407,7 @@ const ReleaseLogs = () => {
               <Button 
                 onClick={showMore}
                 variant="outline"
-                className="border-white/30 text-white bg-transparent hover:bg-white/5 hover:border-white/50"
+                className="border-border text-foreground bg-transparent hover:bg-muted/50 hover:border-border"
               >
                 Load More ({RELEASE_LOGS.length - visibleItems} remaining)
               </Button>
@@ -417,7 +417,7 @@ const ReleaseLogs = () => {
           {/* All loaded message */}
           {visibleItems >= RELEASE_LOGS.length && RELEASE_LOGS.length > ITEMS_PER_PAGE && (
             <motion.div 
-              className="text-center text-gray-400 text-sm"
+              className="text-center text-muted-foreground text-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}

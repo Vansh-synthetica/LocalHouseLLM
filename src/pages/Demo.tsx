@@ -102,7 +102,7 @@ const Demo = () => {
       <div className="max-container py-10">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Live Demo</h1>
-          <p className="text-secondaryText max-w-2xl mx-auto mb-4">
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-4">
             Try it out — ask any question below.
             This version is powered by Gemini while our modular engine is under construction.
           </p>
@@ -122,8 +122,8 @@ const Demo = () => {
                   <div 
                     className={`p-4 rounded-lg max-w-[80%] ${
                       message.role === 'user' 
-                        ? 'bg-cyberBlue/20 text-white' 
-                        : 'bg-secondary text-white'
+                        ? 'bg-primary/20 text-foreground' 
+                        : 'bg-secondary text-secondary-foreground'
                     }`}
                   >
                     {message.content}
@@ -133,11 +133,11 @@ const Demo = () => {
               
               {isLoading && (
                 <div className="flex justify-start mb-4">
-                  <div className="p-4 rounded-lg bg-secondary text-white max-w-[80%]">
+                  <div className="p-4 rounded-lg bg-secondary text-secondary-foreground max-w-[80%]">
                     <div className="flex space-x-2">
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse delay-100"></div>
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse delay-200"></div>
+                      <div className="w-2 h-2 bg-foreground rounded-full animate-pulse"></div>
+                      <div className="w-2 h-2 bg-foreground rounded-full animate-pulse delay-100"></div>
+                      <div className="w-2 h-2 bg-foreground rounded-full animate-pulse delay-200"></div>
                     </div>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const Demo = () => {
             </div>
             
             {/* Input Area */}
-            <div className="border-t border-white/10 p-4">
+            <div className="border-t border-border p-4">
               <form 
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -159,12 +159,12 @@ const Demo = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-grow bg-secondary/50 border-white/10 focus:border-cyberBlue"
+                  className="flex-grow bg-secondary/50 border-border focus:border-primary"
                   disabled={isLoading}
                 />
                 <Button 
                   type="submit" 
-                  className="bg-cyberBlue text-black hover:bg-cyberBlue/90"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90"
                   disabled={isLoading}
                 >
                   <ArrowRight className="w-5 h-5" />
@@ -177,7 +177,7 @@ const Demo = () => {
           <div className="glass p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <h3 className="text-sm font-medium text-secondaryText mb-1">
+                <h3 className="text-sm font-medium text-muted-foreground mb-1">
                   ⚙️ Category used:
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -185,19 +185,19 @@ const Demo = () => {
                     categories.map((category, index) => (
                       <span 
                         key={index} 
-                        className="text-xs px-2 py-1 rounded-full bg-secondary text-white"
+                        className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground"
                       >
                         {category}
                       </span>
                     ))
                   ) : (
-                    <span className="text-xs text-secondaryText">No categories selected yet</span>
+                    <span className="text-xs text-muted-foreground">No categories selected yet</span>
                   )}
                 </div>
               </div>
               
               <div>
-                <h3 className="text-sm font-medium text-secondaryText mb-1">
+                <h3 className="text-sm font-medium text-muted-foreground mb-1">
                   🔐 Funnel check:
                 </h3>
                 {funnelStatus ? (
@@ -206,20 +206,20 @@ const Demo = () => {
                       <span 
                         key={i} 
                         className={`inline-block w-2 h-2 rounded-full ${
-                          i < 7 ? 'bg-neonMint animate-pulse-light' : 'bg-white/30'
-                        }`} 
+                          i < 7 ? 'bg-accent animate-pulse-light' : 'bg-muted'
+                        }`}
                         style={{ animationDelay: `${i * 100}ms` }}
                       />
                     ))}
-                    <span className="text-xs ml-2 text-secondaryText">Verifying...</span>
+                    <span className="text-xs ml-2 text-muted-foreground">Verifying...</span>
                   </div>
                 ) : (
                   categories.length > 0 ? (
                     <div className="text-xs">
-                      <span className="text-neonMint">✓✓✓✓ ... 1000/1000 Passed</span>
+                      <span className="text-success">✓✓✓✓ ... 1000/1000 Passed</span>
                     </div>
                   ) : (
-                    <span className="text-xs text-secondaryText">Awaiting input</span>
+                    <span className="text-xs text-muted-foreground">Awaiting input</span>
                   )
                 )}
               </div>

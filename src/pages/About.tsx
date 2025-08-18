@@ -11,7 +11,7 @@ const About = () => {
         <div className="max-container">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About Us</h1>
-            <p className="text-xl text-secondaryText max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               We're reshaping the way language models are built — modular, responsive, and fundamentally safer.
             </p>
           </div>
@@ -19,7 +19,7 @@ const About = () => {
           {/* Mission */}
           <div className="glass p-8 mb-16">
             <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-            <p className="text-lg text-secondaryText">
+            <p className="text-lg text-muted-foreground">
               LocalHouseLLM was founded with a clear mission: to challenge the status quo of AI development. 
               We believe that simply scaling up model size and parameter count is not the path to true machine intelligence. 
               Instead, we're focused on creating modular, specialized systems that can reason, adapt, and grow safely over time.
@@ -31,24 +31,24 @@ const About = () => {
           
           <div className="glass hover-glow text-center p-8 mb-16 max-w-md mx-auto">
             <h3 className="text-xl font-semibold">Vansh Bukkarwal & Shandie </h3>
-            <p className="text-secondaryText">Founder & CEO</p>
+            <p className="text-muted-foreground">Founder & CEO</p>
           </div>
           
           {/* Join Us */}
-          <div className="bg-gradient-to-r from-cyberBlue/30 to-neonMint/30 rounded-lg p-8 text-center border border-white/10">
+          <div className="bg-gradient-to-r from-primary/30 to-accent/30 rounded-lg p-8 text-center border border-border">
             <h2 className="text-2xl font-bold mb-4">Join Us</h2>
-            <p className="text-lg text-secondaryText mb-6 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
               The team behind LocalHouseLLM is forming now. 
               We're looking for collaborators, systems engineers, research scientists, and bold thinkers.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
-                <Button className="bg-cyberBlue text-black hover:bg-cyberBlue/90 shadow-2xl hover:shadow-cyberBlue/40 transform hover:scale-105 transition-all">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-2xl hover:shadow-primary/40 transform hover:scale-105 transition-all">
                   Contact Us
                 </Button>
               </Link>
               <a href="#" onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}>
-                <Button variant="outline" className="border-white/20 hover:bg-white/5">
+                <Button variant="outline" className="border-border hover:bg-muted/50">
                   GitHub
                 </Button>
               </a>
