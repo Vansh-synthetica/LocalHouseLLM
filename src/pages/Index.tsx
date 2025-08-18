@@ -83,11 +83,11 @@ const Index = () => {
             variants={staggerContainer}
           >
             <motion.div 
-              className="mb-6 text-foreground font-bold text-4xl relative"
+              className="mb-6 text-foreground font-bold text-4xl relative dark:text-foreground light:text-black"
               variants={fadeIn}
               custom={0}
             >
-              <span className="font-lato relative z-10">\</span>
+              <span className="font-lato relative z-10 text-black dark:text-foreground">\</span>
             </motion.div>
             
             <motion.h1 
@@ -124,7 +124,7 @@ const Index = () => {
               custom={4}
             >
               <Link to="/vision" className="w-full sm:w-auto">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-base group px-6 py-2 w-full sm:w-auto">
+                <Button className="bg-black text-white hover:bg-black/90 dark:bg-foreground dark:text-background dark:hover:bg-foreground/90 text-base group px-6 py-2 w-full sm:w-auto">
                   Explore Our Vision
                   <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
