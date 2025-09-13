@@ -87,7 +87,7 @@ const Index = () => {
               variants={fadeIn}
               custom={0}
             >
-              <span className="font-lato relative z-10 text-black dark:text-foreground">\</span>
+              <span className="font-lato relative z-10 text-black dark:text-white">\</span>
             </motion.div>
             
             <motion.h1 
