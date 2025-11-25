@@ -20,30 +20,35 @@ const Vision = () => {
               <div>
                 <h2 className="text-2xl font-bold mb-4 flex items-center">
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  Modular Knowledge
+                  AICL: Fast, Safe, High-Precision Communication
                 </h2>
                 <p className="text-muted-foreground">
-                  We segment words and concepts into micro-expert modules for precise contextual understanding. Each module becomes a specialist in its domain, allowing for more accurate and nuanced responses without scaling the entire model.
+                  Our architecture uses AICL (Adaptive Inter-Module Communication Language) as the system's nervous system.
+                  AICL coordinates experts, routes tasks, enforces safety rules, and ensures every message between modules is symbolic, structured, and unambiguous.
+                  This enables faster reasoning, cleaner logic, and scalable learning — without relying on massive, uncontrollable parameter growth.
                 </p>
               </div>
               
               <div>
                 <h2 className="text-2xl font-bold mb-4 flex items-center">
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  Live Learning with Safety
+                  Built-In Verification, Not Heavy Filters
                 </h2>
                 <p className="text-muted-foreground">
-                  We introduce passive and active learning with a 1,000-funnel verification pipeline — allowing the model to evolve without sacrificing control or safety. Every new piece of knowledge must pass through rigorous checks before becoming part of the model's core knowledge.
+                  Instead of a large verification pipeline, AMAI uses a streamlined funnel of factual, logical, and safety evaluators.
+                  Every output is checked for coherence and trustworthiness before reaching the user — creating stable, interpretable AI without slowing down performance.
                 </p>
               </div>
               
               <div>
                 <h2 className="text-2xl font-bold mb-4 flex items-center">
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  Replacing bloat with elegance
+                  Replacing Bloat With Elegance
                 </h2>
                 <p className="text-muted-foreground">
-                  No more tens of billions of unused parameters. Only precision, activation-based computation, and deep semantic traceability. Our approach focuses on efficiency and interpretability rather than raw parameter count.
+                  No more billions of idle parameters.
+                  AMAI focuses on activation-based computation, modular upgrades, and transparent traceable reasoning.
+                  Modules can be replaced, improved, or expanded independently — giving us evolvable AI without inefficiency or complexity.
                 </p>
               </div>
             </div>
@@ -52,7 +57,7 @@ const Vision = () => {
               <h3 className="text-xl font-semibold mb-6 text-center">Architecture Overview</h3>
               
               <div className="w-full bg-black/30 rounded-lg p-6 flex flex-col">
-                {/* Simple architectural diagram */}
+                {/* Updated architectural diagram */}
                 <div className="flex-grow flex flex-col items-center justify-center space-y-6">
                   {/* Input Layer */}
                   <div className="w-full">
@@ -72,19 +77,28 @@ const Vision = () => {
                   
                   <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
                   
-                  {/* Module Selection */}
+                  {/* Expert Modules */}
                   <div className="w-full grid grid-cols-4 gap-2">
                     <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      Science Module
+                      Science
                     </div>
                     <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      Finance Module
+                      Finance
                     </div>
                     <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      History Module
+                      History
                     </div>
                     <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      Ethics Module
+                      Ethics
+                    </div>
+                  </div>
+                  
+                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
+                  
+                  {/* AICL Communication Layer */}
+                  <div className="w-full">
+                    <div className="bg-primary/30 p-3 rounded-md text-center border border-primary/50">
+                      AICL Communication Layer
                     </div>
                   </div>
                   
@@ -101,9 +115,8 @@ const Vision = () => {
                   
                   {/* Verification Layer */}
                   <div className="w-full">
-                    <div className="bg-primary/30 p-3 rounded-md text-center border border-primary/30 flex justify-between items-center">
-                      <span>Funnel Verification Layer</span>
-                      <span className="text-xs bg-muted px-2 py-1 rounded">1000-point check</span>
+                    <div className="bg-primary/30 p-3 rounded-md text-center border border-primary/30">
+                      Funnel Verification Layer
                     </div>
                   </div>
                   
@@ -115,11 +128,15 @@ const Vision = () => {
                       Output
                     </div>
                   </div>
-                </div>
-                
-                {/* Learning Feedback Loop */}
-                <div className="mt-4 p-2 bg-muted/50 rounded-md text-xs text-muted-foreground text-center">
-                  Active Learning Stream (Feedback Loop)
+                  
+                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
+                  
+                  {/* Active Learning Feedback Loop */}
+                  <div className="w-full">
+                    <div className="bg-muted/50 p-3 rounded-md text-center border border-muted text-sm">
+                      Active Learning Feedback Loop
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
