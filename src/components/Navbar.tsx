@@ -74,7 +74,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          {['demo', 'vision', 'about', 'research-papers', 'release-logs'].map((item, index) => (
+          {['vision', 'about', 'research-papers', 'release-logs'].map((item, index) => (
             <motion.div
               key={item}
               custom={index}
@@ -134,7 +134,7 @@ const Navbar = () => {
           transition={{ duration: 0.3 }}
         >
           <div className="max-container py-4 flex flex-col gap-3">
-            {['demo', 'vision', 'about', 'research-papers', 'release-logs', 'contact'].map((item, index) => (
+            {['vision', 'about', 'research-papers', 'release-logs', 'contact'].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -20 }}
