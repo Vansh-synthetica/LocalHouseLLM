@@ -53,6 +53,7 @@ const Contact = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Have ideas, questions, or want to collaborate? Reach out directly.
               We'll get back to you within 48 hours.
+              *note - The services are down and will be back online soon
             </p>
           </div>
           
