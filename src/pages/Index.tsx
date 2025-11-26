@@ -5,6 +5,7 @@ import { ArrowRight, Terminal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout';
 import { motion } from 'framer-motion';
+import SEO from '@/components/SEO';
 
 const Index = () => {
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -63,8 +64,30 @@ const Index = () => {
     visible: { width: '100%', transition: { duration: 0.8, ease: 'easeInOut' } }
   };
 
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LocalHouseLLM",
+    "applicationCategory": "AI Platform",
+    "description": "Modular AI architecture using AMAI and AICL for adaptive and scalable intelligent systems",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Web",
+    "softwareVersion": "0.4"
+  };
+
   return (
     <Layout>
+      <SEO
+        title="LocalHouseLLM - Modular AI Architecture | AMAI & AICL Technology"
+        description="Revolutionary modular AI architecture using AMAI and AICL. Build adaptive, scalable AI systems with built-in safety verification. Explore modular intelligence, live learning, and verified safety in AI language models."
+        keywords="modular AI, AMAI, AICL, adaptive AI systems, AI architecture, modular language models, scalable intelligence, AI safety, verified AI, LocalHouseLLM, expert modules, AI communication"
+        canonical="https://localhousellm.com/"
+        schema={homeSchema}
+      />
       {/* Hero Section */}
       <section className="bg-background relative h-screen flex items-center overflow-hidden">
         {/* Background elements */}
@@ -172,7 +195,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Why We're Different
+              Why Modular AI Architecture is Different
             </motion.h2>
             
             <motion.div 
@@ -208,8 +231,8 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-xl font-lato font-bold mb-3 text-foreground">Modular Intelligence</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">Specialized models for word categories leading to more accurate and context-aware responses, with precision built into every interaction.</p>
+              <h3 className="text-xl font-lato font-bold mb-3 text-foreground">Modular Intelligence with Expert Modules</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">Specialized AI expert modules for different knowledge domains deliver precise, context-aware responses. Our modular AI architecture enables efficient computation without sacrificing accuracy.</p>
             </motion.div>
             
             <motion.div 
@@ -235,8 +258,8 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-xl font-lato font-bold mb-3 text-foreground">Live Learning</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">Adaptive models that grow smarter from usage while maintaining privacy and safety guardrails, ensuring continuous improvement.</p>
+              <h3 className="text-xl font-lato font-bold mb-3 text-foreground">Adaptive Learning Systems</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">Our adaptive AI systems learn and improve continuously through AICL communication while maintaining strict privacy and safety standards. Experience AI that evolves with real-world usage.</p>
             </motion.div>
             
             <motion.div 
@@ -262,8 +285,8 @@ const Index = () => {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                 />
               </div>
-              <h3 className="text-xl font-lato font-bold mb-3 text-foreground">Verified Safety</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">1,000-point funnel-based verification layer ensures outputs are reliable, accurate, and safe for all applications.</p>
+              <h3 className="text-xl font-lato font-bold mb-3 text-foreground">Built-In AI Safety Verification</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">Multi-stage safety verification ensures every AI output is reliable, accurate, and trustworthy. Our funnel-based verification system provides enterprise-grade AI safety for all applications.</p>
             </motion.div>
           </div>
         </div>
@@ -368,7 +391,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-lato font-bold mb-5 text-foreground">Our Vision</h2>
+              <h2 className="text-3xl md:text-4xl font-lato font-bold mb-5 text-foreground">The Future of AI: Modular & Adaptive Architecture</h2>
               <motion.div 
                 className="h-[2px] w-16 bg-foreground/30 mb-6"
                 initial={{ width: 0 }}
@@ -377,7 +400,7 @@ const Index = () => {
                 viewport={{ once: true }}
               />
               <p className="text-muted-foreground mb-6 text-base leading-relaxed">
-                The age of brute-force scaling is fading. We're building language models the way nature builds intelligence: with specialization, adaptation, and caution.
+                The era of brute-force AI scaling is ending. We're pioneering modular AI architecture inspired by nature's intelligence: specialized expert modules, adaptive learning systems, and comprehensive safety protocols. Discover how AMAI and AICL create smarter, not just bigger, AI systems.
               </p>
               <Link to="/vision">
                 <Button variant="outline" className="border-border text-foreground bg-transparent hover:bg-foreground/5 hover:border-border text-sm group">
@@ -406,8 +429,8 @@ const Index = () => {
                     <span className="text-foreground font-medium font-lato text-base">1</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold font-lato mb-2 text-foreground">Modular Knowledge</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">We segment words and concepts into micro-expert modules for precise contextual understanding.</p>
+                    <h3 className="text-lg font-bold font-lato mb-2 text-foreground">AICL Communication Layer</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">AICL coordinates expert modules, routes tasks, and ensures structured AI communication for faster reasoning.</p>
                   </div>
                 </motion.div>
                 
@@ -422,8 +445,8 @@ const Index = () => {
                     <span className="text-foreground font-medium font-lato text-base">2</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold font-lato mb-2 text-foreground">Live Learning with Safety</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">Passive and active learning with a 1,000-funnel verification pipeline — allowing evolution without sacrificing control.</p>
+                    <h3 className="text-lg font-bold font-lato mb-2 text-foreground">Adaptive Verification</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">Multi-stage verification ensures AI outputs are factually accurate and safe before reaching users.</p>
                   </div>
                 </motion.div>
                 

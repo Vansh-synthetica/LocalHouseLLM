@@ -5,8 +5,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
+import SEO from '@/components/SEO';
 
 const Contact = () => {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact LocalHouseLLM",
+    "description": "Connect with LocalHouseLLM for AI collaboration, partnerships, and inquiries about modular AI architecture"
+  };
+
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -46,13 +54,20 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Contact Us - Build the Future of AI Together | LocalHouseLLM"
+        description="Connect with LocalHouseLLM for AI collaborations, partnerships, and inquiries. Join us in revolutionizing modular AI architecture with AMAI and AICL technology."
+        keywords="contact LocalHouseLLM, AI collaboration, AI partnership, modular AI inquiry, AI research contact"
+        canonical="https://localhousellm.com/contact"
+        schema={contactSchema}
+      />
       <section className="py-20">
         <div className="max-container">
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Let's Build the Future of AI</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Let's Build the Future of AI Together</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Have ideas, questions, or want to collaborate? Reach out directly.
-              We'll get back to you within 48 hours.
+              Have ideas, questions, or want to collaborate on modular AI architecture? Reach out directly.
+              We'll respond within 48 hours.
               *note - The services are down and will be back online soon
             </p>
           </div>
@@ -60,7 +75,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="glass p-8">
-              <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
+              <h2 className="text-2xl font-bold mb-6">Send Us a Message About AI</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -129,7 +144,7 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-8">
               <div className="glass p-8">
-                <h2 className="text-2xl font-bold mb-6">Connect With Us</h2>
+                <h2 className="text-2xl font-bold mb-6">Connect With LocalHouseLLM</h2>
                 
                 <div className="space-y-6">
                   <div>
@@ -145,7 +160,7 @@ const Contact = () => {
               </div>
               
               <div className="glass p-8">
-                <h2 className="text-2xl font-bold mb-6">Join Our Community</h2>
+                <h2 className="text-2xl font-bold mb-6">Join Our AI Community</h2>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <a 
