@@ -2,32 +2,55 @@
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const About = () => {
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About LocalHouseLLM",
+    "description": "Learn about LocalHouseLLM's mission to revolutionize AI through modular architecture, adaptive learning, and safety-first design",
+    "author": {
+      "@type": "Organization",
+      "name": "LocalHouseLLM",
+      "founder": {
+        "@type": "Person",
+        "name": "Vansh Bukkarwal",
+        "jobTitle": "Founder & CEO"
+      }
+    }
+  };
+
   return (
     <Layout>
+      <SEO
+        title="About Us - Building the Future of Modular AI | LocalHouseLLM"
+        description="Discover LocalHouseLLM's mission to transform AI development through modular architecture, specialized expert systems, and adaptive learning. Meet our leadership and join our journey."
+        keywords="LocalHouseLLM team, AI company, modular AI development, AI innovation, Vansh Bukkarwal, AI research, AI collaboration"
+        canonical="https://localhousellm.com/about"
+        schema={aboutSchema}
+      />
       <section className="py-20">
         <div className="max-container">
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">About LocalHouseLLM: Pioneering Modular AI</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We're reshaping the way language models are built — modular, responsive, and fundamentally safer.
+              We're revolutionizing AI development with modular architecture, adaptive learning systems, and safety-first design principles. Building smarter, not just bigger AI.
             </p>
           </div>
           
           {/* Mission */}
           <div className="glass p-8 mb-16">
-            <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
+            <h2 className="text-2xl font-bold mb-4">Our Mission: Redefining AI Architecture</h2>
             <p className="text-lg text-muted-foreground">
-              LocalHouseLLM was founded with a clear mission: to challenge the status quo of AI development. 
-              We believe that simply scaling up model size and parameter count is not the path to true machine intelligence. 
-              Instead, we're focused on creating modular, specialized systems that can reason, adapt, and grow safely over time.
+              LocalHouseLLM was founded with a transformative mission: to challenge conventional AI development paradigms. 
+              We believe that merely scaling up model size and parameter count is not the path to genuine machine intelligence. 
+              Instead, we're pioneering modular AI systems with specialized expert modules that can reason intelligently, adapt continuously, and evolve safely over time using AMAI and AICL technologies.
             </p>
           </div>
           
           {/* Leadership */}
-          <h2 className="text-3xl font-bold mb-8 text-center">Leadership</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">Leadership Team</h2>
           
           <div className="glass hover-glow text-center p-8 mb-16 max-w-md mx-auto">
             <h3 className="text-xl font-semibold">Vansh Bukkarwal</h3>
@@ -36,10 +59,10 @@ const About = () => {
           
           {/* Join Us */}
           <div className="bg-gradient-to-r from-primary/30 to-accent/30 rounded-lg p-8 text-center border border-border">
-            <h2 className="text-2xl font-bold mb-4">Join Us</h2>
+            <h2 className="text-2xl font-bold mb-4">Join the AI Revolution</h2>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-              The team behind LocalHouseLLM is forming now. 
-              We're looking for collaborators, systems engineers, research scientists, and bold thinkers.
+              The LocalHouseLLM team is actively building the future of AI. 
+              We're seeking talented collaborators, systems engineers, AI research scientists, and visionary thinkers to shape modular AI architecture.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
@@ -62,7 +85,7 @@ const About = () => {
           
           {/* Timeline */}
           <div className="mt-20">
-            <h2 className="text-3xl font-bold mb-8 text-center">Our Journey</h2>
+            <h2 className="text-3xl font-bold mb-8 text-center">Our AI Innovation Journey</h2>
             
             <div className="relative">
               {/* Timeline line */}
@@ -82,7 +105,7 @@ const About = () => {
                   <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-cyberBlue shadow-glow"></div>
                   <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
                     <h3 className="font-semibold">July 2025</h3>
-                    <p className="text-secondaryText">Initial research whitepaper published</p>
+                    <p className="text-secondaryText">Initial modular AI research whitepaper published</p>
                   </div>
                 </div>
                 
@@ -90,7 +113,7 @@ const About = () => {
                   <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-cyberBlue shadow-glow"></div>
                   <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
                     <h3 className="font-semibold">October 2025</h3>
-                    <p className="text-secondaryText">First prototype of modular LLM system</p>
+                    <p className="text-secondaryText">First AMAI prototype with modular architecture</p>
                   </div>
                 </div>
                 

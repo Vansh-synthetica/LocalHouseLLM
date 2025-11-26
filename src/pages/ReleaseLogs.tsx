@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 
 // Easy-to-update release logs data
 // Simply add new releases to the beginning of this array
@@ -131,6 +132,17 @@ const RELEASE_LOGS = [
 const ITEMS_PER_PAGE = 3;
 
 const ReleaseLogs = () => {
+  const releaseSchema = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "LocalHouseLLM Release Logs and Updates",
+    "description": "Track the evolution of LocalHouseLLM's modular AI platform with detailed release logs, feature updates, and improvements",
+    "author": {
+      "@type": "Organization",
+      "name": "LocalHouseLLM"
+    }
+  };
+
   const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
@@ -200,6 +212,13 @@ const ReleaseLogs = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Release Logs - Track AMAI Development Progress | LocalHouseLLM"
+        description="Stay updated with LocalHouseLLM release logs. Track improvements, features, and fixes to our modular AI platform. Follow our journey building AMAI and AICL technology."
+        keywords="LocalHouseLLM updates, AMAI changelog, AI platform updates, release notes, version history, AI development log"
+        canonical="https://localhousellm.com/release-logs"
+        schema={releaseSchema}
+      />
       <section className="py-24 bg-background relative overflow-hidden min-h-screen">
         {/* Background elements */}
         <div className="absolute inset-0 z-0">
@@ -220,7 +239,7 @@ const ReleaseLogs = () => {
               className="text-4xl md:text-5xl font-lato font-bold mb-6 text-foreground"
               variants={fadeInUp}
             >
-              Release Logs
+              Release Logs: AMAI Development Journey
             </motion.h1>
             
             <motion.div 
@@ -234,8 +253,8 @@ const ReleaseLogs = () => {
               className="text-lg text-muted-foreground max-w-2xl mx-auto"
               variants={fadeInUp}
             >
-              Stay updated with the latest improvements, features, and fixes to LocalHouseLLM. 
-              Track our journey as we continuously evolve and enhance our modular AI platform.
+              Stay updated with the latest improvements, features, and fixes to LocalHouseLLM's modular AI platform. 
+              Track our journey as we continuously evolve AMAI and AICL to enhance AI intelligence, safety, and efficiency.
             </motion.p>
           </motion.div>
 

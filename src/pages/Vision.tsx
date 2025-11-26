@@ -1,17 +1,41 @@
 
 import Layout from '@/components/Layout';
 import { ArrowRight } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const Vision = () => {
+  const visionSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "AI Architecture Vision: Modular AI with AMAI and AICL",
+    "description": "Technical approach to modular AI architecture using AICL communication, adaptive learning systems, and built-in verification for scalable intelligence",
+    "author": {
+      "@type": "Organization",
+      "name": "LocalHouseLLM"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LocalHouseLLM"
+    }
+  };
+
   return (
     <Layout>
+      <SEO
+        title="AI Vision - Modular Architecture with AMAI & AICL | LocalHouseLLM"
+        description="Explore our revolutionary AI architecture vision using AICL communication, expert modules, and adaptive learning. Discover how modular AI replaces bloat with elegance and efficiency."
+        keywords="AICL, AMAI, AI architecture, modular AI systems, expert modules, AI communication layer, adaptive activation, AI verification, scalable AI"
+        canonical="https://localhousellm.com/vision"
+        type="article"
+        schema={visionSchema}
+      />
       <section className="py-20">
         <div className="max-container">
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Vision</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Vision: The Future of Modular AI Architecture</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The age of brute-force scaling is fading.
-              We're building language models the way nature builds intelligence: with specialization, adaptation, and caution.
+              The era of brute-force AI scaling is ending.
+              We're pioneering modular AI systems inspired by natural intelligence: specialized expert modules, adaptive learning, and comprehensive safety protocols with AMAI and AICL technology.
             </p>
           </div>
           
@@ -20,41 +44,41 @@ const Vision = () => {
               <div>
                 <h2 className="text-2xl font-bold mb-4 flex items-center">
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  AICL: Fast, Safe, High-Precision Communication
+                  AICL: Fast, Safe, High-Precision AI Communication
                 </h2>
                 <p className="text-muted-foreground">
-                  Our architecture uses AICL (Adaptive Inter-Module Communication Language) as the system's nervous system.
-                  AICL coordinates experts, routes tasks, enforces safety rules, and ensures every message between modules is symbolic, structured, and unambiguous.
-                  This enables faster reasoning, cleaner logic, and scalable learning — without relying on massive, uncontrollable parameter growth.
+                  Our modular AI architecture leverages AICL (Adaptive Inter-Module Communication Language) as the system's neural pathway.
+                  AICL coordinates expert AI modules, intelligently routes tasks, enforces safety protocols, and ensures every inter-module message is symbolic, structured, and unambiguous.
+                  This enables faster AI reasoning, cleaner logic, and scalable learning without relying on massive, uncontrollable parameter growth in traditional AI models.
                 </p>
               </div>
               
               <div>
                 <h2 className="text-2xl font-bold mb-4 flex items-center">
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  Built-In Verification, Not Heavy Filters
+                  Built-In AI Verification, Not Heavy Filters
                 </h2>
                 <p className="text-muted-foreground">
-                  Instead of a large verification pipeline, AMAI uses a streamlined funnel of factual, logical, and safety evaluators.
-                  Every output is checked for coherence and trustworthiness before reaching the user — creating stable, interpretable AI without slowing down performance.
+                  Instead of heavy verification pipelines, AMAI employs a streamlined funnel of factual, logical, and safety evaluators.
+                  Every AI output undergoes rigorous checks for coherence and trustworthiness before reaching users — creating stable, interpretable AI systems without compromising performance or speed.
                 </p>
               </div>
               
               <div>
                 <h2 className="text-2xl font-bold mb-4 flex items-center">
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  Replacing Bloat With Elegance
+                  Replacing Parameter Bloat With Architectural Elegance
                 </h2>
                 <p className="text-muted-foreground">
-                  No more billions of idle parameters.
-                  AMAI focuses on activation-based computation, modular upgrades, and transparent traceable reasoning.
-                  Modules can be replaced, improved, or expanded independently — giving us evolvable AI without inefficiency or complexity.
+                  No more billions of idle parameters consuming resources.
+                  AMAI focuses on activation-based computation, modular AI upgrades, and transparent traceable reasoning.
+                  Expert modules can be replaced, improved, or expanded independently — delivering evolvable AI systems without inefficiency or architectural complexity.
                 </p>
               </div>
             </div>
             
             <div className="glass p-8 h-auto">
-              <h3 className="text-xl font-semibold mb-6 text-center">Architecture Overview</h3>
+              <h2 className="text-xl font-semibold mb-6 text-center">Modular AI Architecture Overview</h2>
               
               <div className="w-full bg-black/30 rounded-lg p-6 flex flex-col">
                 {/* Updated architectural diagram */}
@@ -143,39 +167,39 @@ const Vision = () => {
           </div>
           
           <div className="glass p-8 mt-12">
-            <h3 className="text-2xl font-semibold mb-6">Technical Approach</h3>
+            <h2 className="text-2xl font-semibold mb-6">Technical Approach to Modular AI Systems</h2>
             
             <div className="space-y-6">
               <p className="text-muted-foreground">
-                Our architecture departs from traditional transformer-based models in several key ways:
+                Our modular AI architecture departs from traditional transformer-based models through innovative design principles:
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-foreground">Modular Parameter Sharing</h4>
+                  <h3 className="font-semibold text-foreground">Modular Parameter Sharing in AI</h3>
                   <p className="text-sm text-muted-foreground">
-                    Rather than training one massive model, we train specialized modules that share a common interface but focus on specific knowledge domains.
+                    Rather than training one massive AI model, we train specialized expert modules that share a common AICL interface while focusing on specific knowledge domains for optimal efficiency.
                   </p>
                 </div>
                 
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-foreground">Adaptive Activation Patterns</h4>
+                  <h3 className="font-semibold text-foreground">Adaptive Activation Patterns for Efficiency</h3>
                   <p className="text-sm text-muted-foreground">
-                    Only the modules relevant to the query are activated, dramatically reducing computational requirements while maintaining quality.
+                    Only the AI modules relevant to each query are activated through intelligent routing, dramatically reducing computational requirements while maintaining output quality and accuracy.
                   </p>
                 </div>
                 
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-foreground">Multi-Stage Verification</h4>
+                  <h3 className="font-semibold text-foreground">Multi-Stage AI Verification System</h3>
                   <p className="text-sm text-muted-foreground">
-                    Each output passes through multiple verification stages that check for accuracy, safety, and consistency before being delivered.
+                    Each AI output passes through multiple verification stages that rigorously check for factual accuracy, logical consistency, and safety compliance before delivery to users.
                   </p>
                 </div>
                 
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-foreground">Continuous Integration Learning</h4>
+                  <h3 className="font-semibold text-foreground">Continuous Integration Learning for AI</h3>
                   <p className="text-sm text-muted-foreground">
-                    New knowledge is validated against existing knowledge bases before being integrated into the appropriate modules.
+                    New knowledge undergoes validation against existing knowledge bases through AICL protocols before integration into appropriate expert modules, ensuring continuous yet safe AI evolution.
                   </p>
                 </div>
               </div>

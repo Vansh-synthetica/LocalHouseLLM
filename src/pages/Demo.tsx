@@ -4,6 +4,7 @@ import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ArrowRight } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 // Message type
 interface Message {
@@ -99,12 +100,18 @@ const Demo = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Try AMAI Demo - Experience Modular AI in Action | LocalHouseLLM"
+        description="Experience LocalHouseLLM's modular AI demo powered by adaptive expert modules. Test AICL communication, category routing, and AI safety verification in real-time."
+        keywords="AI demo, modular AI demo, AMAI demo, AICL test, AI chatbot, expert modules demo, AI safety demo, adaptive AI"
+        canonical="https://localhousellm.com/demo"
+      />
       <div className="max-container py-10">
         <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Live Demo</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Live AI Demo: Experience Modular Intelligence</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-4">
-            Try it out — ask any question below.
-            This version is powered by Gemini while our modular engine is under construction.
+            Try our modular AI system — ask any question below.
+            This demo showcases category-based expert module routing while our full AMAI architecture is under development.
           </p>
         </div>
         
@@ -173,12 +180,12 @@ const Demo = () => {
             </div>
           </div>
           
-          {/* Simulation Status */}
           <div className="glass p-4">
+            <h2 className="text-lg font-semibold mb-4 text-center">Real-Time AI Module Analytics</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-1">
-                  ⚙️ Category used:
+                  ⚙️ Expert Module Category:
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {categories.length > 0 ? (
@@ -198,7 +205,7 @@ const Demo = () => {
               
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-1">
-                  🔐 Funnel check:
+                  🔐 AI Safety Verification:
                 </h3>
                 {funnelStatus ? (
                   <div className="flex items-center space-x-1">
