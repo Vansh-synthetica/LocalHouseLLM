@@ -83,9 +83,9 @@ const Index = () => {
     <Layout>
       <SEO
         title="LocalHouseLLM - Modular AI Architecture | AMAI & AICL Technology"
-        description="Revolutionary modular AI architecture using AMAI and AICL. Build adaptive, scalable AI systems with built-in safety verification. Explore modular intelligence, live learning, and verified safety in AI language models."
-        keywords="modular AI, AMAI, AICL, adaptive AI systems, AI architecture, modular language models, scalable intelligence, AI safety, verified AI, LocalHouseLLM, expert modules, AI communication"
-        canonical="https://localhousellm.com/"
+        description="Revolutionary modular AI using AMAI expert modules and AICL communication. Build adaptive, scalable AI with built-in safety verification. Experience modular intelligence that learns, adapts, and evolves safely."
+        keywords="LocalHouseLLM, Local House AI, modular AI architecture, AMAI, AICL, adaptive AI systems, expert modules, AI safety verification, modular language models, scalable intelligence, verified AI, distributed AI architecture, specialized AI modules, AI communication layer, activation-based AI, efficient AI systems"
+        canonical="https://localhouse.ai/"
         schema={homeSchema}
       />
       {/* Hero Section */}

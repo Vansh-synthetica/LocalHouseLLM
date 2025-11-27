@@ -1,10 +1,10 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 // Sample blog posts
 const blogPosts = [
@@ -43,6 +43,18 @@ const blogPosts = [
 ];
 
 const Blog = () => {
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "LocalHouseLLM Blog",
+    "description": "Insights, research, and updates on modular AI architecture, AMAI technology, and the future of intelligent systems",
+    "url": "https://localhouse.ai/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "LocalHouseLLM"
+    }
+  };
+
   const [searchQuery, setSearchQuery] = useState('');
   
   // Filter posts based on search query
@@ -56,6 +68,13 @@ const Blog = () => {
 
   return (
     <Layout>
+      <SEO
+        title="AI Research Blog - Modular Architecture Insights | LocalHouseLLM"
+        description="Explore insights into modular AI architecture, AMAI expert systems, AICL communication, and the future of artificial intelligence. Learn about our approach to building next-generation language models."
+        keywords="AI blog, modular AI insights, AMAI research, AI architecture blog, AICL articles, machine learning blog, AI development blog, expert modules blog, LocalHouse research"
+        canonical="https://localhouse.ai/blog"
+        schema={blogSchema}
+      />
       <section className="py-20">
         <div className="max-container">
           <div className="text-center mb-16">

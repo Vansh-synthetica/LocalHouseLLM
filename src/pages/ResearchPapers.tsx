@@ -46,10 +46,10 @@ const ResearchPapers = () => {
   return (
     <Layout>
       <SEO
-        title="Research Papers on Modular AI Architecture | LocalHouseLLM"
-        description="Explore LocalHouseLLM's cutting-edge research in modular AI, AICL communication, adaptive learning systems, and AI safety. Read our published papers on SSRN."
-        keywords="AI research papers, modular AI research, AICL research, AMAI papers, AI architecture research, adaptive AI studies, AI safety research"
-        canonical="https://localhousellm.com/research-papers"
+        title="AI Research Papers - Modular Architecture & AICL | LocalHouseLLM"
+        description="Explore LocalHouseLLM's cutting-edge research in modular AI architecture, AICL communication protocols, adaptive learning frameworks, and AI safety systems. Read our published papers on SSRN and discover the future of intelligent systems."
+        keywords="AI research papers, modular AI research, AICL research, AMAI papers, AI architecture research, adaptive AI studies, AI safety research, academic AI papers, modular intelligence research, expert modules research, AI communication research"
+        canonical="https://localhouse.ai/research-papers"
         type="article"
         schema={researchSchema}
       />

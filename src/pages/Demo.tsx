@@ -102,9 +102,9 @@ const Demo = () => {
     <Layout>
       <SEO
         title="Try AMAI Demo - Experience Modular AI in Action | LocalHouseLLM"
-        description="Experience LocalHouseLLM's modular AI demo powered by adaptive expert modules. Test AICL communication, category routing, and AI safety verification in real-time."
-        keywords="AI demo, modular AI demo, AMAI demo, AICL test, AI chatbot, expert modules demo, AI safety demo, adaptive AI"
-        canonical="https://localhousellm.com/demo"
+        description="Experience LocalHouseLLM's modular AI demo powered by AMAI expert modules. Test AICL communication, intelligent category routing, and multi-stage AI safety verification in real-time. See modular intelligence at work."
+        keywords="AI demo, modular AI demo, AMAI demo, AICL test, AI chatbot demo, expert modules demo, AI safety demo, adaptive AI demo, interactive AI, test modular AI, LocalHouse demo, live AI demo"
+        canonical="https://localhouse.ai/demo"
       />
       <div className="max-container py-10">
         <div className="text-center mb-10">
