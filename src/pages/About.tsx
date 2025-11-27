@@ -24,10 +24,10 @@ const About = () => {
   return (
     <Layout>
       <SEO
-        title="About Us - Building the Future of Modular AI | LocalHouseLLM"
-        description="Discover LocalHouseLLM's mission to transform AI development through modular architecture, specialized expert systems, and adaptive learning. Meet our leadership and join our journey."
-        keywords="LocalHouseLLM team, AI company, modular AI development, AI innovation, Vansh Bukkarwal, AI research, AI collaboration"
-        canonical="https://localhousellm.com/about"
+        title="About LocalHouseLLM - Pioneering Modular AI Architecture"
+        description="Discover LocalHouseLLM's mission to transform AI development through modular architecture, specialized expert systems, and adaptive learning. Meet our leadership and join our journey building the future of artificial intelligence with AMAI and AICL."
+        keywords="LocalHouseLLM team, AI company, modular AI development, AI innovation, Vansh Bukkarwal founder, AI research team, AI collaboration, modular AI startup, AMAI development, AICL technology team"
+        canonical="https://localhouse.ai/about"
         schema={aboutSchema}
       />
       <section className="py-20">

@@ -15,10 +15,10 @@ interface SEOProps {
 
 const SEO = ({
   title = "LocalHouseLLM - Modular AI Architecture | AMAI & AICL Technology",
-  description = "Revolutionary modular AI architecture using AMAI and AICL. Adaptive, scalable AI systems with built-in safety verification. Not bigger. Smarter.",
-  keywords = "modular AI, AMAI, AICL, adaptive AI systems, AI architecture, modular language models, scalable intelligence, AI safety",
-  canonical = "https://localhousellm.com",
-  ogImage = "https://localhousellm.com/og-image.png",
+  description = "Revolutionary modular AI using AMAI expert modules and AICL communication. Build adaptive, scalable AI with built-in safety. Not bigger. Smarter.",
+  keywords = "LocalHouseLLM, Local House AI, modular AI architecture, AMAI, AICL, adaptive AI systems, expert modules, AI safety verification, modular language models, scalable intelligence, verified AI, distributed AI, specialized AI modules, AI communication layer",
+  canonical = "https://localhouse.ai",
+  ogImage = "https://localhouse.ai/og-image.png",
   type = "website",
   author = "LocalHouseLLM",
   publishedTime,
