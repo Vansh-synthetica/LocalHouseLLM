@@ -149,7 +149,7 @@ const Contact = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Email</h3>
-                    <p className="text-secondaryText">contact@synthetica.online</p>
+                    <p className="text-secondaryText">contact@localhousellm.com</p>
                   </div>
                   
                   <div>
