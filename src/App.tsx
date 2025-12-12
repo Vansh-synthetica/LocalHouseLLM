@@ -8,13 +8,16 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { HelmetProvider } from 'react-helmet-async';
 
 import Index from "./pages/Index";
-import Demo from "./pages/Demo";
 import Vision from "./pages/Vision";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ResearchPapers from "./pages/ResearchPapers";
 import ReleaseLogs from "./pages/ReleaseLogs";
 import NotFound from "./pages/NotFound";
+import Anvira from "./pages/Anvira";
+import AnviraO1 from "./pages/AnviraO1";
+import AnviraO1E from "./pages/AnviraO1E";
+import AnviraH1 from "./pages/AnviraH1";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +31,10 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/demo" element={<Demo />} />
+              <Route path="/anvira" element={<Anvira />} />
+              <Route path="/anvira/o1" element={<AnviraO1 />} />
+              <Route path="/anvira/o1e" element={<AnviraO1E />} />
+              <Route path="/anvira/h1" element={<AnviraH1 />} />
               <Route path="/vision" element={<Vision />} />
               <Route path="/about" element={<About />} />
               <Route path="/research-papers" element={<ResearchPapers />} />
