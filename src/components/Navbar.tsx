@@ -74,7 +74,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          {['vision', 'about', 'research-papers', 'release-logs'].map((item, index) => (
+          {['anvira', 'vision', 'about', 'research-papers', 'release-logs'].map((item, index) => (
             <motion.div
               key={item}
               custom={index}
@@ -85,15 +85,15 @@ const Navbar = () => {
               <Link 
                 to={`/${item}`} 
                 className={`text-foreground text-sm relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-foreground after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
-                  location.pathname === `/${item}` ? 'after:scale-x-100' : ''
+                  location.pathname.startsWith(`/${item}`) ? 'after:scale-x-100' : ''
                 }`}
               >
-                {item === 'release-logs' ? 'Release Logs' : item === 'research-papers' ? 'Research Papers' : item.charAt(0).toUpperCase() + item.slice(1)}
+                {item === 'release-logs' ? 'Release Logs' : item === 'research-papers' ? 'Research Papers' : item === 'anvira' ? 'Anvira' : item.charAt(0).toUpperCase() + item.slice(1)}
               </Link>
             </motion.div>
           ))}
           <motion.div
-            custom={3}
+            custom={4}
             variants={linkVariants}
             initial="hidden"
             animate="visible"
@@ -134,7 +134,7 @@ const Navbar = () => {
           transition={{ duration: 0.3 }}
         >
           <div className="max-container py-4 flex flex-col gap-3">
-            {['vision', 'about', 'research-papers', 'release-logs', 'contact'].map((item, index) => (
+            {['anvira', 'vision', 'about', 'research-papers', 'release-logs', 'contact'].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -20 }}
@@ -144,11 +144,11 @@ const Navbar = () => {
                 <Link 
                   to={`/${item}`} 
                   className={`text-foreground text-sm px-4 py-2 block transition-all duration-300 hover:bg-foreground/5 rounded-md ${
-                    location.pathname === `/${item}` ? 'bg-foreground/10' : ''
+                    location.pathname.startsWith(`/${item}`) ? 'bg-foreground/10' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item === 'release-logs' ? 'Release Logs' : item === 'research-papers' ? 'Research Papers' : item.charAt(0).toUpperCase() + item.slice(1)}
+                  {item === 'release-logs' ? 'Release Logs' : item === 'research-papers' ? 'Research Papers' : item === 'anvira' ? 'Anvira' : item.charAt(0).toUpperCase() + item.slice(1)}
                 </Link>
               </motion.div>
             ))}
