@@ -121,7 +121,7 @@ const Anvira = () => {
                 className="group transition-all duration-300 hover:scale-[1.03] hover:shadow-lg"
                 aria-label="Explore anvira o1 standard edition"
               >
-                explore anvira o1
+                explore ANVIRA o1
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
@@ -257,7 +257,7 @@ const Anvira = () => {
             viewport={{ once: true }}
             className="text-3xl font-bold text-center mb-12"
           >
-            why anvira
+            why ANVIRA
           </motion.h2>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -328,7 +328,7 @@ const Anvira = () => {
         className="py-20 bg-primary/5"
       >
         <div className="max-container text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6">ready to try anvira?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">ready to try ANVIRA?</h2>
           <Link to="/contact">
             <Button 
               size="lg"
