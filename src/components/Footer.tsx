@@ -111,9 +111,10 @@ const Footer = () => {
             <h4 className="text-lg font-lato font-bold text-foreground">Connect</h4>
             <ul className="space-y-3">
               <li>
-                <a 
-                  href="#" 
-                  onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
+              <a 
+                  href="https://github.com/LocalHouseLLM" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-foreground after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
                   GitHub
@@ -121,17 +122,28 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
-                  href="#" 
+                  href="https://x.com/localhousellm"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-foreground after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
-                  Twitter
+                  X (Twitter)
                 </a>
               </li>
               <li>
                 <a 
-                  onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
+                  href="https://www.instagram.com/localhousellm/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-foreground after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a 
                   href="#" 
+                  onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
                   className="text-muted-foreground hover:text-foreground transition-colors duration-300 inline-block relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-foreground after:origin-bottom-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
                 >
                   Discord

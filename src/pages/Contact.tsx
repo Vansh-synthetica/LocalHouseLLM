@@ -92,7 +92,7 @@ const Contact = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-white mb-2">Email</label>
+                  <label htmlFor="email" className="block text-foreground mb-2">Email</label>
                   <Input
                     id="email"
                     name="email"
@@ -101,12 +101,12 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="Your email address"
                     required
-                    className="bg-secondary/50 border-white/10"
+                    className="bg-secondary/50 border-border"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="subject" className="block text-white mb-2">Subject</label>
+                  <label htmlFor="subject" className="block text-foreground mb-2">Subject</label>
                   <Input
                     id="subject"
                     name="subject"
@@ -114,12 +114,12 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="Subject of your message"
                     required
-                    className="bg-secondary/50 border-white/10"
+                    className="bg-secondary/50 border-border"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-white mb-2">Message</label>
+                  <label htmlFor="message" className="block text-foreground mb-2">Message</label>
                   <Textarea
                     id="message"
                     name="message"
@@ -127,7 +127,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="Your message"
                     required
-                    className="min-h-[150px] bg-secondary/50 border-white/10"
+                    className="min-h-[150px] bg-secondary/50 border-border"
                   />
                 </div>
                 
@@ -149,12 +149,12 @@ const Contact = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Email</h3>
-                    <p className="text-secondaryText">contact@localhousellm.com</p>
+                    <p className="text-muted-foreground">contact@localhousellm.com</p>
                   </div>
                   
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Location</h3>
-                    <p className="text-secondaryText">India</p>
+                    <p className="text-muted-foreground">India</p>
                   </div>
                 </div>
               </div>
@@ -164,21 +164,33 @@ const Contact = () => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <a 
-                    href="#" 
-                    onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
+                    href="https://github.com/LocalHouseLLM" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">GitHub</div>
-                    <p className="text-sm text-secondaryText">Follow our open source work</p>
+                    <p className="text-sm text-muted-foreground">Follow our open source work</p>
                   </a>
                   
                   <a 
-                    href="#" 
-                    onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
+                    href="https://x.com/localhousellm" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
-                    <div className="font-semibold mb-1">Twitter</div>
-                    <p className="text-sm text-secondaryText">Latest updates and news</p>
+                    <div className="font-semibold mb-1">X (Twitter)</div>
+                    <p className="text-sm text-muted-foreground">Latest updates and news</p>
+                  </a>
+                  
+                  <a 
+                    href="https://www.instagram.com/localhousellm/" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
+                  >
+                    <div className="font-semibold mb-1">Instagram</div>
+                    <p className="text-sm text-muted-foreground">Behind the scenes</p>
                   </a>
                   
                   <a 
@@ -187,16 +199,7 @@ const Contact = () => {
                     className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
                   >
                     <div className="font-semibold mb-1">Discord</div>
-                    <p className="text-sm text-secondaryText">Join our community</p>
-                  </a>
-                  
-                  <a 
-                    href="#" 
-                    onClick={(e) => { e.preventDefault(); alert('Coming Soon'); }}
-                    className="p-4 bg-secondary/50 rounded-lg text-center hover:bg-secondary transition-colors"
-                  >
-                    <div className="font-semibold mb-1">Substack</div>
-                    <p className="text-sm text-secondaryText">Subscribe to our newsletter</p>
+                    <p className="text-sm text-muted-foreground">Join our community</p>
                   </a>
                 </div>
               </div>
