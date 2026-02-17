@@ -11,7 +11,7 @@ import Index from "./pages/Index";
 import Vision from "./pages/Vision";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import ResearchPapers from "./pages/ResearchPapers";
+import OpenSource from "./pages/OpenSource";
 import ReleaseLogs from "./pages/ReleaseLogs";
 import NotFound from "./pages/NotFound";
 import Anvira from "./pages/Anvira";
@@ -37,7 +37,7 @@ const App = () => (
               <Route path="/anvira/h1" element={<AnviraH1 />} />
               <Route path="/vision" element={<Vision />} />
               <Route path="/about" element={<About />} />
-              <Route path="/research-papers" element={<ResearchPapers />} />
+              <Route path="/opensource" element={<OpenSource />} />
               <Route path="/release-logs" element={<ReleaseLogs />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
