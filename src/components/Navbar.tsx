@@ -74,7 +74,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          {['anvira', 'vision', 'about', 'research-papers', 'release-logs'].map((item, index) => (
+          {['anvira', 'vision', 'about', 'opensource', 'release-logs'].map((item, index) => (
             <motion.div
               key={item}
               custom={index}
@@ -134,7 +134,7 @@ const Navbar = () => {
           transition={{ duration: 0.3 }}
         >
           <div className="max-container py-4 flex flex-col gap-3">
-            {['anvira', 'vision', 'about', 'research-papers', 'release-logs', 'contact'].map((item, index) => (
+            {['anvira', 'vision', 'about', 'opensource', 'release-logs', 'contact'].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -20 }}
@@ -148,7 +148,7 @@ const Navbar = () => {
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item === 'release-logs' ? 'Release Logs' : item === 'research-papers' ? 'Research Papers' : item === 'anvira' ? 'Anvira' : item.charAt(0).toUpperCase() + item.slice(1)}
+                  {item === 'release-logs' ? 'Release Logs' : item === 'opensource' ? 'Open Source' : item === 'anvira' ? 'Anvira' : item.charAt(0).toUpperCase() + item.slice(1)}
                 </Link>
               </motion.div>
             ))}
