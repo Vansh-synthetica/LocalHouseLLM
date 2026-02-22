@@ -48,7 +48,7 @@ const Navbar = () => {
       animate="visible"
       variants={navVariants}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-background/90 backdrop-blur-md shadow-md' : 'bg-transparent'
+        scrolled ? 'bg-black/50 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
     >
       <div className="max-container py-4 flex items-center justify-between">
@@ -127,7 +127,7 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <motion.div 
-          className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border shadow-lg"
+          className="md:hidden bg-black/80 backdrop-blur-xl border-b border-border shadow-lg"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
