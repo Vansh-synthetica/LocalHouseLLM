@@ -54,7 +54,7 @@ const Navbar = () => {
       <div className="max-container py-4 flex items-center justify-between">
         <Link to="/" className="text-xl text-foreground flex items-center gap-2 group">
           <motion.span
-            className="text-2xl text-black dark:text-white font-lato relative overflow-hidden"
+            className="text-2xl text-white font-lato relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >

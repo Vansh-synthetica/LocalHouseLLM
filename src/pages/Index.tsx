@@ -89,13 +89,10 @@ const Index = () => {
         schema={homeSchema}
       />
       {/* Hero Section */}
-      <section className="bg-background relative h-screen flex items-center overflow-hidden">
+      <section className="relative h-screen flex items-center overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-muted/70 via-background to-background"></div>
-          <div className="absolute w-[500px] h-[500px] left-1/2 -translate-x-1/2 top-1/3 -translate-y-1/2 rounded-full bg-foreground/5 blur-[100px] opacity-30"></div>
-          <div className="absolute w-[300px] h-[300px] left-[20%] top-[30%] rounded-full bg-foreground/5 blur-[80px] opacity-20"></div>
-          <div className="absolute w-[200px] h-[200px] right-[15%] bottom-[20%] rounded-full bg-foreground/5 blur-[60px] opacity-20"></div>
+          <div className="absolute w-[500px] h-[500px] left-1/2 -translate-x-1/2 top-1/3 -translate-y-1/2 rounded-full bg-white/5 blur-[100px] opacity-30"></div>
         </div>
         
         <div className="max-container relative z-10 pt-16">
@@ -110,7 +107,7 @@ const Index = () => {
               variants={fadeIn}
               custom={0}
             >
-              <span className="font-lato relative z-10 text-black dark:text-white">\</span>
+              <span className="font-lato relative z-10 text-white">\</span>
             </motion.div>
             
             <motion.h1 
@@ -147,7 +144,7 @@ const Index = () => {
               custom={4}
             >
               <Link to="/vision" className="w-full sm:w-auto">
-                <Button className="bg-black text-white hover:bg-black/90 dark:bg-foreground dark:text-background dark:hover:bg-foreground/90 text-base group px-6 py-2 w-full sm:w-auto">
+                <Button className="bg-white text-black hover:bg-white/90 text-base group px-6 py-2 w-full sm:w-auto">
                   Explore Our Vision
                   <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
@@ -175,10 +172,8 @@ const Index = () => {
       </section>
       
       {/* Features Grid */}
-      <section ref={featuresRef} className="py-24 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-muted/50 via-background to-background"></div>
-        </div>
+      <section ref={featuresRef} className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 z-0"></div>
         
         <div className="max-container relative z-10">
           <motion.div
@@ -293,7 +288,7 @@ const Index = () => {
       </section>
       
       {/* Terminal Section */}
-      <section className="py-24 bg-background relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden">
         <div className="max-container relative z-10">
           <motion.div 
             className="premium-glass border-border p-8 text-left font-mono text-base mx-auto max-w-3xl relative"
@@ -318,7 +313,7 @@ const Index = () => {
               </span>
             </div>
 
-            <div className="space-y-3 text-emerald-400 font-mono font-light tracking-tight">
+            <div className="space-y-3 text-foreground/80 font-mono font-light tracking-tight">
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground">$</span>
                 <motion.span 
@@ -340,7 +335,7 @@ const Index = () => {
                 Loading modules...
               </motion.div>
               <motion.div 
-                className="text-emerald-300"
+                className="text-foreground/70"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -349,7 +344,7 @@ const Index = () => {
                 <span className="mr-1.5">✓</span>Core initialized
               </motion.div>
               <motion.div 
-                className="text-emerald-300"
+                className="text-foreground/70"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -358,7 +353,7 @@ const Index = () => {
                 <span className="mr-1.5">✓</span>Module [science] loaded
               </motion.div>
               <motion.div 
-                className="text-emerald-300"
+                className="text-foreground/70"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -367,14 +362,14 @@ const Index = () => {
                 <span className="mr-1.5">✓</span>Verification layer active [1000/1000]
               </motion.div>
               <motion.div 
-                className="border-l border-emerald-400/70 pl-3 mt-4 pt-1"
+                className="border-l border-foreground/30 pl-3 mt-4 pt-1"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 1.5, duration: 0.5 }}
               >
                 <div className="text-foreground">$LocalHouseLLM ready. Ask your question.</div>
-                <div className="h-5 w-[1px] bg-emerald-400 animate-pulse inline-block ml-1"></div>
+                <div className="h-5 w-[1px] bg-foreground/60 animate-pulse inline-block ml-1"></div>
               </motion.div>
             </div>
           </motion.div>
@@ -382,7 +377,7 @@ const Index = () => {
       </section>
       
       {/* Vision Teaser */}
-      <section className="py-24 bg-background relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden">
         <div className="max-container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
