@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { ThemeToggle } from './ThemeToggle';
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -20,7 +20,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-background border-t border-border pt-20 pb-10">
+    <footer className="bg-black/30 backdrop-blur-sm border-t border-border pt-20 pb-10">
       <div className="max-container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <motion.div 
@@ -46,7 +46,7 @@ const Footer = () => {
             <p className="text-muted-foreground leading-relaxed">
               Redefining language models — modular, adaptive, and safe.
             </p>
-            <ThemeToggle />
+            
           </motion.div>
           
           <motion.div 
