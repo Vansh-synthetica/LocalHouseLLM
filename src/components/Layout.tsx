@@ -39,7 +39,7 @@ const Layout = ({ children }: LayoutProps) => {
           <source src={rainforestBg} type="video/mp4" />
         </video>
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
