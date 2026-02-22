@@ -17,8 +17,8 @@ const SEO = ({
   title = "LocalHouseLLM - Modular AI Architecture | AMAI & AICL Technology",
   description = "Revolutionary modular AI using AMAI expert modules and AICL communication. Build adaptive, scalable AI with built-in safety. Not bigger. Smarter.",
   keywords = "LocalHouseLLM, Local House AI, modular AI architecture, AMAI, AICL, adaptive AI systems, expert modules, AI safety verification, modular language models, scalable intelligence, verified AI, distributed AI, specialized AI modules, AI communication layer",
-  canonical = "https://localhouse.ai",
-  ogImage = "https://localhouse.ai/og-image.png",
+  canonical = "https://localhousellm.com",
+  ogImage = "https://localhousellm.com/og-image.png",
   type = "website",
   author = "LocalHouseLLM",
   publishedTime,
@@ -27,22 +27,23 @@ const SEO = ({
 }: SEOProps) => {
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       
-      {/* Canonical URL */}
       <link rel="canonical" href={canonical} />
       
-      {/* Open Graph / Facebook */}
+      {/* Open Graph */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonical} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:site_name" content="LocalHouseLLM" />
+      <meta property="og:locale" content="en_US" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -50,12 +51,12 @@ const SEO = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:site" content="@localhousellm" />
+      <meta name="twitter:creator" content="@localhousellm" />
       
-      {/* Article specific tags */}
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       
-      {/* Schema.org JSON-LD */}
       {schema && (
         <script type="application/ld+json">
           {JSON.stringify(schema)}

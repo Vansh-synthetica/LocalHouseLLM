@@ -37,7 +37,6 @@
 
     --radius: 0.5rem;
     
-    /* Custom semantic colors */
     --success: 0 0% 70%;
     --success-foreground: 0 0% 100%;
     --warning: 0 0% 70%;
@@ -45,11 +44,15 @@
     --info: 0 0% 70%;
     --info-foreground: 0 0% 100%;
   }
-}
 
-@layer base {
   * {
     @apply border-border selection:bg-white/20 selection:text-white;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   body {
@@ -57,7 +60,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-lato font-bold tracking-tight text-[95%];
+    @apply font-lato font-semibold tracking-tight text-[80%];
   }
   
   .glass {
@@ -65,11 +68,11 @@
   }
   
   .premium-glass {
-    @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-border rounded-lg shadow-xl transition-all duration-300;
+    @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl transition-all duration-300;
   }
   
   .luxury-card {
-    @apply relative overflow-hidden bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-md border border-border rounded-lg shadow-xl;
+    @apply relative overflow-hidden bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-xl;
   }
   
   .luxury-card::before {
@@ -82,11 +85,11 @@
   }
   
   .glow-border {
-    @apply border border-border shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-500;
+    @apply border border-border shadow-[0_0_15px_rgba(255,255,255,0.08)] transition-all duration-500;
   }
   
   .hover-glow {
-    @apply transition-all duration-500 hover:border-border hover:shadow-[0_0_20px_rgba(255,255,255,0.2)];
+    @apply transition-all duration-500 hover:border-border hover:shadow-[0_0_20px_rgba(255,255,255,0.15)];
   }
   
   .card-shadow {
@@ -112,12 +115,8 @@
   }
   
   @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
   
   .animate-float {
@@ -125,15 +124,9 @@
   }
   
   @keyframes float {
-    0% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-15px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
   }
   
   .mask-radial {
@@ -143,6 +136,6 @@
   .animate-fade-in {
     opacity: 1 !important;
     transform: translateY(0) !important;
-    transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.17, 0.67, 0.26, 1);
+    transition: opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }
