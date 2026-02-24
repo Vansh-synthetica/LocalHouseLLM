@@ -219,13 +219,7 @@ const ReleaseLogs = () => {
         canonical="https://localhouse.ai/release-logs"
         schema={releaseSchema}
       />
-      <section className="py-24 bg-background relative overflow-hidden min-h-screen">
-        {/* Background elements */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-muted/50 via-background to-background"></div>
-          <div className="absolute w-[400px] h-[400px] left-[10%] top-[20%] rounded-full bg-success/10 blur-[100px] opacity-30"></div>
-          <div className="absolute w-[300px] h-[300px] right-[15%] bottom-[30%] rounded-full bg-primary/10 blur-[80px] opacity-20"></div>
-        </div>
+      <section className="py-24 relative overflow-hidden min-h-screen">
 
         <div className="max-container relative z-10">
           {/* Header */}
