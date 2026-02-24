@@ -18,8 +18,8 @@ const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
   const videoARef = useRef<HTMLVideoElement>(null);
   const videoBRef = useRef<HTMLVideoElement>(null);
-  const [activeVideo, setActiveVideo] = useState(0);
   const [showB, setShowB] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const videoIndex = useRef(0);
 
   // Scroll to top on route change
@@ -27,31 +27,60 @@ const Layout = ({ children }: LayoutProps) => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname]);
 
-  // Dual-video crossfade: when video A ends, fade to B with next video, and vice versa
+  // Fade in on first video load
+  useEffect(() => {
+    const vA = videoARef.current;
+    if (!vA) return;
+    const onCanPlay = () => setVideoLoaded(true);
+    vA.addEventListener('canplay', onCanPlay);
+    return () => vA.removeEventListener('canplay', onCanPlay);
+  }, []);
+
+  // Dual-video crossfade with pre-fade before end
   useEffect(() => {
     const vA = videoARef.current;
     const vB = videoBRef.current;
     if (!vA || !vB) return;
 
-    const handleEndedA = () => {
-      videoIndex.current = (videoIndex.current + 1) % videos.length;
-      vB.src = videos[videoIndex.current];
-      vB.load();
-      vB.play().catch(() => {});
-      setShowB(true);
+    let fadeTimer: ReturnType<typeof setTimeout> | null = null;
+    const FADE_LEAD = 2; // seconds before end to start fading
+
+    const schedulePreFade = (activeVid: HTMLVideoElement, isA: boolean) => {
+      const check = () => {
+        if (activeVid.duration && activeVid.currentTime >= activeVid.duration - FADE_LEAD) {
+          // Prepare next video
+          const nextIdx = (videoIndex.current + 1) % videos.length;
+          const nextVid = isA ? vB : vA;
+          nextVid.src = videos[nextIdx];
+          nextVid.load();
+          nextVid.play().catch(() => {});
+          videoIndex.current = nextIdx;
+          setShowB(isA); // if A is active, fade to B
+        } else {
+          fadeTimer = setTimeout(check, 200);
+        }
+      };
+      fadeTimer = setTimeout(check, 200);
     };
 
-    const handleEndedB = () => {
-      videoIndex.current = (videoIndex.current + 1) % videos.length;
-      vA.src = videos[videoIndex.current];
-      vA.load();
-      vA.play().catch(() => {});
-      setShowB(false);
+    const handleEndedA = () => {
+      // B is already playing from pre-fade
     };
+    const handleEndedB = () => {
+      // A is already playing from pre-fade
+    };
+
+    const handlePlayA = () => { if (!showB) schedulePreFade(vA, true); };
+    const handlePlayB = () => { if (showB) schedulePreFade(vB, false); };
+
+    // Start monitoring first video
+    schedulePreFade(vA, true);
 
     vA.addEventListener('ended', handleEndedA);
     vB.addEventListener('ended', handleEndedB);
+
     return () => {
+      if (fadeTimer) clearTimeout(fadeTimer);
       vA.removeEventListener('ended', handleEndedA);
       vB.removeEventListener('ended', handleEndedB);
     };
@@ -83,26 +112,29 @@ const Layout = ({ children }: LayoutProps) => {
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        {/* Video A */}
-        <video
-          ref={videoARef}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          poster={videoPoster}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2500ms] ease-in-out ${showB ? 'opacity-0' : 'opacity-100'}`}
-        >
-          <source src={videos[0]} type="video/mp4" />
-        </video>
-        {/* Video B */}
-        <video
-          ref={videoBRef}
-          muted
-          playsInline
-          preload="none"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2500ms] ease-in-out ${showB ? 'opacity-100' : 'opacity-0'}`}
-        />
+        {/* Video container with initial fade-in */}
+        <div className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Video A */}
+          <video
+            ref={videoARef}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            poster={videoPoster}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2500ms] ease-in-out ${showB ? 'opacity-0' : 'opacity-100'}`}
+          >
+            <source src={videos[0]} type="video/mp4" />
+          </video>
+          {/* Video B */}
+          <video
+            ref={videoBRef}
+            muted
+            playsInline
+            preload="none"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2500ms] ease-in-out ${showB ? 'opacity-100' : 'opacity-0'}`}
+          />
+        </div>
         {/* Frosted glass overlay */}
         <div className="absolute inset-0 bg-black/60 backdrop-blur-[8px]" />
       </div>
