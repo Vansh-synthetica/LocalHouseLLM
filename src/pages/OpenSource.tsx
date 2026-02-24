@@ -60,7 +60,7 @@ const OpenSource = () => {
         type="website"
         schema={schema}
       />
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen text-foreground">
         <div className="max-container py-20">
           <motion.div
             initial="hidden"
