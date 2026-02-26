@@ -1,36 +1,54 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const opensourceLinks = [
+  { to: '/opensource', label: 'Open Source' },
+  { to: '/vision', label: 'Vision' },
+  { to: '/release-logs', label: 'Release Logs' },
+];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+      if (isScrolled !== scrolled) setScrolled(isScrolled);
     };
-    
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
-  // Animation variants
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setMobileDropdownOpen(false);
+    setDropdownOpen(false);
+  }, [location.pathname]);
+
+  const isOSActive = ['/opensource', '/vision', '/release-logs'].some(p => location.pathname.startsWith(p));
+
+  const handleMouseEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  };
+  const handleMouseLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 150);
+  };
+
   const navVariants = {
     hidden: { y: -20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
-    }
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
   };
 
   const linkVariants = {
@@ -38,18 +56,19 @@ const Navbar = () => {
     visible: (custom: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: custom * 0.1, duration: 0.5, ease: "easeOut" }
-    })
+      transition: { delay: custom * 0.1, duration: 0.5, ease: 'easeOut' },
+    }),
   };
+
+  const underlineClass = (active: boolean) =>
+    `text-foreground text-sm relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-foreground after:transform after:transition-transform after:duration-300 ${active ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`;
 
   return (
     <motion.nav
       initial="hidden"
       animate="visible"
       variants={navVariants}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/50 backdrop-blur-md shadow-md' : 'bg-transparent'
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/50 backdrop-blur-md shadow-md' : 'bg-transparent'}`}
     >
       <div className="max-container py-4 flex items-center justify-between">
         <Link to="/" className="text-xl text-foreground flex items-center gap-2 group">
@@ -61,7 +80,7 @@ const Navbar = () => {
             \
           </motion.span>
           <div className="overflow-hidden">
-            <motion.span 
+            <motion.span
               className="font-lato text-lg font-bold tracking-tight"
               initial={{ y: 20 }}
               animate={{ y: 0 }}
@@ -74,34 +93,78 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          {['anvira', 'vision', 'about', 'opensource', 'release-logs'].map((item, index) => (
-            <motion.div
-              key={item}
-              custom={index}
-              variants={linkVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <Link 
-                to={`/${item}`} 
-                className={`text-foreground text-sm relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-foreground after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
-                  location.pathname.startsWith(`/${item}`) ? 'after:scale-x-100' : ''
-                }`}
-              >
-                {item === 'release-logs' ? 'Release Logs' : item === 'research-papers' ? 'Research Papers' : item === 'anvira' ? 'Anvira' : item.charAt(0).toUpperCase() + item.slice(1)}
-              </Link>
-            </motion.div>
-          ))}
+          {/* Anvira */}
+          <motion.div custom={0} variants={linkVariants} initial="hidden" animate="visible">
+            <Link to="/anvira" className={underlineClass(location.pathname.startsWith('/anvira'))}>
+              Anvira
+            </Link>
+          </motion.div>
+
+          {/* Opensource Dropdown */}
           <motion.div
-            custom={4}
+            custom={1}
             variants={linkVariants}
             initial="hidden"
             animate="visible"
+            className="relative"
+            ref={dropdownRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
+            <button
+              className={`flex items-center gap-1 ${underlineClass(isOSActive)}`}
+              onClick={() => setDropdownOpen(p => !p)}
+            >
+              Opensource
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 rounded-lg border border-border bg-black/80 backdrop-blur-xl shadow-xl overflow-hidden"
+                >
+                  {opensourceLinks.map((link, i) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className={`block px-4 py-2.5 text-sm transition-colors duration-200 hover:bg-white/5 ${
+                        location.pathname === link.to ? 'text-foreground bg-white/5' : 'text-muted-foreground'
+                      }`}
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
+          {/* DevQuill */}
+          <motion.div custom={2} variants={linkVariants} initial="hidden" animate="visible">
+            <Link to="/devquill" className={underlineClass(location.pathname.startsWith('/devquill'))}>
+              DevQuill
+            </Link>
+          </motion.div>
+
+          {/* About */}
+          <motion.div custom={3} variants={linkVariants} initial="hidden" animate="visible">
+            <Link to="/about" className={underlineClass(location.pathname.startsWith('/about'))}>
+              About
+            </Link>
+          </motion.div>
+
+          {/* Contact */}
+          <motion.div custom={4} variants={linkVariants} initial="hidden" animate="visible">
             <Link to="/contact">
               <motion.div whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300 }}>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="border-border text-foreground text-sm bg-transparent hover:bg-foreground/5 hover:border-border"
                 >
                   Contact
@@ -113,7 +176,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <motion.button 
+          <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-foreground p-2"
             whileHover={{ scale: 1.1 }}
@@ -125,37 +188,86 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <motion.div 
-          className="md:hidden bg-black/80 backdrop-blur-xl border-b border-border shadow-lg"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="max-container py-4 flex flex-col gap-3">
-            {['anvira', 'vision', 'about', 'opensource', 'release-logs', 'contact'].map((item, index) => (
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="md:hidden bg-black/80 backdrop-blur-xl border-b border-border shadow-lg"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="max-container py-4 flex flex-col gap-1">
+              {/* Anvira */}
+              <MobileLink to="/anvira" label="Anvira" index={0} />
+
+              {/* Opensource expandable */}
               <motion.div
-                key={item}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.3 }}
+                transition={{ delay: 0.1, duration: 0.3 }}
               >
-                <Link 
-                  to={`/${item}`} 
-                  className={`text-foreground text-sm px-4 py-2 block transition-all duration-300 hover:bg-foreground/5 rounded-md ${
-                    location.pathname.startsWith(`/${item}`) ? 'bg-foreground/10' : ''
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
+                <button
+                  className={`flex items-center justify-between w-full text-foreground text-sm px-4 py-2 rounded-md transition-all duration-300 hover:bg-foreground/5 ${isOSActive ? 'bg-foreground/10' : ''}`}
+                  onClick={() => setMobileDropdownOpen(p => !p)}
                 >
-                  {item === 'release-logs' ? 'Release Logs' : item === 'opensource' ? 'Open Source' : item === 'anvira' ? 'Anvira' : item.charAt(0).toUpperCase() + item.slice(1)}
-                </Link>
+                  Opensource
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {mobileDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      {opensourceLinks.map((link) => (
+                        <Link
+                          key={link.to}
+                          to={link.to}
+                          className={`block text-sm px-8 py-2 transition-colors duration-200 rounded-md hover:bg-foreground/5 ${
+                            location.pathname === link.to ? 'text-foreground bg-foreground/5' : 'text-muted-foreground'
+                          }`}
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      )}
+
+              <MobileLink to="/devquill" label="DevQuill" index={2} />
+              <MobileLink to="/about" label="About" index={3} />
+              <MobileLink to="/contact" label="Contact" index={4} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
+  );
+};
+
+const MobileLink = ({ to, label, index }: { to: string; label: string; index: number }) => {
+  const location = useLocation();
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.3 }}
+    >
+      <Link
+        to={to}
+        className={`text-foreground text-sm px-4 py-2 block transition-all duration-300 hover:bg-foreground/5 rounded-md ${
+          location.pathname.startsWith(to) ? 'bg-foreground/10' : ''
+        }`}
+      >
+        {label}
+      </Link>
+    </motion.div>
   );
 };
 
