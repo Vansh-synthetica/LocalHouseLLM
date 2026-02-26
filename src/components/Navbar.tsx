@@ -93,8 +93,22 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          {/* Anvira */}
+          {/* InkFlow */}
           <motion.div custom={0} variants={linkVariants} initial="hidden" animate="visible">
+            <Link to="/inkflow" className={underlineClass(location.pathname.startsWith('/inkflow'))}>
+              InkFlow
+            </Link>
+          </motion.div>
+
+          {/* DevQuill */}
+          <motion.div custom={1} variants={linkVariants} initial="hidden" animate="visible">
+            <Link to="/devquill" className={underlineClass(location.pathname.startsWith('/devquill'))}>
+              DevQuill
+            </Link>
+          </motion.div>
+
+          {/* Anvira */}
+          <motion.div custom={2} variants={linkVariants} initial="hidden" animate="visible">
             <Link to="/anvira" className={underlineClass(location.pathname.startsWith('/anvira'))}>
               Anvira
             </Link>
@@ -102,7 +116,7 @@ const Navbar = () => {
 
           {/* Opensource Dropdown */}
           <motion.div
-            custom={1}
+            custom={3}
             variants={linkVariants}
             initial="hidden"
             animate="visible"
@@ -128,7 +142,7 @@ const Navbar = () => {
                   transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 rounded-lg border border-border bg-black/80 backdrop-blur-xl shadow-xl overflow-hidden"
                 >
-                  {opensourceLinks.map((link, i) => (
+                  {opensourceLinks.map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
@@ -145,15 +159,8 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.div>
 
-          {/* DevQuill */}
-          <motion.div custom={2} variants={linkVariants} initial="hidden" animate="visible">
-            <Link to="/devquill" className={underlineClass(location.pathname.startsWith('/devquill'))}>
-              DevQuill
-            </Link>
-          </motion.div>
-
           {/* About */}
-          <motion.div custom={3} variants={linkVariants} initial="hidden" animate="visible">
+          <motion.div custom={5} variants={linkVariants} initial="hidden" animate="visible">
             <Link to="/about" className={underlineClass(location.pathname.startsWith('/about'))}>
               About
             </Link>
@@ -198,14 +205,15 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="max-container py-4 flex flex-col gap-1">
-              {/* Anvira */}
-              <MobileLink to="/anvira" label="Anvira" index={0} />
+              <MobileLink to="/inkflow" label="InkFlow" index={0} />
+              <MobileLink to="/devquill" label="DevQuill" index={1} />
+              <MobileLink to="/anvira" label="Anvira" index={2} />
 
               {/* Opensource expandable */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1, duration: 0.3 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
               >
                 <button
                   className={`flex items-center justify-between w-full text-foreground text-sm px-4 py-2 rounded-md transition-all duration-300 hover:bg-foreground/5 ${isOSActive ? 'bg-foreground/10' : ''}`}
@@ -240,9 +248,8 @@ const Navbar = () => {
                 </AnimatePresence>
               </motion.div>
 
-              <MobileLink to="/devquill" label="DevQuill" index={2} />
-              <MobileLink to="/about" label="About" index={3} />
-              <MobileLink to="/contact" label="Contact" index={4} />
+              <MobileLink to="/about" label="About" index={4} />
+              <MobileLink to="/contact" label="Contact" index={5} />
             </div>
           </motion.div>
         )}
