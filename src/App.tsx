@@ -19,6 +19,7 @@ import AnviraO1 from "./pages/AnviraO1";
 import AnviraO1E from "./pages/AnviraO1E";
 import AnviraH1 from "./pages/AnviraH1";
 import DevQuill from "./pages/DevQuill";
+import InkFlow from "./pages/InkFlow";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
               <Route path="/opensource" element={<OpenSource />} />
               <Route path="/release-logs" element={<ReleaseLogs />} />
               <Route path="/devquill" element={<DevQuill />} />
+              <Route path="/inkflow" element={<InkFlow />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
