@@ -50,13 +50,17 @@ const Index = () => {
 
   const homeSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "LocalHouseLLM",
-    "applicationCategory": "AI Platform",
-    "description": "Modular AI architecture using AMAI and AICL for adaptive and scalable intelligent systems",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "operatingSystem": "Web",
-    "softwareVersion": "0.4"
+    "@type": "WebPage",
+    "name": "LocalHouseLLM — Modular AI Architecture",
+    "description": "Build private, modular AI with Anvira. Local-first AI models, enterprise on-prem infrastructure, and edge AI for robotics.",
+    "url": "https://localhousellm.com/",
+    "mainEntity": {
+      "@type": "SoftwareApplication",
+      "name": "Anvira",
+      "applicationCategory": "AI Platform",
+      "description": "Modular AI that runs locally — personal (o1), enterprise (o1e), and robotics (h1) variants",
+      "operatingSystem": "Cross-platform"
+    }
   };
 
   return (
