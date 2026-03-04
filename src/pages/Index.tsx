@@ -66,9 +66,9 @@ const Index = () => {
   return (
     <Layout>
       <SEO
-        title="LocalHouseLLM - Modular AI Architecture | AMAI & AICL Technology"
-        description="Revolutionary modular AI using AMAI expert modules and AICL communication. Build adaptive, scalable AI with built-in safety verification. Experience modular intelligence that learns, adapts, and evolves safely."
-        keywords="LocalHouseLLM, Local House AI, modular AI architecture, AMAI, AICL, adaptive AI systems, expert modules, AI safety verification, modular language models, scalable intelligence, verified AI, distributed AI architecture, specialized AI modules, AI communication layer, activation-based AI, efficient AI systems"
+        title="LocalHouseLLM — Modular AI Architecture | Local, Secure, Scalable Intelligence"
+        description="Build private, modular AI with Anvira — local-first AI models, enterprise on-prem infrastructure, and edge AI for robotics. The intelligent alternative to monolithic LLMs."
+        keywords="LocalHouseLLM, modular AI architecture, local AI model, on-device AI, enterprise AI infrastructure, edge AI system, offline AI assistant, AI orchestration engine, AI for robotics, private AI alternative to OpenAI, Anvira, InkFlow, DevQuill, AMAI, AICL, adaptive AI, scalable intelligence"
         canonical="https://localhousellm.com/"
         schema={homeSchema}
       />
