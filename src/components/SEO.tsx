@@ -11,19 +11,21 @@ interface SEOProps {
   publishedTime?: string;
   modifiedTime?: string;
   schema?: object;
+  noindex?: boolean;
 }
 
 const SEO = ({
-  title = "LocalHouseLLM - Modular AI Architecture | AMAI & AICL Technology",
-  description = "Revolutionary modular AI using AMAI expert modules and AICL communication. Build adaptive, scalable AI with built-in safety. Not bigger. Smarter.",
-  keywords = "LocalHouseLLM, Local House AI, modular AI architecture, AMAI, AICL, adaptive AI systems, expert modules, AI safety verification, modular language models, scalable intelligence, verified AI, distributed AI, specialized AI modules, AI communication layer",
+  title = "LocalHouseLLM — Modular AI Architecture | Local, Secure, Scalable Intelligence",
+  description = "Build private, modular AI with Anvira — local-first AI models, enterprise on-prem infrastructure, and edge AI for robotics. The intelligent alternative to monolithic LLMs.",
+  keywords = "LocalHouseLLM, modular AI architecture, local AI model, on-device AI, enterprise AI infrastructure, edge AI system, offline AI assistant, AI orchestration engine, AI for robotics, private AI alternative, Anvira, InkFlow, DevQuill, AMAI, AICL",
   canonical = "https://localhousellm.com",
   ogImage = "https://localhousellm.com/og-image.png",
   type = "website",
   author = "LocalHouseLLM",
   publishedTime,
   modifiedTime,
-  schema
+  schema,
+  noindex = false
 }: SEOProps) => {
   return (
     <Helmet>
@@ -32,7 +34,7 @@ const SEO = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
-      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"} />
       
       <link rel="canonical" href={canonical} />
       
@@ -42,6 +44,8 @@ const SEO = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="LocalHouseLLM" />
       <meta property="og:locale" content="en_US" />
       
