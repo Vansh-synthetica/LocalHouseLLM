@@ -113,30 +113,23 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          {/* InkFlow */}
-          <motion.div custom={0} variants={linkVariants} initial="hidden" animate="visible">
-            <Link to="/inkflow" className={underlineClass(location.pathname.startsWith('/inkflow'))}>
-              InkFlow
-            </Link>
-          </motion.div>
-
-          {/* DevQuill */}
-          <motion.div custom={1} variants={linkVariants} initial="hidden" animate="visible">
-            <Link to="/devquill" className={underlineClass(location.pathname.startsWith('/devquill'))}>
-              DevQuill
-            </Link>
-          </motion.div>
-
           {/* Anvira */}
-          <motion.div custom={2} variants={linkVariants} initial="hidden" animate="visible">
+          <motion.div custom={0} variants={linkVariants} initial="hidden" animate="visible">
             <Link to="/anvira" className={underlineClass(location.pathname.startsWith('/anvira'))}>
               Anvira
             </Link>
           </motion.div>
 
+          {/* Nomi */}
+          <motion.div custom={1} variants={linkVariants} initial="hidden" animate="visible">
+            <Link to="/nomi" className={underlineClass(location.pathname.startsWith('/nomi'))}>
+              Nomi
+            </Link>
+          </motion.div>
+
           {/* Opensource Dropdown */}
           <motion.div
-            custom={3}
+            custom={2}
             variants={linkVariants}
             initial="hidden"
             animate="visible"
@@ -179,15 +172,60 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.div>
 
+          {/* Early Access Dropdown */}
+          <motion.div
+            custom={3}
+            variants={linkVariants}
+            initial="hidden"
+            animate="visible"
+            className="relative"
+            ref={earlyRef}
+            onMouseEnter={handleEarlyEnter}
+            onMouseLeave={handleEarlyLeave}
+          >
+            <button
+              className={`flex items-center gap-1 ${underlineClass(isEarlyActive)}`}
+              onClick={() => setEarlyOpen(p => !p)}
+            >
+              Early Access
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${earlyOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <AnimatePresence>
+              {earlyOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 rounded-lg border border-border bg-black/80 backdrop-blur-xl shadow-xl overflow-hidden"
+                >
+                  {earlyAccessLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className={`block px-4 py-2.5 text-sm transition-colors duration-200 hover:bg-white/5 ${
+                        location.pathname === link.to ? 'text-foreground bg-white/5' : 'text-muted-foreground'
+                      }`}
+                      onClick={() => setEarlyOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
           {/* About */}
-          <motion.div custom={5} variants={linkVariants} initial="hidden" animate="visible">
+          <motion.div custom={4} variants={linkVariants} initial="hidden" animate="visible">
             <Link to="/about" className={underlineClass(location.pathname.startsWith('/about'))}>
               About
             </Link>
           </motion.div>
 
           {/* Contact */}
-          <motion.div custom={4} variants={linkVariants} initial="hidden" animate="visible">
+          <motion.div custom={5} variants={linkVariants} initial="hidden" animate="visible">
             <Link to="/contact">
               <motion.div whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300 }}>
                 <Button
