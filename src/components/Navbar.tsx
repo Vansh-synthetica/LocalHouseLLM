@@ -20,9 +20,13 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [earlyOpen, setEarlyOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [mobileEarlyOpen, setMobileEarlyOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const earlyRef = useRef<HTMLDivElement>(null);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const earlyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -38,10 +42,13 @@ const Navbar = () => {
   useEffect(() => {
     setIsMenuOpen(false);
     setMobileDropdownOpen(false);
+    setMobileEarlyOpen(false);
     setDropdownOpen(false);
+    setEarlyOpen(false);
   }, [location.pathname]);
 
   const isOSActive = ['/opensource', '/vision', '/release-logs'].some(p => location.pathname.startsWith(p));
+  const isEarlyActive = ['/inkflow', '/devquill'].some(p => location.pathname.startsWith(p));
 
   const handleMouseEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
@@ -49,6 +56,14 @@ const Navbar = () => {
   };
   const handleMouseLeave = () => {
     dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 150);
+  };
+
+  const handleEarlyEnter = () => {
+    if (earlyTimeout.current) clearTimeout(earlyTimeout.current);
+    setEarlyOpen(true);
+  };
+  const handleEarlyLeave = () => {
+    earlyTimeout.current = setTimeout(() => setEarlyOpen(false), 150);
   };
 
   const navVariants = {
