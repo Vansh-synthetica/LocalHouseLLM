@@ -11,6 +11,11 @@ const opensourceLinks = [
   { to: '/release-logs', label: 'Release Logs' },
 ];
 
+const earlyAccessLinks = [
+  { to: '/inkflow', label: 'InkFlow' },
+  { to: '/devquill', label: 'DevQuill' },
+];
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
