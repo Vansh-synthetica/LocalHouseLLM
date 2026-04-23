@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import SEO from '@/components/SEO';
 import { useEffect } from 'react';
+import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -23,6 +24,9 @@ const capabilities = [
 ];
 
 const Nomi = () => {
+  // Premium smooth scroll just for this page
+  useSmoothScroll(true);
+
   // Force light theme classes locally without affecting global theme
   useEffect(() => {
     document.documentElement.style.setProperty('color-scheme', 'light');
