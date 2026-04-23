@@ -263,15 +263,14 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="max-container py-4 flex flex-col gap-1">
-              <MobileLink to="/inkflow" label="InkFlow" index={0} />
-              <MobileLink to="/devquill" label="DevQuill" index={1} />
-              <MobileLink to="/anvira" label="Anvira" index={2} />
+              <MobileLink to="/anvira" label="Anvira" index={0} />
+              <MobileLink to="/nomi" label="Nomi" index={1} />
 
               {/* Opensource expandable */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
+                transition={{ delay: 0.2, duration: 0.3 }}
               >
                 <button
                   className={`flex items-center justify-between w-full text-foreground text-sm px-4 py-2 rounded-md transition-all duration-300 hover:bg-foreground/5 ${isOSActive ? 'bg-foreground/10' : ''}`}
@@ -290,6 +289,45 @@ const Navbar = () => {
                       className="overflow-hidden"
                     >
                       {opensourceLinks.map((link) => (
+                        <Link
+                          key={link.to}
+                          to={link.to}
+                          className={`block text-sm px-8 py-2 transition-colors duration-200 rounded-md hover:bg-foreground/5 ${
+                            location.pathname === link.to ? 'text-foreground bg-foreground/5' : 'text-muted-foreground'
+                          }`}
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Early Access expandable */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
+              >
+                <button
+                  className={`flex items-center justify-between w-full text-foreground text-sm px-4 py-2 rounded-md transition-all duration-300 hover:bg-foreground/5 ${isEarlyActive ? 'bg-foreground/10' : ''}`}
+                  onClick={() => setMobileEarlyOpen(p => !p)}
+                >
+                  Early Access
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileEarlyOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {mobileEarlyOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      {earlyAccessLinks.map((link) => (
                         <Link
                           key={link.to}
                           to={link.to}
