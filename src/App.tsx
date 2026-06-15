@@ -22,6 +22,7 @@ import AnviraH1 from "./pages/AnviraH1";
 import DevQuill from "./pages/DevQuill";
 import InkFlow from "./pages/InkFlow";
 import Nomi from "./pages/Nomi";
+import Mission from "./pages/Mission";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
               <Route path="/devquill" element={<DevQuill />} />
               <Route path="/inkflow" element={<InkFlow />} />
               <Route path="/nomi" element={<Nomi />} />
+              <Route path="/mission" element={<Mission />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
