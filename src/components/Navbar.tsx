@@ -1,33 +1,49 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const opensourceLinks = [
+type NavLink = { to: string; label: string; desc?: string };
+type NavGroup = { heading: string; links: NavLink[] };
+
+const projectsGroups: NavGroup[] = [
+  {
+    heading: 'Products',
+    links: [
+      { to: '/anvira', label: 'Anvira', desc: 'Modular AI architecture' },
+      { to: '/nomi', label: 'Nomi', desc: 'AI persona infrastructure' },
+    ],
+  },
+  {
+    heading: 'Early Access',
+    links: [
+      { to: '/inkflow', label: 'InkFlow', desc: 'AI writing assistant' },
+      { to: '/devquill', label: 'DevQuill', desc: 'For developers' },
+    ],
+  },
+];
+
+const resourcesLinks: NavLink[] = [
   { to: '/mission', label: 'Mission' },
+  { to: '/research', label: 'Research' },
   { to: '/opensource', label: 'Open Source' },
   { to: '/vision', label: 'Vision' },
   { to: '/release-logs', label: 'Release Logs' },
 ];
 
-const earlyAccessLinks = [
-  { to: '/inkflow', label: 'InkFlow' },
-  { to: '/devquill', label: 'DevQuill' },
-];
+const projectsPaths = ['/anvira', '/nomi', '/inkflow', '/devquill'];
+const resourcesPaths = ['/mission', '/research', '/opensource', '/vision', '/release-logs'];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [earlyOpen, setEarlyOpen] = useState(false);
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
-  const [mobileEarlyOpen, setMobileEarlyOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const earlyRef = useRef<HTMLDivElement>(null);
-  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const earlyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [projectsOpen, setProjectsOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [mobileProjects, setMobileProjects] = useState(false);
+  const [mobileResources, setMobileResources] = useState(false);
+  const projectsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resourcesTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -39,131 +55,147 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
-    setMobileDropdownOpen(false);
-    setMobileEarlyOpen(false);
-    setDropdownOpen(false);
-    setEarlyOpen(false);
+    setMobileProjects(false);
+    setMobileResources(false);
+    setProjectsOpen(false);
+    setResourcesOpen(false);
   }, [location.pathname]);
 
-  const isOSActive = ['/mission', '/opensource', '/vision', '/release-logs'].some(p => location.pathname.startsWith(p));
-  const isEarlyActive = ['/inkflow', '/devquill'].some(p => location.pathname.startsWith(p));
+  const isProjectsActive = projectsPaths.some((p) => location.pathname.startsWith(p));
+  const isResourcesActive = resourcesPaths.some((p) => location.pathname.startsWith(p));
 
-  const handleMouseEnter = () => {
-    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
-    setDropdownOpen(true);
+  const enter = (
+    setter: (v: boolean) => void,
+    timer: React.MutableRefObject<ReturnType<typeof setTimeout> | null>,
+  ) => {
+    if (timer.current) clearTimeout(timer.current);
+    setter(true);
   };
-  const handleMouseLeave = () => {
-    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 150);
-  };
-
-  const handleEarlyEnter = () => {
-    if (earlyTimeout.current) clearTimeout(earlyTimeout.current);
-    setEarlyOpen(true);
-  };
-  const handleEarlyLeave = () => {
-    earlyTimeout.current = setTimeout(() => setEarlyOpen(false), 150);
+  const leave = (
+    setter: (v: boolean) => void,
+    timer: React.MutableRefObject<ReturnType<typeof setTimeout> | null>,
+  ) => {
+    timer.current = setTimeout(() => setter(false), 150);
   };
 
-  const navVariants = {
-    hidden: { y: -20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
-  };
-
-  const linkVariants = {
-    hidden: { opacity: 0, y: -5 },
-    visible: (custom: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: custom * 0.1, duration: 0.5, ease: 'easeOut' },
-    }),
-  };
-
-  const underlineClass = (active: boolean) =>
-    `text-foreground text-sm relative pb-1 after:content-[''] after:block after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-foreground after:transform after:transition-transform after:duration-300 ${active ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`;
+  const linkClass = (active: boolean) =>
+    `text-sm transition-colors duration-200 ${
+      active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+    }`;
 
   return (
     <motion.nav
-      initial="hidden"
-      animate="visible"
-      variants={navVariants}
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/50 backdrop-blur-md shadow-md' : 'bg-transparent'}`}
+      initial={{ y: -16, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border/40'
+          : 'bg-transparent'
+      }`}
     >
       <div className="max-container py-4 flex items-center justify-between">
-        <Link to="/" className="text-xl text-foreground flex items-center gap-2 group">
-          <motion.span
-            className="text-2xl text-white font-lato relative overflow-hidden"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-          >
-            \
-          </motion.span>
-          <div className="overflow-hidden">
-            <motion.span
-              className="font-lato text-lg font-bold tracking-tight"
-              initial={{ y: 20 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              LocalHouseLLM
-            </motion.span>
-          </div>
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2 group">
+          <span className="text-2xl text-foreground font-lato leading-none">\</span>
+          <span className="font-lato text-base font-semibold tracking-tight">LocalHouseLLM</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
-          {/* Anvira */}
-          <motion.div custom={0} variants={linkVariants} initial="hidden" animate="visible">
-            <Link to="/anvira" className={underlineClass(location.pathname.startsWith('/anvira'))}>
-              Anvira
-            </Link>
-          </motion.div>
-
-          {/* Nomi */}
-          <motion.div custom={1} variants={linkVariants} initial="hidden" animate="visible">
-            <Link to="/nomi" className={underlineClass(location.pathname.startsWith('/nomi'))}>
-              Nomi
-            </Link>
-          </motion.div>
-
-          {/* Opensource Dropdown */}
-          <motion.div
-            custom={2}
-            variants={linkVariants}
-            initial="hidden"
-            animate="visible"
+        {/* Desktop */}
+        <div className="hidden md:flex items-center gap-8">
+          {/* Projects mega dropdown */}
+          <div
             className="relative"
-            ref={dropdownRef}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() => enter(setProjectsOpen, projectsTimeout)}
+            onMouseLeave={() => leave(setProjectsOpen, projectsTimeout)}
           >
             <button
-              className={`flex items-center gap-1 ${underlineClass(isOSActive)}`}
-              onClick={() => setDropdownOpen(p => !p)}
+              className={`flex items-center gap-1 ${linkClass(isProjectsActive)}`}
+              onClick={() => setProjectsOpen((p) => !p)}
             >
-              Opensource
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+              Projects
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                  projectsOpen ? 'rotate-180' : ''
+                }`}
+              />
             </button>
-
             <AnimatePresence>
-              {dropdownOpen && (
+              {projectsOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                  transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 rounded-lg border border-border bg-black/80 backdrop-blur-xl shadow-xl overflow-hidden"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[460px] rounded-xl border border-border/60 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden"
                 >
-                  {opensourceLinks.map((link) => (
+                  <div className="grid grid-cols-2">
+                    {projectsGroups.map((group) => (
+                      <div key={group.heading} className="p-4 border-r border-border/40 last:border-r-0">
+                        <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground px-3 mb-2">
+                          {group.heading}
+                        </p>
+                        {group.links.map((link) => (
+                          <Link
+                            key={link.to}
+                            to={link.to}
+                            className={`block px-3 py-2 rounded-md transition-colors hover:bg-foreground/5 ${
+                              location.pathname === link.to ? 'bg-foreground/5' : ''
+                            }`}
+                            onClick={() => setProjectsOpen(false)}
+                          >
+                            <div className="text-sm font-medium text-foreground">{link.label}</div>
+                            {link.desc && (
+                              <div className="text-xs text-muted-foreground mt-0.5">{link.desc}</div>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Resources dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => enter(setResourcesOpen, resourcesTimeout)}
+            onMouseLeave={() => leave(setResourcesOpen, resourcesTimeout)}
+          >
+            <button
+              className={`flex items-center gap-1 ${linkClass(isResourcesActive)}`}
+              onClick={() => setResourcesOpen((p) => !p)}
+            >
+              Resources
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                  resourcesOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+            <AnimatePresence>
+              {resourcesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 rounded-xl border border-border/60 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden py-2"
+                >
+                  {resourcesLinks.map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
-                      className={`block px-4 py-2.5 text-sm transition-colors duration-200 hover:bg-white/5 ${
-                        location.pathname === link.to ? 'text-foreground bg-white/5' : 'text-muted-foreground'
+                      className={`block px-4 py-2 text-sm transition-colors hover:bg-foreground/5 ${
+                        location.pathname === link.to
+                          ? 'text-foreground bg-foreground/5'
+                          : 'text-muted-foreground'
                       }`}
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setResourcesOpen(false)}
                     >
                       {link.label}
                     </Link>
@@ -171,207 +203,125 @@ const Navbar = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
 
-          {/* Early Access Dropdown */}
-          <motion.div
-            custom={3}
-            variants={linkVariants}
-            initial="hidden"
-            animate="visible"
-            className="relative"
-            ref={earlyRef}
-            onMouseEnter={handleEarlyEnter}
-            onMouseLeave={handleEarlyLeave}
-          >
-            <button
-              className={`flex items-center gap-1 ${underlineClass(isEarlyActive)}`}
-              onClick={() => setEarlyOpen(p => !p)}
+          <Link to="/about" className={linkClass(location.pathname.startsWith('/about'))}>
+            About
+          </Link>
+
+          <Link to="/contact">
+            <Button
+              variant="outline"
+              className="border-border bg-transparent hover:bg-foreground/5 h-9 text-sm"
             >
-              Early Access
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${earlyOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            <AnimatePresence>
-              {earlyOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                  transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 rounded-lg border border-border bg-black/80 backdrop-blur-xl shadow-xl overflow-hidden"
-                >
-                  {earlyAccessLinks.map((link) => (
-                    <Link
-                      key={link.to}
-                      to={link.to}
-                      className={`block px-4 py-2.5 text-sm transition-colors duration-200 hover:bg-white/5 ${
-                        location.pathname === link.to ? 'text-foreground bg-white/5' : 'text-muted-foreground'
-                      }`}
-                      onClick={() => setEarlyOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* About */}
-          <motion.div custom={4} variants={linkVariants} initial="hidden" animate="visible">
-            <Link to="/about" className={underlineClass(location.pathname.startsWith('/about'))}>
-              About
-            </Link>
-          </motion.div>
-
-          {/* Contact */}
-          <motion.div custom={5} variants={linkVariants} initial="hidden" animate="visible">
-            <Link to="/contact">
-              <motion.div whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300 }}>
-                <Button
-                  variant="outline"
-                  className="border-border text-foreground text-sm bg-transparent hover:bg-foreground/5 hover:border-border"
-                >
-                  Contact
-                </Button>
-              </motion.div>
-            </Link>
-          </motion.div>
+              Contact
+            </Button>
+          </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <motion.button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-foreground p-2"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </motion.button>
-        </div>
+        {/* Mobile button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden text-foreground p-2"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="md:hidden bg-black/80 backdrop-blur-xl border-b border-border shadow-lg"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/40"
           >
             <div className="max-container py-4 flex flex-col gap-1">
-              <MobileLink to="/anvira" label="Anvira" index={0} />
-              <MobileLink to="/nomi" label="Nomi" index={1} />
-
-              {/* Opensource expandable */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
+              {/* Projects */}
+              <button
+                onClick={() => setMobileProjects((p) => !p)}
+                className="flex items-center justify-between px-3 py-2 text-sm rounded-md hover:bg-foreground/5"
               >
-                <button
-                  className={`flex items-center justify-between w-full text-foreground text-sm px-4 py-2 rounded-md transition-all duration-300 hover:bg-foreground/5 ${isOSActive ? 'bg-foreground/10' : ''}`}
-                  onClick={() => setMobileDropdownOpen(p => !p)}
-                >
-                  Opensource
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileDropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {mobileDropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden"
-                    >
-                      {opensourceLinks.map((link) => (
-                        <Link
-                          key={link.to}
-                          to={link.to}
-                          className={`block text-sm px-8 py-2 transition-colors duration-200 rounded-md hover:bg-foreground/5 ${
-                            location.pathname === link.to ? 'text-foreground bg-foreground/5' : 'text-muted-foreground'
-                          }`}
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                Projects
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileProjects ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {mobileProjects && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    {projectsGroups.map((group) => (
+                      <div key={group.heading} className="pt-2">
+                        <p className="px-6 text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
+                          {group.heading}
+                        </p>
+                        {group.links.map((link) => (
+                          <Link
+                            key={link.to}
+                            to={link.to}
+                            className={`block px-6 py-2 text-sm rounded-md hover:bg-foreground/5 ${
+                              location.pathname === link.to
+                                ? 'text-foreground'
+                                : 'text-muted-foreground'
+                            }`}
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-              {/* Early Access expandable */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
+              {/* Resources */}
+              <button
+                onClick={() => setMobileResources((p) => !p)}
+                className="flex items-center justify-between px-3 py-2 text-sm rounded-md hover:bg-foreground/5 mt-1"
               >
-                <button
-                  className={`flex items-center justify-between w-full text-foreground text-sm px-4 py-2 rounded-md transition-all duration-300 hover:bg-foreground/5 ${isEarlyActive ? 'bg-foreground/10' : ''}`}
-                  onClick={() => setMobileEarlyOpen(p => !p)}
-                >
-                  Early Access
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileEarlyOpen ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {mobileEarlyOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden"
-                    >
-                      {earlyAccessLinks.map((link) => (
-                        <Link
-                          key={link.to}
-                          to={link.to}
-                          className={`block text-sm px-8 py-2 transition-colors duration-200 rounded-md hover:bg-foreground/5 ${
-                            location.pathname === link.to ? 'text-foreground bg-foreground/5' : 'text-muted-foreground'
-                          }`}
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                Resources
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileResources ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {mobileResources && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    {resourcesLinks.map((link) => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className={`block px-6 py-2 text-sm rounded-md hover:bg-foreground/5 ${
+                          location.pathname === link.to ? 'text-foreground' : 'text-muted-foreground'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-              <MobileLink to="/about" label="About" index={4} />
-              <MobileLink to="/contact" label="Contact" index={5} />
+              <Link to="/about" className="px-3 py-2 text-sm rounded-md hover:bg-foreground/5 mt-1">
+                About
+              </Link>
+              <Link to="/contact" className="px-3 py-2 text-sm rounded-md hover:bg-foreground/5">
+                Contact
+              </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </motion.nav>
-  );
-};
-
-const MobileLink = ({ to, label, index }: { to: string; label: string; index: number }) => {
-  const location = useLocation();
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.3 }}
-    >
-      <Link
-        to={to}
-        className={`text-foreground text-sm px-4 py-2 block transition-all duration-300 hover:bg-foreground/5 rounded-md ${
-          location.pathname.startsWith(to) ? 'bg-foreground/10' : ''
-        }`}
-      >
-        {label}
-      </Link>
-    </motion.div>
   );
 };
 

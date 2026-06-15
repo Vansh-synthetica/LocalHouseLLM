@@ -23,6 +23,7 @@ import DevQuill from "./pages/DevQuill";
 import InkFlow from "./pages/InkFlow";
 import Nomi from "./pages/Nomi";
 import Mission from "./pages/Mission";
+import Research from "./pages/Research";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
               <Route path="/inkflow" element={<InkFlow />} />
               <Route path="/nomi" element={<Nomi />} />
               <Route path="/mission" element={<Mission />} />
+              <Route path="/research" element={<Research />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
