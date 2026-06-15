@@ -51,6 +51,8 @@ const Footer = () => {
             <h4 className="text-lg font-lato font-bold text-foreground">Company</h4>
             <ul className="space-y-3">
               <li><Link to="/" className={linkClass}>Home</Link></li>
+              <li><Link to="/mission" className={linkClass}>Mission</Link></li>
+              <li><Link to="/research" className={linkClass}>Research</Link></li>
               <li><Link to="/about" className={linkClass}>About Us</Link></li>
               <li><Link to="/vision" className={linkClass}>Vision</Link></li>
               <li><Link to="/opensource" className={linkClass}>Open Source</Link></li>
