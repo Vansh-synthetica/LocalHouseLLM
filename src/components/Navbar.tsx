@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const opensourceLinks = [
+  { to: '/mission', label: 'Mission' },
   { to: '/opensource', label: 'Open Source' },
   { to: '/vision', label: 'Vision' },
   { to: '/release-logs', label: 'Release Logs' },
@@ -47,7 +48,7 @@ const Navbar = () => {
     setEarlyOpen(false);
   }, [location.pathname]);
 
-  const isOSActive = ['/opensource', '/vision', '/release-logs'].some(p => location.pathname.startsWith(p));
+  const isOSActive = ['/mission', '/opensource', '/vision', '/release-logs'].some(p => location.pathname.startsWith(p));
   const isEarlyActive = ['/inkflow', '/devquill'].some(p => location.pathname.startsWith(p));
 
   const handleMouseEnter = () => {
