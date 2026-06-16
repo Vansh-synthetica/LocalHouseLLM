@@ -13,7 +13,6 @@ import Index from "./pages/Index";
 import Vision from "./pages/Vision";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import OpenSource from "./pages/OpenSource";
 import ReleaseLogs from "./pages/ReleaseLogs";
 import NotFound from "./pages/NotFound";
 import Anvira from "./pages/Anvira";
