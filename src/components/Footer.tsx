@@ -55,7 +55,6 @@ const Footer = () => {
               <li><Link to="/research" className={linkClass}>Research</Link></li>
               <li><Link to="/about" className={linkClass}>About Us</Link></li>
               <li><Link to="/vision" className={linkClass}>Vision</Link></li>
-              <li><Link to="/opensource" className={linkClass}>Open Source</Link></li>
               <li><Link to="/release-logs" className={linkClass}>Release Logs</Link></li>
               <li><Link to="/sitemap" className={linkClass}>Sitemap</Link></li>
               <li><Link to="/contact" className={linkClass}>Contact</Link></li>
