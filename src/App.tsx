@@ -46,7 +46,7 @@ const App = () => (
               <Route path="/anvira/h1" element={<AnviraH1 />} />
               <Route path="/vision" element={<Vision />} />
               <Route path="/about" element={<About />} />
-              <Route path="/opensource" element={<OpenSource />} />
+              <Route path="/opensource" element={<Navigate to="/research" replace />} />
               <Route path="/release-logs" element={<ReleaseLogs />} />
               <Route path="/devquill" element={<DevQuill />} />
               <Route path="/inkflow" element={<InkFlow />} />
