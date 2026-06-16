@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -12,7 +13,6 @@ import Index from "./pages/Index";
 import Vision from "./pages/Vision";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import OpenSource from "./pages/OpenSource";
 import ReleaseLogs from "./pages/ReleaseLogs";
 import NotFound from "./pages/NotFound";
 import Anvira from "./pages/Anvira";
@@ -45,7 +45,7 @@ const App = () => (
               <Route path="/anvira/h1" element={<AnviraH1 />} />
               <Route path="/vision" element={<Vision />} />
               <Route path="/about" element={<About />} />
-              <Route path="/opensource" element={<OpenSource />} />
+              <Route path="/opensource" element={<Navigate to="/research" replace />} />
               <Route path="/release-logs" element={<ReleaseLogs />} />
               <Route path="/devquill" element={<DevQuill />} />
               <Route path="/inkflow" element={<InkFlow />} />

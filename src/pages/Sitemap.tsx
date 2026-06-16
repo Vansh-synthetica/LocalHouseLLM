@@ -20,7 +20,6 @@ const groups: Group[] = [
     heading: 'Research',
     items: [
       { to: '/research', label: 'Research', desc: 'Papers on modular, adaptive, decentralized AI.' },
-      { to: '/opensource', label: 'Open Source', desc: 'Public components, code, and contributions.' },
       { to: '/release-logs', label: 'Release Logs', desc: 'Updates across the LocalHouseLLM stack.' },
     ],
   },

@@ -1,7 +1,7 @@
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, FileText } from 'lucide-react';
+import { ArrowUpRight, FileText, Github } from 'lucide-react';
 
 const papers = [
   {
@@ -164,6 +164,72 @@ const Research = () => {
             <FileText className="w-4 h-4" />
             Papers are hosted on SSRN. New work is published as the research programme advances.
           </motion.p>
+        </div>
+      </section>
+
+      {/* REPOS */}
+      <section className="border-t border-border/40 py-16 md:py-24">
+        <div className="max-container max-w-4xl">
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5"
+          >
+            Code
+          </motion.p>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={1}
+            className="text-2xl md:text-3xl font-semibold tracking-tight mb-8"
+          >
+            Open implementations.
+          </motion.h2>
+          <div className="space-y-6">
+            {[
+              {
+                name: 'AICL — Adaptive Inter-Module Communication Language',
+                desc: 'A lightweight, high-performance communication layer for modular AI systems. Provides packets, routing, safety filters, and module management.',
+                url: 'https://github.com/LocalHouseLLM/AICL',
+              },
+              {
+                name: 'Orcha',
+                desc: 'A high-performance orchestration runtime for executing multiple AI experts in parallel, selecting the best outputs, retrying weak results, and producing a coherent final answer.',
+                url: 'https://github.com/LocalHouseLLM/orcha01',
+              },
+            ].map((repo, i) => (
+              <motion.a
+                key={repo.url}
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={i + 2}
+                className="group block border border-border/40 rounded-xl p-6 md:p-8 hover:border-border hover:bg-foreground/[0.02] transition-all"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg md:text-xl font-semibold text-foreground group-hover:text-foreground transition-colors">
+                      {repo.name}
+                    </h3>
+                    <p className="mt-2 text-muted-foreground text-base leading-relaxed max-w-2xl">
+                      {repo.desc}
+                    </p>
+                  </div>
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-border/40 group-hover:border-border group-hover:bg-foreground/5 transition-all shrink-0">
+                    <Github className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  </span>
+                </div>
+              </motion.a>
+            ))}
+          </div>
         </div>
       </section>
     </CleanLayout>
