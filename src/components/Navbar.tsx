@@ -27,13 +27,12 @@ const projectsGroups: NavGroup[] = [
 const resourcesLinks: NavLink[] = [
   { to: '/mission', label: 'Mission' },
   { to: '/research', label: 'Research' },
-  { to: '/opensource', label: 'Open Source' },
   { to: '/vision', label: 'Vision' },
   { to: '/release-logs', label: 'Release Logs' },
 ];
 
 const projectsPaths = ['/anvira', '/nomi', '/inkflow', '/devquill'];
-const resourcesPaths = ['/mission', '/research', '/opensource', '/vision', '/release-logs'];
+const resourcesPaths = ['/mission', '/research', '/vision', '/release-logs'];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
