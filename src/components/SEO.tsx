@@ -15,9 +15,9 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "LocalHouseLLM — Modular AI Architecture | Local, Secure, Scalable Intelligence",
-  description = "Build private, modular AI with Anvira — local-first AI models, enterprise on-prem infrastructure, and edge AI for robotics. The intelligent alternative to monolithic LLMs.",
-  keywords = "LocalHouseLLM, modular AI architecture, local AI model, on-device AI, enterprise AI infrastructure, edge AI system, offline AI assistant, AI orchestration engine, AI for robotics, private AI alternative, Anvira, InkFlow, DevQuill, AMAI, AICL",
+  title = "LocalHouseLLM — Open, Modular Infrastructure for Decentralized AI",
+  description = "LocalHouseLLM is an AI research company building open, modular infrastructure for decentralized AI — interoperable components for communication, orchestration, memory, safety, tools, and intelligence modules.",
+  keywords = "LocalHouseLLM, decentralized AI, open AI infrastructure, modular AI, AI research company, AICL, AMAI, Anvira, Nomi, composable AI, interoperable AI components, AI ownership, open source AI",
   canonical = "https://localhousellm.com",
   ogImage = "https://localhousellm.com/og-image.png",
   type = "website",

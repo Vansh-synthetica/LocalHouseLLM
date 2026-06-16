@@ -8,11 +8,12 @@ import SEO from "@/components/SEO";
 import { ArrowRight, Search, Home } from "lucide-react";
 
 const suggestedPages = [
-  { to: "/anvira", label: "Anvira — Modular AI Models", desc: "Explore our local-first modular AI architecture" },
-  { to: "/inkflow", label: "InkFlow — AI Writing Assistant", desc: "AI copywriting and creative writing agent" },
-  { to: "/devquill", label: "DevQuill — AI Coding Assistant", desc: "Precision AI for developers" },
-  { to: "/about", label: "About LocalHouseLLM", desc: "Our mission, team, and vision" },
-  { to: "/opensource", label: "Open Source", desc: "Our open source contributions" },
+  { to: "/mission", label: "Mission — Why LocalHouseLLM", desc: "Open, modular infrastructure for decentralized AI" },
+  { to: "/research", label: "Research", desc: "Papers on modular, adaptive, decentralized AI" },
+  { to: "/anvira", label: "Anvira — Modular AI", desc: "Personal, enterprise, and edge editions" },
+  { to: "/nomi", label: "Nomi — Persona Infrastructure", desc: "User-owned identity and memory layer" },
+  { to: "/opensource", label: "Open Source", desc: "Our public components and contributions" },
+  { to: "/sitemap", label: "Sitemap", desc: "Browse every page on LocalHouseLLM" },
 ];
 
 const NotFound = () => {
@@ -38,11 +39,12 @@ const NotFound = () => {
   return (
     <Layout>
       <SEO
-        title="Page Not Found — LocalHouseLLM | Modular AI Architecture"
-        description="The page you're looking for doesn't exist. Explore LocalHouseLLM's modular AI products — Anvira local AI, InkFlow writing assistant, and DevQuill coding agent."
-        keywords="LocalHouseLLM, 404, page not found, modular AI, Anvira, InkFlow, DevQuill"
+        title="Page Not Found (404) — LocalHouseLLM"
+        description="The page you requested could not be found. Explore LocalHouseLLM — open, modular infrastructure for decentralized AI."
+        keywords="LocalHouseLLM, 404, page not found"
         canonical="https://localhousellm.com/"
         schema={notFoundSchema}
+        noindex
       />
 
       <section className="min-h-[80vh] flex items-center justify-center py-20">
