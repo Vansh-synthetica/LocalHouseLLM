@@ -24,6 +24,7 @@ import InkFlow from "./pages/InkFlow";
 import Nomi from "./pages/Nomi";
 import Mission from "./pages/Mission";
 import Research from "./pages/Research";
+import Sitemap from "./pages/Sitemap";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
               <Route path="/nomi" element={<Nomi />} />
               <Route path="/mission" element={<Mission />} />
               <Route path="/research" element={<Research />} />
+              <Route path="/sitemap" element={<Sitemap />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
