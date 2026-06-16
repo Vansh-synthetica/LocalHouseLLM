@@ -29,7 +29,7 @@ const Footer = () => {
               <span className="font-lato text-xl font-bold text-foreground">LocalHouseLLM</span>
             </Link>
             <p className="text-muted-foreground leading-relaxed">
-              Modular Intelligence — Local, Secure, Scalable.
+              An AI research company building open, modular infrastructure for decentralized AI.
             </p>
           </motion.div>
 
@@ -57,6 +57,7 @@ const Footer = () => {
               <li><Link to="/vision" className={linkClass}>Vision</Link></li>
               <li><Link to="/opensource" className={linkClass}>Open Source</Link></li>
               <li><Link to="/release-logs" className={linkClass}>Release Logs</Link></li>
+              <li><Link to="/sitemap" className={linkClass}>Sitemap</Link></li>
               <li><Link to="/contact" className={linkClass}>Contact</Link></li>
             </ul>
           </motion.div>
@@ -75,7 +76,7 @@ const Footer = () => {
 
         <motion.div className="mt-16 pt-8 border-t border-border text-center" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }} viewport={{ once: true }}>
           <p className="text-muted-foreground text-sm">
-            © {currentYear} LocalHouseLLM. All rights reserved. — Modular Intelligence for the Real World.
+            © {currentYear} LocalHouseLLM. All rights reserved. — Open, modular infrastructure for decentralized AI.
           </p>
         </motion.div>
       </div>
