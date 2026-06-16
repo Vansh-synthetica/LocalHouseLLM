@@ -1,7 +1,7 @@
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, FileText } from 'lucide-react';
+import { ArrowUpRight, FileText, Github } from 'lucide-react';
 
 const papers = [
   {
