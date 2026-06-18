@@ -362,10 +362,15 @@ const Index = () => {
               accessible future for AI matters to you — there is a place for you here.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link to="/opensource">
+              <Link to="/stack">
                 <Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
-                  Explore open source
+                  Explore the stack
                   <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </Link>
+              <Link to="/docs">
+                <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">
+                  Read the docs
                 </Button>
               </Link>
               <Link to="/contact">
