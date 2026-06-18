@@ -25,6 +25,25 @@ import Nomi from "./pages/Nomi";
 import Mission from "./pages/Mission";
 import Research from "./pages/Research";
 import Sitemap from "./pages/Sitemap";
+import Stack from "./pages/Stack";
+import Aicl from "./pages/stack/Aicl";
+import Orcha from "./pages/stack/Orcha";
+import Memory from "./pages/stack/Memory";
+import Safety from "./pages/stack/Safety";
+import Tools from "./pages/stack/Tools";
+import Modules from "./pages/stack/Modules";
+import Products from "./pages/Products";
+import Docs from "./pages/Docs";
+import Start from "./pages/Start";
+import Faq from "./pages/Faq";
+import Benchmarks from "./pages/Benchmarks";
+import UseCases from "./pages/UseCases";
+import UcAiTutors from "./pages/use-cases/AiTutors";
+import UcHealthcare from "./pages/use-cases/Healthcare";
+import UcAgriculture from "./pages/use-cases/Agriculture";
+import UcResearch from "./pages/use-cases/Research";
+import UcEnterprise from "./pages/use-cases/Enterprise";
+import UcEdgeAi from "./pages/use-cases/EdgeAi";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +73,32 @@ const App = () => (
               <Route path="/research" element={<Research />} />
               <Route path="/sitemap" element={<Sitemap />} />
               <Route path="/contact" element={<Contact />} />
+
+              {/* Stack */}
+              <Route path="/stack" element={<Stack />} />
+              <Route path="/stack/aicl" element={<Aicl />} />
+              <Route path="/stack/orcha" element={<Orcha />} />
+              <Route path="/stack/memory" element={<Memory />} />
+              <Route path="/stack/safety" element={<Safety />} />
+              <Route path="/stack/tools" element={<Tools />} />
+              <Route path="/stack/modules" element={<Modules />} />
+
+              {/* Hub pages */}
+              <Route path="/products" element={<Products />} />
+              <Route path="/docs" element={<Docs />} />
+              <Route path="/start" element={<Start />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/benchmarks" element={<Benchmarks />} />
+
+              {/* Use cases */}
+              <Route path="/use-cases" element={<UseCases />} />
+              <Route path="/use-cases/ai-tutors" element={<UcAiTutors />} />
+              <Route path="/use-cases/healthcare" element={<UcHealthcare />} />
+              <Route path="/use-cases/agriculture" element={<UcAgriculture />} />
+              <Route path="/use-cases/research" element={<UcResearch />} />
+              <Route path="/use-cases/enterprise-private-ai" element={<UcEnterprise />} />
+              <Route path="/use-cases/edge-ai" element={<UcEdgeAi />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
