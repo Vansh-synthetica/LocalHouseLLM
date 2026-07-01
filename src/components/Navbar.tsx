@@ -23,6 +23,7 @@ const stackGroups: NavGroup[] = [
     heading: 'Overview',
     links: [
       { to: '/stack', label: 'Full architecture', desc: 'How the layers fit together' },
+      { to: '/use-cases', label: 'Use Cases', desc: 'Real-world applications' },
       { to: '/benchmarks', label: 'Benchmarks', desc: 'Latency, cost, reliability' },
       { to: '/research', label: 'Research', desc: 'Papers & technical notes' },
     ],
@@ -225,8 +226,8 @@ const Navbar = () => {
             Docs
           </Link>
 
-          <Link to="/use-cases" className={linkClass(location.pathname.startsWith('/use-cases'))}>
-            Use Cases
+          <Link to="/work-with-us" className={linkClass(location.pathname.startsWith('/work-with-us'))}>
+            Work with us
           </Link>
 
           {/* Company */}
@@ -366,8 +367,8 @@ const Navbar = () => {
               <Link to="/docs" className="px-3 py-2 text-sm rounded-md hover:bg-foreground/5">
                 Docs
               </Link>
-              <Link to="/use-cases" className="px-3 py-2 text-sm rounded-md hover:bg-foreground/5">
-                Use Cases
+              <Link to="/work-with-us" className="px-3 py-2 text-sm rounded-md hover:bg-foreground/5">
+                Work with us
               </Link>
 
               {/* Company */}
