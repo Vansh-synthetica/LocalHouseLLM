@@ -344,6 +344,56 @@ const Index = () => {
         </div>
       </section>
 
+      {/* WORK WITH US */}
+      <section className="border-t border-border/40 py-20 md:py-28">
+        <div className="max-container">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="max-w-3xl mb-12"
+          >
+            <Eyebrow>Work With Us</Eyebrow>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">
+              Serious AI infrastructure, consulting, and custom builds.
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+              For founders, companies, and teams building real systems. Engagements are selective
+              and reviewed manually — this is collaboration, not a booking form.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-10">
+            {[
+              { title: 'AI Infrastructure & Deployment', desc: 'Private, modular stacks deployed on your hardware or cloud.' },
+              { title: 'Custom AI Systems & Development', desc: 'Purpose-built modular systems for your product or research.' },
+              { title: 'Strategic Consulting & Partnerships', desc: 'Architecture, roadmap, and long-term collaboration.' },
+            ].map((s, i) => (
+              <motion.div
+                key={s.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-40px' }}
+                variants={fadeUp}
+                custom={i}
+                className="p-6 rounded-xl border border-border/40 hover:border-border transition-colors"
+              >
+                <h3 className="text-base font-semibold mb-2">{s.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <Link to="/work-with-us">
+            <Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
+              Apply to Work With Us
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="border-t border-border/40 py-24 md:py-32">
         <div className="max-container">
@@ -373,9 +423,9 @@ const Index = () => {
                   Read the docs
                 </Button>
               </Link>
-              <Link to="/contact">
+              <Link to="/work-with-us">
                 <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">
-                  Get in touch
+                  Work with us
                 </Button>
               </Link>
             </div>
