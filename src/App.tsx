@@ -44,6 +44,7 @@ import UcAgriculture from "./pages/use-cases/Agriculture";
 import UcResearch from "./pages/use-cases/Research";
 import UcEnterprise from "./pages/use-cases/Enterprise";
 import UcEdgeAi from "./pages/use-cases/EdgeAi";
+import WorkWithUs from "./pages/WorkWithUs";
 
 const queryClient = new QueryClient();
 
@@ -98,6 +99,8 @@ const App = () => (
               <Route path="/use-cases/research" element={<UcResearch />} />
               <Route path="/use-cases/enterprise-private-ai" element={<UcEnterprise />} />
               <Route path="/use-cases/edge-ai" element={<UcEdgeAi />} />
+
+              <Route path="/work-with-us" element={<WorkWithUs />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
