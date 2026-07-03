@@ -1,26 +1,25 @@
-
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 export default {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
-  prefix: "",
+  prefix: '',
   theme: {
     container: {
       center: true,
       padding: '2rem',
       screens: {
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1400px'
-      }
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1400px',
+      },
     },
     extend: {
       colors: {
@@ -31,130 +30,104 @@ export default {
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
+          foreground: 'hsl(var(--secondary-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
+          foreground: 'hsl(var(--destructive-foreground))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
+          foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          foreground: 'hsl(var(--accent-foreground))',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
+          foreground: 'hsl(var(--popover-foreground))',
         },
         card: {
           DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
+          foreground: 'hsl(var(--card-foreground))',
         },
-        // Custom semantic colors
         success: {
           DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))'
+          foreground: 'hsl(var(--success-foreground))',
         },
         warning: {
           DEFAULT: 'hsl(var(--warning))',
-          foreground: 'hsl(var(--warning-foreground))'
+          foreground: 'hsl(var(--warning-foreground))',
         },
         info: {
           DEFAULT: 'hsl(var(--info))',
-          foreground: 'hsl(var(--info-foreground))'
+          foreground: 'hsl(var(--info-foreground))',
         },
       },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        md: 'calc(var(--radius) - 4px)',
+        sm: 'calc(var(--radius) - 6px)',
+      },
+      fontFamily: {
+        // Semantic aliases
+        sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Sora', 'Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        // Back-compat: existing pages use font-lato / font-raleway / font-inter /
+        // font-playfair. Alias them to the new premium pair so no page needs edits.
+        lato: ['Sora', 'Manrope', 'sans-serif'],
+        raleway: ['Manrope', 'sans-serif'],
+        inter: ['Manrope', 'sans-serif'],
+        playfair: ['Sora', 'serif'],
+        manrope: ['Manrope', 'sans-serif'],
+        sora: ['Sora', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' }
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' }
+          to: { height: '0' },
         },
         'fade-in': {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' }
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'fade-out': {
           '0%': { opacity: '1', transform: 'translateY(0)' },
-          '100%': { opacity: '0', transform: 'translateY(10px)' }
+          '100%': { opacity: '0', transform: 'translateY(8px)' },
         },
-        'glow': {
-          '0%, 100%': { 
-            boxShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
-            borderColor: 'rgba(255, 255, 255, 0.3)'
-          },
-          '50%': { 
-            boxShadow: '0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2)',
-            borderColor: 'rgba(255, 255, 255, 0.6)'
-          }
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.97)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
-        'pulse-light': {
-          '0%, 100%': { 
-            opacity: '1'
-          },
-          '50%': { 
-            opacity: '0.7' 
-          }
-        },
-        'shimmer': {
+        shimmer: {
           '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' }
+          '100%': { transform: 'translateX(100%)' },
         },
-        'float': {
+        float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-15px)' }
+          '50%': { transform: 'translateY(-10px)' },
         },
-        'scale-pulse': {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' }
-        },
-        'rotate-slow': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' }
-        },
-        'text-flicker': {
-          '0%, 100%': { opacity: '1' },
-          '5%, 9.9%': { opacity: '0.8' },
-          '10%, 19.9%': { opacity: '1' },
-          '20%, 20.9%': { opacity: '0.9' },
-          '21%, 21.9%': { opacity: '1' }
-        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in': 'fade-in 0.5s ease-out forwards',
-        'fade-out': 'fade-out 0.5s ease-out forwards',
-        'glow': 'glow 2s ease-in-out infinite',
-        'pulse-light': 'pulse-light 2s ease-in-out infinite',
-        'shimmer': 'shimmer 2s infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'scale-pulse': 'scale-pulse 3s ease-in-out infinite',
-        'rotate-slow': 'rotate-slow 10s linear infinite',
-        'text-flicker': 'text-flicker 5s linear infinite'
+        'fade-in': 'fade-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'fade-out': 'fade-out 0.3s ease-out',
+        'scale-in': 'scale-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both',
+        shimmer: 'shimmer 2.5s infinite',
+        float: 'float 8s ease-in-out infinite',
       },
-      fontFamily: {
-        'inter': ['Inter', 'sans-serif'],
-        'playfair': ['Playfair Display', 'serif'],
-        'raleway': ['Raleway', 'sans-serif'],
-        'lato': ['Lato', 'sans-serif']
-      }
-    }
+    },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require('tailwindcss-animate')],
 } satisfies Config;
