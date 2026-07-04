@@ -9,7 +9,7 @@ const Memory = () => (
     <SEO
       title="Memory — Portable, User-Owned Context for AI"
       description="The LocalHouseLLM memory layer is portable, user-owned context that travels across tools, sessions, and devices — so your AI history belongs to you, not to a vendor."
-      canonical="https://localhousellm.com/stack/memory"
+      canonical="https://localhousellm.lovable.app/stack/memory"
       keywords="AI memory, portable AI memory, user-owned AI context, AI context layer, LocalHouseLLM memory, decentralized AI memory, personal AI memory"
       schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'Memory — Portable, User-Owned Context for AI', author: { '@type': 'Organization', name: 'LocalHouseLLM' }, url: 'https://localhousellm.com/stack/memory' }}
     />

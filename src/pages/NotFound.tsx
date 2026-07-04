@@ -42,7 +42,7 @@ const NotFound = () => {
         title="Page Not Found (404) — LocalHouseLLM"
         description="The page you requested could not be found. Explore LocalHouseLLM — open, modular infrastructure for decentralized AI."
         keywords="LocalHouseLLM, 404, page not found"
-        canonical="https://localhousellm.com/"
+        canonical="https://localhousellm.lovable.app/"
         schema={notFoundSchema}
         noindex
       />

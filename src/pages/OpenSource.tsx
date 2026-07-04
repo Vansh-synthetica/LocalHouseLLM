@@ -56,7 +56,7 @@ const OpenSource = () => {
         title="Open Source — Research & Code | LocalHouseLLM"
         description="Explore LocalHouseLLM's published research papers on modular AI and open source code contributions."
         keywords="open source AI, modular AI research, AMAI papers, AICL research, LocalHouseLLM open source"
-        canonical="https://localhouse.ai/opensource"
+        canonical="https://localhousellm.lovable.app/opensource"
         type="website"
         schema={schema}
       />

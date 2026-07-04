@@ -61,7 +61,7 @@ const AnviraH1 = () => {
         title="anvira h1 — embedded edition | LocalHouseLLM"
         description="anvira h1 is a compact, low-power on-device AI brain for robotics and embedded systems – optimized for real-time perception, planning and safe adaptation."
         keywords="anvira h1, embedded AI, robotics AI, edge AI, IoT AI, on-device AI, real-time AI, LocalHouseLLM"
-        canonical="https://localhouse.ai/anvira/h1"
+        canonical="https://localhousellm.lovable.app/anvira/h1"
       />
 
       {/* Hero */}
