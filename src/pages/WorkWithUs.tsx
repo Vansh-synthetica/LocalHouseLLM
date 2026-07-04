@@ -86,7 +86,7 @@ const WorkWithUs = () => {
       <SEO
         title="Work With Us — LocalHouseLLM"
         description="Apply to work with LocalHouseLLM on AI infrastructure, custom AI systems, and strategic consulting. Selective engagements for founders, companies, and research teams."
-        canonical="https://localhousellm.com/work-with-us"
+        canonical="https://localhousellm.lovable.app/work-with-us"
       />
 
       {/* HERO */}

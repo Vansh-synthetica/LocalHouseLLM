@@ -72,7 +72,7 @@ const Blog = () => {
         title="AI Research Blog - Modular Architecture Insights | LocalHouseLLM"
         description="Explore insights into modular AI architecture, AMAI expert systems, AICL communication, and the future of artificial intelligence. Learn about our approach to building next-generation language models."
         keywords="AI blog, modular AI insights, AMAI research, AI architecture blog, AICL articles, machine learning blog, AI development blog, expert modules blog, LocalHouse research"
-        canonical="https://localhouse.ai/blog"
+        canonical="https://localhousellm.lovable.app/blog"
         schema={blogSchema}
       />
       <section className="py-20">

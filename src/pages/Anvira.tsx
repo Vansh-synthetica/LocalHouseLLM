@@ -73,7 +73,7 @@ const Anvira = () => {
         title="anvira — modular local AI | LocalHouseLLM"
         description="anvira — a family of modular, local-first AI products from LocalHouseLLM. Explore anvira o1 (standard), anvira o1e (enterprise), and anvira h1 (embedded)."
         keywords="anvira, modular AI, local AI, LocalHouseLLM, anvira o1, anvira o1e, anvira h1, private AI, edge AI"
-        canonical="https://localhouse.ai/anvira"
+        canonical="https://localhousellm.lovable.app/anvira"
       />
 
       {/* Hero Section */}
@@ -88,8 +88,9 @@ const Anvira = () => {
             className="text-5xl md:text-7xl font-light mb-4 uppercase"
             style={{ letterSpacing: '0.25em' }}
           >
-            ANVIRA
+            Anvira — Modular Local AI Architecture
           </motion.h1>
+
           
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -238,7 +239,7 @@ const Anvira = () => {
                       className="text-primary text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
                       aria-label={`Learn more about ${product.name}`}
                     >
-                      learn more <ArrowRight className="w-4 h-4" />
+                      See {product.name} details <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </div>

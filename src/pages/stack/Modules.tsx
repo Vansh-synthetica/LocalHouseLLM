@@ -9,7 +9,7 @@ const Modules = () => (
     <SEO
       title="Intelligence Modules — Specialized Experts for Modular AI"
       description="Intelligence Modules are the specialized experts inside the LocalHouseLLM stack. Each module is independently swappable, upgradable, and routable — small local models, fine-tuned domain experts, or hosted frontier models can all fill the same slot."
-      canonical="https://localhousellm.com/stack/modules"
+      canonical="https://localhousellm.lovable.app/stack/modules"
       keywords="AI expert modules, intelligence modules, mixture of experts, modular AI experts, LocalHouseLLM modules, specialized AI models, AI module architecture"
       schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'Intelligence Modules — Specialized Experts for Modular AI', author: { '@type': 'Organization', name: 'LocalHouseLLM' }, url: 'https://localhousellm.com/stack/modules' }}
     />

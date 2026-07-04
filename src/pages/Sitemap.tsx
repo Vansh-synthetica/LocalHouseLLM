@@ -52,7 +52,7 @@ const Sitemap = () => {
       <SEO
         title="Sitemap — LocalHouseLLM | All Pages, Research, and Projects"
         description="Human-readable sitemap of LocalHouseLLM — mission, research, open source, and all projects including Anvira and Nomi."
-        canonical="https://localhousellm.com/sitemap"
+        canonical="https://localhousellm.lovable.app/sitemap"
         keywords="LocalHouseLLM sitemap, site index, pages, decentralized AI, modular AI"
         schema={schema}
       />

@@ -25,7 +25,7 @@ const Vision = () => {
         title="AI Vision - Modular Architecture with AMAI & AICL | LocalHouseLLM"
         description="Explore our revolutionary modular AI vision using AICL communication protocol, AMAI expert modules, and adaptive learning systems. Learn how we replace parameter bloat with architectural elegance for efficient, scalable artificial intelligence."
         keywords="AICL, AMAI, AI architecture vision, expert modules, modular AI systems, AI communication layer, adaptive activation, AI verification, scalable AI, symbolic AI communication, distributed intelligence, transparent AI reasoning, evolvable AI systems"
-        canonical="https://localhouse.ai/vision"
+        canonical="https://localhousellm.lovable.app/vision"
         type="article"
         schema={visionSchema}
       />

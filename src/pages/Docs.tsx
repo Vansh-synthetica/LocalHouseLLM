@@ -48,7 +48,7 @@ const Docs = () => (
     <SEO
       title="Docs — LocalHouseLLM Developer Documentation"
       description="Developer documentation for the LocalHouseLLM modular AI stack: quickstart, installation, API reference, config reference, custom expert guide, and integrations."
-      canonical="https://localhousellm.com/docs"
+      canonical="https://localhousellm.lovable.app/docs"
       keywords="LocalHouseLLM docs, ORCHA documentation, AICL documentation, modular AI SDK, AI orchestration SDK, AI developer documentation"
       schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'LocalHouseLLM Developer Documentation', author: { '@type': 'Organization', name: 'LocalHouseLLM' }, url: 'https://localhousellm.com/docs' }}
     />

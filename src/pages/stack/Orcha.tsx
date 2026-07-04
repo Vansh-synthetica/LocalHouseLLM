@@ -20,7 +20,7 @@ const Orcha = () => {
       <SEO
         title="ORCHA — The Orchestration Engine of the LocalHouseLLM Stack"
         description="ORCHA is the orchestration engine inside the LocalHouseLLM modular AI stack. It decomposes requests, routes work to expert modules, aggregates results, and applies verification — turning a fleet of specialized models into a single coherent system."
-        canonical="https://localhousellm.com/stack/orcha"
+        canonical="https://localhousellm.lovable.app/stack/orcha"
         keywords="ORCHA, AI orchestration, AI orchestration engine, modular AI orchestration, LocalHouseLLM ORCHA, AI routing, AI decomposition, multi-agent orchestration"
         schema={schema}
       />

@@ -216,7 +216,7 @@ const ReleaseLogs = () => {
         title="Release Logs - Track AMAI Development Progress | LocalHouseLLM"
         description="Stay updated with LocalHouseLLM release logs. Track improvements, features, and fixes to our modular AI platform. Follow our journey building AMAI expert modules and AICL communication technology with detailed version history."
         keywords="LocalHouseLLM updates, AMAI changelog, AI platform updates, release notes, version history, AI development log, modular AI progress, AICL updates, expert module updates, AI feature releases"
-        canonical="https://localhouse.ai/release-logs"
+        canonical="https://localhousellm.lovable.app/release-logs"
         schema={releaseSchema}
       />
       <section className="py-24 relative overflow-hidden min-h-screen">

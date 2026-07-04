@@ -20,7 +20,7 @@ const UseCases = () => (
     <SEO
       title="Use Cases — LocalHouseLLM"
       description="Real-world deployments of the LocalHouseLLM modular AI stack: AI tutors, healthcare support, agricultural advisors, research assistants, enterprise private AI, and edge AI for robotics."
-      canonical="https://localhousellm.com/use-cases"
+      canonical="https://localhousellm.lovable.app/use-cases"
       keywords="LocalHouseLLM use cases, modular AI use cases, AI tutors, healthcare AI, agricultural AI, research AI, enterprise private AI, edge AI, robotics AI"
       schema={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'LocalHouseLLM Use Cases', url: 'https://localhousellm.com/use-cases' }}
     />
