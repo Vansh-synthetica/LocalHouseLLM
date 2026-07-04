@@ -64,7 +64,7 @@ const InkFlow = () => {
             custom={0}
             className="mb-4"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-white/5 text-xs text-muted-foreground tracking-wide uppercase">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/40 text-xs text-muted-foreground tracking-wide uppercase">
               <Sparkles className="w-3 h-3" />
               Coming Soon
             </span>
@@ -118,7 +118,7 @@ const InkFlow = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="bg-white/5 border-border text-foreground placeholder:text-muted-foreground/50 h-11"
+                  className="bg-muted/40 border-border text-foreground placeholder:text-muted-foreground/50 h-11"
                 />
                 <Button type="submit" className="h-11 px-6 gap-2 whitespace-nowrap">
                   Join Early Access
@@ -155,7 +155,7 @@ const InkFlow = () => {
                 custom={i + 1}
                 className="feature-card p-6 sm:p-8 flex flex-col items-start gap-4"
               >
-                <div className="w-10 h-10 rounded-md bg-white/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-md bg-muted/60 flex items-center justify-center">
                   <f.icon className="w-5 h-5 text-foreground" />
                 </div>
                 <h3 className="text-lg font-lato font-semibold text-foreground">{f.title}</h3>
