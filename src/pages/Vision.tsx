@@ -80,7 +80,7 @@ const Vision = () => {
             <div className="glass p-8 h-auto">
               <h2 className="text-xl font-semibold mb-6 text-center">Modular AI Architecture Overview</h2>
               
-              <div className="w-full bg-black/30 rounded-lg p-6 flex flex-col">
+              <div className="w-full bg-muted/50 rounded-lg p-6 flex flex-col">
                 {/* Updated architectural diagram */}
                 <div className="flex-grow flex flex-col items-center justify-center space-y-6">
                   {/* Input Layer */}

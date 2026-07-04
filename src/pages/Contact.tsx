@@ -133,7 +133,7 @@ const Contact = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-cyberBlue text-black hover:bg-cyberBlue/90"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}

@@ -79,7 +79,7 @@ const Blog = () => {
         <div className="max-container">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Research Blog</h1>
-            <p className="text-xl text-secondaryText max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Insights into our approach to building the next generation of language models.
             </p>
           </div>
@@ -90,11 +90,11 @@ const Blog = () => {
               <Input
                 type="text"
                 placeholder="Search articles..."
-                className="bg-secondary/50 border-white/10 pl-12"
+                className="bg-secondary/50 border-border pl-12"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-secondaryText w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
             </div>
           </div>
           
@@ -108,16 +108,16 @@ const Blog = () => {
                 />
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-xs px-3 py-1 bg-secondary rounded-full text-white">
+                    <span className="text-xs px-3 py-1 bg-secondary rounded-full text-secondary-foreground">
                       {post.category}
                     </span>
-                    <span className="text-xs text-secondaryText">
+                    <span className="text-xs text-muted-foreground">
                       {post.date}
                     </span>
                   </div>
                   <h3 className="text-xl font-bold mb-2">{post.title}</h3>
-                  <p className="text-secondaryText mb-6">{post.excerpt}</p>
-                  <Button variant="outline" size="sm" className="border-cyberBlue text-cyberBlue hover:bg-cyberBlue/10">
+                  <p className="text-muted-foreground mb-6">{post.excerpt}</p>
+                  <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
                     Read Article
                   </Button>
                 </div>
@@ -127,23 +127,23 @@ const Blog = () => {
           
           {filteredPosts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-secondaryText">No articles found matching your search.</p>
+              <p className="text-muted-foreground">No articles found matching your search.</p>
             </div>
           )}
           
           {/* Newsletter */}
           <div className="mt-20 glass p-8 text-center">
             <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
-            <p className="text-secondaryText mb-6 max-w-2xl mx-auto">
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Subscribe to our newsletter to receive the latest updates on our research and development.
             </p>
             <div className="max-w-md mx-auto flex gap-4">
               <Input 
                 type="email" 
                 placeholder="Your email address" 
-                className="bg-secondary/50 border-white/10"
+                className="bg-secondary/50 border-border"
               />
-              <Button className="bg-cyberBlue text-black hover:bg-cyberBlue/90">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                 Subscribe
               </Button>
             </div>

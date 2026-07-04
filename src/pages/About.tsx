@@ -76,7 +76,7 @@ const About = () => {
                 </Button>
               </a>
               <a href="#" onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}>
-                <Button variant="outline" className="border-white/20 hover:bg-white/5">
+                <Button variant="outline" className="border-border hover:bg-muted/50">
                   Twitter
                 </Button>
               </a>
@@ -94,34 +94,34 @@ const About = () => {
               {/* Timeline items */}
               <div className="space-y-12">
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-cyberBlue shadow-glow"></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
                   <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
                     <h3 className="font-semibold">April 2025</h3>
-                    <p className="text-secondaryText">LocalHouseLLM founded</p>
+                    <p className="text-muted-foreground">LocalHouseLLM founded</p>
                   </div>
                 </div>
                 
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-cyberBlue shadow-glow"></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
                   <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
                     <h3 className="font-semibold">July 2025</h3>
-                    <p className="text-secondaryText">Initial modular AI research whitepaper published</p>
+                    <p className="text-muted-foreground">Initial modular AI research whitepaper published</p>
                   </div>
                 </div>
                 
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-cyberBlue shadow-glow"></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
                   <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
                     <h3 className="font-semibold">October 2025</h3>
-                    <p className="text-secondaryText">First AMAI prototype with modular architecture</p>
+                    <p className="text-muted-foreground">First AMAI prototype with modular architecture</p>
                   </div>
                 </div>
                 
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-cyberBlue shadow-glow"></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
                   <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
                     <h3 className="font-semibold">Q1 2026</h3>
-                    <p className="text-secondaryText">Alpha release planned</p>
+                    <p className="text-muted-foreground">Alpha release planned</p>
                   </div>
                 </div>
               </div>
