@@ -88,8 +88,9 @@ const Anvira = () => {
             className="text-5xl md:text-7xl font-light mb-4 uppercase"
             style={{ letterSpacing: '0.25em' }}
           >
-            ANVIRA
+            Anvira — Modular Local AI Architecture
           </motion.h1>
+
           
           <motion.p
             initial={{ opacity: 0, y: 12 }}
