@@ -24,7 +24,7 @@ const getInitialTheme = (storageKey: string, fallback: Theme): Theme => {
   } catch {
     /* ignore */
   }
-  if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) return 'dark';
+  // Always default to light — user can opt into dark via toggle.
   return fallback;
 };
 
