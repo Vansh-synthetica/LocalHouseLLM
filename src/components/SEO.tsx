@@ -15,11 +15,11 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "LocalHouseLLM — Open, Modular Infrastructure for Decentralized AI",
-  description = "LocalHouseLLM is an AI research company building open, modular infrastructure for decentralized AI — interoperable components for communication, orchestration, memory, safety, tools, and intelligence modules.",
-  keywords = "LocalHouseLLM, decentralized AI, open AI infrastructure, modular AI, AI research company, AICL, AMAI, Anvira, Nomi, composable AI, interoperable AI components, AI ownership, open source AI",
-  canonical = "https://localhousellm.com",
-  ogImage = "https://localhousellm.com/og-image.png",
+  title = "LocalHouseLLM — Modular Infrastructure for Local AI",
+  description = "LocalHouseLLM builds open, modular infrastructure for local and decentralized AI. Home of Anvira, Nomi, and the AICL protocol.",
+  keywords = "LocalHouseLLM, Local House LLM, modular AI, local AI, Anvira, Nomi, AICL, ORCHA, decentralized AI, edge AI",
+  canonical = "https://localhousellm.lovable.app/",
+  ogImage = "https://localhousellm.lovable.app/og-image.png",
   type = "website",
   author = "LocalHouseLLM",
   publishedTime,
