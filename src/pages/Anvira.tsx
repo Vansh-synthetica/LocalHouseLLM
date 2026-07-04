@@ -239,7 +239,7 @@ const Anvira = () => {
                       className="text-primary text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
                       aria-label={`Learn more about ${product.name}`}
                     >
-                      learn more <ArrowRight className="w-4 h-4" />
+                      See {product.name} details <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </div>
