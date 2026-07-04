@@ -108,7 +108,7 @@ const Blog = () => {
                 />
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-xs px-3 py-1 bg-secondary rounded-full text-white">
+                    <span className="text-xs px-3 py-1 bg-secondary rounded-full text-secondary-foreground">
                       {post.category}
                     </span>
                     <span className="text-xs text-muted-foreground">
