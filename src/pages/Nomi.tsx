@@ -41,7 +41,7 @@ const Nomi = () => {
         title="Nomi — AI Persona Infrastructure | Your AI Identity, Everywhere"
         description="Nomi is a user-controlled identity and memory layer for AI. Carry your context, preferences, and voice across every AI system — consistent, portable, fully yours."
         keywords="Nomi, AI persona, AI identity, AI memory layer, portable AI profile, user-controlled AI, AI infrastructure, personalized AI, cross-platform AI memory"
-        canonical="https://localhousellm.lovable.app/nomi"
+        canonical="https://localhousellm.com/nomi"
       />
 
       <div className="min-h-screen bg-[#FAFAF7] text-[#0A0A0A] font-raleway antialiased">

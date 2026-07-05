@@ -24,4 +24,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://localhousellm.lovable.app/sitemap.xml
+Sitemap: https://localhousellm.com/sitemap.xml

@@ -71,7 +71,7 @@ const Research = () => {
         title="Research — Modular AI, Adaptive Intelligence & Reasoning | LocalHouseLLM"
         description="Read LocalHouseLLM's research on modular AI architecture, adaptive intelligence, chain-of-thought reasoning, and memory-efficient inference. Foundational work for decentralised AI."
         keywords="LocalHouseLLM research, AMAI, Shadow AMAI, CoT looping, ADAPT, modular AI papers, AICL research, AI infrastructure research"
-        canonical="https://localhousellm.lovable.app/research"
+        canonical="https://localhousellm.com/research"
         type="article"
         schema={schema}
       />

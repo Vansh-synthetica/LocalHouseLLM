@@ -64,7 +64,7 @@ const Index = () => {
         title="LocalHouseLLM — Open, Modular Infrastructure for Decentralized AI"
         description="LocalHouseLLM is building open, modular infrastructure for decentralized AI. Interoperable building blocks for communication, orchestration, memory, safety, tools, and intelligence — owned by the people who use them."
         keywords="LocalHouseLLM, decentralized AI, open AI infrastructure, modular AI, AI ownership, AI sovereignty, open source AI, AICL, AMAI, composable AI, interoperable AI components"
-        canonical="https://localhousellm.lovable.app/"
+        canonical="https://localhousellm.com/"
         schema={homeSchema}
       />
 

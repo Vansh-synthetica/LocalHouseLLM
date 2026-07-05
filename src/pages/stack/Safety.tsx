@@ -9,7 +9,7 @@ const Safety = () => (
     <SEO
       title="Safety — Verification Layer for Modular AI"
       description="LocalHouseLLM's safety layer applies factual, logical, and policy checks to every AI exchange. Verification is a first-class component of the modular stack, not an afterthought."
-      canonical="https://localhousellm.lovable.app/stack/safety"
+      canonical="https://localhousellm.com/stack/safety"
       keywords="AI safety, AI verification, AI verification layer, factual verification AI, AI policy enforcement, LocalHouseLLM safety, trustworthy AI"
       schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'Safety — Verification Layer for Modular AI', author: { '@type': 'Organization', name: 'LocalHouseLLM' }, url: 'https://localhousellm.com/stack/safety' }}
     />

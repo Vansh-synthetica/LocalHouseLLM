@@ -58,7 +58,7 @@ const Contact = () => {
         title="Contact LocalHouseLLM - Build the Future of AI Together"
         description="Connect with LocalHouseLLM for AI collaborations, partnerships, and inquiries. Join us in revolutionizing modular AI architecture with AMAI expert modules and AICL technology. Let's build smarter AI together."
         keywords="contact LocalHouseLLM, AI collaboration, AI partnership, modular AI inquiry, AI research contact, join AI team, LocalHouse partnership, AMAI collaboration, AI consulting"
-        canonical="https://localhousellm.lovable.app/contact"
+        canonical="https://localhousellm.com/contact"
         schema={contactSchema}
       />
       <section className="py-20">

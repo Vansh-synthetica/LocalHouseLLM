@@ -50,7 +50,7 @@ const AnviraO1E = () => {
         title="anvira o1e — enterprise edition | LocalHouseLLM"
         description="anvira o1e is a modular intelligence platform for enterprises — on-premise, secure, scalable, and auditable."
         keywords="anvira o1e, enterprise AI, on-premise AI, secure AI, auditable AI, enterprise intelligence, LocalHouseLLM"
-        canonical="https://localhousellm.lovable.app/anvira/o1e"
+        canonical="https://localhousellm.com/anvira/o1e"
       />
 
       {/* Hero */}

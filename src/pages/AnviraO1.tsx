@@ -49,7 +49,7 @@ const AnviraO1 = () => {
         title="anvira o1 — standard edition | LocalHouseLLM"
         description="anvira o1 is a modular, adaptive personal AI — fast, private, and designed for daily productivity with 10+ expert modules running locally."
         keywords="anvira o1, personal AI, modular AI, local AI, privacy AI, expert modules, adaptive AI, LocalHouseLLM"
-        canonical="https://localhousellm.lovable.app/anvira/o1"
+        canonical="https://localhousellm.com/anvira/o1"
       />
 
       {/* Hero */}

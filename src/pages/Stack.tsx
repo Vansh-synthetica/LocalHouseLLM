@@ -36,7 +36,7 @@ const Stack = () => {
       <SEO
         title="The LocalHouseLLM Stack — Modular AI Architecture"
         description="A complete overview of the LocalHouseLLM modular AI stack: AICL communication, ORCHA orchestration, memory, safety, tools, and intelligence modules — the open infrastructure for decentralized AI."
-        canonical="https://localhousellm.lovable.app/stack"
+        canonical="https://localhousellm.com/stack"
         keywords="LocalHouseLLM stack, modular AI architecture, AICL, ORCHA, AI orchestration, AI communication layer, AI memory, AI safety, intelligence modules, decentralized AI infrastructure"
         schema={schema}
       />
