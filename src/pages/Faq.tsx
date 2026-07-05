@@ -33,7 +33,7 @@ const Faq = () => {
       <SEO
         title="FAQ — LocalHouseLLM"
         description="Frequently asked questions about LocalHouseLLM, AICL, ORCHA, modular AI infrastructure, and how to build on the decentralized AI stack."
-        canonical="https://localhousellm.lovable.app/faq"
+        canonical="https://localhousellm.com/faq"
         keywords="LocalHouseLLM FAQ, what is LocalHouseLLM, what is AICL, what is ORCHA, modular AI FAQ, decentralized AI FAQ"
         schema={schema}
       />

@@ -9,7 +9,7 @@ const Tools = () => (
     <SEO
       title="Tools — Reusable Action Components for AI Modules"
       description="The LocalHouseLLM tools layer is a library of sandboxed, reusable action components — retrieval, calculation, code execution, and external integrations — that any expert module can call through AICL."
-      canonical="https://localhousellm.lovable.app/stack/tools"
+      canonical="https://localhousellm.com/stack/tools"
       keywords="AI tools, AI tool use, AI function calling, AI action components, AI retrieval tool, AI code execution, LocalHouseLLM tools"
       schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'Tools — Reusable Action Components for AI Modules', author: { '@type': 'Organization', name: 'LocalHouseLLM' }, url: 'https://localhousellm.com/stack/tools' }}
     />

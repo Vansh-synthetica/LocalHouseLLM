@@ -21,7 +21,7 @@ const Aicl = () => {
       <SEO
         title="AICL — The Communication Layer of the LocalHouseLLM Stack"
         description="AICL (Adaptive Inter-module Communication Language) is a structured packet protocol that lets AI modules coordinate clearly, safely, and predictably across the LocalHouseLLM modular stack."
-        canonical="https://localhousellm.lovable.app/stack/aicl"
+        canonical="https://localhousellm.com/stack/aicl"
         keywords="AICL, AI communication layer, AI protocol, inter-module communication, modular AI protocol, LocalHouseLLM AICL, adaptive inter-module communication language"
         schema={schema}
       />

@@ -17,7 +17,7 @@ const Benchmarks = () => (
     <SEO
       title="Benchmarks — LocalHouseLLM"
       description="How we measure the LocalHouseLLM modular AI stack: latency, cost, reliability, confidence calibration, and routing quality. Methodology, dimensions, and published results."
-      canonical="https://localhousellm.lovable.app/benchmarks"
+      canonical="https://localhousellm.com/benchmarks"
       keywords="LocalHouseLLM benchmarks, modular AI benchmarks, AI orchestration benchmarks, AI latency, AI cost per response, AI reliability, ORCHA benchmarks"
       schema={{ '@context': 'https://schema.org', '@type': 'Dataset', name: 'LocalHouseLLM Benchmarks', description: 'Methodology and published results for the LocalHouseLLM modular AI stack.', url: 'https://localhousellm.com/benchmarks', creator: { '@type': 'Organization', name: 'LocalHouseLLM' } }}
     />

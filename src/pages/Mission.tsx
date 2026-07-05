@@ -63,7 +63,7 @@ const Mission = () => {
         title="Mission — Open, Modular Infrastructure for Decentralized AI | LocalHouseLLM"
         description="LocalHouseLLM exists to make artificial intelligence accessible, modular, and owned by the people who use it. We build open, interoperable infrastructure for decentralised AI."
         keywords="LocalHouseLLM mission, decentralized AI, open AI infrastructure, modular AI, AI ownership, interoperable components, composable AI, open source AI, AICL, AMAI"
-        canonical="https://localhousellm.lovable.app/mission"
+        canonical="https://localhousellm.com/mission"
         type="article"
         schema={missionSchema}
       />

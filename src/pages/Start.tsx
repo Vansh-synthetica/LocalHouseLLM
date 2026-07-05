@@ -28,7 +28,7 @@ const Start = () => {
       <SEO
         title="Start Here — LocalHouseLLM"
         description="A short, ordered guide to getting started with LocalHouseLLM — the modular, decentralized AI stack. Read the mission, tour the stack, install the SDK, ship your first module."
-        canonical="https://localhousellm.lovable.app/start"
+        canonical="https://localhousellm.com/start"
         keywords="LocalHouseLLM getting started, start here, AI infrastructure quickstart, modular AI quickstart, ORCHA quickstart, AICL quickstart"
         schema={schema}
       />

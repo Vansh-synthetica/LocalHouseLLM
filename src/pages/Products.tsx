@@ -18,7 +18,7 @@ const Products = () => (
     <SEO
       title="Products — LocalHouseLLM"
       description="Products built on the LocalHouseLLM modular AI stack: Anvira (personal, enterprise, and embedded modular AI), Nomi (user-owned persona and memory), InkFlow (writing), DevQuill (developers)."
-      canonical="https://localhousellm.lovable.app/products"
+      canonical="https://localhousellm.com/products"
       keywords="LocalHouseLLM products, Anvira, Nomi, InkFlow, DevQuill, modular AI products, decentralized AI products"
       schema={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'LocalHouseLLM Products', url: 'https://localhousellm.com/products' }}
     />
