@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      profiles: {
+        Row: {
+          account_status: string
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          last_login_at: string | null
+          subscription_tier: string
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          account_status?: string
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          last_login_at?: string | null
+          subscription_tier?: string
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          account_status?: string
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          last_login_at?: string | null
+          subscription_tier?: string
+          updated_at?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string

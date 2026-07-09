@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, LayoutDashboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
+import { useAuth } from '@/hooks/useAuth';
 
 type NavLink = { to: string; label: string; desc?: string };
 type NavGroup = { heading: string; links: NavLink[] };
@@ -74,6 +75,7 @@ const Navbar = () => {
   const productsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const companyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -309,11 +311,24 @@ const Navbar = () => {
               <ThemeToggle />
             </div>
 
-            <Link to="/start">
-              <Button className="h-9 rounded-full px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 shadow-sm">
-                Start
-              </Button>
-            </Link>
+            {user ? (
+              <Link to="/dashboard">
+                <Button className="h-9 rounded-full px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                  <LayoutDashboard className="w-4 h-4 mr-1.5" /> Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link to="/login" className={linkClass(location.pathname === '/login')}>
+                  Sign in
+                </Link>
+                <Link to="/register">
+                  <Button className="h-9 rounded-full px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                    Get started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="md:hidden flex items-center gap-2">
@@ -419,9 +434,20 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
 
-                <Link to="/start" className="mt-3">
-                  <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">Start</Button>
-                </Link>
+                {user ? (
+                  <Link to="/dashboard" className="mt-3">
+                    <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">Dashboard</Button>
+                  </Link>
+                ) : (
+                  <div className="mt-3 flex flex-col gap-2">
+                    <Link to="/login">
+                      <Button variant="outline" className="w-full rounded-full">Sign in</Button>
+                    </Link>
+                    <Link to="/register">
+                      <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">Get started</Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
