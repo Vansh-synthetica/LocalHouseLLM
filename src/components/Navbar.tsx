@@ -75,6 +75,7 @@ const Navbar = () => {
   const productsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const companyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
