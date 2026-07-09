@@ -311,11 +311,24 @@ const Navbar = () => {
               <ThemeToggle />
             </div>
 
-            <Link to="/start">
-              <Button className="h-9 rounded-full px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 shadow-sm">
-                Start
-              </Button>
-            </Link>
+            {user ? (
+              <Link to="/dashboard">
+                <Button className="h-9 rounded-full px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                  <LayoutDashboard className="w-4 h-4 mr-1.5" /> Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link to="/login" className={linkClass(location.pathname === '/login')}>
+                  Sign in
+                </Link>
+                <Link to="/register">
+                  <Button className="h-9 rounded-full px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                    Get started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="md:hidden flex items-center gap-2">
