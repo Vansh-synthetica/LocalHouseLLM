@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, LayoutDashboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
+import { useAuth } from '@/hooks/useAuth';
 
 type NavLink = { to: string; label: string; desc?: string };
 type NavGroup = { heading: string; links: NavLink[] };
