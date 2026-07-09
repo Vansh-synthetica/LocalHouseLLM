@@ -434,9 +434,20 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
 
-                <Link to="/start" className="mt-3">
-                  <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">Start</Button>
-                </Link>
+                {user ? (
+                  <Link to="/dashboard" className="mt-3">
+                    <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">Dashboard</Button>
+                  </Link>
+                ) : (
+                  <div className="mt-3 flex flex-col gap-2">
+                    <Link to="/login">
+                      <Button variant="outline" className="w-full rounded-full">Sign in</Button>
+                    </Link>
+                    <Link to="/register">
+                      <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">Get started</Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
