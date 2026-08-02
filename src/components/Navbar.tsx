@@ -27,7 +27,7 @@ const stackGroups: NavGroup[] = [
       { to: '/stack', label: 'Full architecture', desc: 'How the layers fit together' },
       { to: '/use-cases', label: 'Use Cases', desc: 'Real-world applications' },
       { to: '/benchmarks', label: 'Benchmarks', desc: 'Latency, cost, reliability' },
-      { to: '/research', label: 'Research', desc: 'Papers & technical notes' },
+      { to: '/archive', label: 'Archive', desc: 'Papers, reports & whitepapers' },
     ],
   },
 ];
@@ -58,7 +58,7 @@ const companyLinks: NavLink[] = [
   { to: '/contact', label: 'Contact' },
 ];
 
-const stackPaths = ['/stack', '/use-cases', '/benchmarks'];
+const stackPaths = ['/stack', '/use-cases', '/benchmarks', '/archive'];
 const productsPaths = ['/anvira', '/nomi', '/inkflow', '/devquill', '/products'];
 const companyPaths = ['/mission', '/vision', '/about', '/release-logs', '/faq', '/contact'];
 
