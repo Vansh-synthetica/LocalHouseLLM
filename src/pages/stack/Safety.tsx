@@ -34,12 +34,12 @@ const Safety = () => (
         </ul>
 
         <p className="text-muted-foreground mb-10">
-          The verification model is described in our research note on Shadow AMAI; see the <Link to="/research" className="text-foreground underline underline-offset-4">research page</Link>.
+          The verification model is described in our research note on Shadow AMAI; see the <Link to="/archive" className="text-foreground underline underline-offset-4">research page</Link>.
         </p>
 
         <div className="flex flex-wrap gap-3">
           <Link to="/stack"><Button variant="outline" className="border-border bg-transparent h-11 px-6">Back to the stack</Button></Link>
-          <Link to="/research"><Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">Read the research</Button></Link>
+          <Link to="/archive"><Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">Read the research</Button></Link>
         </div>
       </div>
     </article>

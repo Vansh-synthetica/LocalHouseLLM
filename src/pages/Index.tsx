@@ -110,7 +110,7 @@ const Index = () => {
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
-              <Link to="/research">
+              <Link to="/archive">
                 <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">
                   View research
                 </Button>
@@ -267,7 +267,7 @@ const Index = () => {
                 and decentralised intelligence.
               </p>
             </motion.div>
-            <Link to="/research" className="shrink-0">
+            <Link to="/archive" className="shrink-0">
               <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5">
                 All papers <ArrowRight className="w-4 h-4 ml-1" />
               </Button>

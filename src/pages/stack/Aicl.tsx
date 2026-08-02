@@ -64,7 +64,7 @@ const Aicl = () => {
           <p className="text-muted-foreground mb-12">Read the orchestration side at <Link to="/stack/orcha" className="text-foreground underline underline-offset-4">ORCHA</Link>, and the safety inspection model at <Link to="/stack/safety" className="text-foreground underline underline-offset-4">Safety</Link>.</p>
 
           <h2 className="text-2xl md:text-3xl font-semibold mb-5">Reference implementation</h2>
-          <p className="text-muted-foreground mb-8">The open-source AICL reference is on GitHub. A draft specification is published alongside our <Link to="/research" className="text-foreground underline underline-offset-4">research papers</Link>.</p>
+          <p className="text-muted-foreground mb-8">The open-source AICL reference is on GitHub. A draft specification is published alongside our <Link to="/archive" className="text-foreground underline underline-offset-4">research papers</Link>.</p>
 
           <div className="flex flex-wrap gap-3">
             <a href="https://github.com/LocalHouseLLM/AICL" target="_blank" rel="noopener noreferrer">

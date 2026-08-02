@@ -249,7 +249,7 @@ const Navbar = () => {
               </AnimatePresence>
             </div>
 
-            <Link to="/research" className={linkClass(location.pathname.startsWith('/research'))}>
+            <Link to="/archive" className={linkClass(location.pathname.startsWith('/archive'))}>
               Research
             </Link>
 

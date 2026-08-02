@@ -11,7 +11,7 @@ const steps = [
   { n: '03', t: 'Skim the AICL spec', d: 'See the packet shape every module speaks. Most integrations start by reading one example.', to: '/stack/aicl' },
   { n: '04', t: 'Install the SDK', d: 'A few commands, and you have ORCHA running locally with a starter module.', to: '/docs' },
   { n: '05', t: 'Ship your first module', d: 'Implement the Module interface, register a capability, route real traffic through it.', to: '/docs' },
-  { n: '06', t: 'Read the research', d: 'The architectural arguments live in the papers. Worth half an hour.', to: '/research' },
+  { n: '06', t: 'Read the research', d: 'The architectural arguments live in the papers. Worth half an hour.', to: '/archive' },
 ];
 
 const Start = () => {
