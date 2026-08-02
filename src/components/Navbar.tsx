@@ -419,7 +419,8 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
 
-                <Link to="/research" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5 mt-1">Research</Link>
+                <Link to="/frameworks" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5 mt-1">Frameworks</Link>
+                <Link to="/archive" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Archive</Link>
                 <Link to="/docs" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Docs</Link>
                 <Link to="/work-with-us" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Work with us</Link>
 
