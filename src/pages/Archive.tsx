@@ -155,7 +155,7 @@ const Archive = () => {
           />
         </div>
         <div className="max-container max-w-4xl">
-          <Breadcrumbs items={[{ label: 'Archive', href: '/archive' }]} />
+          <Breadcrumbs items={[{ name: 'Archive', to: '/archive' }]} />
           <motion.p
             initial="hidden"
             animate="visible"
