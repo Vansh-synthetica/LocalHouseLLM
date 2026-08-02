@@ -253,9 +253,18 @@ const Navbar = () => {
               Research
             </Link>
 
+            <Link to="/frameworks" className={linkClass(location.pathname.startsWith('/frameworks'))}>
+              Frameworks
+            </Link>
+
+            <Link to="/archive" className={linkClass(location.pathname.startsWith('/archive'))}>
+              Archive
+            </Link>
+
             <Link to="/docs" className={linkClass(location.pathname.startsWith('/docs'))}>
               Docs
             </Link>
+
 
             <Link
               to="/work-with-us"
