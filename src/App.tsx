@@ -26,7 +26,9 @@ import DevQuill from "./pages/DevQuill";
 import InkFlow from "./pages/InkFlow";
 import Nomi from "./pages/Nomi";
 import Mission from "./pages/Mission";
-import Research from "./pages/Research";
+import Archive from "./pages/Archive";
+import PaperReader from "./pages/PaperReader";
+import Frameworks from "./pages/Frameworks";
 import Sitemap from "./pages/Sitemap";
 import Stack from "./pages/Stack";
 import Aicl from "./pages/stack/Aicl";
@@ -82,13 +84,16 @@ const App = () => (
                 <Route path="/anvira/h1" element={<AnviraH1 />} />
                 <Route path="/vision" element={<Vision />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/opensource" element={<Navigate to="/research" replace />} />
+                <Route path="/opensource" element={<Navigate to="/archive" replace />} />
                 <Route path="/release-logs" element={<ReleaseLogs />} />
                 <Route path="/devquill" element={<DevQuill />} />
                 <Route path="/inkflow" element={<InkFlow />} />
                 <Route path="/nomi" element={<Nomi />} />
                 <Route path="/mission" element={<Mission />} />
-                <Route path="/research" element={<Research />} />
+                <Route path="/research" element={<Navigate to="/archive" replace />} />
+                <Route path="/archive" element={<Archive />} />
+                <Route path="/archive/:slug" element={<PaperReader />} />
+                <Route path="/frameworks" element={<Frameworks />} />
                 <Route path="/sitemap" element={<Sitemap />} />
                 <Route path="/contact" element={<Contact />} />
 

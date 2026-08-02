@@ -27,7 +27,7 @@ const stackGroups: NavGroup[] = [
       { to: '/stack', label: 'Full architecture', desc: 'How the layers fit together' },
       { to: '/use-cases', label: 'Use Cases', desc: 'Real-world applications' },
       { to: '/benchmarks', label: 'Benchmarks', desc: 'Latency, cost, reliability' },
-      { to: '/research', label: 'Research', desc: 'Papers & technical notes' },
+      { to: '/archive', label: 'Archive', desc: 'Papers, reports & whitepapers' },
     ],
   },
 ];
@@ -58,7 +58,7 @@ const companyLinks: NavLink[] = [
   { to: '/contact', label: 'Contact' },
 ];
 
-const stackPaths = ['/stack', '/use-cases', '/benchmarks'];
+const stackPaths = ['/stack', '/use-cases', '/benchmarks', '/archive'];
 const productsPaths = ['/anvira', '/nomi', '/inkflow', '/devquill', '/products'];
 const companyPaths = ['/mission', '/vision', '/about', '/release-logs', '/faq', '/contact'];
 
@@ -249,13 +249,22 @@ const Navbar = () => {
               </AnimatePresence>
             </div>
 
-            <Link to="/research" className={linkClass(location.pathname.startsWith('/research'))}>
+            <Link to="/archive" className={linkClass(location.pathname.startsWith('/archive'))}>
               Research
+            </Link>
+
+            <Link to="/frameworks" className={linkClass(location.pathname.startsWith('/frameworks'))}>
+              Frameworks
+            </Link>
+
+            <Link to="/archive" className={linkClass(location.pathname.startsWith('/archive'))}>
+              Archive
             </Link>
 
             <Link to="/docs" className={linkClass(location.pathname.startsWith('/docs'))}>
               Docs
             </Link>
+
 
             <Link
               to="/work-with-us"
@@ -410,7 +419,8 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
 
-                <Link to="/research" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5 mt-1">Research</Link>
+                <Link to="/frameworks" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5 mt-1">Frameworks</Link>
+                <Link to="/archive" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Archive</Link>
                 <Link to="/docs" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Docs</Link>
                 <Link to="/work-with-us" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Work with us</Link>
 

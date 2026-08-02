@@ -260,7 +260,7 @@ const Mission = () => {
                 Explore open source <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
-            <Link to="/research">
+            <Link to="/archive">
               <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">
                 Read our research
               </Button>

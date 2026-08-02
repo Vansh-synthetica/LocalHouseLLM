@@ -55,7 +55,7 @@ const Benchmarks = () => (
         <h2 className="text-2xl md:text-3xl font-semibold mb-5">Methodology</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">Each benchmark is run against a fixed task set, with the same prompts, the same memory snapshot, and the same module roster. The orchestrator records every AICL packet, so every reported number is reproducible from the trace.</p>
         <p className="text-muted-foreground leading-relaxed mb-4">Comparisons against monolithic baselines are run with both systems given equal access to the same retrieval and tool layers, so we are measuring orchestration and modularity — not unfair access asymmetries.</p>
-        <p className="text-muted-foreground leading-relaxed">Results and the underlying methodology will be published alongside each Anvira and ORCHA release. The latest writeups live on the <Link to="/research" className="text-foreground underline underline-offset-4">research page</Link>.</p>
+        <p className="text-muted-foreground leading-relaxed">Results and the underlying methodology will be published alongside each Anvira and ORCHA release. The latest writeups live on the <Link to="/archive" className="text-foreground underline underline-offset-4">research page</Link>.</p>
       </div>
     </section>
 
@@ -64,7 +64,7 @@ const Benchmarks = () => (
         <h2 className="text-2xl md:text-3xl font-semibold mb-5">Follow along.</h2>
         <div className="flex flex-wrap gap-3">
           <Link to="/release-logs"><Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">Release logs</Button></Link>
-          <Link to="/research"><Button variant="outline" className="border-border bg-transparent h-11 px-6">Research</Button></Link>
+          <Link to="/archive"><Button variant="outline" className="border-border bg-transparent h-11 px-6">Research</Button></Link>
         </div>
       </div>
     </section>

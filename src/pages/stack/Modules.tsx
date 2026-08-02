@@ -35,7 +35,7 @@ const Modules = () => (
         </ul>
 
         <p className="text-muted-foreground mb-10">
-          See the <Link to="/research" className="text-foreground underline underline-offset-4">Adaptive Modular AI paper</Link> for the architectural argument, and <Link to="/anvira" className="text-foreground underline underline-offset-4">Anvira</Link> for the reference product that ships modules end-to-end.
+          See the <Link to="/archive" className="text-foreground underline underline-offset-4">Adaptive Modular AI paper</Link> for the architectural argument, and <Link to="/anvira" className="text-foreground underline underline-offset-4">Anvira</Link> for the reference product that ships modules end-to-end.
         </p>
 
         <div className="flex flex-wrap gap-3">

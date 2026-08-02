@@ -19,7 +19,7 @@ const groups: Group[] = [
   {
     heading: 'Research',
     items: [
-      { to: '/research', label: 'Research', desc: 'Papers on modular, adaptive, decentralized AI.' },
+      { to: '/archive', label: 'Research', desc: 'Papers on modular, adaptive, decentralized AI.' },
       { to: '/release-logs', label: 'Release Logs', desc: 'Updates across the LocalHouseLLM stack.' },
     ],
   },
