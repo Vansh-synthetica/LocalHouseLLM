@@ -1,10 +1,3 @@
-import p01 from '@/assets/papers/01_LocalHouseLLM_Highest-Impact_Optimization_Layers.pdf.asset.json';
-import p02 from '@/assets/papers/02_LocalHouseLLM_The_Hidden_Layer.pdf.asset.json';
-import p03 from '@/assets/papers/03_LocalHouseLLM_Historical_Evolution_GPU_Inference.pdf.asset.json';
-import p04 from '@/assets/papers/04_LocalHouseLLM_KV_Cache_Optimization.pdf.asset.json';
-import p05 from '@/assets/papers/05_LocalHouseLLM_Niche_Local_Acceleration_Techniques.pdf.asset.json';
-import p06 from '@/assets/papers/06_LocalHouseLLM_Five-Layer_Execution_Stack.pdf.asset.json';
-import master from '@/assets/papers/LocalHouseLLM_MASTER_REPORT.pdf.asset.json';
 
 export type ArchiveCategory =
   | 'Modular AI'
@@ -53,7 +46,7 @@ export const archive: ArchiveEntry[] = [
     tags: ['Local inference', 'Optimization', 'Systems', 'Compendium'],
     abstract:
       'A consolidated 49-page compendium of the LocalHouseLLM research programme on local AI inference — quantization, attention kernels, KV-cache systems, graph compilers, scheduling, and the five-layer execution stack. It unifies six technical reports into one reference for engineers building local-first, modular intelligence.',
-    pdfUrl: master.url,
+    pdfUrl: '/papers/LocalHouseLLM_MASTER_REPORT.pdf',
     pages: 49,
     readingMinutes: 95,
     featured: true,
@@ -70,7 +63,7 @@ export const archive: ArchiveEntry[] = [
     tags: ['Quantization', 'Attention kernels', 'Batching', 'Compilers'],
     abstract:
       'A survey of the optimization layers that matter most for low-latency, low-memory inference on local hardware: low-precision quantization (GPTQ, AWQ, SmoothQuant, AQLM, HQQ, BitNet), specialized attention kernels, graph compilers, prefix caching, continuous batching, chunked prefill, and speculative decoding.',
-    pdfUrl: p01.url,
+    pdfUrl: '/papers/01_LocalHouseLLM_Highest-Impact_Optimization_Layers.pdf',
     pages: 7,
     readingMinutes: 18,
     reportNumber: '01',
@@ -86,7 +79,7 @@ export const archive: ArchiveEntry[] = [
     tags: ['KV eviction', 'Speculative decoding', 'Token pruning'],
     abstract:
       'Beyond the well-known optimizations lies a hidden layer of under-the-radar methods — HashEvict, Counter-Causal Surprise, LazyLLM, SpecDiff, Token Recycling, DecoQuant — that solve narrow bottlenecks with unusual approximations and hardware tricks, sometimes yielding 2x speedups or 90%+ KV compression.',
-    pdfUrl: p02.url,
+    pdfUrl: '/papers/02_LocalHouseLLM_The_Hidden_Layer.pdf',
     pages: 7,
     readingMinutes: 17,
     reportNumber: '02',
@@ -102,7 +95,7 @@ export const archive: ArchiveEntry[] = [
     tags: ['FlashAttention', 'vLLM', 'TensorRT-LLM', 'torch.compile'],
     abstract:
       'From naive cuBLAS/cuDNN transformer layers to FasterTransformer, FlashAttention 1–3, PagedAttention and continuous batching, overlap schedulers, and modern compiler stacks — a taxonomy of how GPU inference reached hardware limits, and what each generation actually changed.',
-    pdfUrl: p03.url,
+    pdfUrl: '/papers/03_LocalHouseLLM_Historical_Evolution_GPU_Inference.pdf',
     pages: 8,
     readingMinutes: 20,
     reportNumber: '03',
@@ -118,7 +111,7 @@ export const archive: ArchiveEntry[] = [
     tags: ['KV cache', 'Compression', 'Offloading', 'Long context'],
     abstract:
       'An exhaustive handbook on how KV caches are organized, compressed, quantized, evicted, prefetched, offloaded, and accelerated — the dominant memory bottleneck for long-context and multi-request inference on constrained devices.',
-    pdfUrl: p04.url,
+    pdfUrl: '/papers/04_LocalHouseLLM_KV_Cache_Optimization.pdf',
     pages: 8,
     readingMinutes: 21,
     reportNumber: '04',
@@ -134,7 +127,7 @@ export const archive: ArchiveEntry[] = [
     tags: ['1-bit weights', 'PagedAttention', 'Early exit', 'WebGPU'],
     abstract:
       'Emerging and experimental methods for local acceleration: radical quantization (OneBit, SpinQuant, QuaRot), speculative prefetching (SpeCache), KV distillation, self-speculative decoding (SWIFT, LayerSkip), and in-browser WebGPU inference reaching ~80% of native speed.',
-    pdfUrl: p05.url,
+    pdfUrl: '/papers/05_LocalHouseLLM_Niche_Local_Acceleration_Techniques.pdf',
     pages: 6,
     readingMinutes: 15,
     reportNumber: '05',
@@ -150,7 +143,7 @@ export const archive: ArchiveEntry[] = [
     tags: ['Execution stack', 'Scheduling', 'Runtime', 'Throughput'],
     abstract:
       'A layered analysis of the local execution stack — model representation, kernels, runtime scheduling, memory management, and system integration — identifying where performance is actually won and how the layers must cooperate.',
-    pdfUrl: p06.url,
+    pdfUrl: '/papers/06_LocalHouseLLM_Five-Layer_Execution_Stack.pdf',
     pages: 11,
     readingMinutes: 26,
     reportNumber: '06',
