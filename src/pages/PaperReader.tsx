@@ -168,7 +168,15 @@ const PaperReader = () => {
                 loading="lazy"
                 className="w-full h-[70vh] md:h-[85vh] bg-background"
               />
+              <div className="px-4 py-3 border-t border-border/50 text-xs text-muted-foreground">
+                PDF not displaying?{' '}
+                <a href={entry.pdfUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors">
+                  Open the PDF directly
+                </a>{' '}
+                or download it above.
+              </div>
             </motion.div>
+
           ) : (
             <div className="rounded-2xl border border-border/60 p-8 md:p-12 text-center">
               <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
