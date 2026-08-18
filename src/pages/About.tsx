@@ -52,9 +52,15 @@ const About = () => {
           {/* Leadership */}
           <h2 className="text-3xl font-bold mb-8 text-center">Leadership Team</h2>
           
-          <div className="glass hover-glow text-center p-8 mb-16 max-w-md mx-auto">
-            <h3 className="text-xl font-semibold">Vansh Bukkarwal</h3>
-            <p className="text-muted-foreground">Founder & CEO</p>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
+            <div className="glass hover-glow text-center p-8">
+              <h3 className="text-xl font-semibold">Vansh Bukkarwal</h3>
+              <p className="text-muted-foreground">Founder & CEO</p>
+            </div>
+            <div className="glass hover-glow text-center p-8">
+              <h3 className="text-xl font-semibold">Raghav Kumar</h3>
+              <p className="text-muted-foreground">Co-Founder</p>
+            </div>
           </div>
           
           {/* Join Us */}
