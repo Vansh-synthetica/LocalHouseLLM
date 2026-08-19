@@ -108,36 +108,103 @@ const About = () => {
               <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-secondary/50"></div>
               
               {/* Timeline items */}
-              <div className="space-y-12">
+              <div className="space-y-16">
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
                   <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
                     <h3 className="font-semibold">April 2025</h3>
-                    <p className="text-muted-foreground">LocalHouseLLM founded</p>
+                    <p className="text-primary font-medium">LocalHouseLLM Founded</p>
+                    <p className="text-muted-foreground mt-1">LocalHouseLLM begins with a mission to make intelligent systems local, modular, and user-owned.</p>
                   </div>
                 </div>
-                
+
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
                   <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
                     <h3 className="font-semibold">July 2025</h3>
-                    <p className="text-muted-foreground">Initial modular AI research whitepaper published</p>
+                    <p className="text-primary font-medium">Foundational AI Research</p>
+                    <p className="text-muted-foreground mt-1">Initial research into modular AI architectures and adaptive intelligence begins, establishing the foundation for the company's research direction.</p>
                   </div>
                 </div>
-                
+
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
                   <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
                     <h3 className="font-semibold">October 2025</h3>
-                    <p className="text-muted-foreground">First AMAI prototype with modular architecture</p>
+                    <p className="text-primary font-medium">First AMAI Prototype</p>
+                    <p className="text-muted-foreground mt-1">The first Adaptive Modular AI (AMAI) prototype demonstrates a modular approach to AI systems and becomes the foundation for subsequent research.</p>
                   </div>
                 </div>
-                
+
                 <div className="relative">
-                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary "></div>
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
                   <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
                     <h3 className="font-semibold">Q1 2026</h3>
-                    <p className="text-muted-foreground">Alpha release planned</p>
+                    <p className="text-primary font-medium">Research → Systems</p>
+                    <p className="text-muted-foreground mt-1">LocalHouseLLM expands beyond research prototypes into a broader systems architecture, introducing the foundations of Nomi, AICL, and Orcha.</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                  <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
+                    <h3 className="font-semibold">Q2 2026</h3>
+                    <p className="text-primary font-medium">Anvira Begins</p>
+                    <p className="text-muted-foreground mt-1">Development begins on Anvira, a local-first AI desktop environment designed to bring models, agents, memory, tools, and workspaces into a single application.</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                  <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
+                    <h3 className="font-semibold">Q2 2026</h3>
+                    <p className="text-primary font-medium">Orcha Agent Runtime</p>
+                    <p className="text-muted-foreground mt-1">Orcha evolves into a dedicated agent execution layer with event-driven execution, tools, memory, checkpoints, replay, multi-agent workflows, and runtime observability.</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                  <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
+                    <h3 className="font-semibold">Q2–Q3 2026</h3>
+                    <p className="text-primary font-medium">Anvira 0.1</p>
+                    <p className="text-muted-foreground mt-1">The first complete Anvira product emerges with: local model management · chat · workspaces · Agent Hub · Orcha · Nomi · AICL · file intelligence · multi-model support.</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                  <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
+                    <h3 className="font-semibold">Q3 2026</h3>
+                    <p className="text-primary font-medium">The Agentic Stack</p>
+                    <p className="text-muted-foreground mt-1">LocalHouseLLM expands Orcha with LangChain, LangGraph, MCP, Deep Agents, RAG evaluation, durable checkpoints, human approval, multi-agent execution, and persistent agent state.</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                  <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
+                    <h3 className="font-semibold">Q3 2026</h3>
+                    <p className="text-primary font-medium">Anvira 0.2</p>
+                    <p className="text-muted-foreground mt-1">Anvira evolves from a local AI application into a stateful AI workspace capable of project understanding, agent execution, tool use, code creation and editing, verification, GPU-accelerated local inference, and persistent workspaces.</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                  <div className="md:w-1/2 md:pl-8 md:ml-auto ml-6 md:text-left">
+                    <h3 className="font-semibold">Q3 2026</h3>
+                    <p className="text-primary font-medium">Edge AI Expansion</p>
+                    <p className="text-muted-foreground mt-1">Research begins on bringing the LocalHouseLLM stack beyond desktop hardware toward mobile and CPU-first edge AI, extending the vision of locally owned intelligence to constrained devices.</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                  <div className="md:w-1/2 md:pr-8 md:text-right ml-6 md:ml-0">
+                    <h3 className="font-semibold">Now</h3>
+                    <p className="text-primary font-medium">Building the Local AI Stack</p>
+                    <p className="text-muted-foreground mt-1">LocalHouseLLM is developing an integrated ecosystem across Models · Anvira · Orcha · Nomi · AICL · Agents · Evaluation · Edge AI, with the long-term goal of making advanced AI systems local, modular, interoperable, and user-owned.</p>
                   </div>
                 </div>
               </div>
