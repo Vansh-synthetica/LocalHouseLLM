@@ -50,17 +50,32 @@ const About = () => {
           </div>
           
           {/* Leadership */}
-          <h2 className="text-3xl font-bold mb-8 text-center">Leadership Team</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">Leadership</h2>
           
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12">
             <div className="glass hover-glow text-center p-8">
               <h3 className="text-xl font-semibold">Vansh Bukkarwal</h3>
-              <p className="text-muted-foreground">Founder & CEO</p>
+              <p className="text-muted-foreground">CEO-Founder</p>
             </div>
             <div className="glass hover-glow text-center p-8">
-              <h3 className="text-xl font-semibold">Raghav Kumar</h3>
+              <h3 className="text-xl font-semibold">Shandie</h3>
+              <p className="text-muted-foreground">Co-owner</p>
+            </div>
+          </div>
+
+          {/* Co-Founders */}
+          <h3 className="text-2xl font-bold mb-6 text-center">Co-Founders</h3>
+          <div className="grid md:grid-cols-1 gap-6 max-w-xl mx-auto mb-12">
+            <div className="glass hover-glow text-center p-8">
+              <h3 className="text-xl font-semibold">Raghav</h3>
               <p className="text-muted-foreground">Co-Founder</p>
             </div>
+          </div>
+
+          {/* Teams */}
+          <h3 className="text-2xl font-bold mb-6 text-center">Teams</h3>
+          <div className="glass text-center p-8 max-w-xl mx-auto">
+            <p className="text-lg text-muted-foreground">Coming soon</p>
           </div>
           
           {/* Join Us */}
