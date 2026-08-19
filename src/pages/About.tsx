@@ -65,16 +65,16 @@ const About = () => {
 
           {/* Co-Founders */}
           <h3 className="text-2xl font-bold mb-6 text-center">Co-Founders</h3>
-          <div className="grid md:grid-cols-1 gap-6 max-w-xl mx-auto mb-12">
+          <div className="grid md:grid-cols-1 gap-6 max-w-xl mx-auto mb-16">
             <div className="glass hover-glow text-center p-8">
               <h3 className="text-xl font-semibold">Raghav</h3>
               <p className="text-muted-foreground">Co-Founder</p>
             </div>
           </div>
 
-          {/* Teams */}
-          <h3 className="text-2xl font-bold mb-6 text-center">Teams</h3>
-          <div className="glass text-center p-8 max-w-xl mx-auto">
+          {/* Team */}
+          <h3 className="text-2xl font-bold mb-6 text-center">Team</h3>
+          <div className="glass text-center p-8 max-w-xl mx-auto mb-16">
             <p className="text-lg text-muted-foreground">Coming soon</p>
           </div>
           
@@ -91,14 +91,9 @@ const About = () => {
                   Contact Us
                 </Button>
               </Link>
-              <a href="#" onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}>
+              <a href="mailto:vanshbukkarwal@localhousellm.com">
                 <Button variant="outline" className="border-border hover:bg-muted/50">
-                  GitHub
-                </Button>
-              </a>
-              <a href="#" onClick={(e) => { e.preventDefault(); alert('404 Not Found'); }}>
-                <Button variant="outline" className="border-border hover:bg-muted/50">
-                  Twitter
+                  Want to join us? Reach out here
                 </Button>
               </a>
             </div>
