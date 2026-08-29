@@ -45,7 +45,7 @@ type LicenseInfo = {
 
 const FALLBACK_TIERS: AvailableTier[] = [
   { tier: "OPEN", name: "ORCHA Open", price: "Free", commercial_use: false },
-  { tier: "PRO", name: "ORCHA Pro", price: "$100", commercial_use: true },
+  { tier: "PRO", name: "ORCHA Pro", price: "$85", commercial_use: true },
   { tier: "BUSINESS", name: "ORCHA Business", price: "Contact Us", commercial_use: true, contact_us: true },
   { tier: "ENTERPRISE", name: "ORCHA Enterprise", price: "Contact Us", commercial_use: true, contact_us: true },
   { tier: "OEM", name: "OEM / Embedded License", price: "Contact Us", commercial_use: true, contact_us: true },
