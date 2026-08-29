@@ -50,6 +50,7 @@ import UcResearch from "./pages/use-cases/Research";
 import UcEnterprise from "./pages/use-cases/Enterprise";
 import UcEdgeAi from "./pages/use-cases/EdgeAi";
 import WorkWithUs from "./pages/WorkWithUs";
+import OrchaLicense from "./pages/orcha/License";
 
 // Auth
 import Login from "./pages/auth/Login";
@@ -96,7 +97,8 @@ const App = () => (
                 <Route path="/frameworks" element={<Frameworks />} />
                 <Route path="/sitemap" element={<Sitemap />} />
                 <Route path="/contact" element={<Contact />} />
-
+                <Route path="/orcha/license" element={<OrchaLicense />} />
+                
                 {/* Stack */}
                 <Route path="/stack" element={<Stack />} />
                 <Route path="/stack/aicl" element={<Aicl />} />
