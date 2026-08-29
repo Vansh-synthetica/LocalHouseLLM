@@ -320,8 +320,8 @@ export default function OrchaLicense() {
             </p>
           </div>
           <div className="orcha-support-actions">
-            <a className="orcha-btn ghost" href="mailto:support@orcha.dev">
-              support@orcha.dev
+            <a className="orcha-btn ghost" href="mailto:no-reply@localhousellm.com">
+              no-reply@localhousellm.com
             </a>
             <a className="orcha-btn ghost" href="/docs">
               Documentation
