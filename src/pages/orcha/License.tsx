@@ -45,16 +45,16 @@ type LicenseInfo = {
 
 const FALLBACK_TIERS: AvailableTier[] = [
   { tier: "OPEN", name: "ORCHA Open", price: "Free", commercial_use: false },
-  { tier: "PRO", name: "ORCHA Pro", price: "INR 8,000-15,000/mo", commercial_use: true },
+  { tier: "PRO", name: "ORCHA Pro", price: "INR $100", commercial_use: true },
   { tier: "BUSINESS", name: "ORCHA Business", price: "Contact Us", commercial_use: true, contact_us: true },
   { tier: "ENTERPRISE", name: "ORCHA Enterprise", price: "Contact Us", commercial_use: true, contact_us: true },
   { tier: "OEM", name: "OEM / Embedded License", price: "Contact Us", commercial_use: true, contact_us: true },
 ];
 
 const TIER_CONTACT: Record<string, string> = {
-  BUSINESS: "sales@orcha.dev",
-  ENTERPRISE: "enterprise@orcha.dev",
-  OEM: "oem@orcha.dev",
+  BUSINESS: "no-reply@localhousellm.com",
+  ENTERPRISE: "no-reply@localhousellm.com",
+  OEM: "no-reply@localhousellm.com",
 };
 
 const TIER_COLOR: Record<string, string> = {
