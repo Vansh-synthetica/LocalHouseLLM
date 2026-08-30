@@ -27,7 +27,7 @@ import {
 } from '@/components/ui/accordion';
 
 const DOWNLOAD_URL =
-  'https://drive.google.com/file/d/1rRvE1c6N1gHpD-Ybqqtf2FdFvrQ58sgV/view?usp=sharing';
+  'https://drive.google.com/file/d/1Gp4gIoyrV584rAubII_Fk-zNb1hCZHM2/view';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -150,7 +150,7 @@ const Anvira = () => (
   <CleanLayout>
     <SEO
       title="Anvira v0.2 — Local-First Agentic Desktop Platform"
-      description="Anvira v0.2 is a local-first agentic desktop platform: real file and terminal execution, self-correcting agent loops, tool-call recovery, strict tool mode, and hardware-aware local inference."
+      description="Anvira v0.2 is a local-first agentic desktop platform: real file and terminal execution, self-correcting agent loops, tool-call recovery, strict tool mode, and hardware-aware local [...]
       keywords="Anvira v0.2, local agent, agentic desktop, local-first AI, GGUF, CUDA inference, tool calling, self-correcting agent, LocalHouseLLM"
       canonical="https://localhousellm.com/anvira"
       schema={{
