@@ -27,7 +27,7 @@ import {
 } from '@/components/ui/accordion';
 
 const DOWNLOAD_URL =
-  'https://drive.google.com/file/d/1Gp4gIoyrV584rAubII_Fk-zNb1hCZHM2/view';
+  'https://drive.google.com/file/d/1Gp4gIoyrV584rAubII_Fk-zNb1hCZHM2/view?usp=sharing';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -150,7 +150,7 @@ const Anvira = () => (
   <CleanLayout>
     <SEO
       title="Anvira v0.2 — Local-First Agentic Desktop Platform"
-      description="Anvira v0.2 is a local-first agentic desktop platform: real file and terminal execution, self-correcting agent loops, tool-call recovery, strict tool mode, and hardware-aware local [...]
+      description="Anvira v0.2 is a local-first agentic desktop platform: real file and terminal execution, self-correcting agent loops, tool-call recovery, strict tool mode, and hardware-aware l[...]"
       keywords="Anvira v0.2, local agent, agentic desktop, local-first AI, GGUF, CUDA inference, tool calling, self-correcting agent, LocalHouseLLM"
       canonical="https://localhousellm.com/anvira"
       schema={{
@@ -440,8 +440,7 @@ const Anvira = () => (
             >
 {`{
   "action": "${action}"
-}`}
-            </motion.pre>
+}`}            </motion.pre>
           ))}
         </motion.div>
       </div>
