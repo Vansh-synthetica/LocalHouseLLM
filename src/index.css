@@ -3,104 +3,102 @@
 @tailwind utilities;
 
 /*
-  LocalHouseLLM — Museum Light design system
-  Monet × OpenAI × Anthropic
-  Palette: pearl white canvas, warm gray ink, muted indigo, gentle cyan.
-  All colors are semantic HSL tokens — never hardcoded in components.
+  LocalHouseLLM — Studio Dark design system (Langflow-inspired)
+  Near-black canvas, electric violet primary, neon-mint accent,
+  large radii, glass panels. All colors are semantic HSL tokens.
 */
 
 @layer base {
-  :root {
-    /* Museum Light — daylight */
-    --background: 42 30% 97%;        /* #f7f5f0 pearl */
-    --foreground: 236 22% 20%;       /* #2d2e42 ink */
-
-    --card: 40 24% 94%;              /* #eeece5 */
-    --card-foreground: 236 22% 20%;
-
-    --popover: 42 30% 98%;
-    --popover-foreground: 236 22% 20%;
-
-    --primary: 234 61% 57%;          /* #4f5bd5 muted indigo */
-    --primary-foreground: 42 30% 98%;
-
-    --secondary: 40 20% 90%;
-    --secondary-foreground: 236 22% 20%;
-
-    --muted: 40 18% 92%;
-    --muted-foreground: 236 12% 42%;
-
-    --accent: 189 41% 60%;           /* #6bb6c9 gentle cyan */
-    --accent-foreground: 236 22% 15%;
-
-    --destructive: 0 60% 50%;
-    --destructive-foreground: 42 30% 98%;
-
-    --border: 36 15% 84%;
-    --input: 36 15% 84%;
-    --ring: 234 61% 57%;
-
-    --radius: 0.75rem;
-
-    --success: 158 42% 42%;
-    --success-foreground: 42 30% 98%;
-    --warning: 34 78% 55%;
-    --warning-foreground: 236 22% 15%;
-    --info: 189 41% 50%;
-    --info-foreground: 42 30% 98%;
-
-    /* Atmospheric gradient stops (Monet dawn) */
-    --wash-1: 42 60% 95%;   /* pearl */
-    --wash-2: 245 60% 90%;  /* lavender mist */
-    --wash-3: 189 55% 88%;  /* cyan haze */
-    --wash-4: 234 50% 82%;  /* indigo drift */
-
-    color-scheme: light;
-  }
-
+  :root,
   .dark {
-    /* Museum Light — dusk */
-    --background: 236 30% 8%;        /* deep indigo night */
-    --foreground: 42 30% 96%;
+    --background: 240 10% 4%;        /* near-black canvas */
+    --foreground: 240 20% 97%;
 
-    --card: 236 28% 12%;
-    --card-foreground: 42 30% 96%;
+    --card: 240 9% 8%;
+    --card-foreground: 240 20% 97%;
 
-    --popover: 236 30% 10%;
-    --popover-foreground: 42 30% 96%;
+    --popover: 240 10% 6%;
+    --popover-foreground: 240 20% 97%;
 
-    --primary: 234 70% 72%;          /* softer indigo on dark */
-    --primary-foreground: 236 30% 8%;
+    --primary: 262 83% 66%;          /* electric violet */
+    --primary-foreground: 240 20% 98%;
 
-    --secondary: 236 20% 16%;
-    --secondary-foreground: 42 30% 96%;
+    --secondary: 240 8% 13%;
+    --secondary-foreground: 240 20% 97%;
 
-    --muted: 236 18% 18%;
-    --muted-foreground: 42 15% 70%;
+    --muted: 240 8% 12%;
+    --muted-foreground: 240 8% 66%;
 
-    --accent: 189 55% 68%;
-    --accent-foreground: 236 30% 8%;
+    --accent: 158 84% 52%;           /* neon mint */
+    --accent-foreground: 240 10% 6%;
 
-    --destructive: 0 60% 55%;
-    --destructive-foreground: 42 30% 98%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 240 20% 98%;
 
-    --border: 236 18% 22%;
-    --input: 236 18% 22%;
-    --ring: 234 70% 72%;
+    --border: 240 8% 17%;
+    --input: 240 8% 17%;
+    --ring: 262 83% 66%;
 
-    --success: 158 42% 55%;
-    --success-foreground: 236 30% 8%;
-    --warning: 34 78% 65%;
-    --warning-foreground: 236 30% 8%;
-    --info: 189 55% 65%;
-    --info-foreground: 236 30% 8%;
+    --radius: 1rem;
 
-    --wash-1: 236 40% 10%;
-    --wash-2: 245 45% 18%;
-    --wash-3: 189 45% 16%;
-    --wash-4: 234 55% 22%;
+    --success: 158 70% 45%;
+    --success-foreground: 240 10% 6%;
+    --warning: 38 92% 58%;
+    --warning-foreground: 240 10% 6%;
+    --info: 199 89% 60%;
+    --info-foreground: 240 10% 6%;
+
+    /* Atmospheric gradient stops */
+    --wash-1: 240 10% 4%;
+    --wash-2: 262 70% 16%;
+    --wash-3: 158 60% 12%;
+    --wash-4: 285 60% 14%;
 
     color-scheme: dark;
+  }
+
+  .light {
+    --background: 42 30% 97%;
+    --foreground: 240 18% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 18% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 18% 12%;
+
+    --primary: 262 72% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 20% 92%;
+    --secondary-foreground: 240 18% 12%;
+
+    --muted: 40 18% 93%;
+    --muted-foreground: 240 8% 40%;
+
+    --accent: 158 64% 38%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 65% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 36 12% 86%;
+    --input: 36 12% 86%;
+    --ring: 262 72% 52%;
+
+    --success: 158 50% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 34 80% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 199 70% 44%;
+    --info-foreground: 0 0% 100%;
+
+    --wash-1: 42 60% 97%;
+    --wash-2: 262 60% 92%;
+    --wash-3: 158 50% 92%;
+    --wash-4: 285 50% 92%;
+
+    color-scheme: light;
   }
 
   * {
