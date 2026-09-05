@@ -150,18 +150,17 @@
 }
 
 @layer components {
-  /* Painterly Monet gradient-mesh background */
+  /* Studio dark atmosphere: glow blooms + technical grid */
   .atmosphere {
     position: fixed;
     inset: 0;
     z-index: 0;
     background:
-      radial-gradient(60% 55% at 12% 18%, hsl(var(--wash-2) / 0.9), transparent 60%),
-      radial-gradient(55% 45% at 88% 22%, hsl(var(--wash-3) / 0.8), transparent 65%),
-      radial-gradient(70% 60% at 78% 82%, hsl(var(--wash-4) / 0.75), transparent 65%),
-      radial-gradient(50% 50% at 22% 78%, hsl(var(--wash-2) / 0.7), transparent 60%),
+      radial-gradient(55% 45% at 15% 10%, hsl(var(--wash-2) / 0.85), transparent 62%),
+      radial-gradient(45% 40% at 85% 12%, hsl(var(--wash-4) / 0.7), transparent 66%),
+      radial-gradient(60% 50% at 80% 88%, hsl(var(--wash-3) / 0.6), transparent 66%),
       linear-gradient(180deg, hsl(var(--wash-1)) 0%, hsl(var(--background)) 100%);
-    background-size: 140% 140%, 130% 130%, 150% 150%, 130% 130%, 100% 100%;
+    background-size: 140% 140%, 130% 130%, 150% 150%, 100% 100%;
     animation: atmosphere-drift 40s ease-in-out infinite alternate;
     pointer-events: none;
   }
@@ -170,59 +169,67 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, hsl(var(--background) / 0.35) 100%);
+    background-image:
+      linear-gradient(to right, hsl(var(--foreground) / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.055) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 10%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 10%, transparent 75%);
   }
 
   /* Frosted glass surface */
   .glass {
-    @apply bg-card/60 backdrop-blur-xl border border-border/60 rounded-xl;
+    @apply bg-card/60 backdrop-blur-xl border border-border/70 rounded-2xl;
     box-shadow:
-      0 1px 0 0 hsl(var(--foreground) / 0.02) inset,
-      0 10px 40px -10px hsl(var(--foreground) / 0.08);
+      0 1px 0 0 hsl(0 0% 100% / 0.05) inset,
+      0 16px 44px -20px hsl(240 40% 2% / 0.8);
   }
 
   .glass-strong {
-    @apply bg-background/80 backdrop-blur-2xl border border-border/60 rounded-xl;
-    box-shadow: 0 20px 60px -20px hsl(var(--foreground) / 0.12);
+    @apply bg-background/80 backdrop-blur-2xl border border-border/70 rounded-2xl;
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.06) inset,
+      0 24px 64px -24px hsl(240 40% 2% / 0.85);
   }
 
   /* Premium card */
   .card-premium {
-    @apply rounded-2xl border border-border/60 bg-card/70 backdrop-blur-xl p-6 transition-all duration-500;
+    @apply rounded-2xl border border-border/70 bg-card/70 backdrop-blur-xl p-6 transition-all duration-300;
     box-shadow:
-      0 1px 0 0 hsl(var(--foreground) / 0.03) inset,
-      0 8px 30px -12px hsl(var(--foreground) / 0.08);
+      0 1px 0 0 hsl(0 0% 100% / 0.05) inset,
+      0 14px 40px -22px hsl(240 40% 2% / 0.8);
   }
 
   .card-premium:hover {
-    @apply -translate-y-0.5 border-primary/30;
+    @apply -translate-y-1 border-primary/45;
     box-shadow:
-      0 1px 0 0 hsl(var(--foreground) / 0.04) inset,
-      0 20px 50px -20px hsl(var(--primary) / 0.18);
+      0 1px 0 0 hsl(0 0% 100% / 0.07) inset,
+      0 24px 60px -24px hsl(var(--primary) / 0.4);
   }
 
   /* Legacy aliases used across pages */
   .premium-glass,
   .feature-card,
   .luxury-card {
-    @apply rounded-2xl border border-border/60 bg-card/70 backdrop-blur-xl transition-all duration-500;
+    @apply rounded-2xl border border-border/70 bg-card/70 backdrop-blur-xl transition-all duration-300;
     box-shadow:
-      0 1px 0 0 hsl(var(--foreground) / 0.03) inset,
-      0 8px 30px -12px hsl(var(--foreground) / 0.08);
+      0 1px 0 0 hsl(0 0% 100% / 0.05) inset,
+      0 14px 40px -22px hsl(240 40% 2% / 0.8);
   }
 
   .feature-card:hover,
   .luxury-card:hover,
   .hover-glow:hover {
-    @apply -translate-y-0.5 border-primary/30;
+    @apply -translate-y-1 border-primary/45;
     box-shadow:
-      0 1px 0 0 hsl(var(--foreground) / 0.04) inset,
-      0 20px 50px -20px hsl(var(--primary) / 0.18);
+      0 1px 0 0 hsl(0 0% 100% / 0.07) inset,
+      0 24px 60px -24px hsl(var(--primary) / 0.4);
   }
 
   .hover-glow {
-    @apply transition-all duration-500;
+    @apply transition-all duration-300;
   }
+
 
   .max-container {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
