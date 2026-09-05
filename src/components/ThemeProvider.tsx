@@ -24,13 +24,13 @@ const getInitialTheme = (storageKey: string, fallback: Theme): Theme => {
   } catch {
     /* ignore */
   }
-  // Always default to light — user can opt into dark via toggle.
+  // Default to dark — user can opt into light via toggle.
   return fallback;
 };
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'light',
+  defaultTheme = 'dark',
   storageKey = 'lhllm-theme',
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => getInitialTheme(storageKey, defaultTheme));
