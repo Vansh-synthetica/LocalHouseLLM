@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useSpotlight } from './fx/useSpotlight';
 
 interface CleanLayoutProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ interface CleanLayoutProps {
  */
 const CleanLayout = ({ children }: CleanLayoutProps) => {
   const location = useLocation();
+  useSpotlight();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
