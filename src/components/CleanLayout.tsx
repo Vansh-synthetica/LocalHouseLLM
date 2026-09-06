@@ -44,7 +44,7 @@ const CleanLayout = ({ children }: CleanLayoutProps) => {
           }}
         />
       </div>
-
+      <div className="grain" aria-hidden="true" />
 
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
