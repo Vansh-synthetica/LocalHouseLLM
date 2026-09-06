@@ -69,11 +69,15 @@ const Index = () => {
       />
 
       {/* HERO */}
-      <section className="relative pt-12 md:pt-24 pb-24 md:pb-32">
+      <section className="relative pt-10 md:pt-20 pb-16 md:pb-24 overflow-hidden">
         <div className="max-container">
           <div className="max-w-4xl">
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0}>
-              <Eyebrow>LocalHouseLLM</Eyebrow>
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0} className="mb-6">
+              <Link to="/anvira" className="pill-glow group">
+                <span className="pill-dot" />
+                Anvira v0.2 is live — local AI that does the work
+                <ArrowRight className="w-3.5 h-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:text-foreground transition-all" />
+              </Link>
             </motion.div>
             <motion.h1
               initial="hidden"
@@ -84,7 +88,7 @@ const Index = () => {
             >
               Open, modular infrastructure
               <br />
-              <span className="text-muted-foreground">for decentralized AI.</span>
+              <span className="text-aurora">for decentralized AI.</span>
             </motion.h1>
             <motion.p
               initial="hidden"
@@ -105,20 +109,56 @@ const Index = () => {
               className="flex flex-wrap items-center gap-3"
             >
               <Link to="/mission">
-                <Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
+                <Button className="btn-shine bg-primary text-primary-foreground hover:bg-primary h-11 px-6">
                   Read our mission
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
               <Link to="/archive">
-                <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">
+                <Button variant="outline" className="border-border bg-card/40 backdrop-blur-md hover:bg-foreground/5 hover:border-primary/50 h-11 px-6 transition-all">
                   View research
                 </Button>
               </Link>
             </motion.div>
           </div>
+
+          {/* Flow canvas — the stack as a living graph */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mt-16 md:mt-24 rounded-3xl border border-border/60 bg-card/30 backdrop-blur-xl p-4 sm:p-8 md:p-12 overflow-hidden"
+          >
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,hsl(var(--primary)/0.18),transparent_70%)]" />
+            <div
+              className="absolute inset-0 -z-10 opacity-[0.08]"
+              style={{
+                backgroundImage:
+                  'radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)',
+                backgroundSize: '22px 22px',
+              }}
+            />
+            <div className="flex items-center gap-2 mb-6 text-[11px] tracking-[0.22em] uppercase text-muted-foreground">
+              <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_10px_hsl(var(--accent))]" />
+              Live: how a request flows through the stack
+            </div>
+            <FlowCanvas />
+          </motion.div>
+        </div>
+
+        {/* Marquee of layers */}
+        <div className="marquee mt-14 md:mt-20">
+          <div className="marquee-track">
+            {[...marqueeItems, ...marqueeItems].map((m, i) => (
+              <span key={i} className="node-chip">
+                <span className="port" />
+                {m}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* WHY MODULAR AI MATTERS */}
       <section className="border-t border-border/40 py-20 md:py-28">
