@@ -103,11 +103,11 @@ const FlowCanvas = () => {
       {nodes.map((n, i) => (
         <motion.div
           key={n.id}
-          initial={{ opacity: 0, scale: 0.85, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: `${n.x}%`, top: `${n.y}%` }}
+          className="absolute"
+          style={{ left: `${n.x}%`, top: `${n.y}%`, x: '-50%', y: '-50%' }}
         >
           <motion.div
             animate={{ y: [0, -5, 0] }}
