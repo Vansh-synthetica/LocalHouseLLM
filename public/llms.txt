@@ -1,0 +1,58 @@
+# LocalHouseLLM
+
+> LocalHouseLLM builds open, modular infrastructure for local and decentralized AI — home of Anvira (local-first modular AI desktop), Nomi (AI persona & memory layer), AICL (inter-module communication language), and Orcha (orchestration runtime).
+
+LocalHouseLLM's mission is to make artificial intelligence accessible, modular, and owned by the people who use it. All pages on this site are open to AI crawlers and may be indexed, summarized, and cited.
+
+## Pages
+
+- [Home](/): Mission, modular stack overview, and research highlights.
+- [Mission](/mission): Manifesto for open, decentralized AI infrastructure.
+- [About](/about): Who we are and how we work.
+- [Contact](/contact): Get in touch with the team.
+- [Work With Us](/work-with-us): Consulting, custom builds, and AI infrastructure partnerships.
+
+## Products
+
+- [Anvira](/anvira): Local-first modular AI desktop application (v0.1).
+- [Anvira O1](/anvira/o1): Reasoning-focused Anvira edition.
+- [Anvira O1E](/anvira/o1e): Extended reasoning edition.
+- [Anvira H1](/anvira/h1): Hybrid edition.
+- [Nomi](/nomi): User-controlled AI persona, identity, and memory infrastructure.
+- [InkFlow](/inkflow): AI writing and copy assistant (early access).
+- [DevQuill](/devquill): AI development assistant (early access).
+- [Products overview](/products): All LocalHouseLLM products.
+
+## Frameworks & Stack
+
+- [Frameworks](/frameworks): AICL, Orcha, and Nomi as composable layers.
+- [Stack](/stack): The full modular AI execution stack.
+- [AICL](/stack/aicl): Adaptive Inter-Module Communication Language.
+- [Orcha](/stack/orcha): Orchestration runtime for parallel expert execution.
+- [Memory](/stack/memory): Persistent memory layer.
+- [Intelligence Modules](/stack/modules): Composable expert modules.
+- [Safety](/stack/safety): Verification and safety filters.
+- [Tools](/stack/tools): Tool and agent integration layer.
+
+## Research
+
+- [Archive](/archive): Curated research library with in-browser PDF reader.
+- [Master Report](/archive/localhousellm-master-report): 49-page compendium on local AI inference.
+- [Benchmarks](/benchmarks): Performance measurements.
+- [Docs](/docs): Technical documentation hub.
+
+## Use Cases
+
+- [Use Cases](/use-cases): Where modular local AI applies.
+- [Enterprise private AI](/use-cases/enterprise-private-ai): On-premise, private deployments.
+- [Healthcare](/use-cases/healthcare): Privacy-preserving clinical AI.
+- [Edge AI](/use-cases/edge-ai): Inference on constrained devices.
+- [Research](/use-cases/research): Research workflows.
+- [AI tutors](/use-cases/ai-tutors): Education.
+- [Agriculture](/use-cases/agriculture): Field and offline deployments.
+
+## Optional
+
+- [FAQ](/faq): Common questions.
+- [Release logs](/release-logs): Changelog and releases.
+- [Sitemap](/sitemap): Human-readable index of all pages.

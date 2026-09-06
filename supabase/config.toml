@@ -1,0 +1,4 @@
+project_id = "ntdjmjdpszxrpaytjqla"
+
+[functions.submit-work-request]
+verify_jwt = false
