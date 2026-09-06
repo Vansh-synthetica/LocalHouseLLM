@@ -4,6 +4,20 @@ import { ArrowRight, Network, Cpu, BookOpen, Lock, Blocks, Globe, GraduationCap,
 import { Button } from '@/components/ui/button';
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
+import FlowCanvas from '@/components/fx/FlowCanvas';
+
+const marqueeItems = [
+  'AICL Protocol',
+  'ORCHA Orchestration',
+  'User-owned Memory',
+  'Safety Verification',
+  'Tool Runtime',
+  'Intelligence Modules',
+  'Anvira v0.2',
+  'Nomi Personas',
+  'Local-first inference',
+  'Open research',
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -69,11 +83,15 @@ const Index = () => {
       />
 
       {/* HERO */}
-      <section className="relative pt-12 md:pt-24 pb-24 md:pb-32">
+      <section className="relative pt-10 md:pt-20 pb-16 md:pb-24 overflow-hidden">
         <div className="max-container">
           <div className="max-w-4xl">
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0}>
-              <Eyebrow>LocalHouseLLM</Eyebrow>
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0} className="mb-6">
+              <Link to="/anvira" className="pill-glow group">
+                <span className="pill-dot" />
+                Anvira v0.2 is live — local AI that does the work
+                <ArrowRight className="w-3.5 h-3.5 text-muted-foreground group-hover:translate-x-0.5 group-hover:text-foreground transition-all" />
+              </Link>
             </motion.div>
             <motion.h1
               initial="hidden"
@@ -84,7 +102,7 @@ const Index = () => {
             >
               Open, modular infrastructure
               <br />
-              <span className="text-muted-foreground">for decentralized AI.</span>
+              <span className="text-aurora">for decentralized AI.</span>
             </motion.h1>
             <motion.p
               initial="hidden"
@@ -105,23 +123,59 @@ const Index = () => {
               className="flex flex-wrap items-center gap-3"
             >
               <Link to="/mission">
-                <Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
+                <Button className="btn-shine bg-primary text-primary-foreground hover:bg-primary h-11 px-6">
                   Read our mission
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
               <Link to="/archive">
-                <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">
+                <Button variant="outline" className="border-border bg-card/40 backdrop-blur-md hover:bg-foreground/5 hover:border-primary/50 h-11 px-6 transition-all">
                   View research
                 </Button>
               </Link>
             </motion.div>
           </div>
+
+          {/* Flow canvas — the stack as a living graph */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mt-16 md:mt-24 rounded-3xl border border-border/60 bg-card/30 backdrop-blur-xl p-4 sm:p-8 md:p-12 overflow-hidden"
+          >
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,hsl(var(--primary)/0.18),transparent_70%)]" />
+            <div
+              className="absolute inset-0 -z-10 opacity-[0.08]"
+              style={{
+                backgroundImage:
+                  'radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)',
+                backgroundSize: '22px 22px',
+              }}
+            />
+            <div className="flex items-center gap-2 mb-6 text-[11px] tracking-[0.22em] uppercase text-muted-foreground">
+              <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_10px_hsl(var(--accent))]" />
+              Live: how a request flows through the stack
+            </div>
+            <FlowCanvas />
+          </motion.div>
+        </div>
+
+        {/* Marquee of layers */}
+        <div className="marquee mt-14 md:mt-20">
+          <div className="marquee-track">
+            {[...marqueeItems, ...marqueeItems].map((m, i) => (
+              <span key={i} className="node-chip">
+                <span className="port" />
+                {m}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* WHY MODULAR AI MATTERS */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="max-container">
           <div className="grid md:grid-cols-12 gap-10 md:gap-16">
             <motion.div
@@ -164,9 +218,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* WHAT WE'RE BUILDING — STACK */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="max-container">
           <motion.div
             initial="hidden"
@@ -185,7 +240,7 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 border border-border/40 rounded-2xl overflow-hidden">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {stack.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -194,9 +249,11 @@ const Index = () => {
                 viewport={{ once: true, margin: '-40px' }}
                 variants={fadeUp}
                 custom={i}
-                className="p-7 border-b border-r border-border/40 last:border-r-0 [&:nth-child(3n)]:border-r-0 [&:nth-last-child(-n+3)]:border-b-0 max-sm:[&]:border-r-0 max-sm:[&:nth-last-child(-n+1)]:border-b-0 max-sm:[&:nth-last-child(2)]:border-b"
+                className="card-premium p-7"
               >
-                <item.icon className="w-5 h-5 mb-5 text-foreground" />
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary mb-5">
+                  <item.icon className="w-5 h-5" />
+                </span>
                 <h3 className="text-base font-semibold mb-2">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </motion.div>
@@ -204,9 +261,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* USE CASES */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="max-container">
           <motion.div
             initial="hidden"
@@ -225,7 +283,7 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-px bg-border/40 rounded-2xl overflow-hidden border border-border/40">
+          <div className="grid sm:grid-cols-2 gap-4">
             {useCases.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -234,9 +292,11 @@ const Index = () => {
                 viewport={{ once: true, margin: '-40px' }}
                 variants={fadeUp}
                 custom={i}
-                className="bg-background p-7 flex gap-5"
+                className="card-premium p-7 flex gap-5"
               >
-                <item.icon className="w-6 h-6 shrink-0 mt-1 text-foreground" />
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+                  <item.icon className="w-5 h-5" />
+                </span>
                 <div>
                   <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
@@ -246,9 +306,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* RESEARCH PREVIEW */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="max-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <motion.div
@@ -274,7 +335,7 @@ const Index = () => {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-px bg-border/40 border border-border/40 rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-4">
             {[
               'Adaptive Modular AI: A New Paradigm for Scalable, Safe, and Efficient Language Models',
               'Shadow AMAI: An Architecture for Unconstrained Adaptive Modular Intelligence',
@@ -288,7 +349,7 @@ const Index = () => {
                 viewport={{ once: true, margin: '-40px' }}
                 variants={fadeUp}
                 custom={i}
-                className="bg-background p-7"
+                className="card-premium p-7"
               >
                 <p className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-3">Paper · 2026</p>
                 <h3 className="text-base md:text-lg font-semibold leading-snug">{t}</h3>
@@ -297,9 +358,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* PROJECTS */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="max-container">
           <motion.div
             initial="hidden"
@@ -329,13 +391,13 @@ const Index = () => {
               >
                 <Link
                   to={p.to}
-                  className="group block p-7 rounded-xl border border-border/40 hover:border-border transition-colors duration-300"
+                  className="card-premium group block p-7"
                 >
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">{p.tag}</span>
                     <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{p.name}</h3>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-aurora transition-colors">{p.name}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                 </Link>
               </motion.div>
@@ -343,9 +405,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* WORK WITH US */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="max-container">
           <motion.div
             initial="hidden"
@@ -377,7 +440,7 @@ const Index = () => {
                 viewport={{ once: true, margin: '-40px' }}
                 variants={fadeUp}
                 custom={i}
-                className="p-6 rounded-xl border border-border/40 hover:border-border transition-colors"
+                className="card-premium p-6"
               >
                 <h3 className="text-base font-semibold mb-2">{s.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
@@ -386,16 +449,17 @@ const Index = () => {
           </div>
 
           <Link to="/work-with-us">
-            <Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
+            <Button className="btn-shine bg-primary text-primary-foreground hover:bg-primary h-11 px-6">
               Apply to Work With Us
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </Link>
         </div>
       </section>
+      <div className="beam max-container" />
 
       {/* CTA */}
-      <section className="border-t border-border/40 py-24 md:py-32">
+      <section className="py-24 md:py-32">
         <div className="max-container">
           <motion.div
             initial="hidden"
@@ -413,7 +477,7 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/stack">
-                <Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
+                <Button className="btn-shine bg-primary text-primary-foreground hover:bg-primary h-11 px-6">
                   Explore the stack
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>

@@ -59,7 +59,7 @@ const toneClass: Record<Node['tone'], string> = {
  */
 const FlowCanvas = () => {
   return (
-    <div className="relative w-full aspect-[1000/520] select-none" aria-hidden="true">
+    <div className="relative w-full aspect-[1000/520] select-none" style={{ containerType: "inline-size" }} aria-hidden="true">
       {/* Edges */}
       <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 w-full h-full overflow-visible">
         <defs>
@@ -103,16 +103,17 @@ const FlowCanvas = () => {
       {nodes.map((n, i) => (
         <motion.div
           key={n.id}
-          initial={{ opacity: 0, scale: 0.85, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: `${n.x}%`, top: `${n.y}%` }}
+          className="absolute"
+          style={{ left: `${n.x}%`, top: `${n.y}%`, x: '-50%', y: '-50%' }}
         >
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 5 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
-            className="fx-spot glass w-[140px] rounded-xl px-3 py-2.5 flex items-center gap-2.5"
+            className="fx-spot glass rounded-xl px-3 py-2.5 flex items-center gap-2.5"
+            style={{ width: "14cqw" }}
           >
             <span className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${toneClass[n.tone]}`}>
               <n.icon className="w-3.5 h-3.5" />
