@@ -4,6 +4,20 @@ import { ArrowRight, Network, Cpu, BookOpen, Lock, Blocks, Globe, GraduationCap,
 import { Button } from '@/components/ui/button';
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
+import FlowCanvas from '@/components/fx/FlowCanvas';
+
+const marqueeItems = [
+  'AICL Protocol',
+  'ORCHA Orchestration',
+  'User-owned Memory',
+  'Safety Verification',
+  'Tool Runtime',
+  'Intelligence Modules',
+  'Anvira v0.2',
+  'Nomi Personas',
+  'Local-first inference',
+  'Open research',
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
