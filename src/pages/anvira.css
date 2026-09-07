@@ -1,0 +1,386 @@
+.anvira-site {
+  --anvira-paper: 42 28% 96%;
+  --anvira-paper-deep: 39 18% 90%;
+  --anvira-ink: 96 8% 13%;
+  --anvira-ink-soft: 90 5% 35%;
+  --anvira-moss: 103 18% 34%;
+  --anvira-moss-light: 98 19% 74%;
+  --anvira-line: 72 10% 78%;
+  --anvira-surface: 45 33% 98%;
+  --anvira-night: 100 7% 10%;
+  position: relative;
+  min-height: 100dvh;
+  color: hsl(var(--anvira-ink));
+  background-color: hsl(var(--anvira-paper));
+  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+}
+
+.anvira-site *, .anvira-site *::before, .anvira-site *::after { box-sizing: border-box; }
+.anvira-site a { color: inherit; }
+.anvira-site h1, .anvira-site h2, .anvira-site h3, .anvira-site h4, .anvira-site p { margin: 0; }
+.anvira-site h1, .anvira-site h2, .anvira-site h3, .anvira-site h4 { color: inherit; font-family: Sora, Manrope, sans-serif; letter-spacing: 0; }
+.anvira-shell { width: min(1280px, calc(100% - 48px)); margin-inline: auto; }
+
+.anvira-nav__brand span:first-child img,
+.anvira-orbit__center span img,
+.anvira-system-visual__center > span img,
+.anvira-machine__core > span img,
+.anvira-model-foundation__workspace > span img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.anvira-grain { position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
+
+.anvira-nav { position: fixed; inset: 0 0 auto; z-index: 70; height: 72px; transition: background .4s ease, border-color .4s ease; border-bottom: 1px solid transparent; }
+.anvira-nav.is-scrolled { background: hsl(var(--anvira-paper) / .9); backdrop-filter: blur(18px); border-color: hsl(var(--anvira-line) / .7); }
+.anvira-nav__inner { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.anvira-nav__brand { justify-self: start; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; }
+.anvira-nav__brand span:first-child { display: grid; place-items: center; width: 27px; height: 27px; font-weight: 400; }
+.anvira-nav__links { display: flex; align-items: center; gap: 30px; }
+.anvira-nav__links a { font-size: 12px; text-decoration: none; color: hsl(var(--anvira-ink-soft)); transition: color .2s ease; }
+.anvira-nav__links a:hover { color: hsl(var(--anvira-ink)); }
+.anvira-nav__download { justify-self: end; padding: 10px 17px; border-radius: 3px; text-decoration: none; font-size: 12px; color: hsl(var(--anvira-paper)) !important; background: hsl(var(--anvira-ink)); transition: transform .2s ease, background .2s ease; }
+.anvira-nav__download:hover { transform: translateY(-1px); background: hsl(var(--anvira-moss)); }
+.anvira-nav__menu { display: none; justify-self: end; border: 0; background: transparent; color: inherit; width: 40px; height: 40px; }
+.anvira-nav__mobile { display: none; }
+
+.anvira-hero { position: relative; min-height: 100vh; }
+.anvira-hero__sticky { position: sticky; top: 0; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; padding: 110px 0 48px; }
+.anvira-hero__wash { position: absolute; inset: 0; background: radial-gradient(circle at 68% 55%, hsl(var(--anvira-moss-light) / .25), transparent 32%), linear-gradient(180deg, hsl(var(--anvira-surface)), hsl(var(--anvira-paper))); }
+.anvira-hero__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(360px, .78fr) minmax(540px, 1.35fr); gap: 40px; align-items: center; }
+.anvira-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; text-transform: uppercase; font-size: 10px; letter-spacing: .18em; color: hsl(var(--anvira-moss)); }
+.anvira-kicker::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+.anvira-hero h1 { font-weight: 300; font-size: clamp(52px, 6.2vw, 100px); line-height: .96; }
+.anvira-hero h1 span { display: block; }
+.anvira-hero__copy { max-width: 560px; margin-top: 31px !important; color: hsl(var(--anvira-ink-soft)); font-size: 17px; line-height: 1.75; }
+.anvira-actions { display: flex; gap: 11px; margin-top: 33px; }
+.anvira-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 20px; border: 1px solid hsl(var(--anvira-ink)); border-radius: 3px; text-decoration: none; font-size: 12px; transition: transform .22s ease, background .22s ease, color .22s ease; }
+.anvira-button svg { width: 15px; }
+.anvira-button--primary { color: hsl(var(--anvira-paper)) !important; background: hsl(var(--anvira-ink)); }
+.anvira-button--secondary { background: transparent; }
+.anvira-button:hover { transform: translateY(-2px); }
+.anvira-button--secondary:hover { color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-ink)); }
+.anvira-hero__visual { position: relative; perspective: 1600px; }
+.anvira-hero__visual-inner { transform: rotateY(-4deg) rotateX(2deg); transform-style: preserve-3d; filter: drop-shadow(0 36px 55px hsl(var(--anvira-ink) / .13)); }
+.anvira-hero__branch, .anvira-botanical { position: absolute; pointer-events: none; object-fit: contain; mix-blend-mode: multiply; }
+.anvira-hero__branch { z-index: 4; right: -14%; bottom: -14%; width: 42%; opacity: .56; transform: rotate(-20deg); }
+.anvira-hero__leaf { z-index: 0; position: absolute; left: -12%; top: 9%; width: 30%; opacity: .13; filter: sepia(.2); mix-blend-mode: multiply; }
+.anvira-scroll-cue { position: absolute; z-index: 4; left: 50%; bottom: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; color: hsl(var(--anvira-ink-soft)); font-size: 9px; text-transform: uppercase; letter-spacing: .18em; }
+.anvira-scroll-cue i { width: 1px; height: 34px; background: hsl(var(--anvira-ink) / .3); transform-origin: top; animation: anvira-line 2s ease-in-out infinite; }
+@keyframes anvira-line { 0%, 100% { transform: scaleY(.2); opacity: .3; } 50% { transform: scaleY(1); opacity: 1; } }
+
+.anvira-morph { position: relative; height: 260vh; }
+.anvira-morph__sticky { position: sticky; top: 0; height: 100dvh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.anvira-morph__wash { position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, hsl(var(--anvira-moss-light) / .18), transparent 62%); }
+.anvira-morph__interface { position: absolute; left: 50%; top: 50%; width: min(1040px, 82vw); transform: translate(-50%, -50%); filter: blur(.3px); }
+.anvira-morph__line { position: absolute; left: 50%; top: 50%; width: min(920px, 86vw); transform: translate(-50%, -50%); text-align: center; font-family: Sora, sans-serif; font-weight: 300; font-size: clamp(38px, 6.4vw, 88px); line-height: 1.05; }
+
+.anvira-leaf-wipe { position: relative; height: 160vh; }
+.anvira-leaf-wipe__sticky { position: sticky; top: 0; height: 100dvh; overflow: hidden; }
+.anvira-leaf-wipe__night { position: absolute; inset: 0; background: hsl(var(--anvira-night)); }
+.anvira-leaf-wipe__leaf { position: absolute; left: 50%; top: 50%; width: min(360px, 32vw); pointer-events: none; will-change: transform; }
+.anvira-leaf-wipe__leaf svg { display: block; width: 100%; height: auto; }
+.anvira-sprig-leaf__outline { fill: hsl(var(--anvira-moss) / .16); stroke: hsl(var(--anvira-moss) / .5); stroke-width: 1.6; }
+.anvira-sprig-leaf__vein { fill: none; stroke: hsl(var(--anvira-moss) / .32); stroke-width: 1.2; stroke-linecap: round; }
+.anvira-leaf-wipe__line { position: absolute; left: 50%; top: 50%; width: min(920px, 86vw); transform: translate(-50%, -50%); text-align: center; font-family: Sora, sans-serif; font-weight: 300; font-size: clamp(38px, 6.4vw, 88px); line-height: 1.05; color: hsl(var(--anvira-ink)); }
+.anvira-leaf-wipe__line--light { color: hsl(var(--anvira-paper)); }
+
+/* Accurate mockup of the real Anvira desktop app (dark UI, real accent color) */
+.anvira-app { --ra-bg: #181c26; --ra-bg-elevated: #1e222e; --ra-bg-muted: #252a38; --ra-bg-sidebar: #15181f; --ra-accent: #6090e6; --ra-border: rgba(255,255,255,.075); --ra-text: rgba(255,255,255,.92); --ra-text-soft: rgba(255,255,255,.5); width: 100%; aspect-ratio: 16 / 10; display: grid; grid-template-columns: 168px 1fr; overflow: hidden; border-radius: 10px; color: var(--ra-text); background: var(--ra-bg); font-size: 11px; box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+.anvira-app__sidebar { display: flex; flex-direction: column; padding: 16px 11px; background: var(--ra-bg-sidebar); border-right: 1px solid var(--ra-border); }
+.anvira-app__brand { display: flex; align-items: center; gap: 8px; padding-bottom: 14px; margin-bottom: 10px; border-bottom: 1px solid var(--ra-border); }
+.anvira-app__brand img { width: 24px; height: 24px; object-fit: contain; }
+.anvira-app__brand strong { display: block; font-size: 10.5px; }
+.anvira-app__brand small { display: block; margin-top: 1px; color: var(--ra-text-soft); font-size: 7.5px; }
+.anvira-app__nav { display: flex; flex-direction: column; gap: 1px; }
+.anvira-app__nav span { display: flex; align-items: center; gap: 8px; padding: 6px 7px; border-radius: 6px; color: rgba(255,255,255,.5); font-size: 9.5px; }
+.anvira-app__nav span svg { width: 12px; flex-shrink: 0; }
+.anvira-app__nav span i { font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.anvira-app__nav span.is-active { color: #fff; background: rgba(96,144,230,.16); }
+.anvira-app__footer { margin-top: auto; display: flex; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px solid var(--ra-border); }
+.anvira-app__footer img { width: 18px; height: 18px; object-fit: contain; }
+.anvira-app__footer small { color: var(--ra-text-soft); font-size: 8px; }
+
+.anvira-app__main { position: relative; min-width: 0; display: flex; flex-direction: column; }
+.anvira-app__topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--ra-border); }
+.anvira-app__selects { display: flex; gap: 12px; min-width: 0; }
+.anvira-app__selects span { display: flex; align-items: center; gap: 3px; color: rgba(255,255,255,.6); font-size: 9px; white-space: nowrap; }
+.anvira-app__selects svg { width: 9px; }
+.anvira-app__effort { display: flex; gap: 3px; flex-shrink: 0; }
+.anvira-app__effort button { padding: 4px 8px; border: 0; border-radius: 5px; background: transparent; color: rgba(255,255,255,.38); font-size: 8.5px; }
+.anvira-app__effort button.is-active { background: var(--ra-accent); color: #fff; }
+
+.anvira-app__thread { flex: 1; min-height: 0; overflow: hidden; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+.anvira-app__bubble--user { align-self: flex-end; max-width: 76%; padding: 9px 12px; border-radius: 10px 10px 2px 10px; background: var(--ra-bg-muted); line-height: 1.55; font-size: 10.5px; }
+.anvira-app__bubble--agent { display: flex; gap: 9px; max-width: 88%; }
+.anvira-app__avatar { flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--ra-bg-muted); display: grid; place-items: center; overflow: hidden; }
+.anvira-app__avatar img { width: 75%; height: 75%; object-fit: contain; }
+.anvira-app__bubble--agent strong { display: block; font-size: 9.5px; color: rgba(255,255,255,.85); }
+.anvira-app__bubble--agent p { margin-top: 5px !important; color: rgba(255,255,255,.58); line-height: 1.65; font-size: 10px; }
+
+.anvira-app__composer { display: flex; align-items: center; gap: 9px; margin: 0 16px 16px; padding: 9px 11px; border: 1px solid var(--ra-border); border-radius: 8px; background: var(--ra-bg-elevated); color: rgba(255,255,255,.35); }
+.anvira-app__composer > svg { width: 12px; flex-shrink: 0; }
+.anvira-app__composer span { flex: 1; font-size: 9.5px; }
+.anvira-app__composer button { display: grid; place-items: center; width: 22px; height: 22px; border: 0; border-radius: 6px; background: var(--ra-accent); color: #fff; }
+.anvira-app__composer button svg { width: 11px; }
+.anvira-app__mascot-float { position: absolute; right: 20px; bottom: 72px; width: 24px; height: 24px; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); }
+
+.anvira-section { position: relative; padding: 150px 0; }
+.anvira-section--line { border-top: 1px solid hsl(var(--anvira-line)); }
+.anvira-section--deep { color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-night)); }
+.anvira-section__intro { max-width: 780px; }
+.anvira-section__number { display: block; margin-bottom: 28px; color: hsl(var(--anvira-moss)); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+.anvira-section--deep .anvira-section__number { color: hsl(var(--anvira-moss-light)); }
+.anvira-section h2 { font-size: clamp(42px, 6vw, 82px); line-height: 1.02; font-weight: 300; }
+.anvira-section__intro > p { max-width: 610px; margin-top: 30px !important; color: hsl(var(--anvira-ink-soft)); font-size: 17px; line-height: 1.8; }
+.anvira-section--deep .anvira-section__intro > p { color: hsl(var(--anvira-paper) / .6); }
+.anvira-section__stage { margin-top: 80px; }
+.anvira-botanical--left { left: -170px; top: 14%; width: 360px; opacity: .1; transform: rotate(22deg); }
+.anvira-botanical--right { right: -170px; top: 32%; width: 370px; opacity: .12; transform: rotate(-25deg) scaleX(-1); }
+.anvira-botanical--bridge-left { left: -90px; top: -70px; width: 280px; opacity: .13; transform: rotate(-12deg); }
+.anvira-botanical--bridge-right { right: -90px; top: -60px; width: 300px; opacity: .13; transform: rotate(14deg) scaleX(-1); }
+
+.anvira-orbit { position: relative; width: min(900px, 100%); aspect-ratio: 10 / 7; margin-inline: auto; }
+.anvira-orbit svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.anvira-orbit path { fill: none; stroke: hsl(var(--anvira-line)); stroke-width: 1.2; stroke-dasharray: 5 7; animation: anvira-dash 18s linear infinite; }
+@keyframes anvira-dash { to { stroke-dashoffset: -200; } }
+.anvira-orbit__center { position: absolute; left: 50%; top: 50%; width: 210px; height: 210px; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid hsl(var(--anvira-moss) / .35); border-radius: 50%; background: hsl(var(--anvira-surface)); box-shadow: 0 35px 80px hsl(var(--anvira-ink) / .1); }
+.anvira-orbit__center span, .anvira-system-visual__center > span { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 12px; font-family: Sora; }
+.anvira-orbit__center strong { font-size: 18px; }
+.anvira-orbit__center small { margin-top: 5px; color: hsl(var(--anvira-ink-soft)); }
+.anvira-orbit__node { position: absolute; display: flex; align-items: center; gap: 9px; min-width: 124px; padding: 13px 15px; border: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper)); box-shadow: 0 12px 30px hsl(var(--anvira-ink) / .06); font-size: 12px; transition: transform .25s ease, border-color .25s ease; }
+.anvira-orbit__node:hover { transform: translateY(-4px); border-color: hsl(var(--anvira-moss)); }
+.anvira-orbit__node svg { position: static; width: 15px; color: hsl(var(--anvira-moss)); }
+.anvira-orbit__node--1 { left: 4%; top: 12%; } .anvira-orbit__node--2 { right: 2%; top: 12%; }
+.anvira-orbit__node--3 { left: 0; top: 48%; } .anvira-orbit__node--4 { right: 0; top: 48%; }
+.anvira-orbit__node--5 { left: 10%; bottom: 6%; } .anvira-orbit__node--6 { left: 50%; bottom: 0; transform: translateX(-50%); }
+.anvira-orbit__node--6:hover { transform: translateX(-50%) translateY(-4px); } .anvira-orbit__node--7 { right: 8%; bottom: 6%; }
+
+.anvira-context-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; align-items: start; }
+.anvira-context-layout .anvira-section__intro { position: sticky; top: 140px; }
+.anvira-context-flow { position: relative; display: grid; gap: 12px; padding-left: 40px; }
+.anvira-context-flow__line { position: absolute; left: 19px; top: 42px; bottom: 42px; width: 1px; background: hsl(var(--anvira-line)); }
+.anvira-context-flow__line::after { content: ''; position: absolute; inset: 0; transform-origin: top; background: hsl(var(--anvira-moss)); animation: anvira-flow 4s ease-in-out infinite; }
+@keyframes anvira-flow { 0% { transform: scaleY(0); } 45%, 65% { transform: scaleY(1); } 100% { transform-origin: bottom; transform: scaleY(0); } }
+.anvira-context-flow__step { display: flex; align-items: center; gap: 20px; min-height: 94px; padding: 18px 22px; border-bottom: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-surface) / .55); }
+.anvira-context-flow__step > span { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper)); }
+.anvira-context-flow__step svg { width: 17px; color: hsl(var(--anvira-moss)); }
+.anvira-context-flow__step div { display: grid; gap: 5px; }
+.anvira-context-flow__step strong { font-size: 14px; }
+.anvira-context-flow__step small { color: hsl(var(--anvira-ink-soft)); }
+
+.anvira-machine { position: relative; width: min(720px, 100%); margin-inline: auto; padding: 64px 32px; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center; border: 1px solid hsl(var(--anvira-paper) / .14); border-radius: 50% / 40%; background: radial-gradient(circle, hsl(var(--anvira-paper) / .06), transparent 68%); }
+.anvira-machine__label { position: absolute; top: 9%; left: 50%; transform: translateX(-50%); color: hsl(var(--anvira-paper) / .45); font-size: 10px; text-transform: uppercase; letter-spacing: .18em; }
+.anvira-machine__core { position: relative; width: 168px; height: 168px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid hsl(var(--anvira-moss-light) / .4); border-radius: 50%; background: hsl(var(--anvira-paper) / .04); }
+.anvira-machine__core > span { display: grid; place-items: center; width: 34px; height: 34px; }
+.anvira-machine__core strong { margin-top: 7px; font-size: 13px; }
+.anvira-machine__core small { margin-top: 3px; color: hsl(var(--anvira-paper) / .48); font-size: 10px; }
+.anvira-machine__pulse { position: absolute; inset: -28px; border: 1px solid hsl(var(--anvira-moss-light) / .12); border-radius: 50%; animation: anvira-pulse 4s ease-out infinite; }
+@keyframes anvira-pulse { 0% { transform: scale(.8); opacity: 0; } 35% { opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
+.anvira-machine__items { font-family: Sora; font-weight: 300; font-size: clamp(15px, 1.9vw, 21px); color: hsl(var(--anvira-paper) / .82); }
+.anvira-machine__items i { margin: 0 12px; font-style: normal; color: hsl(var(--anvira-paper) / .22); }
+.anvira-machine__caption { display: inline-flex; align-items: center; gap: 7px; color: hsl(var(--anvira-paper) / .42); font-size: 10.5px; }
+.anvira-machine__caption svg { width: 12px; }
+
+.anvira-immersive { display: grid; grid-template-columns: .6fr 1.4fr; align-items: center; gap: 70px; }
+.anvira-immersive .anvira-app { transform: scale(1.03); transform-origin: center left; filter: drop-shadow(0 40px 60px hsl(var(--anvira-ink) / .18)); }
+.anvira-chapter-label { max-width: 360px; }
+.anvira-chapter-label h2 { font-size: clamp(42px, 5vw, 68px); }
+.anvira-chapter-label p { margin-top: 25px !important; color: hsl(var(--anvira-ink-soft)); line-height: 1.8; }
+.anvira-detail-list { margin-top: 29px; display: grid; gap: 11px; padding: 0; list-style: none; color: hsl(var(--anvira-ink-soft)); font-size: 12px; }
+.anvira-detail-list li { display: flex; gap: 10px; align-items: center; }
+.anvira-detail-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: hsl(var(--anvira-moss)); }
+
+.anvira-agent-visual { display: grid; grid-template-columns: 290px 1fr; min-height: 600px; overflow: hidden; border: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-surface)); box-shadow: 0 30px 90px hsl(var(--anvira-ink) / .08); }
+.anvira-agent-visual__list { padding: 30px 21px; border-right: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper-deep) / .5); }
+.anvira-agent-visual__list > div { display: grid; grid-template-columns: 35px 1fr auto; align-items: center; gap: 11px; margin-top: 8px; padding: 12px 10px; color: hsl(var(--anvira-ink-soft)); font-size: 11px; }
+.anvira-agent-visual__list > div.is-active { color: hsl(var(--anvira-ink)); background: hsl(var(--anvira-surface)); box-shadow: 0 9px 22px hsl(var(--anvira-ink) / .06); }
+.anvira-agent-visual__list > div > span { display: grid; place-items: center; width: 31px; height: 31px; border: 1px solid hsl(var(--anvira-line)); font-size: 8px; }
+.anvira-agent-visual__list svg { width: 12px; }
+.anvira-agent-visual__list button { width: 100%; margin-top: 17px; padding: 11px; border: 1px dashed hsl(var(--anvira-line)); background: transparent; text-align: left; color: hsl(var(--anvira-ink-soft)); font-size: 10px; }
+.anvira-agent-visual__list button span { margin-right: 8px; }
+.anvira-agent-visual__detail { padding: 50px 65px; }
+.anvira-agent-visual__header { display: flex; gap: 14px; align-items: center; }
+.anvira-agent-visual__header > span { display: grid; place-items: center; width: 52px; height: 52px; background: hsl(var(--anvira-moss)); color: hsl(var(--anvira-paper)); }
+.anvira-agent-visual__header div { display: grid; gap: 3px; }
+.anvira-agent-visual__header small { color: hsl(var(--anvira-ink-soft)); }
+.anvira-agent-visual__header strong { font-size: 18px; }
+.anvira-agent-visual__brief { margin-top: 35px; max-width: 600px; padding-bottom: 26px; border-bottom: 1px solid hsl(var(--anvira-line)); }
+.anvira-agent-visual__brief small { color: hsl(var(--anvira-moss)); letter-spacing: .15em; font-size: 9px; }
+.anvira-agent-visual__brief p { margin-top: 10px !important; color: hsl(var(--anvira-ink-soft)); line-height: 1.7; }
+.anvira-agent-visual__traits { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.anvira-agent-visual__traits span { padding: 7px 9px; border: 1px solid hsl(var(--anvira-line)); color: hsl(var(--anvira-ink-soft)); font-size: 9px; }
+.anvira-agent-visual__detail ol { margin: 34px 0 0; padding: 0; list-style: none; }
+.anvira-agent-visual__detail li { position: relative; display: flex; align-items: center; gap: 13px; min-height: 61px; }
+.anvira-agent-visual__detail li:not(:last-child)::after { content: ''; position: absolute; left: 10px; top: 40px; bottom: -10px; width: 1px; background: hsl(var(--anvira-line)); }
+.anvira-agent-visual__detail li > svg { width: 21px; padding: 4px; border: 1px solid hsl(var(--anvira-line)); border-radius: 50%; background: hsl(var(--anvira-surface)); z-index: 1; }
+.anvira-agent-visual__detail li.is-done > svg, .anvira-agent-visual__detail li.is-live > svg { color: hsl(var(--anvira-moss)); border-color: hsl(var(--anvira-moss)); }
+.anvira-agent-visual__detail li span { display: grid; gap: 4px; }
+.anvira-agent-visual__detail li strong { font-size: 11px; }
+.anvira-agent-visual__detail li small { color: hsl(var(--anvira-ink-soft)); font-size: 9px; }
+
+.anvira-notes-visual { position: relative; display: grid; grid-template-columns: 240px 1fr; min-height: 620px; overflow: hidden; border: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-surface)); box-shadow: 0 35px 100px hsl(var(--anvira-ink) / .08); }
+.anvira-notes-visual > aside { padding: 32px 22px; border-right: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper-deep) / .45); }
+.anvira-notes-visual > aside > small { color: hsl(var(--anvira-moss)); letter-spacing: .15em; font-size: 8px; }
+.anvira-notes-visual > aside h4 { margin: 7px 0 25px; font-size: 15px; }
+.anvira-notes-visual > aside > span { display: flex; align-items: center; gap: 8px; padding: 10px; color: hsl(var(--anvira-ink-soft)); font-size: 10px; }
+.anvira-notes-visual > aside > span.is-active { color: hsl(var(--anvira-ink)); background: hsl(var(--anvira-surface)); }
+.anvira-notes-visual > aside svg { width: 12px; }
+.anvira-notes-visual__sources { display: grid; gap: 5px; margin-top: 45px; padding: 13px 10px; border-top: 1px solid hsl(var(--anvira-line)); }
+.anvira-notes-visual__sources small { color: hsl(var(--anvira-ink-soft)); font-size: 8px; }
+.anvira-notes-visual__sources strong { font-size: 11px; }
+.anvira-notes-visual article { max-width: 720px; padding: 68px 70px 110px; }
+.anvira-notes-visual article h3 { margin-top: 18px; font-size: clamp(32px, 4vw, 56px); line-height: 1.08; font-weight: 300; }
+.anvira-notes-visual article > p { margin-top: 25px !important; color: hsl(var(--anvira-ink-soft)); font-family: Sora; font-size: 15px; line-height: 1.9; }
+.anvira-notes-visual blockquote { margin: 34px 0; padding: 3px 0 3px 25px; border-left: 2px solid hsl(var(--anvira-moss)); color: hsl(var(--anvira-ink-soft)); font-size: 16px; font-style: italic; line-height: 1.7; }
+.anvira-notes-visual blockquote cite { display: block; margin-top: 9px; color: hsl(var(--anvira-moss)); font-size: 9px; font-style: normal; text-transform: uppercase; letter-spacing: .12em; }
+.anvira-notes-visual article h5 { margin-top: 32px; font-family: Sora; font-size: 12px; }
+.anvira-notes-visual__ai { position: absolute; right: 28px; bottom: 25px; display: flex; align-items: center; gap: 11px; width: 340px; padding: 15px 17px; border: 1px solid hsl(var(--anvira-moss) / .3); background: hsl(var(--anvira-paper)); box-shadow: 0 14px 35px hsl(var(--anvira-ink) / .09); }
+.anvira-notes-visual__ai > svg { width: 16px; color: hsl(var(--anvira-moss)); }
+.anvira-notes-visual__ai > svg:last-child { margin-left: auto; }
+.anvira-notes-visual__ai span { display: grid; gap: 3px; }
+.anvira-notes-visual__ai small { color: hsl(var(--anvira-ink-soft)); font-size: 8px; }
+.anvira-notes-visual__ai strong { font-size: 10px; }
+
+.anvira-study-loop { position: relative; width: min(900px, 100%); aspect-ratio: 1.45; margin-inline: auto; border: 1px solid hsl(var(--anvira-line)); border-radius: 50%; }
+.anvira-study-loop::before, .anvira-study-loop::after { content: ''; position: absolute; inset: 13%; border: 1px dashed hsl(var(--anvira-moss) / .35); border-radius: 50%; }
+.anvira-study-loop::after { inset: 28%; border-style: solid; opacity: .3; }
+.anvira-study-loop__center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.anvira-study-loop__center svg { width: 31px; color: hsl(var(--anvira-moss)); }
+.anvira-study-loop__center strong { margin-top: 12px; font-size: 16px; }
+.anvira-study-loop__center small { margin-top: 5px; color: hsl(var(--anvira-ink-soft)); }
+.anvira-study-loop__step { position: absolute; display: flex; align-items: center; gap: 8px; padding: 11px 14px; border: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper)); box-shadow: 0 10px 25px hsl(var(--anvira-ink) / .06); font-size: 11px; }
+.anvira-study-loop__step i { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-moss)); font-size: 8px; font-style: normal; }
+.anvira-study-loop__step--1 { left: 44%; top: -3%; } .anvira-study-loop__step--2 { right: 3%; top: 17%; }
+.anvira-study-loop__step--3 { right: -2%; top: 54%; } .anvira-study-loop__step--4 { right: 17%; bottom: -1%; }
+.anvira-study-loop__step--5 { left: 27%; bottom: -4%; } .anvira-study-loop__step--6 { left: -2%; top: 56%; }
+.anvira-study-loop__step--7 { left: 4%; top: 16%; }
+
+.anvira-model-foundation { max-width: 920px; margin-inline: auto; }
+.anvira-model-foundation__workspace { min-height: 210px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid hsl(var(--anvira-paper) / .16); background: linear-gradient(145deg, hsl(var(--anvira-paper) / .07), transparent); }
+.anvira-model-foundation__workspace > span { display: grid; place-items: center; width: 40px; height: 40px; }
+.anvira-model-foundation__workspace strong { margin-top: 10px; }
+.anvira-model-foundation__workspace small { margin-top: 5px; color: hsl(var(--anvira-paper) / .45); }
+.anvira-model-foundation__bridge { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center; margin: 25px 0; color: hsl(var(--anvira-paper) / .4); font-size: 9px; text-transform: uppercase; letter-spacing: .18em; }
+.anvira-model-foundation__bridge i { height: 1px; background: hsl(var(--anvira-paper) / .15); }
+.anvira-model-foundation__models { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: hsl(var(--anvira-paper) / .15); border: 1px solid hsl(var(--anvira-paper) / .15); }
+.anvira-model-foundation__models span { min-height: 86px; display: grid; place-items: center; padding: 12px; text-align: center; color: hsl(var(--anvira-paper) / .62); background: hsl(var(--anvira-night)); font-size: 10px; }
+
+.anvira-local { position: relative; min-height: 100dvh; display: flex; align-items: center; text-align: center; }
+.anvira-local__inner { position: relative; }
+.anvira-local h2 { font-size: clamp(54px, 8vw, 118px); line-height: .95; font-weight: 300; }
+.anvira-local h2 span { display: block; }
+.anvira-local p { max-width: 590px; margin: 35px auto 0 !important; color: hsl(var(--anvira-ink-soft)); line-height: 1.8; }
+.anvira-local__device { width: 64px; margin: 48px auto 0; }
+.anvira-local__device svg { display: block; overflow: visible; }
+.anvira-local__eye-outline { fill: none; stroke: hsl(var(--anvira-moss) / .5); stroke-width: 1.4; }
+.anvira-local__eye-pupil { fill: hsl(var(--anvira-moss) / .8); }
+.anvira-local__eye-slash { stroke: hsl(var(--anvira-ink-soft) / .5); stroke-width: 1.6; stroke-linecap: round; }
+
+.anvira-system-visual { position: relative; max-width: 760px; margin-inline: auto; text-align: center; }
+.anvira-system-visual__center { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 150px; height: 150px; margin: 0 auto 46px; border-radius: 50%; background: hsl(var(--anvira-ink)); color: hsl(var(--anvira-paper)); box-shadow: 0 25px 70px hsl(var(--anvira-ink) / .15); }
+.anvira-system-visual__center > span { display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 8px; font-family: Sora; }
+.anvira-system-visual__center strong { font-size: 15px; }
+.anvira-system-visual__center small { margin-top: 3px; color: hsl(var(--anvira-paper) / .55); font-size: 10px; }
+.anvira-system-visual__words { font-family: Sora; font-weight: 300; font-size: clamp(19px, 3.2vw, 32px); line-height: 1.6; color: hsl(var(--anvira-ink)); }
+.anvira-system-visual__words span { transition: color .2s ease; }
+.anvira-system-visual__words span:hover { color: hsl(var(--anvira-moss)); }
+.anvira-system-visual__words i { margin: 0 16px; font-style: normal; color: hsl(var(--anvira-line)); }
+.anvira-system-visual__caption { margin-top: 46px; display: inline-flex; align-items: center; gap: 11px; }
+.anvira-system-visual__caption svg { width: 18px; color: hsl(var(--anvira-moss)); }
+.anvira-system-visual__caption span { display: grid; gap: 3px; text-align: left; }
+.anvira-system-visual__caption strong { font-size: 11px; }
+.anvira-system-visual__caption small { color: hsl(var(--anvira-ink-soft)); font-size: 9px; }
+
+.anvira-final { position: relative; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; border-top: 1px solid hsl(var(--anvira-line)); }
+.anvira-final__content { position: relative; z-index: 2; }
+.anvira-final h2 { max-width: 1000px; font-size: clamp(58px, 9vw, 132px); line-height: .93; font-weight: 300; }
+.anvira-final h2 span { display: block; }
+.anvira-final__meet { margin-top: 42px !important; font-family: Sora; font-size: 20px; }
+.anvira-final .anvira-actions { margin-top: 26px; }
+.anvira-final__branch { right: -10%; bottom: -21%; width: min(600px, 48vw); opacity: .35; transform: rotate(-33deg); mix-blend-mode: multiply; pointer-events: none; object-fit: contain; }
+.anvira-footer { min-height: 92px; display: flex; align-items: center; border-top: 1px solid hsl(var(--anvira-line)); color: hsl(var(--anvira-ink-soft)); font-size: 10px; }
+.anvira-footer__inner { display: flex; justify-content: space-between; align-items: center; }
+.anvira-footer a { text-decoration: none; }
+
+@media (max-width: 1024px) {
+  .anvira-shell { width: min(100% - 36px, 940px); }
+  .anvira-hero { min-height: auto; }
+  .anvira-hero__sticky { position: relative; min-height: auto; padding-top: 135px; }
+  .anvira-hero__grid { grid-template-columns: 1fr; gap: 65px; }
+  .anvira-hero__copy { max-width: 650px; }
+  .anvira-hero__visual { width: min(850px, 100%); margin-inline: auto; }
+  .anvira-scroll-cue { display: none; }
+  .anvira-context-layout { gap: 45px; }
+  .anvira-immersive { grid-template-columns: 1fr; }
+  .anvira-immersive .anvira-workspace { transform: none; }
+  .anvira-chapter-label { max-width: 650px; }
+}
+
+@media (max-width: 760px) {
+  .anvira-shell { width: calc(100% - 32px); }
+  .anvira-nav__inner { grid-template-columns: 1fr auto; }
+  .anvira-nav__links, .anvira-nav__download { display: none; }
+  .anvira-nav__menu { display: grid; place-items: center; }
+  .anvira-nav__mobile { position: fixed; inset: 72px 0 auto; display: grid; gap: 0; padding: 18px 16px 22px; border-bottom: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper) / .97); backdrop-filter: blur(20px); }
+  .anvira-nav__mobile a { padding: 13px 4px; border-bottom: 1px solid hsl(var(--anvira-line) / .6); text-decoration: none; font-size: 13px; }
+  .anvira-nav__mobile a:last-child { margin-top: 12px; border: 0; color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-ink)); text-align: center; }
+  .anvira-hero__sticky { padding-top: 120px; padding-bottom: 90px; }
+  .anvira-hero h1 { font-size: clamp(47px, 15vw, 72px); }
+  .anvira-hero__copy { font-size: 15px; line-height: 1.7; }
+  .anvira-actions { flex-direction: column; align-items: stretch; }
+  .anvira-app { aspect-ratio: auto; min-height: 460px; grid-template-columns: 52px 1fr; }
+  .anvira-app__sidebar { align-items: center; padding: 14px 6px; }
+  .anvira-app__brand { flex-direction: column; gap: 3px; padding-bottom: 10px; }
+  .anvira-app__brand div, .anvira-app__nav span i, .anvira-app__footer small { display: none; }
+  .anvira-app__nav span { justify-content: center; padding: 8px 0; }
+  .anvira-app__bubble--user { max-width: 90%; }
+  .anvira-app__selects span:not(:first-child) { display: none; }
+  .anvira-hero__branch { width: 55%; right: -22%; }
+  .anvira-section { padding: 105px 0; }
+  .anvira-section h2 { font-size: clamp(40px, 12vw, 58px); }
+  .anvira-section__intro > p { font-size: 15px; }
+  .anvira-section__stage { margin-top: 55px; }
+  .anvira-orbit { aspect-ratio: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .anvira-orbit svg { display: none; }
+  .anvira-orbit__center { position: relative; left: auto; top: auto; transform: none; grid-column: 1 / -1; width: 100%; height: 180px; border-radius: 0; }
+  .anvira-orbit__node { position: relative; inset: auto !important; min-width: 0; transform: none !important; }
+  .anvira-context-layout { grid-template-columns: 1fr; }
+  .anvira-context-layout .anvira-section__intro { position: relative; top: auto; }
+  .anvira-context-flow { padding-left: 22px; }
+  .anvira-context-flow__line { left: 4px; }
+  .anvira-context-flow__step { min-height: 80px; padding: 14px; }
+  .anvira-machine { border-radius: 8%; padding: 48px 22px; }
+  .anvira-machine__core { width: 140px; height: 140px; }
+  .anvira-machine__items { font-size: 16px; }
+  .anvira-machine__items i { margin: 0 8px; }
+  .anvira-agent-visual { grid-template-columns: 1fr; }
+  .anvira-agent-visual__list { border-right: 0; border-bottom: 1px solid hsl(var(--anvira-line)); }
+  .anvira-agent-visual__list > div:not(.is-active), .anvira-agent-visual__list button { display: none; }
+  .anvira-agent-visual__detail { padding: 35px 22px; }
+  .anvira-notes-visual { grid-template-columns: 1fr; min-height: 680px; }
+  .anvira-notes-visual > aside { display: none; }
+  .anvira-notes-visual article { padding: 45px 24px 140px; }
+  .anvira-notes-visual__ai { width: calc(100% - 34px); right: 17px; }
+  .anvira-study-loop { aspect-ratio: auto; display: grid; grid-template-columns: 1fr; gap: 8px; border: 0; }
+  .anvira-study-loop::before, .anvira-study-loop::after { display: none; }
+  .anvira-study-loop__center { position: relative; left: auto; top: auto; transform: none; min-height: 160px; margin-bottom: 15px; border: 1px solid hsl(var(--anvira-line)); }
+  .anvira-study-loop__step { position: relative; inset: auto !important; }
+  .anvira-model-foundation__models { grid-template-columns: repeat(2, 1fr); }
+  .anvira-system-visual__words { font-size: 18px; }
+  .anvira-system-visual__words i { margin: 0 10px; }
+  .anvira-local h2 { font-size: clamp(49px, 15vw, 78px); }
+  .anvira-final { min-height: 85dvh; }
+  .anvira-final h2 { font-size: clamp(52px, 15vw, 82px); }
+  .anvira-final__branch { width: 75vw; right: -35%; bottom: -10%; opacity: .23; }
+  .anvira-morph { height: 190vh; }
+  .anvira-leaf-wipe { height: 130vh; }
+  .anvira-leaf-wipe__leaf { width: 44vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anvira-site *, .anvira-site *::before, .anvira-site *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+  .anvira-hero__visual-inner { transform: none !important; }
+}

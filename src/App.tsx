@@ -19,9 +19,6 @@ import Contact from "./pages/Contact";
 import ReleaseLogs from "./pages/ReleaseLogs";
 import NotFound from "./pages/NotFound";
 import Anvira from "./pages/Anvira";
-import AnviraO1 from "./pages/AnviraO1";
-import AnviraO1E from "./pages/AnviraO1E";
-import AnviraH1 from "./pages/AnviraH1";
 import DevQuill from "./pages/DevQuill";
 import InkFlow from "./pages/InkFlow";
 import Nomi from "./pages/Nomi";
@@ -69,7 +66,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <HelmetProvider>
-    <ThemeProvider defaultTheme="dark">
+    <ThemeProvider defaultTheme="light">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
@@ -80,9 +77,6 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/anvira" element={<Anvira />} />
-                <Route path="/anvira/o1" element={<AnviraO1 />} />
-                <Route path="/anvira/o1e" element={<AnviraO1E />} />
-                <Route path="/anvira/h1" element={<AnviraH1 />} />
                 <Route path="/vision" element={<Vision />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/opensource" element={<Navigate to="/archive" replace />} />

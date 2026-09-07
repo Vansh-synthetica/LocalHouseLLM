@@ -1,763 +1,682 @@
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode, type RefObject } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import {
-  Download,
-  ArrowRight,
-  Terminal,
-  FileStack,
-  RefreshCcw,
-  ShieldCheck,
-  Cpu,
-  Gauge,
-  Boxes,
-  GitCompare,
-  CheckCircle2,
-  Braces,
-} from 'lucide-react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
+import { ArrowRight, Download, Menu, X } from 'lucide-react';
 
-import CleanLayout from '@/components/CleanLayout';
-import Breadcrumbs from '@/components/Breadcrumbs';
 import SEO from '@/components/SEO';
-import { Button } from '@/components/ui/button';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+  WorkspaceVisual,
+  WorkspaceOrbit,
+  ContextFlow,
+  MachineVisual,
+  AgentVisual,
+  NotesVisual,
+  StudyLoop,
+  ModelFoundation,
+  SystemVisual,
+  SprigLeaf,
+} from '@/components/anvira/AnviraVisuals';
+import anviraBranch from '@/assets/anvira-botanical-branch.png';
+import anviraFoliage from '@/assets/anvira-foliage-silhouette.png';
+import anviraMascot from '@/assets/anvira-mascot.png';
+import { useSmoothScroll } from '@/hooks/useSmoothScroll';
+import './anvira.css';
 
 const DOWNLOAD_URL =
   'https://drive.google.com/file/d/1Gp4gIoyrV584rAubII_Fk-zNb1hCZHM2/view?usp=sharing';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+const NAV_LINKS = [
+  { href: '#workspace', label: 'Product' },
+  { href: '#agents', label: 'Agents' },
+  { href: '#notes', label: 'Notes' },
+  { href: '#study', label: 'Study' },
+  { href: '#models', label: 'Models' },
+];
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const revealUp = {
+  hidden: { opacity: 0, y: 26 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
-
-const inView = {
-  variants: fadeUp,
-  initial: 'hidden' as const,
-  whileInView: 'visible' as const,
-  viewport: { once: true, margin: '-80px' },
+const revealStage = {
+  hidden: { opacity: 0, scale: 0.97 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const staggerInView = {
-  variants: stagger,
-  initial: 'hidden' as const,
-  whileInView: 'visible' as const,
-  viewport: { once: true, margin: '-60px' },
+const Reveal = ({
+  children,
+  className,
+  variants = revealUp,
+}: {
+  children: ReactNode;
+  className?: string;
+  variants?: typeof revealUp | typeof revealStage;
+}) => (
+  <motion.div
+    className={className}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: '-100px' }}
+    variants={variants}
+  >
+    {children}
+  </motion.div>
+);
+
+const SectionIntro = ({ number, title, children }: { number: string; title: ReactNode; children?: ReactNode }) => (
+  <Reveal className="anvira-section__intro">
+    <span className="anvira-section__number">{number}</span>
+    <h2>{title}</h2>
+    {children}
+  </Reveal>
+);
+
+const Botanical = ({
+  src,
+  className,
+  containerRef,
+  range = 46,
+}: {
+  src: string;
+  className: string;
+  containerRef: RefObject<HTMLElement>;
+  range?: number;
+}) => {
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] });
+  const distance = prefersReducedMotion() ? 0 : range;
+  const y = useTransform(scrollYProgress, [0, 1], [distance, -distance]);
+  // The placement classes (anvira-botanical--left/right/...) carry their own static
+  // `transform: rotate(...)`. Scroll-parallax is applied to an inner element instead
+  // of directly on the classed one, so that rotation isn't overwritten.
+  return (
+    <div className={className} style={{ position: 'absolute' }}>
+      <motion.img src={src} alt="" aria-hidden="true" style={{ y, display: 'block', width: '100%' }} />
+    </div>
+  );
 };
 
-const changes = [
-  { title: 'Real filesystem and terminal execution', body: 'Files are read, written, and edited; commands run on your machine and their output comes back into the loop.' },
-  { title: 'Multi-step coding workflows', body: 'Tasks are decomposed into ordered steps that span multiple files and commands.' },
-  { title: 'Self-correcting agent loops', body: 'Failures are read, diagnosed, and turned into corrective steps instead of ending the run.' },
-  { title: 'Verification and failure-recovery gates', body: 'Work is pushed toward execution and verification before it is reported as complete.' },
-  { title: 'Tool-call recovery', body: 'Tool calls are recovered across several structured output formats produced by different local models.' },
-  { title: 'Schema-constrained strict tool mode', body: 'Action envelopes constrain generation so smaller models emit valid, parseable calls.' },
-  { title: 'Conversation and workspace continuity', body: 'Sessions keep their workspace and history so long tasks survive across steps.' },
-  { title: 'Hardware-aware local inference', body: 'Detected CPU, RAM, GPU, and VRAM inform how models are loaded and run.' },
-  { title: 'CUDA/GPU optimization', body: 'NVIDIA acceleration with GPU layer and context tuning for the available VRAM.' },
-  { title: 'Production-tested packaged application', body: 'The packaged desktop build is smoke-tested, not just the underlying engine.' },
-];
+const PrivacyEye = () => (
+  <div className="anvira-local__device" aria-hidden="true">
+    <svg viewBox="0 0 64 40" width="64" height="40">
+      <motion.path
+        d="M4 20 Q32 3 60 20 Q32 37 4 20 Z"
+        className="anvira-local__eye-outline"
+        initial={{ opacity: 0, scale: 0.85 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      />
+      <motion.circle
+        cx="32"
+        cy="20"
+        r="6"
+        className="anvira-local__eye-pupil"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      />
+      <motion.line
+        x1="8"
+        y1="9"
+        x2="56"
+        y2="31"
+        className="anvira-local__eye-slash"
+        initial={{ pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ pathLength: { duration: 1.6, delay: 0.7, ease: 'easeInOut' }, opacity: { duration: 0.2, delay: 0.7 } }}
+      />
+    </svg>
+  </div>
+);
 
-const trace = [
-  'Inspect workspace',
-  'Create / edit files',
-  'Run command',
-  'Read output',
-  'Detect failure',
-  'Apply correction',
-  'Run again',
-  'Verify',
-];
+const AnviraNav = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
-const correction = [
-  { icon: ShieldCheck, title: 'Verification gates', body: 'Written code is pushed toward actual execution and verification.' },
-  { icon: RefreshCcw, title: 'Failure-aware correction', body: 'Real error output becomes part of the next corrective step.' },
-  { icon: GitCompare, title: 'Retry escalation', body: 'Repeated failures receive increasingly explicit corrective instructions.' },
-  { icon: Braces, title: 'Truncated-call protection', body: 'Incomplete generated file operations are rejected rather than blindly executed.' },
-];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-const dialects = [
-  'Native tool calls',
-  'JSON objects',
-  'Qwen-style tags',
-  'Python-style dictionaries',
-  'XML function calls',
-  'Fenced structured blocks',
-  'Mixed prose + call output',
-];
+  return (
+    <header className={`anvira-nav${scrolled ? ' is-scrolled' : ''}`}>
+      <div className="anvira-shell anvira-nav__inner">
+        <a href="#top" className="anvira-nav__brand">
+          <span><img src={anviraMascot} alt="" aria-hidden="true" /></span> Anvira
+        </a>
+        <nav className="anvira-nav__links" aria-label="Anvira sections">
+          {NAV_LINKS.map((l) => (
+            <a key={l.href} href={l.href}>
+              {l.label}
+            </a>
+          ))}
+        </nav>
+        <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer" className="anvira-nav__download">
+          Download
+        </a>
+        <button
+          type="button"
+          className="anvira-nav__menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+        </button>
+      </div>
+      {open && (
+        <div className="anvira-nav__mobile">
+          {NAV_LINKS.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+              {l.label}
+            </a>
+          ))}
+          <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+            Download Anvira
+          </a>
+        </div>
+      )}
+    </header>
+  );
+};
 
-const hardware = [
-  'GGUF models',
-  'NVIDIA CUDA acceleration',
-  'VRAM-aware configuration',
-  'Context sizing',
-  'GPU layer optimization',
-  'Inference profiles',
-];
+const AnviraHero = () => {
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sPx = useSpring(px, { stiffness: 60, damping: 20, mass: 0.4 });
+  const sPy = useSpring(py, { stiffness: 60, damping: 20, mass: 0.4 });
 
-const benchmarks = [
-  { model: 'Qwen2.5-Coder 7B', quant: 'Q4_K_M', gen: '~21.5 tok/s' },
-  { model: 'Qwen2.5-Coder 3B', quant: 'Q4_K_M', gen: '~20 tok/s' },
-  { model: 'Qwen2.5-Coder 1.5B', quant: 'Q4_K_M', gen: '~68.3 tok/s' },
-];
+  const reduced = prefersReducedMotion();
+  const visualX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [-16, 16]);
+  const visualY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [-12, 12]);
+  const branchX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [12, -12]);
+  const branchY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [10, -10]);
+  const leafX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [-8, 8]);
+  const leafY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [-6, 6]);
 
-const scaling = [
-  { size: '7B', body: 'Best suited for complex coding and multi-file reasoning.' },
-  { size: '3B', body: 'A practical balance between capability and local resource usage.' },
-  { size: '1.5B', body: 'Very fast for simpler structured tasks, particularly with strict tool mode.' },
-];
+  // The CSS on these elements already carries a static transform (3D tilt / rotation).
+  // Compose it into the motion-driven transform instead of using the x/y shorthand,
+  // which would otherwise overwrite the element's inline transform entirely.
+  const visualTransform = useTransform([visualX, visualY], ([vx, vy]: number[]) =>
+    `translate(${vx}px, ${vy}px) rotateY(-4deg) rotateX(2deg)`,
+  );
+  const branchTransform = useTransform([branchX, branchY], ([bx, by]: number[]) =>
+    `translate(${bx}px, ${by}px) rotate(-20deg)`,
+  );
 
-const architecture = [
-  'User',
-  'Anvira Desktop',
-  'Agent Runtime',
-  'Tools & Workspace',
-  'Local Model',
-  'Verification / Correction',
-  'Result',
-];
+  const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    if (reduced || e.pointerType !== 'mouse') return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - rect.left) / rect.width - 0.5);
+    py.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+  const handlePointerLeave = () => {
+    px.set(0);
+    py.set(0);
+  };
 
-const stackLayers = [
-  { name: 'AICL', to: '/stack/aicl' },
-  { name: 'ORCHA', to: '/stack/orcha' },
-  { name: 'Nomi', to: '/nomi' },
-  { name: 'Safety', to: '/stack/safety' },
-  { name: 'Tools', to: '/stack/tools' },
-  { name: 'Intelligence Modules', to: '/stack/modules' },
-];
+  return (
+    <section className="anvira-hero" id="top">
+      <div className="anvira-hero__sticky" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
+        <div className="anvira-hero__wash" aria-hidden="true" />
+        <div className="anvira-shell anvira-hero__grid">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="anvira-kicker"
+            >
+              Anvira · Local-first AI workspace
+            </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span>One workspace.</span>
+              <span>One context.</span>
+              <span>Your intelligence.</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="anvira-hero__copy"
+            >
+              Anvira brings conversation, knowledge, agents, notes and learning together in one
+              local-first AI workspace.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
+              className="anvira-actions"
+            >
+              <a href="#workspace" className="anvira-button anvira-button--primary">
+                Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+              <a href="#context" className="anvira-button anvira-button--secondary">
+                See how it works
+              </a>
+            </motion.div>
+          </div>
 
-const metrics = [
-  { value: '652', label: 'tests passing' },
-  { value: '7+', label: 'tool-call dialects recovered' },
-  { value: 'Verified', label: 'real coding workflows' },
-  { value: 'Smoke-tested', label: 'production package' },
-  { value: 'Verified', label: 'runtime process chain' },
-];
+          <div className="anvira-hero__visual">
+            <motion.div className="anvira-hero__visual-inner" style={{ transform: visualTransform }}>
+              <WorkspaceVisual />
+            </motion.div>
+            <motion.img
+              src={anviraBranch}
+              alt=""
+              aria-hidden="true"
+              className="anvira-hero__branch"
+              style={{ transform: branchTransform }}
+            />
+            <motion.img
+              src={anviraFoliage}
+              alt=""
+              aria-hidden="true"
+              className="anvira-hero__leaf"
+              style={{ x: leafX, y: leafY }}
+            />
+          </div>
+        </div>
 
-const limitations = [
-  'More capable models perform better on difficult multi-file reasoning.',
-  'Large one-shot prompts can still be less reliable than incremental workflows.',
-  'Local performance depends heavily on hardware and model selection.',
-  "Nomi's deeper memory capabilities remain an area of continued development.",
-];
+        <div className="anvira-scroll-cue">
+          <span>Scroll</span>
+          <i aria-hidden="true" />
+        </div>
+      </div>
+    </section>
+  );
+};
 
-const Anvira = () => (
-  <CleanLayout>
-    <SEO
-      title="Anvira v0.2 — Local-First Agentic Desktop Platform"
-      description="Anvira v0.2 is a local-first agentic desktop platform: real file and terminal execution, self-correcting agent loops, tool-call recovery, strict tool mode, and hardware-aware l[...]"
-      keywords="Anvira v0.2, local agent, agentic desktop, local-first AI, GGUF, CUDA inference, tool calling, self-correcting agent, LocalHouseLLM"
-      canonical="https://localhousellm.com/anvira"
-      schema={{
-        '@context': 'https://schema.org',
-        '@type': 'SoftwareApplication',
-        name: 'Anvira',
-        applicationCategory: 'DeveloperApplication',
-        operatingSystem: 'Windows',
-        softwareVersion: '0.2',
-        description:
-          'Anvira is a local-first agentic desktop platform that executes real work on your machine with tool use, verification, self-correction, and hardware-aware local inference.',
-        url: 'https://localhousellm.com/anvira',
-        downloadUrl: DOWNLOAD_URL,
-        publisher: { '@type': 'Organization', name: 'LocalHouseLLM' },
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-      }}
-    />
+const AnviraMorph = () => {
+  const morphRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: morphRef, offset: ['start start', 'end end'] });
+  const reduced = prefersReducedMotion();
+  const dy = reduced ? 0 : 24;
 
-    {/* Hero */}
-    <section className="relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
-          backgroundSize: '72px 72px',
-          maskImage: 'radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%)',
+  const opacity1 = useTransform(scrollYProgress, [0, 0.22, 0.34], [1, 1, 0]);
+  const opacity2 = useTransform(scrollYProgress, [0.28, 0.4, 0.62, 0.74], [0, 1, 1, 0]);
+  const opacity3 = useTransform(scrollYProgress, [0.68, 0.82, 1], [0, 1, 1]);
+  const y1 = useTransform(scrollYProgress, [0, 0.34], [0, -dy]);
+  const y2 = useTransform(scrollYProgress, [0.28, 0.74], [dy, -dy]);
+  const y3 = useTransform(scrollYProgress, [0.68, 1], [dy, 0]);
+  // Compose with the CSS centering transform (translate(-50%, -50%)) so it isn't overwritten.
+  const t1 = useTransform(y1, (v) => `translate(-50%, calc(-50% + ${v}px))`);
+  const t2 = useTransform(y2, (v) => `translate(-50%, calc(-50% + ${v}px))`);
+  const t3 = useTransform(y3, (v) => `translate(-50%, calc(-50% + ${v}px))`);
+
+  const interfaceOpacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 0.16, 0.62]);
+  const interfaceScale = useTransform(scrollYProgress, [0, 1], reduced ? [1, 1] : [0.9, 1.04]);
+  const interfaceY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [26, -18]);
+  // Compose with the CSS centering transform (translate(-50%, -50%)) so it isn't overwritten.
+  const interfaceTransform = useTransform([interfaceScale, interfaceY], ([s, y]: number[]) =>
+    `translate(-50%, calc(-50% + ${y}px)) scale(${s})`,
+  );
+
+  return (
+    <div className="anvira-morph" ref={morphRef} aria-hidden="true">
+      <div className="anvira-morph__sticky">
+        <div className="anvira-morph__wash" />
+        <motion.div
+          className="anvira-morph__interface"
+          style={{ opacity: interfaceOpacity, transform: interfaceTransform }}
+        >
+          <WorkspaceVisual />
+        </motion.div>
+        <motion.p className="anvira-morph__line" style={{ opacity: opacity1, transform: t1 }}>
+          One workspace.
+        </motion.p>
+        <motion.p className="anvira-morph__line" style={{ opacity: opacity2, transform: t2 }}>
+          One context.
+        </motion.p>
+        <motion.p className="anvira-morph__line" style={{ opacity: opacity3, transform: t3 }}>
+          Your intelligence.
+        </motion.p>
+      </div>
+    </div>
+  );
+};
+
+// A single leaf enters from the top-left corner and drifts across to the
+// right as you scroll from "One context" into "Your intelligence", fading
+// out as it clears the frame. The headline underneath changes right as the
+// leaf passes over the middle of the screen, so the two feel like one motion.
+const AnviraLeafWipe = () => {
+  const wipeRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: wipeRef, offset: ['start start', 'end end'] });
+  const reduced = prefersReducedMotion();
+
+  // vw/vh (not %, which resolves against the leaf's own small size) so the
+  // sweep distance is relative to the actual viewport.
+  const leafX = useTransform(scrollYProgress, [0, 1], reduced ? [-32, -32] : [-32, 118]);
+  const leafY = useTransform(scrollYProgress, [0, 1], reduced ? [-34, -34] : [-34, 16]);
+  const leafRotate = useTransform(scrollYProgress, [0, 1], reduced ? [-22, -22] : [-30, -8]);
+  const leafOpacity = useTransform(scrollYProgress, [0, 0.14, 0.76, 0.94], reduced ? [1, 1, 1, 1] : [0, 1, 1, 0]);
+  const leafTransform = useTransform([leafX, leafY, leafRotate], ([x, y, r]: number[]) =>
+    `translate(calc(-50% + ${x}vw), calc(-50% + ${y}vh)) rotate(${r}deg)`,
+  );
+
+  const nightOpacity = useTransform(scrollYProgress, [0.42, 0.6], [0, 1]);
+  const contextOpacity = useTransform(scrollYProgress, [0, 0.36, 0.5], [1, 1, 0]);
+  const intelligenceOpacity = useTransform(scrollYProgress, [0.5, 0.64, 1], [0, 1, 1]);
+
+  return (
+    <div className="anvira-leaf-wipe" ref={wipeRef}>
+      <div className="anvira-leaf-wipe__sticky">
+        <motion.div className="anvira-leaf-wipe__night" style={{ opacity: nightOpacity }} aria-hidden="true" />
+        <motion.p className="anvira-leaf-wipe__line" style={{ opacity: contextOpacity }}>
+          One context.
+        </motion.p>
+        <motion.p className="anvira-leaf-wipe__line anvira-leaf-wipe__line--light" style={{ opacity: intelligenceOpacity }}>
+          Your intelligence.
+        </motion.p>
+        <motion.div className="anvira-leaf-wipe__leaf" style={{ opacity: leafOpacity, transform: leafTransform }}>
+          <SprigLeaf />
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const Anvira = () => {
+  // Slower, heavier-feeling scroll than the site default so the scroll-linked
+  // transitions (the hero morph, the leaf wipe, the section reveals) have
+  // time to actually read as motion rather than flashing past.
+  useSmoothScroll(!prefersReducedMotion(), {
+    duration: 2,
+    wheelMultiplier: 0.7,
+    touchMultiplier: 1,
+    lerp: 0.06,
+  });
+
+  const workspaceRef = useRef<HTMLElement>(null);
+  const contextRef = useRef<HTMLElement>(null);
+  const agentsRef = useRef<HTMLElement>(null);
+  const notesRef = useRef<HTMLElement>(null);
+  const studyRef = useRef<HTMLElement>(null);
+  const localRef = useRef<HTMLElement>(null);
+  const systemRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // Scoped to this page only: keeps off-canvas botanical decoration from
+    // causing horizontal scroll without using an ancestor `overflow` value,
+    // which would otherwise break every `position: sticky` element below.
+    document.documentElement.style.scrollPaddingTop = '88px';
+    document.documentElement.style.overflowX = 'hidden';
+
+    // `overflow-x: hidden` hides the scrollbar but doesn't retroactively snap
+    // an existing horizontal scroll position back to 0 (e.g. after a trackpad
+    // swipe or scroll-anchoring nudges it sideways from a previous page),
+    // which visibly shifts the whole centered layout left/right. Correct it
+    // once on mount only — a continuous scroll listener that calls
+    // `scrollTo` from inside a scroll handler fights with scroll-linked
+    // animations (their scroll position reads become stale/frozen), so this
+    // is deliberately not re-checked on every scroll event.
+    if (window.scrollX !== 0) window.scrollTo({ left: 0, top: window.scrollY });
+
+    return () => {
+      document.documentElement.style.scrollPaddingTop = '';
+      document.documentElement.style.overflowX = '';
+    };
+  }, []);
+
+  return (
+    <div className="anvira-site">
+      <SEO
+        title="Anvira — One Workspace. One Context. Your Intelligence."
+        description="Anvira is a local-first AI workspace where chat, notes, study, agents, knowledge and models work together inside one persistent, connected environment."
+        keywords="Anvira, local-first AI workspace, unified AI environment, AI agents, AI notes, AI study, local models, GGUF, llama.cpp, LocalHouseLLM"
+        canonical="https://localhousellm.com/anvira"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'Anvira',
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Windows',
+          description:
+            'Anvira is a local-first AI workspace that unifies chat, notes, study, agents, knowledge and local models inside one persistent, connected environment.',
+          url: 'https://localhousellm.com/anvira',
+          downloadUrl: DOWNLOAD_URL,
+          publisher: { '@type': 'Organization', name: 'LocalHouseLLM' },
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         }}
       />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 h-[480px] w-[820px] rounded-full bg-primary/10 blur-[130px]"
-      />
 
-      <div className="max-container relative pt-10 pb-24 md:pb-28">
-        <Breadcrumbs items={[{ name: 'Anvira' }]} />
+      <div className="anvira-grain" aria-hidden="true" />
+      <AnviraNav />
+      <AnviraHero />
+      <AnviraMorph />
 
-        <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-4xl">
-          <motion.p
-            variants={fadeUp}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs uppercase tracking-[0.22em] text-muted-foreground"
-          >
-            Anvira v0.2 · release
-          </motion.p>
-
-          <motion.h1
-            variants={fadeUp}
-            className="text-4xl md:text-6xl font-light leading-[1.06] tracking-tight"
-          >
-            Local AI that actually
-            <br />
-            does the work.
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed"
-          >
-            Anvira is a local-first agentic desktop platform that can understand tasks, use tools,
-            work with real files, execute commands, recover from failures, verify its work, and
-            return results — directly on your machine.
-          </motion.p>
-
-          <motion.div variants={fadeUp} className="mt-10 flex flex-col sm:flex-row gap-3">
-            <Button
-              size="lg"
-              asChild
-              className="h-12 px-7 text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">
-                <Download className="mr-2 h-4 w-4" />
-                Download Anvira v0.2
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="group h-12 px-7 text-base">
-              <a href="#agent-engine">
-                Explore the agent engine
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-          </motion.div>
-
-          <motion.p
-            variants={fadeUp}
-            className="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground"
-          >
-            Local execution · Agentic workflows · Self-correction · Hardware-aware inference
-          </motion.p>
-
-          <motion.p
-            variants={fadeUp}
-            className="mt-10 border-l border-border pl-5 text-base text-muted-foreground"
-          >
-            v0.1 established the local-first workspace.{' '}
-            <span className="text-foreground">v0.2 makes the agent execute real work.</span>
-          </motion.p>
-        </motion.div>
-      </div>
-    </section>
-
-    {/* What v0.2 changes */}
-    <section id="agent-engine" className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.div {...inView} className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">What v0.2 changes</h2>
-          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-            This release is about execution reliability rather than additional interface surface.
-            The work went into the runtime: how the agent uses tools, how it reads real output,
-            how it recovers when something fails, and how it confirms that a task is actually done.
-          </p>
-        </motion.div>
-
-        <motion.div
-          {...staggerInView}
-          className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {changes.map((c, i) => (
-            <motion.div key={c.title} variants={fadeUp} className="bg-background p-7">
-              <span className="font-mono text-xs text-muted-foreground">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="mt-4 text-base font-medium">{c.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.body}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-
-    {/* From conversation to execution */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.div {...inView} className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">
-            From conversation to execution
-          </h2>
-          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-            A chatbot returns text. An agentic system takes the request into a workspace, acts on
-            it, and keeps going until the result holds up.
-          </p>
-        </motion.div>
-
-        <motion.div
-          {...inView}
-          className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground"
-        >
-          {['Request', 'Understand', 'Execute', 'Inspect', 'Correct', 'Verify', 'Complete'].map(
-            (s, i) => (
-              <span key={s} className="flex items-center gap-3">
-                {i > 0 && <span className="text-border">→</span>}
-                <span className={i === 6 ? 'text-foreground' : undefined}>{s}</span>
-              </span>
-            ),
-          )}
-        </motion.div>
-
-        <motion.div {...staggerInView} className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <motion.div
-            variants={fadeUp}
-            className="rounded-2xl border border-border bg-background overflow-hidden"
-          >
-            <div className="flex items-center gap-2 border-b border-border px-5 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-              <span className="ml-3 font-mono text-xs text-muted-foreground">anvira · request</span>
-            </div>
-            <div className="p-6 font-mono text-sm leading-relaxed text-foreground">
-              <span className="text-muted-foreground">&gt; </span>
-              Create a Python script that processes this dataset, run it, fix any errors, and
-              verify the results.
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="rounded-2xl border border-border bg-background overflow-hidden"
-          >
-            <div className="flex items-center gap-2 border-b border-border px-5 py-3">
-              <Terminal className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
-              <span className="font-mono text-xs text-muted-foreground">execution trace</span>
-            </div>
-            <ol className="p-6 space-y-0">
-              {trace.map((step, i) => (
-                <li key={step} className="relative pl-8 pb-4 last:pb-0">
-                  {i < trace.length - 1 && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-[7px] top-4 bottom-0 w-px bg-border"
-                    />
-                  )}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute left-0 top-[5px] h-[15px] w-[15px] rounded-full border ${
-                      i === trace.length - 1
-                        ? 'border-primary bg-primary/20'
-                        : 'border-border bg-background'
-                    }`}
-                  />
-                  <span className="font-mono text-sm">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-
-    {/* Self-correcting execution */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.div {...inView} className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">
-            Anvira doesn't stop at the first error.
-          </h2>
-          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-            The runtime can detect when work has not been properly verified, feed actual command
-            failures back into the workflow, and drive corrective iterations until the step either
-            passes verification or is reported honestly.
-          </p>
-        </motion.div>
-
-        <motion.div {...staggerInView} className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {correction.map((c) => (
-            <motion.div key={c.title} variants={fadeUp}>
-              <c.icon className="h-5 w-5 text-primary" aria-hidden="true" />
-              <h3 className="mt-4 text-base font-medium">{c.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.body}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-
-    {/* Tool-call resilience */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-20">
-        <motion.div {...inView}>
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">Tool-call resilience</h2>
-          <p className="mt-5 text-muted-foreground leading-relaxed">
-            Local models do not all emit tool calls in the same format. v0.2 includes a recovery
-            layer that parses and repairs calls across 7+ observed dialects.
-          </p>
-          <p className="mt-5 text-foreground">
-            Different local models should not require rebuilding the execution layer around them.
-          </p>
-        </motion.div>
-
-        <motion.ul {...staggerInView} className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-          {dialects.map((d) => (
-            <motion.li
-              key={d}
-              variants={fadeUp}
-              className="bg-background px-6 py-5 font-mono text-sm text-muted-foreground"
-            >
-              {d}
-            </motion.li>
-          ))}
-        </motion.ul>
-      </div>
-    </section>
-
-    {/* Strict tool mode */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container grid gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-20 items-start">
-        <motion.div {...inView}>
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">Strict tool mode</h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Structured execution for smaller local models.
-          </p>
-          <p className="mt-5 text-muted-foreground leading-relaxed">
-            Anvira supports schema-constrained action envelopes for agent execution. Generation is
-            held to a defined shape, which reduces malformed tool calls and improves protocol
-            adherence on smaller models. On environments without structured decoding support,
-            Anvira falls back to legacy native tool behaviour.
-          </p>
-        </motion.div>
-
-        <motion.div {...staggerInView} className="grid gap-4">
-          {['tool', 'final'].map((action) => (
-            <motion.pre
-              key={action}
-              variants={fadeUp}
-              className="rounded-xl border border-border bg-background p-6 font-mono text-sm text-foreground overflow-x-auto"
-            >
-{`{
-  "action": "${action}"
-}`}            </motion.pre>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-
-    {/* Local inference */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.div {...inView} className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">
-            Your hardware matters. Anvira adapts to it.
-          </h2>
-          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-            Anvira detects and works with local hardware — CPU, RAM, NVIDIA GPU, VRAM, and CUDA
-            capability — and uses that information to tune how models are loaded and run.
-          </p>
-        </motion.div>
-
-        <motion.div {...staggerInView} className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {hardware.map((h) => (
-            <motion.div key={h} variants={fadeUp} className="bg-background px-6 py-6">
-              <Cpu className="h-4 w-4 text-primary" aria-hidden="true" />
-              <p className="mt-3 text-sm font-medium">{h}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div {...inView} className="mt-10 max-w-3xl">
-          <Accordion type="single" collapsible className="rounded-2xl border border-border px-6">
-            <AccordionItem value="engineering" className="border-none">
-              <AccordionTrigger className="text-sm">
-                Engineering details — inference configuration
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-3">
-                <p>
-                  Anvira runs GGUF models through a CUDA-enabled local runtime. On startup it
-                  profiles available VRAM and system RAM, then selects an inference profile that
-                  sets how many transformer layers are offloaded to the GPU and how large a context
-                  window can be held without spilling.
-                </p>
-                <p>
-                  Context size, GPU layer count, and batch behaviour are derived from that profile
-                  rather than fixed defaults, so the same model file behaves differently on a 4GB
-                  laptop GPU than on a larger card. Profiles can be overridden inside the
-                  application for users who want manual control.
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </motion.div>
-      </div>
-    </section>
-
-    {/* Benchmarks */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.div {...inView} className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">
-            Verified local performance
-          </h2>
-          <p className="mt-5 text-muted-foreground leading-relaxed">
-            Measured on the development machine:{' '}
-            <span className="text-foreground">NVIDIA RTX 3050 Laptop GPU · 4GB VRAM</span>.
-          </p>
-        </motion.div>
-
-        <motion.div {...staggerInView} className="mt-12 grid gap-5 sm:grid-cols-3">
-          {benchmarks.map((b) => (
-            <motion.div
-              key={b.model}
-              variants={fadeUp}
-              className="glass rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30"
-            >
-              <p className="font-mono text-xs text-muted-foreground">{b.quant}</p>
-              <h3 className="mt-3 text-base font-medium">{b.model}</h3>
-              <p className="mt-5 text-3xl font-light tracking-tight">{b.gen}</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                generation
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div {...inView} className="mt-8 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-          <Gauge className="h-4 w-4 text-primary" aria-hidden="true" />
-          <span>
-            Prompt processing measured at <span className="text-foreground">~49 tok/s</span> on the
-            7B configuration.
-          </span>
-        </motion.div>
-
-        <motion.p {...inView} className="mt-4 text-xs text-muted-foreground">
-          These are development-machine measurements, not universal performance guarantees.
-          Performance varies with model, quantization, hardware, context size, and workload.
-        </motion.p>
-      </div>
-    </section>
-
-    {/* Model scaling */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.div {...inView} className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">Model scaling</h2>
-          <p className="mt-5 text-muted-foreground leading-relaxed">
-            Anvira is designed to make local models useful across different hardware classes.
-          </p>
-        </motion.div>
-
-        <motion.div {...staggerInView} className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
-          {scaling.map((s) => (
-            <motion.div key={s.size} variants={fadeUp} className="bg-background p-7">
-              <p className="text-3xl font-light tracking-tight">{s.size}</p>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.body}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.p {...inView} className="mt-8 max-w-2xl text-sm text-muted-foreground">
-          Smaller models still have a lower reasoning ceiling. Complex workflows benefit from
-          stronger models.
-        </motion.p>
-      </div>
-    </section>
-
-    {/* Architecture */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.h2 {...inView} className="max-w-2xl text-2xl md:text-3xl font-light tracking-tight">
-          Architecture
-        </motion.h2>
-
-        <motion.ol {...staggerInView} className="mt-12 mx-auto max-w-md">
-          {architecture.map((node, i) => (
-            <motion.li key={node} variants={fadeUp} className="text-center">
-              <div
-                className={`rounded-xl border px-6 py-4 font-mono text-sm ${
-                  i === architecture.length - 1
-                    ? 'border-primary/40 bg-primary/5 text-foreground'
-                    : 'border-border bg-background text-muted-foreground'
-                }`}
-              >
-                {node}
-              </div>
-              {i < architecture.length - 1 && (
-                <span aria-hidden="true" className="block py-1.5 text-border">
-                  ↓
-                </span>
-              )}
-            </motion.li>
-          ))}
-        </motion.ol>
-
-        <motion.div {...inView} className="mt-16 rounded-2xl border border-border p-8 text-center">
-          <p className="text-sm text-muted-foreground">
-            Anvira is a product built on the LocalHouseLLM modular stack — not an Electron chat
-            interface.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-2">
-            {stackLayers.map((l) => (
-              <Link
-                key={l.name}
-                to={l.to}
-                className="rounded-full border border-border px-4 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-              >
-                {l.name}
-              </Link>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-
-    {/* v0.1 → v0.2 */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.h2 {...inView} className="max-w-2xl text-2xl md:text-3xl font-light tracking-tight">
-          v0.1 → v0.2
-        </motion.h2>
-
-        <motion.div {...staggerInView} className="mt-12 grid gap-5 md:grid-cols-2">
-          <motion.div variants={fadeUp} className="rounded-2xl border border-border p-8">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              v0.1
+      {/* One workspace */}
+      <section className="anvira-section anvira-section--line" id="workspace" ref={workspaceRef}>
+        <Botanical src={anviraBranch} className="anvira-botanical anvira-botanical--left" containerRef={workspaceRef} />
+        <div className="anvira-shell">
+          <SectionIntro number="01 — One workspace" title={<>Everything you do.<br />One workspace.</>}>
+            <p>
+              Chat, Notes, Study, Agents, Files, Knowledge and Models don't live in separate apps
+              inside Anvira. They share one workspace, one history and one context — so switching
+              between them never means starting over.
             </p>
-            <h3 className="mt-3 text-xl font-light">The local-first foundation</h3>
-            <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
-              {['Local workspace', 'Agents', 'Context', 'Local execution', 'Modular architecture'].map(
-                (x) => (
-                  <li key={x} className="flex items-center gap-3">
-                    <Boxes className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                    {x}
-                  </li>
-                ),
-              )}
-            </ul>
-          </motion.div>
+          </SectionIntro>
+          <Reveal className="anvira-section__stage" variants={revealStage}>
+            <WorkspaceOrbit />
+          </Reveal>
+        </div>
+      </section>
 
-          <motion.div
-            variants={fadeUp}
-            className="glass rounded-2xl border border-primary/25 p-8"
-          >
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              v0.2
+      {/* One context */}
+      <section className="anvira-section anvira-section--line" id="context" ref={contextRef}>
+        <Botanical src={anviraBranch} className="anvira-botanical anvira-botanical--bridge-right" containerRef={contextRef} />
+        <div className="anvira-shell anvira-context-layout">
+          <SectionIntro number="02 — One context" title={<>Your context shouldn't<br />disappear between apps.</>}>
+            <p>
+              A document enters Anvira once. From there it becomes part of the workspace — Chat
+              understands it, Notes organizes it, an agent can act on it, and Study turns it into
+              material you can learn from. Nothing is re-uploaded. Nothing is re-explained.
             </p>
-            <h3 className="mt-3 text-xl font-light">The execution layer</h3>
-            <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
-              {[
-                'Real tool execution',
-                'Self-correction',
-                'Verification',
-                'Tool-call recovery',
-                'Strict tool mode',
-                'Hardware-aware inference',
-                'Production verification',
-              ].map((x) => (
-                <li key={x} className="flex items-center gap-3">
-                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
-                  {x}
-                </li>
-              ))}
+          </SectionIntro>
+          <ContextFlow />
+        </div>
+      </section>
+
+      <AnviraLeafWipe />
+
+      {/* Your intelligence */}
+      <section className="anvira-section anvira-section--deep" id="intelligence">
+        <div className="anvira-shell">
+          <SectionIntro number="03 — Your intelligence" title={<>Intelligence that works<br />where you do.</>}>
+            <p>
+              Anvira is local-first. Your workspace, your knowledge and your local models live on
+              your machine by default. Cloud providers are optional connections you choose — never
+              a requirement.
+            </p>
+          </SectionIntro>
+          <Reveal className="anvira-section__stage" variants={revealStage}>
+            <MachineVisual />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Chat */}
+      <section className="anvira-section anvira-section--line" id="chat">
+        <div className="anvira-shell anvira-immersive">
+          <Reveal className="anvira-chapter-label">
+            <span className="anvira-section__number">04 — Chat</span>
+            <h2>
+              Ask, attach and act —<br />without leaving the thread.
+            </h2>
+            <p>
+              Conversations in Anvira carry the workspace with them. Attach a file and it becomes
+              context immediately. Point an agent at a task and watch it work inside the same
+              thread, with results flowing straight back into your workspace.
+            </p>
+            <ul className="anvira-detail-list">
+              <li>Multi-workspace conversations</li>
+              <li>Attachments become live context</li>
+              <li>Project-aware responses</li>
+              <li>Agentic actions, in-thread</li>
+              <li>Permissions on every action</li>
+              <li>Saved approvals for repeat work</li>
             </ul>
-          </motion.div>
-        </motion.div>
+          </Reveal>
+          <Reveal variants={revealStage}>
+            <WorkspaceVisual />
+          </Reveal>
+        </div>
+      </section>
 
-        <motion.p {...inView} className="mt-8 max-w-2xl text-sm text-muted-foreground">
-          v0.2 is an extension of the foundation v0.1 established — the workspace stayed, the
-          execution layer grew around it.
-        </motion.p>
-      </div>
-    </section>
+      {/* Agents */}
+      <section className="anvira-section anvira-section--line" id="agents" ref={agentsRef}>
+        <Botanical src={anviraFoliage} className="anvira-botanical anvira-botanical--right" containerRef={agentsRef} />
+        <div className="anvira-shell">
+          <SectionIntro number="05 — Agents" title={<>Don't just ask AI.<br />Give it a role.</>}>
+            <p>
+              Anvira Guide, Research Scout, Builder Panel and Product Architect ship with defined
+              goals, capabilities and tools. Give an agent a role and it reasons inside your
+              workspace with the permissions you set — or design a custom agent of your own.
+            </p>
+          </SectionIntro>
+          <Reveal className="anvira-section__stage" variants={revealStage}>
+            <AgentVisual />
+          </Reveal>
+        </div>
+      </section>
 
-    {/* Verification */}
-    <section className="border-t border-border py-20 md:py-24">
-      <div className="max-container">
-        <motion.div {...inView} className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight">
-            Built, tested, packaged, verified.
-          </h2>
-          <p className="mt-5 text-muted-foreground leading-relaxed">
-            Verification covered both the underlying engine and the packaged desktop application,
-            including the runtime process chain the shipped build depends on.
-          </p>
-        </motion.div>
+      {/* Notes */}
+      <section className="anvira-section anvira-section--line" id="notes" ref={notesRef}>
+        <Botanical src={anviraFoliage} className="anvira-botanical anvira-botanical--right" containerRef={notesRef} />
+        <div className="anvira-shell">
+          <SectionIntro number="06 — Notes" title={<>Your knowledge, finally<br />connected to your intelligence.</>}>
+            <p>
+              Notebooks, pages and sources sit next to the same intelligence that powers Chat and
+              Agents. Rich notes, citations, meeting notes and whiteboards stay connected to the
+              material they came from — and Anvira can summarize, cite and assist without leaving
+              the page.
+            </p>
+          </SectionIntro>
+          <Reveal className="anvira-section__stage" variants={revealStage}>
+            <NotesVisual />
+          </Reveal>
+        </div>
+      </section>
 
-        <motion.div {...staggerInView} className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-5">
-          {metrics.map((m) => (
-            <motion.div key={m.label} variants={fadeUp} className="bg-background p-7">
-              <p className="text-2xl font-light tracking-tight">{m.value}</p>
-              <p className="mt-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                {m.label}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+      {/* Study */}
+      <section className="anvira-section anvira-section--line" id="study" ref={studyRef}>
+        <Botanical src={anviraFoliage} className="anvira-botanical anvira-botanical--left" containerRef={studyRef} />
+        <div className="anvira-shell">
+          <SectionIntro number="07 — Study" title={<>Learn from the same<br />intelligence you work with.</>}>
+            <p>
+              A notebook becomes a study guide. A study guide becomes flashcards, a quiz and a
+              weak-spot review. The loop adapts as you learn, because it understands the material —
+              not just what it should generate next.
+            </p>
+          </SectionIntro>
+          <Reveal className="anvira-section__stage" variants={revealStage}>
+            <StudyLoop />
+          </Reveal>
+        </div>
+      </section>
 
-    {/* Limitations */}
-    <section className="border-t border-border py-16">
-      <div className="max-container max-w-3xl">
-        <motion.h2 {...inView} className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
-          Honest limitations
-        </motion.h2>
-        <motion.ul {...staggerInView} className="mt-6 space-y-3 text-sm text-muted-foreground">
-          {limitations.map((l) => (
-            <motion.li key={l} variants={fadeUp} className="flex gap-3">
-              <FileStack className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              {l}
-            </motion.li>
-          ))}
-        </motion.ul>
-      </div>
-    </section>
+      {/* Model layer */}
+      <section className="anvira-section anvira-section--line anvira-section--deep" id="models">
+        <div className="anvira-shell">
+          <SectionIntro number="08 — The model layer" title={<>Intelligence underneath.<br />Invisible when you don't need it.</>}>
+            <p>
+              Local GGUF models run through llama.cpp with hardware-aware, GPU-accelerated
+              inference. Swap models, scale with your hardware, or bring your own cloud provider —
+              the workspace above stays exactly the same.
+            </p>
+          </SectionIntro>
+          <Reveal className="anvira-section__stage" variants={revealStage}>
+            <ModelFoundation />
+          </Reveal>
+        </div>
+      </section>
 
-    {/* Final CTA */}
-    <section className="relative overflow-hidden border-t border-border py-24 md:py-28">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-[400px] w-[760px] rounded-full bg-primary/10 blur-[130px]"
-      />
-      <motion.div {...staggerInView} className="max-container relative text-center">
-        <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-light tracking-tight">
-          Run your AI where your work lives.
-        </motion.h2>
-        <motion.p
-          variants={fadeUp}
-          className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground leading-relaxed"
-        >
-          Anvira v0.2 brings local models, agent execution, tools, verification, and hardware-aware
-          inference into one desktop environment.
-        </motion.p>
+      {/* Local-first statement */}
+      <section className="anvira-local" ref={localRef}>
+        <Botanical src={anviraFoliage} className="anvira-botanical anvira-botanical--bridge-left" containerRef={localRef} />
+        <div className="anvira-shell anvira-local__inner">
+          <Reveal variants={revealStage}>
+            <h2>
+              <span>Your workspace.</span>
+              <span>Your machine.</span>
+              <span>Your intelligence.</span>
+            </h2>
+            <p>
+              Anvira runs locally by default. Nothing leaves your machine unless you choose to
+              connect a cloud provider.
+            </p>
+            <PrivacyEye />
+          </Reveal>
+        </div>
+      </section>
 
-        <motion.div variants={fadeUp} className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button
-            size="lg"
-            asChild
-            className="h-12 px-7 text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">
-              <Download className="mr-2 h-4 w-4" />
-              Download Anvira v0.2
-            </a>
-          </Button>
-          <Button size="lg" variant="ghost" asChild className="h-12 px-7 text-base">
-            <Link to="/contact">Send feedback</Link>
-          </Button>
-        </motion.div>
+      {/* Whole system */}
+      <section className="anvira-section anvira-section--line" id="system" ref={systemRef}>
+        <Botanical src={anviraBranch} className="anvira-botanical anvira-botanical--bridge-right" containerRef={systemRef} />
+        <div className="anvira-shell">
+          <SectionIntro number="09 — The whole system" title={<>One workspace. One context.<br />Your intelligence.</>}>
+            <p>
+              Chat, Agents, Notes, Study, Knowledge, Files and Models aren't separate products
+              orbiting Anvira — they behave like one interconnected system, sharing everything you
+              bring into it.
+            </p>
+          </SectionIntro>
+          <Reveal className="anvira-section__stage" variants={revealStage}>
+            <SystemVisual />
+          </Reveal>
+        </div>
+      </section>
 
-        <motion.p
-          variants={fadeUp}
-          className="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground"
-        >
-          Windows · Local GGUF inference · CUDA support · Local execution
-        </motion.p>
-      </motion.div>
-    </section>
-  </CleanLayout>
-);
+      {/* Final CTA */}
+      <section className="anvira-final">
+        <img src={anviraBranch} alt="" aria-hidden="true" className="anvira-final__branch" />
+        <div className="anvira-shell anvira-final__content">
+          <Reveal variants={revealStage}>
+            <h2>
+              <span>One workspace.</span>
+              <span>One context.</span>
+              <span>Your intelligence.</span>
+            </h2>
+            <p className="anvira-final__meet">Meet Anvira.</p>
+            <div className="anvira-actions">
+              <a href="#top" className="anvira-button anvira-button--primary">
+                Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={DOWNLOAD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="anvira-button anvira-button--secondary"
+              >
+                <Download className="h-3.5 w-3.5" /> Download Anvira
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <footer className="anvira-footer">
+        <div className="anvira-shell anvira-footer__inner">
+          <span>© {new Date().getFullYear()} Anvira — built on the LocalHouseLLM stack.</span>
+          <Link to="/">← LocalHouseLLM</Link>
+        </div>
+      </footer>
+    </div>
+  );
+};
 
 export default Anvira;
