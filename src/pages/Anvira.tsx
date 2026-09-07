@@ -37,6 +37,13 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Lenis's own scroll virtualization can fight with a sticky-heavy,
+// scroll-linked page like this one on touch devices; native mobile scroll
+// is already smooth via OS momentum, so only run it on non-touch input.
+const isCoarsePointer = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(pointer: coarse)').matches;
+
 const revealUp = {
   hidden: { opacity: 0, y: 26 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
@@ -394,7 +401,7 @@ const Anvira = () => {
   // Slower, heavier-feeling scroll than the site default so the scroll-linked
   // transitions (the hero morph, the leaf wipe, the section reveals) have
   // time to actually read as motion rather than flashing past.
-  useSmoothScroll(!prefersReducedMotion(), {
+  useSmoothScroll(!prefersReducedMotion() && !isCoarsePointer(), {
     duration: 2,
     wheelMultiplier: 0.7,
     touchMultiplier: 1,

@@ -18,12 +18,20 @@ import {
 import { WorkspaceVisual } from '@/components/anvira/AnviraVisuals';
 import anviraBranch from '@/assets/anvira-botanical-branch.png';
 import anviraFoliage from '@/assets/anvira-foliage-silhouette.png';
+import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import '@/pages/anvira.css';
 import './home.css';
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Lenis's own scroll virtualization can fight with a sticky-heavy,
+// scroll-linked page like this one on touch devices; native mobile scroll
+// is already smooth via OS momentum, so only run it on non-touch input.
+const isCoarsePointer = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(pointer: coarse)').matches;
 
 const revealUp = {
   hidden: { opacity: 0, y: 26 },
@@ -452,6 +460,15 @@ const FinalSection = () => (
 );
 
 const Index = () => {
+  // Same slower, heavier scroll feel as the Anvira page, scoped to this
+  // page only, so the scroll-linked transitions read as motion.
+  useSmoothScroll(!prefersReducedMotion() && !isCoarsePointer(), {
+    duration: 2,
+    wheelMultiplier: 0.7,
+    touchMultiplier: 1,
+    lerp: 0.06,
+  });
+
   const homeSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
