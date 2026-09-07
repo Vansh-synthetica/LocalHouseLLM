@@ -338,6 +338,14 @@
   .anvira-app__nav span { justify-content: center; padding: 8px 0; }
   .anvira-app__bubble--user { max-width: 90%; }
   .anvira-app__selects span:not(:first-child) { display: none; }
+  .anvira-app__selects span { font-size: 8px; }
+  .anvira-app__topbar { padding: 8px 10px; gap: 6px; }
+  .anvira-app__effort { flex-wrap: wrap; justify-content: flex-end; gap: 2px; }
+  .anvira-app__effort button:not(.is-active) { display: none; }
+  .anvira-app__thread { padding: 12px 14px; }
+  .anvira-app__bubble--agent p, .anvira-app__bubble--user { font-size: 9.5px; }
+  .anvira-app__composer { margin: 0 10px 10px; padding: 7px 9px; }
+  .anvira-app__composer span { font-size: 8.5px; }
   .anvira-hero__branch { width: 55%; right: -22%; }
   .anvira-section { padding: 105px 0; }
   .anvira-section h2 { font-size: clamp(40px, 12vw, 58px); }

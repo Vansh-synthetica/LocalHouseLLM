@@ -40,13 +40,6 @@ const productsGroups: NavGroup[] = [
       { to: '/nomi', label: 'Nomi', desc: 'AI persona infrastructure' },
     ],
   },
-  {
-    heading: 'Early Access',
-    links: [
-      { to: '/inkflow', label: 'InkFlow', desc: 'AI writing assistant' },
-      { to: '/devquill', label: 'DevQuill', desc: 'For developers' },
-    ],
-  },
 ];
 
 const companyLinks: NavLink[] = [
@@ -59,7 +52,7 @@ const companyLinks: NavLink[] = [
 ];
 
 const stackPaths = ['/stack', '/use-cases', '/benchmarks', '/archive'];
-const productsPaths = ['/anvira', '/nomi', '/inkflow', '/devquill', '/products'];
+const productsPaths = ['/anvira', '/nomi', '/products'];
 const companyPaths = ['/mission', '/vision', '/about', '/release-logs', '/faq', '/contact'];
 
 const Navbar = () => {
@@ -126,7 +119,7 @@ const Navbar = () => {
     }`;
 
   const renderMegaDropdown = (groups: NavGroup[]) => (
-    <div className="grid grid-cols-2 divide-x divide-border/60">
+    <div className={`grid ${groups.length > 1 ? 'grid-cols-2 divide-x divide-border/60' : 'grid-cols-1'}`}>
       {groups.map((group) => (
         <div key={group.heading} className="p-3">
           <p className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground/80 px-3 mb-1.5">
@@ -241,7 +234,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.18 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] rounded-2xl border border-border/60 bg-popover/95 backdrop-blur-2xl shadow-2xl overflow-hidden"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-2xl border border-border/60 bg-popover/95 backdrop-blur-2xl shadow-2xl overflow-hidden"
                   >
                     {renderMegaDropdown(productsGroups)}
                   </motion.div>
@@ -255,10 +248,6 @@ const Navbar = () => {
 
             <Link to="/frameworks" className={linkClass(location.pathname.startsWith('/frameworks'))}>
               Frameworks
-            </Link>
-
-            <Link to="/archive" className={linkClass(location.pathname.startsWith('/archive'))}>
-              Archive
             </Link>
 
             <Link to="/docs" className={linkClass(location.pathname.startsWith('/docs'))}>
@@ -420,7 +409,7 @@ const Navbar = () => {
                 </AnimatePresence>
 
                 <Link to="/frameworks" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5 mt-1">Frameworks</Link>
-                <Link to="/archive" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Archive</Link>
+                <Link to="/archive" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Research</Link>
                 <Link to="/docs" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Docs</Link>
                 <Link to="/work-with-us" className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5">Work with us</Link>
 

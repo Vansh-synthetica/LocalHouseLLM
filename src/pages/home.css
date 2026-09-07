@@ -197,6 +197,9 @@
   .lh-final h2 { font-size: clamp(46px, 14vw, 72px); }
   .lh-final__branch { width: 70vw; right: -30%; bottom: -8%; opacity: .2; }
   .lh-research__item { grid-template-columns: 1fr; gap: 8px; }
+  .lh-network { aspect-ratio: 1 / 1.1; }
+  .lh-network__label { display: none; }
+  .lh-tree__row--3 .lh-tree__node { padding: 16px 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
