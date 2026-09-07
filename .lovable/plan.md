@@ -1,75 +1,59 @@
+# Anvira premium product experience
+
 ## Goal
-Turn localhousellm.com into the canonical, entity-authoritative home of the LocalHouseLLM modular AI stack — strong SEO, clear IA, developer-grade content, and a new favicon from the uploaded backslash pfp.
+Rebuild `/anvira` as a standalone, cinematic product story around one idea: **One workspace. One context. Your intelligence.** The page will feel like an invitation into Anvira rather than a conventional SaaS feature page, while preserving the existing download destination and accurate local-first positioning.
 
-## 1. Branding / Favicon
-- Convert `user-uploads://Localjhousellm_pfp.png` into `public/favicon.ico` + `public/favicon-192.png` + `public/favicon-512.png` + `public/apple-touch-icon.png`.
-- Update `index.html` `<link rel="icon">`, apple-touch-icon, and manifest references.
-- Refresh OG image reference if needed (keep existing `/og-image.png`; do not fabricate).
+## What will change
 
-## 2. Information Architecture (new routes)
-Add these pages (each: `<SEO>` with unique title/description/canonical/JSON-LD, single H1, breadcrumb, internal links, CTA footer):
+### 1. A distinct Anvira page shell
+- Replace the shared company layout on `/anvira` with a dedicated warm-ivory Anvira shell.
+- Add a minimal Anvira navigation: Product, Agents, Notes, Study, Models, and Download.
+- Keep the rest of the LocalHouseLLM website and its global navigation unchanged.
+- Add a compact, deliberate mobile menu and a restrained scrolled state.
 
-| Route | Page | Schema |
-|---|---|---|
-| `/stack` | Full modular architecture | TechArticle + BreadcrumbList |
-| `/stack/aicl` | AICL communication layer | TechArticle |
-| `/stack/orcha` | ORCHA orchestration layer | TechArticle |
-| `/stack/memory` | Memory layer | TechArticle |
-| `/stack/safety` | Safety / verification layer | TechArticle |
-| `/stack/tools` | Tools layer | TechArticle |
-| `/stack/modules` | Intelligence Modules | TechArticle |
-| `/products` | Product hub | CollectionPage |
-| `/docs` | Docs hub (Quickstart, Install, API, Config, Custom Expert, Integrations) | TechArticle |
-| `/start` | "Start Here" developer onramp | HowTo |
-| `/faq` | FAQ | FAQPage |
-| `/benchmarks` | Latency / cost / reliability tables | Dataset |
-| `/use-cases` | Index | CollectionPage |
-| `/use-cases/ai-tutors` | | Article |
-| `/use-cases/healthcare` | | Article |
-| `/use-cases/agriculture` | | Article |
-| `/use-cases/research` | | Article |
-| `/use-cases/enterprise-private-ai` | | Article |
-| `/use-cases/edge-ai` | | Article |
+### 2. Cinematic opening sequence
+- Build the three-line hero: “One workspace. One context. Your intelligence.” with only the two requested actions.
+- Create an original, layered Anvira workspace composition rather than a browser screenshot: workspace rail, conversation, attached context, notes, study and active-agent states.
+- Frame it with subtle botanical artwork, paper texture, moving shadows and independent depth layers.
+- Use a scroll-linked transition that progressively emphasizes the three statements while revealing more of the workspace.
 
-Existing pages kept: `/`, `/mission`, `/vision`, `/research`, `/release-logs`, `/anvira*`, `/nomi`, `/inkflow`, `/devquill`, `/about`, `/contact`, `/sitemap`.
+### 3. Story-led product sections
+Build a sequence of large visual chapters rather than feature-card grids:
+- **One workspace:** a central workspace with Chat, Notes, Study, Agents, Files, Knowledge and Models connected around it.
+- **One context:** an animated document journey through ingestion, chat, notes, agent work and study.
+- **Your intelligence:** a quiet local-machine diagram with optional cloud connections outside the boundary.
+- **Chat:** immersive conversation scene with context, attachments, agent actions and approvals.
+- **Agents:** four built-in agents plus a role/capabilities/tools/permissions execution timeline.
+- **Notes:** editorial notebook/pages/sources/AI composition.
+- **Study:** Pochi → guide → flashcards → quiz → weak spots → review learning loop.
+- **Model layer:** local-model infrastructure presented as the invisible foundation, not the product.
+- **Local-first:** minimal full-viewport ownership statement.
+- **Whole system:** the final interactive ecosystem map tying every surface back to Anvira.
+- **Final invitation:** the core statement repeated with Explore and Download actions.
 
-## 3. Navigation
-Rework `Navbar.tsx`:
-- Top-level: **Stack** (dropdown: AICL, ORCHA, Memory, Safety, Tools, Modules, Full stack), **Products** (Anvira, Nomi, InkFlow, DevQuill), **Research**, **Docs**, **Company** (Mission, Vision, About, Release Logs, FAQ, Contact).
-- Persistent "Start" CTA → `/start`.
-- Mobile: collapsible accordion.
+### 4. Motion and interaction
+- Use Framer Motion plus the existing smooth-scroll utility; no new animation dependency.
+- Add restrained pointer parallax on capable desktop devices and scroll-linked movement for background, interface and botanical layers.
+- Use masked text reveals, subtle interface state changes, animated connection paths and purposeful micro-interactions.
+- Disable pointer parallax on touch devices and substantially simplify motion under `prefers-reduced-motion`.
 
-Add a shared `Breadcrumbs.tsx` component used on all non-home pages, emitting visible nav + `BreadcrumbList` JSON-LD.
+### 5. Visual system and assets
+- Add Anvira-scoped semantic tokens for warm paper, near-black ink, moss accents and tactile surface colors without changing the rest of the site.
+- Generate a cohesive transparent botanical asset set (fine branches/leaves and soft silhouettes) for foreground and background framing.
+- Keep corners restrained, avoid excessive glass, pills and nested cards, and use strong editorial spacing on desktop and a separately composed mobile flow.
 
-## 4. Homepage refresh (`pages/Index.tsx`)
-- Strengthen H1; keep current. Add explicit "LocalHouseLLM is an AI infrastructure company" sentence early.
-- Add 5 CTA buttons (Explore stack, Mission, Research, Products, Docs).
-- Link each stack card to its new `/stack/*` page.
-- Fix dead `/opensource` CTA → `/research`.
-- Add FAQ snippet (3 Qs) with FAQPage JSON-LD for rich results.
+### 6. Production quality
+- Split the page into small reusable Anvira components instead of one oversized page file.
+- Keep one semantic H1, accessible controls, meaningful labels, stable aspect ratios and no layout-shifting media.
+- Update Anvira SEO copy/schema to describe the unified local-first workspace accurately.
+- Preserve the current download URL unless a newer installer URL is provided.
+- Verify the desktop and mobile compositions, anchor navigation, reduced-motion behavior, console state and production build.
 
-## 5. SEO infrastructure
-- `index.html`: tighten JSON-LD Organization (sameAs GitHub/X/LinkedIn), add WebSite + SearchAction, ensure no Lovable branding.
-- `SEO.tsx`: already solid; add optional `breadcrumbs` prop emitting BreadcrumbList JSON-LD inline.
-- `public/sitemap.xml`: regenerate with every new route, 2026-06-18 lastmod, priorities tuned.
-- `public/robots.txt`: keep as-is (already good); confirm sitemap line.
-- Add per-page canonical (already supported via SEO component).
+## Technical details
+- Primary files: `src/pages/Anvira.tsx`, new components/styles/assets under an Anvira-specific folder.
+- The dedicated shell will not alter other routes or the shared `Navbar`/`Footer` behavior.
+- Product visuals will be original React/CSS compositions with generated botanical bitmap assets; no stock imagery or copied product UI.
+- Expensive movement will use transforms/opacity only, `requestAnimationFrame` where needed, and pointer listeners scoped to the hero.
 
-## 6. Content tone
-- Confident, technical, grounded. No hype words ("revolutionary", "magical").
-- Each new page: 400–800 words of real explanation, examples, internal links to 2–4 sibling pages.
-
-## 7. Out of scope (won't do this turn)
-- Real benchmark numbers — page will be scaffolded with "methodology + placeholder pending publication" framing rather than fabricated charts.
-- Real API code samples for unimplemented APIs — Docs page presents the documented surface honestly as "in progress" where applicable.
-- SSR/Next migration. Site remains Vite SPA; we lean on Helmet + crawlable HTML + sitemap. (True SSR would require a stack change — flagged for follow-up.)
-- Auto-generated sitemap script. Keeping static `public/sitemap.xml` per existing pattern.
-
-## Technical notes
-- All new pages use existing `CleanLayout` + `SEO` + new `Breadcrumbs`.
-- No new dependencies.
-- Favicon conversion via ImageMagick (`nix run nixpkgs#imagemagick`).
-- ~20 new files; ~6 edits. Will batch writes in parallel.
-
-## Deliverable
-Single implementation pass producing all routes, nav, breadcrumbs, sitemap, favicon, and SEO wiring. Build verified before handing back.
+## Assumption
+“Entire Anvira website/landing page” means the existing `/anvira` route only, not the LocalHouseLLM homepage or Anvira model subpages (`/anvira/o1`, `/anvira/o1e`, `/anvira/h1`).
