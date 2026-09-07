@@ -23,7 +23,7 @@ import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import './anvira.css';
 
 const DOWNLOAD_URL =
-  'https://drive.google.com/file/d/1Gp4gIoyrV584rAubII_Fk-zNb1hCZHM2/view?usp=sharing';
+  'https://github.com/Vansh-synthetica/LocalHouseLLM/releases/download/anvira-v1.1/Anvira.1.1.Pochi.exe';
 
 const NAV_LINKS = [
   { href: '#workspace', label: 'Product' },
