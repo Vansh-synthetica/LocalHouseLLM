@@ -1,7 +1,6 @@
 import type { Config } from 'tailwindcss';
 
 export default {
-  darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -68,6 +67,21 @@ export default {
           DEFAULT: 'hsl(var(--info))',
           foreground: 'hsl(var(--info-foreground))',
         },
+        // Named aliases onto the same palette — for bespoke sections that want
+        // the raw paper/ink/moss vocabulary instead of the semantic UI tokens.
+        paper: {
+          DEFAULT: 'hsl(42 28% 96%)',
+          deep: 'hsl(39 18% 90%)',
+        },
+        ink: {
+          DEFAULT: 'hsl(96 8% 13%)',
+          soft: 'hsl(90 5% 35%)',
+        },
+        moss: {
+          DEFAULT: 'hsl(103 18% 34%)',
+          light: 'hsl(98 19% 74%)',
+        },
+        line: 'hsl(72 10% 78%)',
       },
       borderRadius: {
         lg: 'var(--radius)',

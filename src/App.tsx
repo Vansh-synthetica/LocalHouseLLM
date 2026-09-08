@@ -5,9 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { HelmetProvider } from 'react-helmet-async';
-import PageTransition from "@/components/PageTransition";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import PublicOnlyRoute from "@/components/PublicOnlyRoute";
@@ -19,8 +17,6 @@ import Contact from "./pages/Contact";
 import ReleaseLogs from "./pages/ReleaseLogs";
 import NotFound from "./pages/NotFound";
 import Anvira from "./pages/Anvira";
-import DevQuill from "./pages/DevQuill";
-import InkFlow from "./pages/InkFlow";
 import Nomi from "./pages/Nomi";
 import Mission from "./pages/Mission";
 import Archive from "./pages/Archive";
@@ -66,14 +62,12 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <HelmetProvider>
-    <ThemeProvider defaultTheme="light">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AuthProvider>
-              <PageTransition />
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AuthProvider>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/anvira" element={<Anvira />} />
@@ -81,8 +75,6 @@ const App = () => (
                 <Route path="/about" element={<About />} />
                 <Route path="/opensource" element={<Navigate to="/archive" replace />} />
                 <Route path="/release-logs" element={<ReleaseLogs />} />
-                <Route path="/devquill" element={<DevQuill />} />
-                <Route path="/inkflow" element={<InkFlow />} />
                 <Route path="/nomi" element={<Nomi />} />
                 <Route path="/mission" element={<Mission />} />
                 <Route path="/research" element={<Navigate to="/archive" replace />} />
@@ -145,11 +137,10 @@ const App = () => (
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </AuthProvider>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+          </AuthProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   </HelmetProvider>
 );
 

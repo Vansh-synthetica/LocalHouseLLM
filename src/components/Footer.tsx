@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import BrandMark from './system/BrandMark';
 
 const linkClass =
   'text-muted-foreground hover:text-foreground transition-colors duration-200';
@@ -7,13 +8,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-border/60 bg-background/40 backdrop-blur-xl">
+    <footer className="mt-24 border-t border-border bg-background">
       <div className="max-container py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
           <div className="col-span-2 space-y-5">
             <Link to="/" className="inline-flex items-center gap-2.5" aria-label="LocalHouseLLM home">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent text-primary-foreground font-display text-lg leading-none">
-                \
+              <span className="inline-flex h-6 w-6 items-center justify-center text-foreground">
+                <BrandMark />
               </span>
               <span className="font-display text-base font-semibold tracking-tight text-foreground">
                 LocalHouseLLM
@@ -50,8 +51,6 @@ const Footer = () => {
               <li><Link to="/products" className={linkClass}>All products</Link></li>
               <li><Link to="/anvira" className={linkClass}>Anvira</Link></li>
               <li><Link to="/nomi" className={linkClass}>Nomi</Link></li>
-              <li><Link to="/inkflow" className={linkClass}>InkFlow</Link></li>
-              <li><Link to="/devquill" className={linkClass}>DevQuill</Link></li>
               <li><Link to="/docs" className={linkClass}>Docs</Link></li>
               <li><Link to="/start" className={linkClass}>Start here</Link></li>
             </ul>
