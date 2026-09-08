@@ -1,23 +1,28 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Network, Cpu, BookOpen, Lock, Blocks, Globe } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import CleanLayout from '@/components/CleanLayout';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SEO from '@/components/SEO';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.05, duration: 0.6 } }),
-};
+import { Reveal, SectionIntro } from '@/components/system/Motion';
 
 const layers = [
-  { to: '/stack/aicl', icon: Network, name: 'AICL', tag: 'Communication', desc: 'A structured protocol that lets AI modules talk to each other clearly, safely, and predictably.' },
-  { to: '/stack/orcha', icon: Cpu, name: 'ORCHA', tag: 'Orchestration', desc: 'Decomposes requests, routes work across experts, and aggregates results into coherent answers.' },
-  { to: '/stack/memory', icon: BookOpen, name: 'Memory', tag: 'Context', desc: 'A portable, user-owned context layer — your history travels with you across tools and sessions.' },
-  { to: '/stack/safety', icon: Lock, name: 'Safety', tag: 'Verification', desc: 'Factual, logical, and policy checks at every step. Verification is a first-class layer, not an afterthought.' },
-  { to: '/stack/tools', icon: Blocks, name: 'Tools', tag: 'Actions', desc: 'A library of reusable, sandboxed actions: retrieval, calculation, code execution, and integrations.' },
-  { to: '/stack/modules', icon: Globe, name: 'Intelligence Modules', tag: 'Experts', desc: 'Specialized expert models you can swap, extend, or upgrade independently of the rest of the system.' },
+  { to: '/stack/aicl', tag: 'Communication', name: 'AICL', desc: 'A structured protocol that lets AI modules talk to each other clearly, safely, and predictably.' },
+  { to: '/stack/orcha', tag: 'Orchestration', name: 'ORCHA', desc: 'Decomposes requests, routes work across experts, and aggregates results into coherent answers.' },
+  { to: '/stack/memory', tag: 'Context', name: 'Memory', desc: 'A portable, user-owned context layer — your history travels with you across tools and sessions.' },
+  { to: '/stack/safety', tag: 'Verification', name: 'Safety', desc: 'Factual, logical, and policy checks at every step. Verification is a first-class layer, not an afterthought.' },
+  { to: '/stack/tools', tag: 'Actions', name: 'Tools', desc: 'A library of reusable, sandboxed actions: retrieval, calculation, code execution, and integrations.' },
+  { to: '/stack/modules', tag: 'Experts', name: 'Intelligence Modules', desc: 'Specialized expert models you can swap, extend, or upgrade independently of the rest of the system.' },
+];
+
+const chain = [
+  { name: 'AICL', role: 'the messages that move between every module' },
+  { name: 'ORCHA', role: 'decides what happens, in what order, by whom' },
+  { name: 'NOMI / Memory', role: 'the context a request can read from' },
+  { name: 'Safety', role: 'the checks a response has to pass before it ships' },
+  { name: 'Tools', role: 'the actions a module can reach for' },
+  { name: 'Modules', role: 'the experts that actually do the reasoning' },
+  { name: 'Applications', role: 'Anvira and everything built on top' },
 ];
 
 const Stack = () => {
@@ -44,73 +49,122 @@ const Stack = () => {
 
       <section className="pt-10 pb-20 md:pb-28">
         <div className="max-container max-w-4xl">
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5">
-            Architecture
-          </motion.p>
-          <motion.h1 initial="hidden" animate="visible" variants={fadeUp} custom={1} className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-8">
-            The LocalHouseLLM stack.
-          </motion.h1>
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={2} className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-            Modern AI systems collapse too many concerns into a single monolithic model. LocalHouseLLM separates them. Each capability — communication, orchestration, memory, safety, tools, intelligence — is its own well-defined layer, with a clear contract and an open interface.
-          </motion.p>
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={3} className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            The result is infrastructure you can inspect, replace, and own. Swap a memory backend. Plug in a domain-specific expert. Run on local hardware or in your private cloud. The stack stays the same.
-          </motion.p>
+          <Reveal>
+            <p className="technical-label">Architecture</p>
+            <h1 className="mt-4 font-display font-semibold tracking-tight text-4xl md:text-6xl leading-[1.05] mb-8">
+              The LocalHouseLLM stack.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+              Modern AI systems collapse too many concerns into a single monolithic model. LocalHouseLLM separates
+              them. Each capability — communication, orchestration, memory, safety, tools, intelligence — is its
+              own well-defined layer, with a clear contract and an open interface.
+            </p>
+          </Reveal>
+          <Reveal delay={0.14}>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              The result is infrastructure you can inspect, replace, and own. Swap a memory backend. Plug in a
+              domain-specific expert. Run on local hardware or in your private cloud. The stack stays the same.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="border-t border-border/40 py-16 md:py-24">
+      <section className="border-t border-border py-16 md:py-24">
         <div className="max-container">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-10">The six layers</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <SectionIntro kicker="The six layers" title="Read top to bottom, or jump straight to what you need." />
+          <div className="mt-14 divide-y divide-border border-t border-b border-border">
             {layers.map((l, i) => (
-              <motion.div key={l.to} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} variants={fadeUp} custom={i}>
-                <Link to={l.to} className="group block p-7 rounded-xl border border-border/40 hover:border-border transition-colors h-full">
-                  <l.icon className="w-5 h-5 mb-5 text-foreground" />
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">{l.tag}</p>
-                  <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+              <Reveal key={l.to} delay={i * 0.04}>
+                <Link
+                  to={l.to}
+                  className="group grid grid-cols-[3rem_1fr] sm:grid-cols-[4rem_10rem_1fr_auto] items-baseline gap-x-4 gap-y-1 py-6 transition-colors hover:bg-foreground/[0.02]"
+                >
+                  <span className="text-xs text-muted-foreground font-mono">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="text-xs uppercase tracking-[0.14em] text-primary sm:col-start-2">{l.tag}</span>
+                  <span className="col-span-2 sm:col-span-1 sm:col-start-3 font-display text-xl font-semibold text-foreground">
                     {l.name}
-                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{l.desc}</p>
+                  </span>
+                  <span className="hidden sm:block col-start-4 self-center">
+                    <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                  </span>
+                  <span className="col-span-2 sm:col-span-3 sm:col-start-2 text-sm text-muted-foreground leading-relaxed max-w-xl">
+                    {l.desc}
+                  </span>
                 </Link>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-border/40 py-16 md:py-24">
+      <section className="border-t border-border py-16 md:py-24">
         <div className="max-container max-w-3xl">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-6">How the layers fit together</h2>
-          <div className="space-y-5 text-muted-foreground leading-relaxed">
-            <p>A request enters the system. <strong className="text-foreground">ORCHA</strong> decomposes it into sub-tasks and decides which experts should handle each. It speaks to those experts using <strong className="text-foreground">AICL</strong> — a structured packet format so every exchange is observable and routable.</p>
-            <p>Each expert call may read from <strong className="text-foreground">Memory</strong> (your portable context) or invoke a <strong className="text-foreground">Tool</strong> (retrieval, calculation, code execution). Before any response returns to the user, the <strong className="text-foreground">Safety</strong> layer applies factual, logical, and policy checks.</p>
-            <p>The experts themselves — <strong className="text-foreground">Intelligence Modules</strong> — are independently swappable. A small local model, a fine-tuned domain expert, or a hosted frontier model can fill the same slot. The protocol does not care which.</p>
+          <SectionIntro kicker="How it fits together" title="A living system, not a flowchart." />
+
+          <div className="mt-10 space-y-5 text-muted-foreground leading-relaxed">
+            <p>
+              A request enters the system. <strong className="text-foreground">ORCHA</strong> decomposes it into
+              sub-tasks and decides which experts should handle each. It speaks to those experts using{' '}
+              <strong className="text-foreground">AICL</strong> — a structured packet format so every exchange is
+              observable and routable.
+            </p>
+            <p>
+              Each expert call may read from <strong className="text-foreground">Memory</strong> (your portable
+              context) or invoke a <strong className="text-foreground">Tool</strong> (retrieval, calculation, code
+              execution). Before any response returns to the user, the{' '}
+              <strong className="text-foreground">Safety</strong> layer applies factual, logical, and policy
+              checks.
+            </p>
+            <p>
+              The experts themselves — <strong className="text-foreground">Intelligence Modules</strong> — are
+              independently swappable. A small local model, a fine-tuned domain expert, or a hosted frontier model
+              can fill the same slot. The protocol does not care which.
+            </p>
           </div>
 
-          <div className="mt-10 p-6 rounded-xl border border-border/40 font-mono text-xs md:text-sm leading-relaxed bg-foreground/[0.02]">
-            <div>user request</div>
-            <div className="text-muted-foreground">  ↓</div>
-            <div>ORCHA  →  decompose · route · aggregate · retry</div>
-            <div className="text-muted-foreground">  ↓ (AICL packets)</div>
-            <div>Intelligence Modules  +  Tools  +  Memory</div>
-            <div className="text-muted-foreground">  ↓</div>
-            <div>Safety  →  factual · logical · policy</div>
-            <div className="text-muted-foreground">  ↓</div>
-            <div>response</div>
-          </div>
+          <Reveal className="mt-14" delay={0.1}>
+            <div className="space-y-0">
+              {chain.map((c, i) => (
+                <div key={c.name} className="flex gap-5">
+                  <div className="flex flex-col items-center">
+                    <span className="h-2 w-2 rounded-full bg-primary shrink-0" />
+                    {i < chain.length - 1 && <span className="w-px flex-1 bg-border" />}
+                  </div>
+                  <div className={i < chain.length - 1 ? 'pb-8' : ''}>
+                    <span className="font-display text-lg font-semibold text-foreground">{c.name}</span>
+                    <p className="text-sm text-muted-foreground mt-0.5">{c.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="border-t border-border py-20 md:py-28">
         <div className="max-container max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">Build on the stack.</h2>
-          <p className="text-muted-foreground mb-8">The Docs walk through installation, integration, and your first module.</p>
-          <div className="flex flex-wrap gap-3">
-            <Link to="/docs"><Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">Read the docs <ArrowRight className="w-4 h-4 ml-1" /></Button></Link>
-            <Link to="/start"><Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">Start here</Button></Link>
-          </div>
+          <Reveal>
+            <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight mb-5">
+              Build on the stack.
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              The Docs walk through installation, integration, and your first module.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/docs">
+                <Button className="rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11 px-6">
+                  Read the docs <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </Link>
+              <Link to="/start">
+                <Button variant="outline" className="rounded-sm h-11 px-6">
+                  Start here
+                </Button>
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
     </CleanLayout>

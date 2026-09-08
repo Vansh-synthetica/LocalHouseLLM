@@ -1,34 +1,25 @@
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import {
-  Blocks,
-  Network,
-  Lock,
-  Globe,
-  Cpu,
-  BookOpen,
-  Stethoscope,
-  Sprout,
-  GraduationCap,
-  FlaskConical,
-  ArrowRight,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Reveal, SectionIntro } from '@/components/system/Motion';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.07, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  }),
-};
+const stack = [
+  { title: 'Communication', desc: 'AICL — a structured protocol that lets AI modules coordinate clearly and safely.' },
+  { title: 'Orchestration', desc: 'Route tasks across expert modules with transparent, traceable logic.' },
+  { title: 'Memory', desc: 'Portable, user-owned context that persists across tools, sessions, and devices.' },
+  { title: 'Safety', desc: 'Built-in verification — factual, logical, and ethical checks at every step.' },
+  { title: 'Tools', desc: 'Reusable components for retrieval, action, and integration with real systems.' },
+  { title: 'Intelligence Modules', desc: 'Specialised experts — extend, swap, or upgrade independently of the whole.' },
+];
 
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5">{children}</p>
-);
+const useCases = [
+  { title: 'AI tutors', desc: 'Personalised learning shaped to a student, school, or language.' },
+  { title: 'Healthcare support', desc: 'On-premise assistants for clinics that require privacy and accuracy.' },
+  { title: 'Agricultural advisors', desc: 'Offline-capable systems for rural communities and local knowledge.' },
+  { title: 'Research assistants', desc: 'Composable reasoning systems built for specific fields and institutions.' },
+];
 
 const Mission = () => {
   const missionSchema = {
@@ -40,22 +31,6 @@ const Mission = () => {
       'LocalHouseLLM is building open, modular infrastructure for decentralized AI — interoperable building blocks for communication, orchestration, memory, safety, tools, and intelligence modules.',
     publisher: { '@type': 'Organization', name: 'LocalHouseLLM', url: 'https://localhousellm.com' },
   };
-
-  const stack = [
-    { icon: Network, title: 'Communication', desc: 'AICL — a structured protocol that lets AI modules coordinate clearly and safely.' },
-    { icon: Cpu, title: 'Orchestration', desc: 'Route tasks across expert modules with transparent, traceable logic.' },
-    { icon: BookOpen, title: 'Memory', desc: 'Portable, user-owned context that persists across tools, sessions, and devices.' },
-    { icon: Lock, title: 'Safety', desc: 'Built-in verification — factual, logical, and ethical checks at every step.' },
-    { icon: Blocks, title: 'Tools', desc: 'Reusable components for retrieval, action, and integration with real systems.' },
-    { icon: Globe, title: 'Intelligence Modules', desc: 'Specialised experts — extend, swap, or upgrade independently of the whole.' },
-  ];
-
-  const useCases = [
-    { icon: GraduationCap, title: 'AI tutors', desc: 'Personalised learning shaped to a student, school, or language.' },
-    { icon: Stethoscope, title: 'Healthcare support', desc: 'On-premise assistants for clinics that require privacy and accuracy.' },
-    { icon: Sprout, title: 'Agricultural advisors', desc: 'Offline-capable systems for rural communities and local knowledge.' },
-    { icon: FlaskConical, title: 'Research assistants', desc: 'Composable reasoning systems built for specific fields and institutions.' },
-  ];
 
   return (
     <CleanLayout>
@@ -71,201 +46,131 @@ const Mission = () => {
       {/* HERO */}
       <section className="pt-12 md:pt-24 pb-20 md:pb-28">
         <div className="max-container max-w-4xl">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <Eyebrow>Our Mission</Eyebrow>
-          </motion.div>
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={1}
-            className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-8"
-          >
-            Making intelligence accessible, modular, and owned by the people who use it.
-          </motion.h1>
-          <motion.p
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={2}
-            className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl"
-          >
-            LocalHouseLLM is building open, modular infrastructure for decentralised AI — the
-            foundational components for a future where intelligence is composable, transparent, and
-            shared.
-          </motion.p>
+          <Reveal>
+            <p className="technical-label">Our mission</p>
+            <h1 className="mt-4 font-display font-semibold tracking-tight text-4xl sm:text-5xl md:text-6xl leading-[1.05] mb-8">
+              Making intelligence accessible, modular, and owned by the people who use it.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              LocalHouseLLM is building open, modular infrastructure for decentralised AI — the foundational
+              components for a future where intelligence is composable, transparent, and shared.
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* MANIFESTO */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="border-t border-border py-20 md:py-28">
         <div className="max-container">
           <div className="grid md:grid-cols-12 gap-10 md:gap-16">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="md:col-span-4"
-            >
-              <Eyebrow>Manifesto</Eyebrow>
-              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight leading-tight">
+            <Reveal className="md:col-span-4">
+              <p className="technical-label">Manifesto</p>
+              <h2 className="mt-4 font-display text-2xl md:text-3xl font-semibold tracking-tight leading-tight">
                 The principles we build on.
               </h2>
-            </motion.div>
-            <motion.article
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={fadeUp}
-              custom={1}
-              className="md:col-span-8 space-y-6 text-foreground/90 text-lg md:text-xl leading-relaxed"
-            >
+            </Reveal>
+            <Reveal delay={0.08} className="md:col-span-8 space-y-6 text-foreground/90 text-lg md:text-xl leading-relaxed">
               <p>
-                LocalHouseLLM exists to make artificial intelligence accessible, modular, and owned
-                by the people who use it.
+                LocalHouseLLM exists to make artificial intelligence accessible, modular, and owned by the people
+                who use it.
               </p>
               <p>
-                Rather than depending on centralised AI controlled by a handful of organisations,
-                we are building open infrastructure that allows anyone to create, customise, and
-                deploy AI systems for their own needs.
+                Rather than depending on centralised AI controlled by a handful of organisations, we are building
+                open infrastructure that allows anyone to create, customise, and deploy AI systems for their own
+                needs.
               </p>
               <p>
-                Our goal is to provide the foundational components of artificial intelligence —
-                communication, orchestration, memory, safety, tools, and intelligence modules — as
-                a modular ecosystem of interoperable parts.
+                Our goal is to provide the foundational components of artificial intelligence — communication,
+                orchestration, memory, safety, tools, and intelligence modules — as a modular ecosystem of
+                interoperable parts.
               </p>
               <p>
-                Whether the system is an AI tutor, a research assistant, an agricultural advisor,
-                a healthcare support tool, or an entirely new category of intelligence, builders
-                should be able to compose reusable components and shape systems for their
-                community, language, industry, or mission.
+                Whether the system is an AI tutor, a research assistant, an agricultural advisor, a healthcare
+                support tool, or an entirely new category of intelligence, builders should be able to compose
+                reusable components and shape systems for their community, language, industry, or mission.
               </p>
               <p>
-                We believe the future of AI should be decentralised, transparent, and accessible to
-                everyone — not concentrated within large corporations.
+                We believe the future of AI should be decentralised, transparent, and accessible to everyone — not
+                concentrated within large corporations.
               </p>
               <p className="text-foreground font-medium pt-2">
                 LocalHouseLLM is building the foundation for that future.
               </p>
-            </motion.article>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* MODULAR STACK */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="border-t border-border py-20 md:py-28">
         <div className="max-container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="max-w-3xl mb-14"
-          >
-            <Eyebrow>The modular stack</Eyebrow>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">
-              Composable layers, not a monolith.
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              Each component does one thing well, exposes a clear interface, and can be replaced or
-              improved without rebuilding the system around it.
+          <SectionIntro kicker="The modular stack" title="Composable layers, not a monolith." className="max-w-3xl mb-14">
+            <p className="mt-5 text-muted-foreground text-base md:text-lg leading-relaxed">
+              Each component does one thing well, exposes a clear interface, and can be replaced or improved
+              without rebuilding the system around it.
             </p>
-          </motion.div>
+          </SectionIntro>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 border border-border/40 rounded-2xl overflow-hidden">
+          <div className="divide-y divide-border border-t border-b border-border">
             {stack.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-40px' }}
-                variants={fadeUp}
-                custom={i}
-                className="p-7 border-b border-r border-border/40 last:border-r-0 [&:nth-child(3n)]:border-r-0 [&:nth-last-child(-n+3)]:border-b-0"
-              >
-                <item.icon className="w-5 h-5 mb-5 text-foreground" />
-                <h3 className="text-base font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </motion.div>
+              <Reveal key={item.title} delay={i * 0.03}>
+                <div className="grid sm:grid-cols-[10rem_1fr] gap-x-6 gap-y-1 py-6">
+                  <span className="text-xs uppercase tracking-[0.14em] text-primary">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3 className="font-display text-lg font-semibold text-foreground">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mt-1 max-w-xl">{item.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* USE CASES */}
-      <section className="border-t border-border/40 py-20 md:py-28">
+      <section className="border-t border-border py-20 md:py-28">
         <div className="max-container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="max-w-3xl mb-14"
-          >
-            <Eyebrow>In practice</Eyebrow>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">
-              Intelligence shaped to its context.
-            </h2>
-          </motion.div>
+          <SectionIntro kicker="In practice" title="Intelligence shaped to its context." className="max-w-3xl mb-14" />
 
-          <div className="grid sm:grid-cols-2 gap-px bg-border/40 border border-border/40 rounded-2xl overflow-hidden">
+          <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10">
             {useCases.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                custom={i}
-                className="bg-background p-7 flex gap-5"
-              >
-                <item.icon className="w-6 h-6 shrink-0 mt-1 text-foreground" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
+              <Reveal key={item.title} delay={i * 0.04}>
+                <div className="border-t border-border pt-5">
+                  <h3 className="font-display text-lg font-semibold mb-1.5">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border/40 py-24 md:py-32">
+      <section className="border-t border-border py-24 md:py-32">
         <div className="max-container max-w-3xl">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-3xl md:text-5xl font-semibold tracking-tight mb-6 leading-tight"
-          >
-            Help us build the foundation.
-          </motion.h2>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={1}
-            className="text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl"
-          >
-            We work in the open. If a decentralised, modular future for AI matters to you, there is
-            a place for you here.
-          </motion.p>
-          <div className="flex flex-wrap gap-3">
-            <Link to="/opensource">
-              <Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
-                Explore open source <ArrowRight className="w-4 h-4 ml-1" />
-              </Button>
-            </Link>
-            <Link to="/archive">
-              <Button variant="outline" className="border-border bg-transparent hover:bg-foreground/5 h-11 px-6">
-                Read our research
-              </Button>
-            </Link>
-          </div>
+          <Reveal>
+            <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tight mb-6 leading-tight">
+              Help us build the foundation.
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl">
+              We work in the open. If a decentralised, modular future for AI matters to you, there is a place for
+              you here.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/archive">
+                <Button className="rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11 px-6">
+                  Explore open source <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </Link>
+              <Link to="/archive">
+                <Button variant="outline" className="rounded-sm h-11 px-6">
+                  Read our research
+                </Button>
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
     </CleanLayout>

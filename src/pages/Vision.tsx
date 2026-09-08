@@ -1,209 +1,92 @@
-
 import Layout from '@/components/Layout';
-import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
+import { Reveal, SectionIntro } from '@/components/system/Motion';
+
+const pillars = [
+  {
+    title: 'AICL — the communication layer',
+    body: 'AICL (Adaptive Inter-Module Communication Language) is the system’s neural pathway. It coordinates expert modules, routes tasks, enforces safety protocols, and ensures every inter-module message is symbolic, structured, and unambiguous — enabling faster reasoning and cleaner logic without relying on uncontrolled parameter growth.',
+  },
+  {
+    title: 'Verification, not heavy filters',
+    body: 'Instead of a single heavy moderation pass, AMAI runs a streamlined funnel of factual, logical, and safety evaluators. Every output is checked for coherence and trustworthiness before it reaches a user — stable, interpretable behaviour without sacrificing speed.',
+  },
+  {
+    title: 'Architecture over parameter count',
+    body: 'No idle parameters consuming resources for their own sake. AMAI is built on activation-based computation and modular upgrades: expert modules can be replaced, improved, or expanded independently, with reasoning that stays traceable end to end.',
+  },
+];
+
+const approach = [
+  { title: 'Modular parameter sharing', body: 'Specialised expert modules share a common AICL interface while focusing on specific knowledge domains, instead of one model carrying everything.' },
+  { title: 'Adaptive activation', body: 'Only the modules relevant to a query are activated through intelligent routing, reducing computational cost without giving up output quality.' },
+  { title: 'Multi-stage verification', body: 'Every output passes through checks for factual accuracy, logical consistency, and safety compliance before it reaches a user.' },
+  { title: 'Continuous, validated learning', body: 'New knowledge is validated against existing knowledge through AICL protocols before it is integrated into the relevant expert modules.' },
+];
 
 const Vision = () => {
   const visionSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "AI Architecture Vision: Modular AI with AMAI and AICL",
-    "description": "Technical approach to modular AI architecture using AICL communication, adaptive learning systems, and built-in verification for scalable intelligence",
-    "author": {
-      "@type": "Organization",
-      "name": "LocalHouseLLM"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "LocalHouseLLM"
-    }
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'AI Architecture Vision: Modular AI with AMAI and AICL',
+    description: 'A technical approach to modular AI architecture using AICL communication, adaptive activation, and built-in verification.',
+    author: { '@type': 'Organization', name: 'LocalHouseLLM' },
+    publisher: { '@type': 'Organization', name: 'LocalHouseLLM' },
   };
 
   return (
     <Layout>
       <SEO
-        title="AI Vision - Modular Architecture with AMAI & AICL | LocalHouseLLM"
-        description="Explore our revolutionary modular AI vision using AICL communication protocol, AMAI expert modules, and adaptive learning systems. Learn how we replace parameter bloat with architectural elegance for efficient, scalable artificial intelligence."
-        keywords="AICL, AMAI, AI architecture vision, expert modules, modular AI systems, AI communication layer, adaptive activation, AI verification, scalable AI, symbolic AI communication, distributed intelligence, transparent AI reasoning, evolvable AI systems"
+        title="Vision — Modular AI Architecture with AMAI & AICL | LocalHouseLLM"
+        description="LocalHouseLLM's architectural vision: modular expert modules, an AICL communication layer, and built-in verification, in place of parameter-count scaling alone."
+        keywords="AICL, AMAI, AI architecture vision, expert modules, modular AI systems, AI communication layer, adaptive activation, AI verification, scalable AI"
         canonical="https://localhousellm.com/vision"
         type="article"
         schema={visionSchema}
       />
-      <section className="py-20">
-        <div className="max-container">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Vision: The Future of Modular AI Architecture</h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The era of brute-force AI scaling is ending.
-              We're pioneering modular AI systems inspired by natural intelligence: specialized expert modules, adaptive learning, and comprehensive safety protocols with AMAI and AICL technology.
+
+      <section className="pt-16 pb-20 md:pt-24 md:pb-28">
+        <div className="max-container max-w-4xl">
+          <Reveal>
+            <p className="technical-label">Our vision</p>
+            <h1 className="mt-4 font-display font-semibold tracking-tight text-4xl md:text-6xl leading-[1.05] mb-8">
+              Architecture, not scale, is the path forward.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              We build modular AI systems around specialised expert modules, adaptive activation, and layered
+              verification — using AMAI and AICL as the underlying architecture, in place of ever-larger single
+              models.
             </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold mb-4 flex items-center">
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  AICL: Fast, Safe, High-Precision AI Communication
-                </h2>
-                <p className="text-muted-foreground">
-                  Our modular AI architecture leverages AICL (Adaptive Inter-Module Communication Language) as the system's neural pathway.
-                  AICL coordinates expert AI modules, intelligently routes tasks, enforces safety protocols, and ensures every inter-module message is symbolic, structured, and unambiguous.
-                  This enables faster AI reasoning, cleaner logic, and scalable learning without relying on massive, uncontrollable parameter growth in traditional AI models.
-                </p>
-              </div>
-              
-              <div>
-                <h2 className="text-2xl font-bold mb-4 flex items-center">
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  Built-In AI Verification, Not Heavy Filters
-                </h2>
-                <p className="text-muted-foreground">
-                  Instead of heavy verification pipelines, AMAI employs a streamlined funnel of factual, logical, and safety evaluators.
-                  Every AI output undergoes rigorous checks for coherence and trustworthiness before reaching users — creating stable, interpretable AI systems without compromising performance or speed.
-                </p>
-              </div>
-              
-              <div>
-                <h2 className="text-2xl font-bold mb-4 flex items-center">
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary mr-3 text-sm">▶</span>
-                  Replacing Parameter Bloat With Architectural Elegance
-                </h2>
-                <p className="text-muted-foreground">
-                  No more billions of idle parameters consuming resources.
-                  AMAI focuses on activation-based computation, modular AI upgrades, and transparent traceable reasoning.
-                  Expert modules can be replaced, improved, or expanded independently — delivering evolvable AI systems without inefficiency or architectural complexity.
-                </p>
-              </div>
-            </div>
-            
-            <div className="glass p-8 h-auto">
-              <h2 className="text-xl font-semibold mb-6 text-center">Modular AI Architecture Overview</h2>
-              
-              <div className="w-full bg-muted/50 rounded-lg p-6 flex flex-col">
-                {/* Updated architectural diagram */}
-                <div className="flex-grow flex flex-col items-center justify-center space-y-6">
-                  {/* Input Layer */}
-                  <div className="w-full">
-                    <div className="bg-primary/20 p-3 rounded-md text-center border border-primary/50">
-                      Input
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
-                  
-                  {/* Category Router */}
-                  <div className="w-full">
-                    <div className="bg-secondary p-3 rounded-md text-center border border-border">
-                      Category Router
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
-                  
-                  {/* Expert Modules */}
-                  <div className="w-full grid grid-cols-4 gap-2">
-                    <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      Science
-                    </div>
-                    <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      Finance
-                    </div>
-                    <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      History
-                    </div>
-                    <div className="bg-accent/20 p-2 rounded-md text-center text-xs border border-accent/50">
-                      Ethics
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
-                  
-                  {/* AICL Communication Layer */}
-                  <div className="w-full">
-                    <div className="bg-primary/30 p-3 rounded-md text-center border border-primary/50">
-                      AICL Communication Layer
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
-                  
-                  {/* Core Logic */}
-                  <div className="w-full">
-                    <div className="bg-secondary p-3 rounded-md text-center border border-border">
-                      Core Logic Integration
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
-                  
-                  {/* Verification Layer */}
-                  <div className="w-full">
-                    <div className="bg-primary/30 p-3 rounded-md text-center border border-primary/30">
-                      Funnel Verification Layer
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
-                  
-                  {/* Output */}
-                  <div className="w-full">
-                    <div className="bg-primary/20 p-3 rounded-md text-center border border-primary/50">
-                      Output
-                    </div>
-                  </div>
-                  
-                  <ArrowRight className="w-6 h-6 text-muted-foreground rotate-90" />
-                  
-                  {/* Active Learning Feedback Loop */}
-                  <div className="w-full">
-                    <div className="bg-muted/50 p-3 rounded-md text-center border border-muted text-sm">
-                      Active Learning Feedback Loop
-                    </div>
-                  </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-t border-border py-20 md:py-28">
+        <div className="max-container max-w-3xl space-y-16">
+          {pillars.map((p, i) => (
+            <Reveal key={p.title} delay={i * 0.05}>
+              <p className="technical-label">{String(i + 1).padStart(2, '0')}</p>
+              <h2 className="mt-4 font-display text-2xl md:text-3xl font-semibold mb-4">{p.title}</h2>
+              <p className="text-muted-foreground leading-relaxed">{p.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t border-border py-20 md:py-28">
+        <div className="max-container max-w-3xl">
+          <SectionIntro kicker="Technical approach" title="Four principles behind the architecture." className="mb-14" />
+          <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10">
+            {approach.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.04}>
+                <div className="border-t border-border pt-5">
+                  <h3 className="font-display text-lg font-semibold mb-1.5">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
                 </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="glass p-8 mt-12">
-            <h2 className="text-2xl font-semibold mb-6">Technical Approach to Modular AI Systems</h2>
-            
-            <div className="space-y-6">
-              <p className="text-muted-foreground">
-                Our modular AI architecture departs from traditional transformer-based models through innovative design principles:
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-foreground">Modular Parameter Sharing in AI</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Rather than training one massive AI model, we train specialized expert modules that share a common AICL interface while focusing on specific knowledge domains for optimal efficiency.
-                  </p>
-                </div>
-                
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-foreground">Adaptive Activation Patterns for Efficiency</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Only the AI modules relevant to each query are activated through intelligent routing, dramatically reducing computational requirements while maintaining output quality and accuracy.
-                  </p>
-                </div>
-                
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-foreground">Multi-Stage AI Verification System</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Each AI output passes through multiple verification stages that rigorously check for factual accuracy, logical consistency, and safety compliance before delivery to users.
-                  </p>
-                </div>
-                
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-foreground">Continuous Integration Learning for AI</h3>
-                  <p className="text-sm text-muted-foreground">
-                    New knowledge undergoes validation against existing knowledge bases through AICL protocols before integration into appropriate expert modules, ensuring continuous yet safe AI evolution.
-                  </p>
-                </div>
-              </div>
-            </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
