@@ -7,19 +7,17 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import SEO from '@/components/SEO';
 
 const products = [
-  { to: '/anvira', name: 'Anvira', tag: 'Modular AI architecture', desc: 'The reference product line that ships the full LocalHouseLLM stack end-to-end. Available in personal, enterprise, and embedded editions.' },
+  { to: '/anvira', name: 'Anvira', tag: 'Local-first AI workspace', desc: 'The reference product that ships the full LocalHouseLLM stack end-to-end — one workspace for chat, agents, notes, study, and models.' },
   { to: '/nomi', name: 'Nomi', tag: 'Persona & memory infrastructure', desc: 'A user-owned identity and memory layer that travels across AI systems. Plug Nomi into any modular AI and your context comes with you.' },
-  { to: '/inkflow', name: 'InkFlow', tag: 'Early access · Writing', desc: 'A focused AI writing assistant built on the modular stack — clarity, tone, and structure for everyday work.' },
-  { to: '/devquill', name: 'DevQuill', tag: 'Early access · Developers', desc: 'A development environment tuned for building, testing, and shipping modular AI systems.' },
 ];
 
 const Products = () => (
   <CleanLayout>
     <SEO
       title="Products — LocalHouseLLM"
-      description="Products built on the LocalHouseLLM modular AI stack: Anvira (personal, enterprise, and embedded modular AI), Nomi (user-owned persona and memory), InkFlow (writing), DevQuill (developers)."
+      description="Products built on the LocalHouseLLM modular AI stack: Anvira (local-first AI workspace) and Nomi (user-owned persona and memory)."
       canonical="https://localhousellm.com/products"
-      keywords="LocalHouseLLM products, Anvira, Nomi, InkFlow, DevQuill, modular AI products, decentralized AI products"
+      keywords="LocalHouseLLM products, Anvira, Nomi, modular AI products, decentralized AI products"
       schema={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'LocalHouseLLM Products', url: 'https://localhousellm.com/products' }}
     />
     <Breadcrumbs items={[{ name: 'Products', to: '/products' }]} />

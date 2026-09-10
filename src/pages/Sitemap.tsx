@@ -20,19 +20,38 @@ const groups: Group[] = [
     heading: 'Research',
     items: [
       { to: '/archive', label: 'Research', desc: 'Papers on modular, adaptive, decentralized AI.' },
+      { to: '/benchmarks', label: 'Benchmarks', desc: 'Latency, cost, and reliability measurements.' },
       { to: '/release-logs', label: 'Release Logs', desc: 'Updates across the LocalHouseLLM stack.' },
+    ],
+  },
+  {
+    heading: 'Stack',
+    items: [
+      { to: '/stack', label: 'Stack overview', desc: 'The full modular AI architecture.' },
+      { to: '/stack/aicl', label: 'AICL', desc: 'The communication layer between modules.' },
+      { to: '/stack/orcha', label: 'ORCHA', desc: 'The orchestration engine.' },
+      { to: '/stack/memory', label: 'Memory', desc: 'Portable, user-owned context.' },
+      { to: '/stack/safety', label: 'Safety', desc: 'Verification and policy checks.' },
+      { to: '/stack/tools', label: 'Tools', desc: 'Reusable, sandboxed actions.' },
+      { to: '/stack/modules', label: 'Intelligence Modules', desc: 'Specialized, swappable experts.' },
     ],
   },
   {
     heading: 'Projects',
     items: [
-      { to: '/anvira', label: 'Anvira', desc: 'Modular AI architecture — personal, enterprise, edge.' },
-      { to: '/anvira/o1', label: 'Anvira o1', desc: 'Personal local-first modular AI assistant.' },
-      { to: '/anvira/o1e', label: 'Anvira o1e', desc: 'Enterprise on-premises AI infrastructure.' },
-      { to: '/anvira/h1', label: 'Anvira h1', desc: 'Embedded AI for robotics and edge devices.' },
+      { to: '/anvira', label: 'Anvira', desc: 'Local-first modular AI workspace.' },
       { to: '/nomi', label: 'Nomi', desc: 'User-owned AI persona and memory infrastructure.' },
-      { to: '/inkflow', label: 'InkFlow', desc: 'Early-access writing assistant.' },
-      { to: '/devquill', label: 'DevQuill', desc: 'Early-access environment for developers.' },
+      { to: '/products', label: 'All products', desc: 'Everything built on the LocalHouseLLM stack.' },
+    ],
+  },
+  {
+    heading: 'Resources',
+    items: [
+      { to: '/docs', label: 'Docs', desc: 'Technical documentation hub.' },
+      { to: '/start', label: 'Start here', desc: 'Installation, integration, first module.' },
+      { to: '/use-cases', label: 'Use cases', desc: 'Where modular local AI applies.' },
+      { to: '/faq', label: 'FAQ', desc: 'Common questions, answered directly.' },
+      { to: '/work-with-us', label: 'Work with us', desc: 'Consulting and infrastructure partnerships.' },
     ],
   },
 ];

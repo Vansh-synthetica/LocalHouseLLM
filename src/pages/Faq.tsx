@@ -13,7 +13,7 @@ const faqs = [
   { q: 'How is AICL different from ORCHA?', a: 'AICL defines how messages move between modules. ORCHA decides which messages to send and what to do with the responses. Keeping the protocol and the orchestrator separate is what makes either of them upgradable in isolation.' },
   { q: 'Why does modular AI matter?', a: 'Monolithic models concentrate capability, cost, and risk in one opaque artifact. Modular AI separates concerns: small specialized experts are cheaper to run, faster to upgrade, easier to audit, and possible to swap. The result is infrastructure that improves piece by piece rather than all-or-nothing.' },
   { q: 'Who should use the LocalHouseLLM stack?', a: 'Developers and researchers building AI systems where ownership, auditability, or local execution matter: healthcare, finance, education, robotics, on-device assistants, and any private-data setting. Anyone tired of rebuilding routing, retries, and verification by hand.' },
-  { q: 'Is LocalHouseLLM open source?', a: 'Yes — the core components (AICL, ORCHA) are open source on GitHub. Research papers are published openly on SSRN. Products built on the stack (Anvira, Nomi, InkFlow, DevQuill) have their own licensing.' },
+  { q: 'Is LocalHouseLLM open source?', a: 'Yes — the core components (AICL, ORCHA) are open source on GitHub. Research papers are published openly on SSRN. Products built on the stack (Anvira, Nomi) have their own licensing.' },
   { q: 'Where can I read the research?', a: 'The Research page collects every paper and technical note, with links to SSRN and GitHub.' },
 ];
 

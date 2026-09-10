@@ -9,10 +9,10 @@ import { ArrowRight, Search, Home } from "lucide-react";
 
 const suggestedPages = [
   { to: "/mission", label: "Mission — Why LocalHouseLLM", desc: "Open, modular infrastructure for decentralized AI" },
-  { to: "/research", label: "Research", desc: "Papers on modular, adaptive, decentralized AI" },
-  { to: "/anvira", label: "Anvira — Modular AI", desc: "Personal, enterprise, and edge editions" },
+  { to: "/archive", label: "Research", desc: "Papers on modular, adaptive, decentralized AI" },
+  { to: "/anvira", label: "Anvira — AI Workspace", desc: "Local-first modular AI workspace" },
   { to: "/nomi", label: "Nomi — Persona Infrastructure", desc: "User-owned identity and memory layer" },
-  { to: "/opensource", label: "Open Source", desc: "Our public components and contributions" },
+  { to: "/stack", label: "Stack", desc: "The full modular AI architecture" },
   { to: "/sitemap", label: "Sitemap", desc: "Browse every page on LocalHouseLLM" },
 ];
 
@@ -27,7 +27,7 @@ const NotFound = () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Page Not Found — LocalHouseLLM",
-    "description": "The page you requested could not be found. Explore LocalHouseLLM's modular AI products including Anvira, InkFlow, and DevQuill.",
+    "description": "The page you requested could not be found. Explore LocalHouseLLM's modular AI products including Anvira and Nomi.",
     "url": `https://localhousellm.com${location.pathname}`,
     "isPartOf": {
       "@type": "WebSite",

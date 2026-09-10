@@ -19,7 +19,7 @@ const SEO = ({
   description = "LocalHouseLLM builds open, modular infrastructure for local and decentralized AI. Home of Anvira, Nomi, and the AICL protocol.",
   keywords = "LocalHouseLLM, Local House LLM, modular AI, local AI, Anvira, Nomi, AICL, ORCHA, decentralized AI, edge AI",
   canonical = "https://localhousellm.com/",
-  ogImage = "https://localhousellm.com/og-image.png",
+  ogImage = "https://localhousellm.com/favicon.png",
   type = "website",
   author = "LocalHouseLLM",
   publishedTime,
