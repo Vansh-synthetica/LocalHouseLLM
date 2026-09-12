@@ -159,24 +159,22 @@ const Stack = () => {
 
       {/* ---------- AICL ---------- */}
       <section id="aicl" className="border-t border-border py-20 md:py-28 scroll-mt-20">
-        <div className="max-container max-w-5xl grid lg:grid-cols-[1fr_auto] gap-10 items-start mb-12">
+        <div className="max-container max-w-3xl">
           <Reveal>
             <p className="technical-label">Communication layer</p>
             <h2 className="mt-4 font-serif font-normal tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
               AICL
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="text-lg text-muted-foreground leading-relaxed mb-10">
               AICL — the Adaptive Inter-module Communication Language — is the protocol AI modules use to talk to
               each other inside the LocalHouseLLM stack. Every request, response, and capability advertisement
               moves as a structured AICL packet.
             </p>
           </Reveal>
-          <Reveal delay={0.1} className="hidden lg:block pt-6">
+
+          <Reveal className="mb-10">
             <CommunicationVisual />
           </Reveal>
-        </div>
-
-        <div className="max-container max-w-3xl">
           <Reveal>
             <p className="text-muted-foreground leading-relaxed mb-10">
               Free-form prompt strings are a fine interface for a chat box, but a terrible interface for an
