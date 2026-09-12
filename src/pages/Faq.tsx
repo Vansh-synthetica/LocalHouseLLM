@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import CleanLayout from '@/components/CleanLayout';
@@ -61,8 +60,8 @@ const Faq = () => {
         <div className="max-container max-w-3xl">
           <h2 className="text-2xl md:text-3xl font-semibold mb-5">Still have questions?</h2>
           <div className="flex flex-wrap gap-3">
-            <Link to="/contact"><Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">Get in touch</Button></Link>
-            <Link to="/docs"><Button variant="outline" className="border-border bg-transparent h-11 px-6">Read the docs</Button></Link>
+            <Link to="/about#contact"><Button className="rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11 px-6">Get in touch</Button></Link>
+            <Link to="/docs"><Button variant="outline" className="rounded-sm border-border bg-transparent h-11 px-6">Read the docs</Button></Link>
           </div>
         </div>
       </section>

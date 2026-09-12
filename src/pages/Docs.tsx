@@ -71,11 +71,11 @@ const Docs = () => (
     <section className="border-t border-border/40 py-12 md:py-16">
       <div className="max-container max-w-4xl space-y-12">
         {sections.map((s) => (
-          <article key={s.heading} id={s.heading.toLowerCase().replace(/\s+/g, '-')}>
+          <article key={s.heading} id={s.heading.toLowerCase().replace(/\s+/g, '-')} className="scroll-mt-24">
             <h2 className="text-2xl md:text-3xl font-semibold mb-4">{s.heading}</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">{s.body}</p>
             {s.code && (
-              <pre className="p-5 rounded-xl border border-border/40 font-mono text-xs md:text-sm leading-relaxed bg-foreground/[0.02] whitespace-pre overflow-x-auto">{s.code}</pre>
+              <pre className="p-5 rounded-sm border border-border font-mono text-xs md:text-sm leading-relaxed bg-card whitespace-pre overflow-x-auto">{s.code}</pre>
             )}
           </article>
         ))}
@@ -86,10 +86,10 @@ const Docs = () => (
       <div className="max-container max-w-3xl">
         <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">Where to go next.</h2>
         <div className="flex flex-wrap gap-3">
-          <Link to="/start"><Button className="bg-foreground text-background hover:bg-foreground/90 h-11 px-6">Start here <ArrowRight className="w-4 h-4 ml-1" /></Button></Link>
-          <Link to="/stack"><Button variant="outline" className="border-border bg-transparent h-11 px-6">The stack</Button></Link>
+          <a href="#quickstart"><Button className="rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11 px-6">Start here <ArrowRight className="w-4 h-4 ml-1" /></Button></a>
+          <Link to="/stack"><Button variant="outline" className="rounded-sm border-border bg-transparent h-11 px-6">The stack</Button></Link>
           <a href="https://github.com/LocalHouseLLM" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" className="border-border bg-transparent h-11 px-6">GitHub</Button>
+            <Button variant="outline" className="rounded-sm border-border bg-transparent h-11 px-6">GitHub</Button>
           </a>
         </div>
       </div>
