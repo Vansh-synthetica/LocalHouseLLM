@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion, type MotionValue } from 'framer-motion';
 
 // Hand-placed node positions (not random) so the "living system" reads as
 // deliberate composition rather than noise, and stays stable across renders.
@@ -39,54 +38,6 @@ export const NodeField = () => (
   </div>
 );
 
-// The opening transition: a scattered field crossfades into an ordered grid
-// as you scroll, standing in for "a single system becomes structured layers."
-const scatterNodes: [number, number][] = [
-  [90, 70], [220, 40], [340, 100], [60, 180], [180, 150], [300, 200], [400, 60],
-  [130, 260], [260, 280], [380, 220], [40, 320], [210, 340], [340, 330], [440, 300],
-];
-const gridCols = [70, 170, 270, 370, 470];
-const gridRows = [80, 180, 280];
-const gridNodes: [number, number][] = gridRows.flatMap((y) => gridCols.map((x): [number, number] => [x, y]));
-
-export const StructureField = ({
-  scatterOpacity,
-  gridOpacity,
-}: {
-  scatterOpacity: MotionValue<number>;
-  gridOpacity: MotionValue<number>;
-}) => (
-  <div className="lh-structure__field" aria-hidden="true">
-    <svg viewBox="0 0 500 360" preserveAspectRatio="xMidYMid meet">
-      <motion.g style={{ opacity: scatterOpacity }}>
-        {scatterNodes.map(([x, y], i) =>
-          scatterNodes.slice(i + 1, i + 3).map(([x2, y2], j) => (
-            <path key={`s-${i}-${j}`} className="lh-structure__line" d={`M${x},${y} L${x2},${y2}`} />
-          )),
-        )}
-        {scatterNodes.map(([x, y], i) => (
-          <circle key={`sn-${i}`} className="lh-structure__node" cx={x} cy={y} r={3.2} />
-        ))}
-      </motion.g>
-      <motion.g style={{ opacity: gridOpacity }}>
-        {gridRows.map((y, ri) =>
-          gridCols.slice(0, -1).map((x, ci) => (
-            <path key={`gh-${ri}-${ci}`} className="lh-structure__line" d={`M${x},${y} L${gridCols[ci + 1]},${y}`} />
-          )),
-        )}
-        {gridCols.map((x, ci) =>
-          gridRows.slice(0, -1).map((y, ri) => (
-            <path key={`gv-${ci}-${ri}`} className="lh-structure__line" d={`M${x},${y} L${x},${gridRows[ri + 1]}`} />
-          )),
-        )}
-        {gridNodes.map(([x, y], i) => (
-          <circle key={`gn-${i}`} className="lh-structure__node" cx={x} cy={y} r={3.2} />
-        ))}
-      </motion.g>
-    </svg>
-  </div>
-);
-
 export const ArchitectureTree = () => (
   <div className="lh-tree">
     <div className="lh-tree__root">
@@ -118,66 +69,6 @@ export const ArchitectureTree = () => (
   </div>
 );
 
-const orchaSteps = ['Decompose', 'Plan', 'Select', 'Execute', 'Evaluate', 'Resolve', 'Result'];
-
-export const OrchaFlow = () => (
-  <div className="lh-flow">
-    {orchaSteps.map((step, i) => (
-      <div key={step} style={{ display: 'flex', alignItems: 'center' }}>
-        <span className="lh-flow__step">{step}</span>
-        {i < orchaSteps.length - 1 && <span className="lh-flow__arrow" aria-hidden="true" />}
-      </div>
-    ))}
-  </div>
-);
-
-const threadSteps = [
-  ['Interaction', 'A conversation happens'],
-  ['Context', 'What mattered is captured'],
-  ['Memory', 'It persists, user-owned'],
-  ['Future interaction', 'The system remembers'],
-];
-
-export const NomiThread = () => (
-  <div className="lh-thread">
-    {threadSteps.map(([title, caption]) => (
-      <div className="lh-thread__node" key={title}>
-        <i />
-        <strong>{title}</strong>
-        <small>{caption}</small>
-      </div>
-    ))}
-  </div>
-);
-
-const aiclNodes: [number, number, string][] = [
-  [400, 60, 'Module A'], [620, 140, 'Module B'], [640, 320, 'Module C'],
-  [420, 380, 'Module D'], [200, 320, 'Module E'], [180, 130, 'Module F'],
-];
-
-export const AiclNetwork = () => (
-  <div className="lh-network" aria-hidden="true">
-    <svg viewBox="0 0 800 460">
-      {aiclNodes.map(([x, y], i) => {
-        const [x2, y2] = aiclNodes[(i + 1) % aiclNodes.length];
-        const mx = (x + x2) / 2 + (i % 2 === 0 ? 30 : -30);
-        const my = (y + y2) / 2 + (i % 2 === 0 ? -24 : 24);
-        return <path key={`e-${i}`} d={`M${x},${y} Q${mx},${my} ${x2},${y2}`} style={{ animation: `lh-dash ${8 + i}s linear infinite` }} strokeDasharray="3 8" />;
-      })}
-      <path d="M400,60 Q410,220 420,380" strokeDasharray="3 8" style={{ animation: 'lh-dash 12s linear infinite' }} />
-      <path d="M620,140 Q400,230 200,320" strokeDasharray="3 8" style={{ animation: 'lh-dash 10s linear infinite' }} />
-      {aiclNodes.map(([x, y], i) => (
-        <circle key={`n-${i}`} cx={x} cy={y} r={5} />
-      ))}
-    </svg>
-    {aiclNodes.map(([x, y, label], i) => (
-      <span key={label} className="lh-network__label" style={{ left: `${(x / 800) * 100}%`, top: `${(y / 460) * 100}%` }}>
-        {label}
-      </span>
-    ))}
-  </div>
-);
-
 export const LocalMachine = () => (
   <div className="lh-machine">
     <p className="lh-machine__items">
@@ -187,20 +78,3 @@ export const LocalMachine = () => (
   </div>
 );
 
-const researchItems = [
-  ['2026', 'Adaptive Modular AI: A New Paradigm for Scalable, Safe, and Efficient Language Models'],
-  ['2026', 'Shadow AMAI: An Architecture for Unconstrained Adaptive Modular Intelligence'],
-  ['2026', 'CoT Looping Systems, Continuous Hypothesis Propagation, and Predictability Ratios'],
-  ['2026', 'ADAPT: Adaptive Decomposition and Parallel Task Execution for Memory-Efficient LLM Inference'],
-];
-
-export const ResearchList = () => (
-  <div className="lh-research">
-    {researchItems.map(([year, title]) => (
-      <div className="lh-research__item" key={title}>
-        <small>{year}</small>
-        <strong>{title}</strong>
-      </div>
-    ))}
-  </div>
-);

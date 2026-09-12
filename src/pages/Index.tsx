@@ -7,13 +7,8 @@ import SEO from '@/components/SEO';
 import {
   NodeField,
   ArchitectureTree,
-  OrchaFlow,
-  NomiThread,
-  AiclNetwork,
   LocalMachine,
-  ResearchList,
 } from '@/components/home/HomeVisuals';
-import { WorkspaceVisual } from '@/components/anvira/AnviraVisuals';
 import anviraBranch from '@/assets/anvira-botanical-branch.png';
 import anviraFoliage from '@/assets/anvira-foliage-silhouette.png';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -240,78 +235,29 @@ const ArchitectureSection = () => (
   </section>
 );
 
-const OrchaSection = () => (
-  <section className="lh-section lh-section--line lh-section--deep" id="orcha">
-    <div className="lh-shell">
-      <SectionIntro eyebrow="ORCHA" title={<>Intelligence needs<br />a runtime.</>}>
-        <p>Orcha coordinates models, agents and tools into reliable, executable workflows.</p>
-      </SectionIntro>
-      <Reveal className="lh-section__stage" variants={revealStage}>
-        <OrchaFlow />
-      </Reveal>
-    </div>
-  </section>
-);
-
-const NomiSection = () => (
-  <section className="lh-section lh-section--line lh-section--deep" id="nomi">
-    <div className="lh-thread-rail" aria-hidden="true">
-      <motion.div
-        className="lh-thread-rail__fill"
-        initial={{ scaleY: 0 }}
-        whileInView={{ scaleY: 1 }}
-        viewport={{ once: true, amount: 0.9 }}
-        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-      />
-    </div>
-    <div className="lh-shell">
-      <SectionIntro eyebrow="NOMI" title={<>Intelligence needs<br />continuity.</>}>
-        <p>Nomi gives intelligent systems persistent memory, identity and context.</p>
-      </SectionIntro>
-      <Reveal className="lh-section__stage" variants={revealStage}>
-        <NomiThread />
-      </Reveal>
-    </div>
-  </section>
-);
-
-const AiclSection = () => (
-  <section className="lh-section lh-section--line" id="aicl">
-    <div className="lh-shell">
-      <SectionIntro eyebrow="AICL" title={<>Intelligence needs<br />to communicate.</>}>
-        <p>AICL explores adaptive communication between independent intelligence modules.</p>
-      </SectionIntro>
-      <Reveal className="lh-section__stage" variants={revealStage}>
-        <AiclNetwork />
-      </Reveal>
-    </div>
-  </section>
-);
-
+// A single calm teaser, not a full demo — the full workspace experience
+// lives on its own dedicated page at /anvira.
 const AnviraSection = () => (
-  <section className="lh-section lh-section--line" id="anvira">
+  <section className="lh-section lh-section--line lh-anvira-teaser" id="anvira">
     <EyeWatermark />
-    <div className="lh-shell lh-anvira">
-      <Reveal>
+    <div className="lh-shell">
+      <Reveal className="lh-anvira-teaser__intro">
         <p className="lh-eyebrow">Our first environment</p>
         <h2>Meet Anvira.</h2>
-        <p style={{ marginTop: 22, color: 'hsl(var(--lh-ink-soft))', lineHeight: 1.8, maxWidth: 460 }}>
+        <p>
           A local-first AI workspace where conversation, knowledge, agents, notes and learning
           live together.
         </p>
-        <div className="lh-anvira__lines">
-          <span>One workspace.</span>
-          <span>One context.</span>
-          <span>Your intelligence.</span>
-        </div>
-        <Link to="/anvira" className="lh-anvira__link">
+      </Reveal>
+      <Reveal className="lh-anvira__lines">
+        <span>One workspace.</span>
+        <span>One context.</span>
+        <span>Your intelligence.</span>
+      </Reveal>
+      <Reveal>
+        <Link to="/anvira" className="lh-button lh-button--primary">
           Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
         </Link>
-      </Reveal>
-      <Reveal variants={revealStage}>
-        <div className="lh-anvira__panel">
-          <WorkspaceVisual />
-        </div>
       </Reveal>
     </div>
   </section>
@@ -325,22 +271,6 @@ const LocalFirstSection = () => (
       </SectionIntro>
       <Reveal className="lh-section__stage" variants={revealStage}>
         <LocalMachine />
-      </Reveal>
-    </div>
-  </section>
-);
-
-const ResearchSection = () => (
-  <section className="lh-section lh-section--line" id="research">
-    <div className="lh-shell">
-      <SectionIntro eyebrow="Research" title={<>We are still<br />figuring it out.</>} />
-      <Reveal className="lh-section__stage" variants={revealStage}>
-        <ResearchList />
-      </Reveal>
-      <Reveal>
-        <Link to="/archive" className="lh-research__link">
-          Explore research <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
       </Reveal>
     </div>
   </section>
@@ -420,12 +350,8 @@ const Index = () => {
         <OpeningTransition />
         <IdeaSection />
         <ArchitectureSection />
-        <OrchaSection />
-        <NomiSection />
-        <AiclSection />
         <AnviraSection />
         <LocalFirstSection />
-        <ResearchSection />
         <BiggerPicture />
         <FinalSection />
       </div>
