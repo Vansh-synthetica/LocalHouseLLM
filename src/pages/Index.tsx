@@ -7,6 +7,7 @@ import SEO from '@/components/SEO';
 import { NodeField, LocalMachine } from '@/components/home/HomeVisuals';
 import anviraBranch from '@/assets/anvira-botanical-branch.png';
 import anviraFoliage from '@/assets/anvira-foliage-silhouette.png';
+import forestImage from '@/assets/video-poster.jpg';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import '@/pages/anvira.css';
 import './home.css';
@@ -86,7 +87,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span>Intelligence,</span>
+            <span className="lh-mark">Intelligence,</span>
             <span>built differently.</span>
           </motion.h1>
           <motion.p
@@ -156,6 +157,22 @@ const OpeningTransition = () => (
   </div>
 );
 
+// One real photograph, used exactly once — the same restraint Anthropic
+// applies to its own single full-bleed image band, rather than scattering
+// abstract decoration through every section.
+const ImageBand = () => (
+  <div className="lh-imageband">
+    <div className="lh-imageband__frame" style={{ backgroundImage: `url(${forestImage})` }}>
+      <div className="lh-shell lh-imageband__quote">
+        <Reveal>
+          <p>Grown, not assembled — intelligence that adapts to where it lives.</p>
+          <span>LocalHouseLLM</span>
+        </Reveal>
+      </div>
+    </div>
+  </div>
+);
+
 // A quiet watermark inside the Anvira section rather than a dedicated
 // transition — the same eye + line-sweep drawing technique as Anvira's own
 // privacy motif, sitting behind the copy so it reads as ambient texture,
@@ -207,7 +224,7 @@ const chain = [
 const ThesisSection = () => (
   <section className="lh-section lh-section--line" id="idea">
     <div className="lh-shell">
-      <SectionIntro eyebrow="The idea" title={<>Intelligence shouldn't<br />live inside a single model.</>}>
+      <SectionIntro eyebrow="The idea" title={<>Intelligence shouldn't<br />live inside a <span className="lh-mark">single model</span>.</>}>
         <p>Models are only one part of an intelligent system. Ours separates the rest into layers.</p>
       </SectionIntro>
 
@@ -243,7 +260,9 @@ const AnviraSection = () => (
     <div className="lh-shell">
       <Reveal className="lh-anvira-teaser__intro">
         <p className="lh-eyebrow">Our first environment</p>
-        <h2>Meet Anvira.</h2>
+        <h2>
+          Meet <span className="lh-mark">Anvira</span>.
+        </h2>
         <p>
           A local-first AI workspace where conversation, knowledge, agents, notes and learning
           live together.
@@ -266,7 +285,7 @@ const AnviraSection = () => (
 const LocalFirstSection = () => (
   <section className="lh-section lh-section--line" id="local-first">
     <div className="lh-shell">
-      <SectionIntro eyebrow="Local-first" title={<>Intelligence should belong<br />to the people using it.</>}>
+      <SectionIntro eyebrow="Local-first" title={<>Intelligence should <span className="lh-mark">belong</span><br />to the people using it.</>}>
         <p>Local-first by default. Cloud when you choose it.</p>
       </SectionIntro>
       <Reveal className="lh-section__stage" variants={revealStage}>
@@ -294,7 +313,9 @@ const FinalSection = () => (
       <Reveal variants={revealStage}>
         <h2>
           <span>Intelligence,</span>
-          <span>built to belong.</span>
+          <span>
+            built to <span className="lh-mark">belong</span>.
+          </span>
         </h2>
         <p>Building infrastructure for modular, persistent, executable intelligence.</p>
         <p className="lh-final__meta">LocalHouseLLM</p>
@@ -348,6 +369,7 @@ const Index = () => {
       <div className="lhllm-home">
         <Hero />
         <OpeningTransition />
+        <ImageBand />
         <ThesisSection />
         <AnviraSection />
         <LocalFirstSection />
