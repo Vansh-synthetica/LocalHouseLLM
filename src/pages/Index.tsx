@@ -279,10 +279,10 @@ const LocalFirstSection = () => (
 const BiggerPicture = () => (
   <div className="lh-cinema">
     <Reveal className="lh-cinema__line">
-      <p>The future isn't one model. It's systems.</p>
+      <p>The best AI won't be the biggest model. It'll be the one that's actually yours.</p>
     </Reveal>
     <Reveal className="lh-cinema__sub">
-      <p>Systems that remember, communicate, act, verify, and adapt.</p>
+      <p>Systems you can inspect, extend, and keep — not rent.</p>
     </Reveal>
   </div>
 );
