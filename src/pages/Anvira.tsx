@@ -204,19 +204,12 @@ const AnviraHero = () => {
   const reduced = prefersReducedMotion();
   const visualX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [-16, 16]);
   const visualY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [-12, 12]);
-  const branchX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [12, -12]);
-  const branchY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [10, -10]);
-  const leafX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [-8, 8]);
-  const leafY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [-6, 6]);
 
-  // The CSS on these elements already carries a static transform (3D tilt / rotation).
-  // Compose it into the motion-driven transform instead of using the x/y shorthand,
-  // which would otherwise overwrite the element's inline transform entirely.
+  // The CSS on this element already carries a static transform (3D tilt).
+  // Compose it into the motion-driven transform instead of using the x/y
+  // shorthand, which would otherwise overwrite the inline transform entirely.
   const visualTransform = useTransform([visualX, visualY], ([vx, vy]: number[]) =>
     `translate(${vx}px, ${vy}px) rotateY(-4deg) rotateX(2deg)`,
-  );
-  const branchTransform = useTransform([branchX, branchY], ([bx, by]: number[]) =>
-    `translate(${bx}px, ${by}px) rotate(-20deg)`,
   );
 
   const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
@@ -289,20 +282,6 @@ const AnviraHero = () => {
             <motion.div className="anvira-hero__visual-inner" style={{ transform: visualTransform }}>
               <WorkspaceVisual />
             </motion.div>
-            <motion.img
-              src={anviraBranch}
-              alt=""
-              aria-hidden="true"
-              className="anvira-hero__branch"
-              style={{ transform: branchTransform }}
-            />
-            <motion.img
-              src={anviraFoliage}
-              alt=""
-              aria-hidden="true"
-              className="anvira-hero__leaf"
-              style={{ x: leafX, y: leafY }}
-            />
           </div>
         </div>
 
