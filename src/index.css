@@ -41,7 +41,7 @@
     --input: 72 10% 78%;
     --ring: 103 18% 34%;
 
-    --radius: 0.25rem;
+    --radius: 0.75rem;
 
     --success: 145 30% 38%;
     --success-foreground: 45 33% 98%;
@@ -200,6 +200,14 @@
   /* Small-caps uppercase metadata label — stack layers, dates, categories */
   .technical-label {
     @apply inline-flex items-center gap-2 font-display text-[10px] font-medium uppercase tracking-[0.18em] text-primary;
+  }
+
+  /* A hand-picked word inside a headline carries a deliberate underline
+     instead of a color change — editorial markup, not decoration. */
+  .headline-mark {
+    text-decoration: underline;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.08em;
   }
 }
 

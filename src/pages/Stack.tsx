@@ -59,8 +59,8 @@ const Stack = () => {
         <div className="max-container max-w-4xl">
           <Reveal>
             <p className="technical-label">Architecture</p>
-            <h1 className="mt-4 font-serif font-normal tracking-tight text-4xl md:text-6xl leading-[1.05] mb-8">
-              The LocalHouseLLM stack.
+            <h1 className="mt-4 font-display font-extrabold tracking-tight text-4xl md:text-6xl leading-[1.05] mb-8">
+              The LocalHouseLLM <span className="headline-mark">stack</span>.
             </h1>
           </Reveal>
           <Reveal delay={0.06}>
@@ -162,7 +162,7 @@ const Stack = () => {
         <div className="max-container max-w-3xl">
           <Reveal>
             <p className="technical-label">Communication layer</p>
-            <h2 className="mt-4 font-serif font-normal tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
+            <h2 className="mt-4 font-display font-extrabold tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
               AICL
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
@@ -224,7 +224,7 @@ const Stack = () => {
         <div className="max-container max-w-3xl">
           <Reveal>
             <p className="technical-label">Orchestration layer</p>
-            <h2 className="mt-4 font-serif font-normal tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
+            <h2 className="mt-4 font-display font-extrabold tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
               ORCHA
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
@@ -279,7 +279,7 @@ const result = await orcha.handle({
         <div className="max-container max-w-3xl">
           <Reveal>
             <p className="technical-label">Context layer</p>
-            <h2 className="mt-4 font-serif font-normal tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
+            <h2 className="mt-4 font-display font-extrabold tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
               Memory
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
@@ -317,7 +317,7 @@ const result = await orcha.handle({
         <div className="max-container max-w-3xl">
           <Reveal>
             <p className="technical-label">Verification layer</p>
-            <h2 className="mt-4 font-serif font-normal tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
+            <h2 className="mt-4 font-display font-extrabold tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
               Safety
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
@@ -357,7 +357,7 @@ const result = await orcha.handle({
         <div className="max-container max-w-3xl">
           <Reveal>
             <p className="technical-label">Actions layer</p>
-            <h2 className="mt-4 font-serif font-normal tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
+            <h2 className="mt-4 font-display font-extrabold tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
               Tools
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
@@ -393,7 +393,7 @@ const result = await orcha.handle({
         <div className="max-container max-w-3xl">
           <Reveal>
             <p className="technical-label">Experts layer</p>
-            <h2 className="mt-4 font-serif font-normal tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
+            <h2 className="mt-4 font-display font-extrabold tracking-tight text-3xl md:text-5xl leading-[1.05] mb-6">
               Intelligence Modules
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">

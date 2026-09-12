@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
 import { NodeField, LocalMachine } from '@/components/home/HomeVisuals';
+import { WorkspaceVisual } from '@/components/anvira/AnviraVisuals';
 import anviraBranch from '@/assets/anvira-botanical-branch.png';
 import anviraFoliage from '@/assets/anvira-foliage-silhouette.png';
 import forestImage from '@/assets/video-poster.jpg';
@@ -88,7 +89,8 @@ const Hero = () => {
             transition={{ duration: 0.85, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="lh-mark">Intelligence,</span>
-            <span>built differently.</span>
+            <span>built</span>
+            <span>differently.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 14 }}
@@ -224,7 +226,7 @@ const chain = [
 const ThesisSection = () => (
   <section className="lh-section lh-section--line" id="idea">
     <div className="lh-shell">
-      <SectionIntro eyebrow="The idea" title={<>Intelligence shouldn't<br />live inside a <span className="lh-mark">single model</span>.</>}>
+      <SectionIntro eyebrow="The idea" title={<>Intelligence shouldn't<br />live inside a<br /><span className="lh-mark">single model</span>.</>}>
         <p>Models are only one part of an intelligent system. Ours separates the rest into layers.</p>
       </SectionIntro>
 
@@ -273,6 +275,9 @@ const AnviraSection = () => (
         <span>One context.</span>
         <span>Your intelligence.</span>
       </Reveal>
+      <Reveal className="lh-anvira-preview" variants={revealStage}>
+        <WorkspaceVisual />
+      </Reveal>
       <Reveal>
         <Link to="/anvira" className="lh-button lh-button--primary">
           Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
@@ -285,7 +290,7 @@ const AnviraSection = () => (
 const LocalFirstSection = () => (
   <section className="lh-section lh-section--line" id="local-first">
     <div className="lh-shell">
-      <SectionIntro eyebrow="Local-first" title={<>Intelligence should <span className="lh-mark">belong</span><br />to the people using it.</>}>
+      <SectionIntro eyebrow="Local-first" title={<>Intelligence should<br /><span className="lh-mark">belong</span> to the<br />people using it.</>}>
         <p>Local-first by default. Cloud when you choose it.</p>
       </SectionIntro>
       <Reveal className="lh-section__stage" variants={revealStage}>
@@ -313,9 +318,8 @@ const FinalSection = () => (
       <Reveal variants={revealStage}>
         <h2>
           <span>Intelligence,</span>
-          <span>
-            built to <span className="lh-mark">belong</span>.
-          </span>
+          <span>built to</span>
+          <span className="lh-mark">belong.</span>
         </h2>
         <p>Building infrastructure for modular, persistent, executable intelligence.</p>
         <p className="lh-final__meta">LocalHouseLLM</p>

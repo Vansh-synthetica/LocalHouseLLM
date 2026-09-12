@@ -86,8 +86,8 @@ const About = () => {
         <div className="max-container max-w-4xl">
           <Reveal>
             <p className="technical-label">About</p>
-            <h1 className="mt-4 font-serif font-normal tracking-tight text-4xl md:text-6xl leading-[1.05] mb-8">
-              Building smarter, not just bigger, AI.
+            <h1 className="mt-4 font-display font-extrabold tracking-tight text-4xl md:text-6xl leading-[1.05] mb-8">
+              Building <span className="headline-mark">smarter</span>, not just bigger, AI.
             </h1>
           </Reveal>
           <Reveal delay={0.06}>

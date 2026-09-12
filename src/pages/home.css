@@ -110,6 +110,11 @@
 .lh-anvira__lines span { display: block; font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: clamp(26px, 3.6vw, 44px); color: hsl(var(--lh-ink-soft)); }
 .lh-anvira__lines span:last-child { color: hsl(var(--lh-ink)); font-style: italic; }
 
+/* The real Anvira interface, not another abstract diagram — the one place
+   Home proves the product exists rather than just describing it. */
+.lh-anvira-preview { position: relative; z-index: 1; width: min(820px, 100%); margin: 46px auto 0; border-radius: 14px; box-shadow: 0 60px 120px -40px hsl(var(--lh-ink) / .3), 0 0 0 1px hsl(var(--lh-ink) / .07); }
+.lh-anvira-preview .anvira-app { border-radius: 14px; }
+
 /* ---------- Local machine ---------- */
 .lh-machine { position: relative; width: min(680px, 100%); margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
 .lh-machine__items { font-size: clamp(15px, 1.9vw, 20px); color: hsl(var(--lh-ink)); }
