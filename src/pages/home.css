@@ -88,7 +88,7 @@
 .lh-chain-cta { margin-top: 12px; }
 
 /* ---------- Anvira teaser: quiet, typographic, no product demo ---------- */
-.lh-anvira-teaser { text-align: center; }
+.lh-anvira-teaser { text-align: center; overflow: hidden; }
 .lh-anvira-teaser .lh-shell { position: relative; z-index: 1; }
 .lh-anvira-teaser .lh-eyebrow { justify-content: center; }
 .lh-anvira-teaser__intro { position: relative; z-index: 1; max-width: 560px; margin-inline: auto; }
