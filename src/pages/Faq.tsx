@@ -42,7 +42,7 @@ const Faq = () => {
       <section className="pt-10 pb-12">
         <div className="max-container max-w-4xl">
           <p className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5">Questions</p>
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-8">FAQ</h1>
+          <h1 className="text-4xl md:text-6xl font-serif font-normal tracking-tight leading-[1.05] mb-8">FAQ</h1>
         </div>
       </section>
 

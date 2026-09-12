@@ -346,23 +346,14 @@ const ResearchSection = () => (
   </section>
 );
 
-const cinemaLines = [
-  "The future isn't",
-  'one model.',
-  "It's systems.",
-  'Systems that remember.',
-  'Systems that communicate.',
-  'Systems that act.',
-  'Systems that verify and adapt.',
-];
-
 const BiggerPicture = () => (
   <div className="lh-cinema">
-    {cinemaLines.map((line) => (
-      <Reveal key={line} className="lh-cinema__line">
-        <p>{line}</p>
-      </Reveal>
-    ))}
+    <Reveal className="lh-cinema__line">
+      <p>The future isn't one model. It's systems.</p>
+    </Reveal>
+    <Reveal className="lh-cinema__sub">
+      <p>Systems that remember, communicate, act, verify, and adapt.</p>
+    </Reveal>
   </div>
 );
 

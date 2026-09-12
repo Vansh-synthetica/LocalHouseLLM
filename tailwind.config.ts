@@ -92,6 +92,7 @@ export default {
         // Semantic aliases
         sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['Sora', 'Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['"Source Serif 4"', 'Georgia', 'serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
         // Back-compat: existing pages use font-lato / font-raleway / font-inter /
         // font-playfair. Alias them to the new premium pair so no page needs edits.

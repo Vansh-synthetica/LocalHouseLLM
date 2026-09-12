@@ -57,7 +57,7 @@ const Docs = () => (
     <section className="pt-10 pb-12">
       <div className="max-container max-w-4xl">
         <p className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5">Documentation</p>
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-8">Docs</h1>
+        <h1 className="text-4xl md:text-6xl font-serif font-normal tracking-tight leading-[1.05] mb-8">Docs</h1>
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4">
           You're building AI that lives on the user's machine, remembers their context, and works for them — not
           one more thing running in someone else's cloud.

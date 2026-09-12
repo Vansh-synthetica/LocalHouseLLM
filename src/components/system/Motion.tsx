@@ -48,7 +48,7 @@ export const SectionIntro = ({
 }) => (
   <Reveal className={className}>
     <p className="technical-label">{kicker}</p>
-    <h2 className="mt-4 font-display font-semibold tracking-tight text-4xl sm:text-5xl lg:text-6xl text-foreground leading-[1.05]">
+    <h2 className="mt-4 font-serif font-normal tracking-tight text-4xl sm:text-5xl lg:text-6xl text-foreground leading-[1.05]">
       {title}
     </h2>
     {children}

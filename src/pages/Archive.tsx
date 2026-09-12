@@ -169,7 +169,7 @@ const Archive = () => {
             animate="visible"
             variants={fadeUp}
             custom={1}
-            className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[1.02]"
+            className="text-5xl sm:text-6xl md:text-7xl font-serif font-normal tracking-tight leading-[1.02]"
           >
             Archive
           </motion.h1>
