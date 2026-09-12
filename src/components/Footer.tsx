@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="mt-24 border-t border-border bg-background">
       <div className="max-container py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div className="col-span-2 space-y-5">
             <Link to="/" className="inline-flex items-center gap-2.5" aria-label="LocalHouseLLM home">
               <span className="inline-flex h-6 w-6 items-center justify-center text-foreground">
@@ -36,40 +36,24 @@ const Footer = () => {
             <h4 className="text-xs font-display font-semibold tracking-[0.15em] uppercase text-foreground">Stack</h4>
             <ul className="space-y-2.5 text-sm">
               <li><Link to="/stack" className={linkClass}>Overview</Link></li>
-              <li><Link to="/stack/aicl" className={linkClass}>AICL</Link></li>
-              <li><Link to="/stack/orcha" className={linkClass}>ORCHA</Link></li>
-              <li><Link to="/stack/memory" className={linkClass}>Memory</Link></li>
-              <li><Link to="/stack/safety" className={linkClass}>Safety</Link></li>
-              <li><Link to="/stack/tools" className={linkClass}>Tools</Link></li>
-              <li><Link to="/stack/modules" className={linkClass}>Modules</Link></li>
-            </ul>
-          </nav>
-
-          <nav className="space-y-4" aria-label="Products and build">
-            <h4 className="text-xs font-display font-semibold tracking-[0.15em] uppercase text-foreground">Build</h4>
-            <ul className="space-y-2.5 text-sm">
-              <li><Link to="/products" className={linkClass}>All products</Link></li>
-              <li><Link to="/anvira" className={linkClass}>Anvira</Link></li>
-              <li><Link to="/nomi" className={linkClass}>Nomi</Link></li>
-              <li><Link to="/docs" className={linkClass}>Docs</Link></li>
-              <li><Link to="/start" className={linkClass}>Start here</Link></li>
+              <li><Link to="/stack#aicl" className={linkClass}>AICL</Link></li>
+              <li><Link to="/stack#orcha" className={linkClass}>ORCHA</Link></li>
+              <li><Link to="/stack#memory" className={linkClass}>Memory</Link></li>
+              <li><Link to="/stack#safety" className={linkClass}>Safety</Link></li>
+              <li><Link to="/stack#tools" className={linkClass}>Tools</Link></li>
+              <li><Link to="/stack#modules" className={linkClass}>Modules</Link></li>
             </ul>
           </nav>
 
           <nav className="space-y-4" aria-label="Company">
             <h4 className="text-xs font-display font-semibold tracking-[0.15em] uppercase text-foreground">Company</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><Link to="/mission" className={linkClass}>Mission</Link></li>
-              <li><Link to="/vision" className={linkClass}>Vision</Link></li>
+              <li><Link to="/anvira" className={linkClass}>Anvira</Link></li>
+              <li><Link to="/docs" className={linkClass}>Docs</Link></li>
               <li><Link to="/archive" className={linkClass}>Research</Link></li>
-              <li><Link to="/benchmarks" className={linkClass}>Benchmarks</Link></li>
-              <li><Link to="/use-cases" className={linkClass}>Use cases</Link></li>
-              <li><Link to="/work-with-us" className={linkClass}>Work with us</Link></li>
-              <li><Link to="/release-logs" className={linkClass}>Release logs</Link></li>
-              <li><Link to="/faq" className={linkClass}>FAQ</Link></li>
               <li><Link to="/about" className={linkClass}>About</Link></li>
-              <li><Link to="/contact" className={linkClass}>Contact</Link></li>
-              <li><Link to="/sitemap" className={linkClass}>Sitemap</Link></li>
+              <li><Link to="/about#contact" className={linkClass}>Contact</Link></li>
+              <li><Link to="/faq" className={linkClass}>FAQ</Link></li>
             </ul>
           </nav>
         </div>

@@ -8,12 +8,12 @@ import SEO from "@/components/SEO";
 import { ArrowRight, Search, Home } from "lucide-react";
 
 const suggestedPages = [
-  { to: "/mission", label: "Mission — Why LocalHouseLLM", desc: "Open, modular infrastructure for decentralized AI" },
+  { to: "/about", label: "About — Why LocalHouseLLM", desc: "Mission, team, and how to reach us" },
   { to: "/archive", label: "Research", desc: "Papers on modular, adaptive, decentralized AI" },
   { to: "/anvira", label: "Anvira — AI Workspace", desc: "Local-first modular AI workspace" },
-  { to: "/nomi", label: "Nomi — Persona Infrastructure", desc: "User-owned identity and memory layer" },
   { to: "/stack", label: "Stack", desc: "The full modular AI architecture" },
-  { to: "/sitemap", label: "Sitemap", desc: "Browse every page on LocalHouseLLM" },
+  { to: "/docs", label: "Docs", desc: "Developer documentation" },
+  { to: "/", label: "Home", desc: "Back to the start" },
 ];
 
 const NotFound = () => {
