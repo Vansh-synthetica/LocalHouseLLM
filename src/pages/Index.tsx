@@ -4,11 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
-import {
-  NodeField,
-  ArchitectureTree,
-  LocalMachine,
-} from '@/components/home/HomeVisuals';
+import { NodeField, LocalMachine } from '@/components/home/HomeVisuals';
 import anviraBranch from '@/assets/anvira-botanical-branch.png';
 import anviraFoliage from '@/assets/anvira-foliage-silhouette.png';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -200,36 +196,40 @@ const EyeWatermark = () => (
   </motion.div>
 );
 
-const ideaWords = ['Memory', 'Execution', 'Communication', 'Tools', 'Verification', 'Adaptation'];
+const chain = [
+  { name: 'AICL', role: 'the messages that move between every module' },
+  { name: 'ORCHA', role: 'decides what happens, and when' },
+  { name: 'Memory', role: 'the context that persists, user-owned' },
+  { name: 'Intelligence Modules', role: 'the experts that do the reasoning' },
+  { name: 'Applications', role: "Anvira, and what's built next" },
+];
 
-const IdeaSection = () => (
+const ThesisSection = () => (
   <section className="lh-section lh-section--line" id="idea">
     <div className="lh-shell">
       <SectionIntro eyebrow="The idea" title={<>Intelligence shouldn't<br />live inside a single model.</>}>
-        <p>Models are only one part of an intelligent system.</p>
+        <p>Models are only one part of an intelligent system. Ours separates the rest into layers.</p>
       </SectionIntro>
-      <Reveal className="lh-idea__words">
-        {ideaWords.map((w) => (
-          <span key={w} className="is-on">
-            {w}
-          </span>
+
+      <Reveal className="lh-chain">
+        {chain.map((c, i) => (
+          <div className="lh-chain__item" key={c.name}>
+            <div className="lh-chain__rail">
+              <span className="lh-chain__dot" />
+              {i < chain.length - 1 && <span className="lh-chain__line" />}
+            </div>
+            <div className={`lh-chain__body${i === chain.length - 1 ? ' lh-chain__body--last' : ''}`}>
+              <strong>{c.name}</strong>
+              <p>{c.role}</p>
+            </div>
+          </div>
         ))}
       </Reveal>
-    </div>
-  </section>
-);
 
-const ArchitectureSection = () => (
-  <section className="lh-section lh-section--line" id="architecture">
-    <div className="lh-shell">
-      <SectionIntro eyebrow="What we are building" title={<>A different kind of<br />AI infrastructure.</>}>
-        <p>
-          LocalHouseLLM builds systems that allow intelligence to communicate, remember, reason,
-          execute and adapt across models, tools and environments.
-        </p>
-      </SectionIntro>
-      <Reveal className="lh-section__stage" variants={revealStage}>
-        <ArchitectureTree />
+      <Reveal className="lh-chain-cta">
+        <Link to="/stack" className="lh-button lh-button--secondary">
+          See the full architecture <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
       </Reveal>
     </div>
   </section>
@@ -348,8 +348,7 @@ const Index = () => {
       <div className="lhllm-home">
         <Hero />
         <OpeningTransition />
-        <IdeaSection />
-        <ArchitectureSection />
+        <ThesisSection />
         <AnviraSection />
         <LocalFirstSection />
         <BiggerPicture />

@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 // Hand-placed node positions (not random) so the "living system" reads as
 // deliberate composition rather than noise, and stays stable across renders.
 const heroNodes: [number, number, number][] = [
@@ -35,37 +33,6 @@ export const NodeField = () => (
         />
       ))}
     </svg>
-  </div>
-);
-
-export const ArchitectureTree = () => (
-  <div className="lh-tree">
-    <div className="lh-tree__root">
-      <strong>LOCALHOUSELLM</strong>
-      <small>Company</small>
-    </div>
-    <div className="lh-tree__connector" />
-    <p className="lh-tree__label">Infrastructure</p>
-    <div className="lh-tree__row-wrap">
-      <div className="lh-tree__row lh-tree__row--3">
-        <div className="lh-tree__node"><strong>AICL</strong><small>Communication</small></div>
-        <div className="lh-tree__node"><strong>ORCHA</strong><small>Execution</small></div>
-        <div className="lh-tree__node"><strong>NOMI</strong><small>Memory</small></div>
-      </div>
-    </div>
-    <div className="lh-tree__connector" style={{ marginTop: 24 }} />
-    <p className="lh-tree__label">Intelligence &amp; Tools</p>
-    <div className="lh-tree__node" style={{ maxWidth: 320, marginInline: 'auto' }}>
-      <strong>Intelligence Modules</strong>
-      <small>Models and specialized experts</small>
-    </div>
-    <div className="lh-tree__connector" style={{ marginTop: 24 }} />
-    <p className="lh-tree__label">Applications</p>
-    <div className="lh-tree__apps">
-      <Link to="/anvira">Anvira — the workspace</Link>
-      <span className="is-future">Zynvera — the education environment</span>
-      <span className="is-future">Future environments</span>
-    </div>
   </div>
 );
 
