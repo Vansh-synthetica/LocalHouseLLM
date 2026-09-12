@@ -509,7 +509,7 @@ const Anvira = () => {
       <AnviraLeafWipe />
 
       {/* Your intelligence */}
-      <section className="anvira-section anvira-section--deep" id="intelligence">
+      <section className="anvira-section" id="intelligence">
         <div className="anvira-shell">
           <SectionIntro number="03 — Your intelligence" title={<>Intelligence that works<br />where you do.</>}>
             <p>
@@ -605,7 +605,7 @@ const Anvira = () => {
       </section>
 
       {/* Model layer */}
-      <section className="anvira-section anvira-section--line anvira-section--deep" id="models">
+      <section className="anvira-section anvira-section--line" id="models">
         <div className="anvira-shell">
           <SectionIntro number="08 — The model layer" title={<>Intelligence underneath.<br />Invisible when you don't need it.</>}>
             <p>
