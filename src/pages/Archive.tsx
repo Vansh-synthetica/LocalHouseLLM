@@ -40,14 +40,14 @@ const Actions = ({ entry }: { entry: ArchiveEntry }) => (
       <>
         <Link
           to={`/archive/${entry.slug}`}
-          className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
+          className="inline-flex items-center gap-2 rounded-sm bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
         >
           <BookOpen className="w-4 h-4" /> Read in browser
         </Link>
         <a
           href={entry.pdfUrl}
           download
-          className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-border transition-colors"
+          className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-foreground/40 transition-colors"
         >
           <Download className="w-4 h-4" /> Download PDF
         </a>
@@ -58,7 +58,7 @@ const Actions = ({ entry }: { entry: ArchiveEntry }) => (
         href={entry.externalUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-border transition-colors"
+        className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-foreground/40 transition-colors"
       >
         <ArrowUpRight className="w-4 h-4" /> {entry.source === 'SSRN' ? 'Read on SSRN' : 'External source'}
       </a>
@@ -73,7 +73,7 @@ const PaperCard = ({ entry, i }: { entry: ArchiveEntry; i: number }) => (
     viewport={{ once: true, margin: '-60px' }}
     variants={fadeUp}
     custom={i}
-    className="group relative rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm p-6 md:p-8 transition-all duration-300 hover:border-border hover:bg-card/60 hover:-translate-y-0.5"
+    className="group relative rounded-sm border border-border bg-card p-6 md:p-8 transition-all duration-300 hover:border-foreground/30"
   >
     <Meta entry={entry} />
     <h3 className="mt-3 text-lg md:text-xl font-semibold leading-snug tracking-tight">
@@ -92,7 +92,7 @@ const PaperCard = ({ entry, i }: { entry: ArchiveEntry; i: number }) => (
         {entry.tags.map((t) => (
           <li
             key={t}
-            className="rounded-full border border-border/50 px-2.5 py-1 text-[11px] text-muted-foreground"
+            className="rounded-sm border border-border px-2.5 py-1 text-[11px] text-muted-foreground"
           >
             {t}
           </li>
@@ -145,15 +145,7 @@ const Archive = () => {
       />
 
       {/* HERO */}
-      <section className="relative overflow-hidden pt-10 md:pt-20 pb-14 md:pb-20">
-        {/* animated ambient element */}
-        <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-          <motion.div
-            animate={{ opacity: [0.25, 0.45, 0.25], scale: [1, 1.06, 1] }}
-            transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -top-24 left-1/2 -translate-x-1/2 h-[420px] w-[820px] rounded-full bg-primary/10 blur-[120px]"
-          />
-        </div>
+      <section className="pt-10 md:pt-20 pb-14 md:pb-20">
         <div className="max-container max-w-4xl">
           <Breadcrumbs items={[{ name: 'Archive', to: '/archive' }]} />
           <motion.p
@@ -209,9 +201,8 @@ const Archive = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/40 backdrop-blur-md p-7 md:p-12"
+            className="rounded-sm border border-border bg-card p-7 md:p-12"
           >
-            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
             <Meta entry={featured} />
             <h2 className="mt-4 text-2xl md:text-4xl font-semibold tracking-tight leading-[1.12] max-w-3xl">
               {featured.title}
@@ -252,10 +243,10 @@ const Archive = () => {
                 role="tab"
                 aria-selected={active === c}
                 onClick={() => setActive(c)}
-                className={`rounded-full px-4 py-2 text-sm transition-colors border ${
+                className={`rounded-sm px-4 py-2 text-sm transition-colors border ${
                   active === c
                     ? 'bg-foreground text-background border-transparent'
-                    : 'border-border/60 text-muted-foreground hover:text-foreground hover:bg-foreground/5'
+                    : 'border-border text-muted-foreground hover:text-foreground hover:bg-foreground/5'
                 }`}
               >
                 {c}
@@ -388,7 +379,7 @@ const Archive = () => {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={i}
-                className="group flex items-start justify-between gap-4 rounded-2xl border border-border/50 p-6 md:p-8 hover:border-border hover:bg-foreground/[0.03] transition-all"
+                className="group flex items-start justify-between gap-4 rounded-sm border border-border p-6 md:p-8 hover:border-foreground/30 hover:bg-foreground/[0.03] transition-all"
               >
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold">{repo.name}</h3>
