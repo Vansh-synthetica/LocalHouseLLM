@@ -1,54 +1,21 @@
 # LocalHouseLLM
 
-> LocalHouseLLM builds open, modular infrastructure for local and decentralized AI — home of Anvira (a local-first modular AI workspace), Nomi (AI persona & memory infrastructure), AICL (inter-module communication language), and ORCHA (orchestration runtime).
+> LocalHouseLLM builds open, modular infrastructure for local and decentralized AI — home of Anvira (a local-first modular AI workspace), AICL (inter-module communication language), and ORCHA (orchestration runtime).
 
-LocalHouseLLM's mission is to make artificial intelligence accessible, modular, and owned by the people who use it. All pages on this site are open to AI crawlers and may be indexed, summarized, and cited.
+Your AI should live on your machine, remember you, and work for you — not live in someone else's cloud. That's the idea behind everything here.
+
+All pages on this site are open to AI crawlers and may be indexed, summarized, and cited.
 
 ## Pages
 
-- [Home](/): Mission, modular stack overview, and research highlights.
-- [Mission](/mission): Manifesto for open, decentralized AI infrastructure.
-- [Vision](/vision): The architectural approach — AMAI and AICL in place of parameter-count scaling.
-- [About](/about): Who we are, leadership, and company timeline.
-- [Contact](/contact): Get in touch with the team.
-- [Work With Us](/work-with-us): Consulting, custom builds, and AI infrastructure partnerships.
-
-## Products
-
+- [Home](/): The core idea and an overview of the system.
 - [Anvira](/anvira): Local-first modular AI workspace — one workspace, one context, your intelligence.
-- [Nomi](/nomi): User-controlled AI persona, identity, and memory infrastructure.
-- [Products overview](/products): All LocalHouseLLM products.
+- [Stack](/stack): The full modular AI execution stack in one page — AICL, ORCHA, Memory (including Nomi, its persona/identity layer), Safety, Tools, and Intelligence Modules.
+- [Docs](/docs): Developer documentation — quickstart, installation, API and config reference, building a custom expert, integrations.
+- [About](/about): Why LocalHouseLLM exists, how we think about the architecture, who's building it, the company timeline, and how to contact us.
+- [Research](/archive): Curated research library with in-browser PDF reader.
+- [FAQ](/faq): Common questions, answered directly.
 
-## Stack
+## Notes for crawlers
 
-- [Stack](/stack): The full modular AI execution stack — AICL, ORCHA, memory, safety, tools, intelligence modules.
-- [AICL](/stack/aicl): Adaptive Inter-Module Communication Language — the communication layer.
-- [ORCHA](/stack/orcha): Orchestration engine — decomposition, routing, aggregation.
-- [Memory](/stack/memory): Portable, user-owned context layer.
-- [Safety](/stack/safety): Verification layer — factual, logical, and policy checks.
-- [Tools](/stack/tools): Reusable, sandboxed action components.
-- [Intelligence Modules](/stack/modules): Specialized, independently swappable expert models.
-- [Frameworks](/frameworks): AICL, ORCHA, and Nomi as composable layers.
-
-## Research
-
-- [Archive](/archive): Curated research library with in-browser PDF reader.
-- [Master Report](/archive/localhousellm-master-report): Compendium on local AI inference.
-- [Benchmarks](/benchmarks): Performance measurements, methodology, and conditions.
-- [Docs](/docs): Technical documentation hub.
-
-## Use Cases
-
-- [Use Cases](/use-cases): Where modular local AI applies.
-- [Enterprise private AI](/use-cases/enterprise-private-ai): On-premise, private deployments.
-- [Healthcare](/use-cases/healthcare): Privacy-preserving clinical AI.
-- [Edge AI](/use-cases/edge-ai): Inference on constrained devices.
-- [Research](/use-cases/research): Research workflows.
-- [AI tutors](/use-cases/ai-tutors): Education.
-- [Agriculture](/use-cases/agriculture): Field and offline deployments.
-
-## Optional
-
-- [FAQ](/faq): Common questions.
-- [Release logs](/release-logs): Changelog and releases.
-- [Sitemap](/sitemap): Human-readable index of all pages.
+Several pages that previously existed as separate URLs have been consolidated: the six Stack sub-pages (AICL, ORCHA, Memory, Safety, Tools, Modules) are now anchored sections within `/stack`; Mission, Vision, and Contact are now sections within `/about`. Old URLs redirect to their new location rather than 404ing.
