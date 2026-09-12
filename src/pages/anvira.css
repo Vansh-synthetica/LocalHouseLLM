@@ -1,13 +1,19 @@
+/* Dark-first, matching claude.com's own product pages: ink and paper carry
+   the same roles they always did (ink = foreground text, paper = page
+   background, surface = elevated card, line = hairline border) — only the
+   values are inverted. Because every section and visual component below
+   reads color through these four names rather than hardcoding light/dark,
+   the whole page follows from this one swap. */
 .anvira-site {
-  --anvira-paper: 42 28% 96%;
-  --anvira-paper-deep: 39 18% 90%;
-  --anvira-ink: 96 8% 13%;
-  --anvira-ink-soft: 90 5% 35%;
-  --anvira-moss: 103 18% 34%;
-  --anvira-moss-light: 98 19% 74%;
-  --anvira-line: 72 10% 78%;
-  --anvira-surface: 45 33% 98%;
-  --anvira-night: 100 7% 10%;
+  --anvira-paper: 90 6% 9%;
+  --anvira-paper-deep: 90 7% 6%;
+  --anvira-ink: 60 20% 95%;
+  --anvira-ink-soft: 70 8% 65%;
+  --anvira-moss: 103 28% 56%;
+  --anvira-moss-light: 100 24% 76%;
+  --anvira-line: 90 8% 19%;
+  --anvira-surface: 90 6% 13%;
+  --anvira-night: 90 6% 4%;
   position: relative;
   min-height: 100dvh;
   color: hsl(var(--anvira-ink));
@@ -34,18 +40,15 @@
 .anvira-grain { position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
 
 .anvira-nav { position: fixed; inset: 0 0 auto; z-index: 70; height: 72px; transition: background .4s ease, border-color .4s ease; border-bottom: 1px solid transparent; color: hsl(var(--anvira-ink)); }
-.anvira-nav.is-scrolled { background: hsl(var(--anvira-paper) / .9); backdrop-filter: blur(18px); border-color: hsl(var(--anvira-line) / .7); }
-/* Unscrolled, the nav sits over the dark hero — flip its text to paper-light
-   so it stays legible before the bar picks up its own opaque background. */
-.anvira-nav:not(.is-scrolled) { color: hsl(var(--anvira-paper)); }
+.anvira-nav.is-scrolled { background: hsl(var(--anvira-paper) / .85); backdrop-filter: blur(18px); border-color: hsl(var(--anvira-line)); }
 .anvira-nav__inner { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
 .anvira-nav__brand { justify-self: start; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; }
 .anvira-nav__brand span:first-child { display: grid; place-items: center; width: 27px; height: 27px; font-weight: 400; }
 .anvira-nav__links { display: flex; align-items: center; gap: 30px; }
 .anvira-nav__links a { font-size: 12px; text-decoration: none; color: inherit; opacity: .72; transition: opacity .2s ease; }
 .anvira-nav__links a:hover { opacity: 1; }
-.anvira-nav__download { justify-self: end; padding: 10px 17px; border-radius: 8px; text-decoration: none; font-size: 12px; color: hsl(var(--anvira-paper)) !important; background: hsl(var(--anvira-moss)); transition: transform .2s ease, background .2s ease; }
-.anvira-nav__download:hover { transform: translateY(-1px); background: hsl(var(--anvira-moss-light)); color: hsl(var(--anvira-ink)) !important; }
+.anvira-nav__download { justify-self: end; padding: 10px 17px; border-radius: 8px; text-decoration: none; font-size: 12px; color: hsl(var(--anvira-ink)) !important; background: hsl(var(--anvira-moss)); transition: transform .2s ease, background .2s ease, color .2s ease; }
+.anvira-nav__download:hover { transform: translateY(-1px); background: hsl(var(--anvira-moss-light)); color: hsl(var(--anvira-night)) !important; }
 .anvira-nav__menu { display: none; justify-self: end; border: 0; background: transparent; color: inherit; width: 40px; height: 40px; }
 .anvira-nav__mobile { display: none; }
 
@@ -55,27 +58,21 @@
 .anvira-hero__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(360px, .78fr) minmax(540px, 1.35fr); gap: 40px; align-items: center; }
 .anvira-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; text-transform: uppercase; font-size: 10px; letter-spacing: .18em; color: hsl(var(--anvira-moss-light)); }
 .anvira-kicker::before { content: ''; width: 28px; height: 1px; background: currentColor; }
-.anvira-hero h1 { font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: clamp(48px, 5.6vw, 92px); line-height: 1.05; color: hsl(var(--anvira-paper)); }
+.anvira-hero h1 { font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: clamp(48px, 5.6vw, 92px); line-height: 1.05; }
 .anvira-hero h1 span { display: block; }
-.anvira-hero__copy { max-width: 560px; margin-top: 31px !important; color: hsl(var(--anvira-paper) / .62); font-size: 17px; line-height: 1.75; }
+.anvira-hero__copy { max-width: 560px; margin-top: 31px !important; color: hsl(var(--anvira-ink-soft)); font-size: 17px; line-height: 1.75; }
 .anvira-actions { display: flex; gap: 11px; margin-top: 33px; }
-.anvira-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 20px; border: 1px solid hsl(var(--anvira-ink)); border-radius: 8px; text-decoration: none; font-size: 12px; transition: transform .22s ease, background .22s ease, color .22s ease; }
+.anvira-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 20px; border: 1px solid hsl(var(--anvira-ink) / .3); border-radius: 8px; text-decoration: none; font-size: 12px; transition: transform .22s ease, background .22s ease, color .22s ease; }
 .anvira-button svg { width: 15px; }
-.anvira-button--primary { color: hsl(var(--anvira-paper)) !important; background: hsl(var(--anvira-ink)); }
+.anvira-button--primary { color: hsl(var(--anvira-paper)) !important; background: hsl(var(--anvira-ink)); border-color: transparent; }
 .anvira-button--secondary { background: transparent; }
 .anvira-button:hover { transform: translateY(-2px); }
 .anvira-button--secondary:hover { color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-ink)); }
-/* On the dark hero the light-on-light ink button reads inverted: solid paper
-   primary, paper-outlined secondary, instead of the ink-based pair used on
-   every other (light) section of the page. */
-.anvira-hero .anvira-button { border-color: hsl(var(--anvira-paper) / .3); color: hsl(var(--anvira-paper)); }
-.anvira-hero .anvira-button--primary { background: hsl(var(--anvira-paper)); color: hsl(var(--anvira-night)) !important; }
-.anvira-hero .anvira-button--secondary:hover { background: hsl(var(--anvira-paper)); color: hsl(var(--anvira-night)) !important; }
 .anvira-hero__visual { position: relative; perspective: 1600px; }
-.anvira-hero__visual-inner { transform: rotateY(-4deg) rotateX(2deg); transform-style: preserve-3d; box-shadow: 0 50px 120px -30px hsl(var(--anvira-moss) / .45), 0 0 0 1px hsl(var(--anvira-paper) / .06); border-radius: 10px; }
-.anvira-botanical { position: absolute; pointer-events: none; object-fit: contain; mix-blend-mode: multiply; }
-.anvira-scroll-cue { position: absolute; z-index: 4; left: 50%; bottom: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; color: hsl(var(--anvira-paper) / .5); font-size: 9px; text-transform: uppercase; letter-spacing: .18em; }
-.anvira-scroll-cue i { width: 1px; height: 34px; background: hsl(var(--anvira-paper) / .35); transform-origin: top; animation: anvira-line 2s ease-in-out infinite; }
+.anvira-hero__visual-inner { transform: rotateY(-4deg) rotateX(2deg); transform-style: preserve-3d; box-shadow: 0 50px 120px -30px hsl(var(--anvira-moss) / .35), 0 0 0 1px hsl(var(--anvira-ink) / .06); border-radius: 10px; }
+.anvira-botanical { position: absolute; pointer-events: none; object-fit: contain; mix-blend-mode: screen; }
+.anvira-scroll-cue { position: absolute; z-index: 4; left: 50%; bottom: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; color: hsl(var(--anvira-ink-soft)); font-size: 9px; text-transform: uppercase; letter-spacing: .18em; }
+.anvira-scroll-cue i { width: 1px; height: 34px; background: hsl(var(--anvira-ink) / .35); transform-origin: top; animation: anvira-line 2s ease-in-out infinite; }
 @keyframes anvira-line { 0%, 100% { transform: scaleY(.2); opacity: .3; } 50% { transform: scaleY(1); opacity: 1; } }
 
 .anvira-morph { position: relative; height: 190dvh; }
@@ -86,13 +83,11 @@
 
 .anvira-leaf-wipe { position: relative; height: 130dvh; }
 .anvira-leaf-wipe__sticky { position: sticky; top: 0; height: 100dvh; overflow: hidden; }
-.anvira-leaf-wipe__night { position: absolute; inset: 0; background: hsl(var(--anvira-night)); }
 .anvira-leaf-wipe__leaf { position: absolute; left: 50%; top: 50%; width: min(360px, 32vw); pointer-events: none; will-change: transform; }
 .anvira-leaf-wipe__leaf svg { display: block; width: 100%; height: auto; }
 .anvira-sprig-leaf__outline { fill: hsl(var(--anvira-moss) / .16); stroke: hsl(var(--anvira-moss) / .5); stroke-width: 1.6; }
 .anvira-sprig-leaf__vein { fill: none; stroke: hsl(var(--anvira-moss) / .32); stroke-width: 1.2; stroke-linecap: round; }
 .anvira-leaf-wipe__line { position: absolute; left: 50%; top: 50%; width: min(920px, 86vw); transform: translate(-50%, -50%); text-align: center; font-family: Sora, sans-serif; font-weight: 300; font-size: clamp(38px, 6.4vw, 88px); line-height: 1.05; color: hsl(var(--anvira-ink)); }
-.anvira-leaf-wipe__line--light { color: hsl(var(--anvira-paper)); }
 
 /* Accurate mockup of the real Anvira desktop app (dark UI, real accent color) */
 .anvira-app { --ra-bg: #181c26; --ra-bg-elevated: #1e222e; --ra-bg-muted: #252a38; --ra-bg-sidebar: #15181f; --ra-accent: #6090e6; --ra-border: rgba(255,255,255,.075); --ra-text: rgba(255,255,255,.92); --ra-text-soft: rgba(255,255,255,.5); width: 100%; aspect-ratio: 16 / 10; display: grid; grid-template-columns: 168px 1fr; overflow: hidden; border-radius: 10px; color: var(--ra-text); background: var(--ra-bg); font-size: 11px; box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
@@ -141,10 +136,10 @@
 .anvira-section h2 { font-size: clamp(42px, 6vw, 82px); line-height: 1.02; font-weight: 300; }
 .anvira-section__intro > p { max-width: 610px; margin-top: 30px !important; color: hsl(var(--anvira-ink-soft)); font-size: 17px; line-height: 1.8; }
 .anvira-section__stage { margin-top: 80px; }
-.anvira-botanical--left { left: -170px; top: 14%; width: 360px; opacity: .1; transform: rotate(22deg); }
-.anvira-botanical--right { right: -170px; top: 32%; width: 370px; opacity: .12; transform: rotate(-25deg) scaleX(-1); }
-.anvira-botanical--bridge-left { left: -90px; top: -70px; width: 280px; opacity: .13; transform: rotate(-12deg); }
-.anvira-botanical--bridge-right { right: -90px; top: -60px; width: 300px; opacity: .13; transform: rotate(14deg) scaleX(-1); }
+.anvira-botanical--left { left: -170px; top: 14%; width: 360px; opacity: .16; transform: rotate(22deg); }
+.anvira-botanical--right { right: -170px; top: 32%; width: 370px; opacity: .18; transform: rotate(-25deg) scaleX(-1); }
+.anvira-botanical--bridge-left { left: -90px; top: -70px; width: 280px; opacity: .2; transform: rotate(-12deg); }
+.anvira-botanical--bridge-right { right: -90px; top: -60px; width: 300px; opacity: .2; transform: rotate(14deg) scaleX(-1); }
 
 .anvira-orbit { position: relative; width: min(900px, 100%); aspect-ratio: 10 / 7; margin-inline: auto; }
 .anvira-orbit svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -207,7 +202,7 @@
 .anvira-agent-visual__list button span { margin-right: 8px; }
 .anvira-agent-visual__detail { padding: 50px 65px; }
 .anvira-agent-visual__header { display: flex; gap: 14px; align-items: center; }
-.anvira-agent-visual__header > span { display: grid; place-items: center; width: 52px; height: 52px; background: hsl(var(--anvira-moss)); color: hsl(var(--anvira-paper)); }
+.anvira-agent-visual__header > span { display: grid; place-items: center; width: 52px; height: 52px; background: hsl(var(--anvira-moss)); color: hsl(var(--anvira-ink)); }
 .anvira-agent-visual__header div { display: grid; gap: 3px; }
 .anvira-agent-visual__header small { color: hsl(var(--anvira-ink-soft)); }
 .anvira-agent-visual__header strong { font-size: 18px; }
@@ -256,7 +251,7 @@
 .anvira-study-loop__center strong { margin-top: 12px; font-size: 16px; }
 .anvira-study-loop__center small { margin-top: 5px; color: hsl(var(--anvira-ink-soft)); }
 .anvira-study-loop__step { position: absolute; display: flex; align-items: center; gap: 8px; padding: 11px 14px; border: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper)); box-shadow: 0 10px 25px hsl(var(--anvira-ink) / .06); font-size: 11px; }
-.anvira-study-loop__step i { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-moss)); font-size: 8px; font-style: normal; }
+.anvira-study-loop__step i { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; color: hsl(var(--anvira-ink)); background: hsl(var(--anvira-moss)); font-size: 8px; font-style: normal; }
 .anvira-study-loop__step--1 { left: 44%; top: -3%; } .anvira-study-loop__step--2 { right: 3%; top: 17%; }
 .anvira-study-loop__step--3 { right: -2%; top: 54%; } .anvira-study-loop__step--4 { right: 17%; bottom: -1%; }
 .anvira-study-loop__step--5 { left: 27%; bottom: -4%; } .anvira-study-loop__step--6 { left: -2%; top: 56%; }
@@ -304,7 +299,7 @@
 .anvira-final h2 span { display: block; }
 .anvira-final__meet { margin-top: 42px !important; font-family: Sora; font-size: 20px; }
 .anvira-final .anvira-actions { margin-top: 26px; }
-.anvira-final__branch { right: -10%; bottom: -21%; width: min(600px, 48vw); opacity: .35; transform: rotate(-33deg); mix-blend-mode: multiply; pointer-events: none; object-fit: contain; }
+.anvira-final__branch { right: -10%; bottom: -21%; width: min(600px, 48vw); opacity: .22; transform: rotate(-33deg); mix-blend-mode: screen; pointer-events: none; object-fit: contain; }
 .anvira-footer { min-height: 92px; display: flex; align-items: center; border-top: 1px solid hsl(var(--anvira-line)); color: hsl(var(--anvira-ink-soft)); font-size: 10px; }
 .anvira-footer__inner { display: flex; justify-content: space-between; align-items: center; }
 .anvira-footer a { text-decoration: none; }

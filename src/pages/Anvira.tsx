@@ -362,18 +362,16 @@ const AnviraLeafWipe = () => {
     `translate(calc(-50% + ${x}vw), calc(-50% + ${y}vh)) rotate(${r}deg)`,
   );
 
-  const nightOpacity = useTransform(scrollYProgress, [0.42, 0.6], [0, 1]);
   const contextOpacity = useTransform(scrollYProgress, [0, 0.36, 0.5], [1, 1, 0]);
   const intelligenceOpacity = useTransform(scrollYProgress, [0.5, 0.64, 1], [0, 1, 1]);
 
   return (
     <div className="anvira-leaf-wipe" ref={wipeRef}>
       <div className="anvira-leaf-wipe__sticky">
-        <motion.div className="anvira-leaf-wipe__night" style={{ opacity: nightOpacity }} aria-hidden="true" />
         <motion.p className="anvira-leaf-wipe__line" style={{ opacity: contextOpacity }}>
           One context.
         </motion.p>
-        <motion.p className="anvira-leaf-wipe__line anvira-leaf-wipe__line--light" style={{ opacity: intelligenceOpacity }}>
+        <motion.p className="anvira-leaf-wipe__line" style={{ opacity: intelligenceOpacity }}>
           Your intelligence.
         </motion.p>
         <motion.div className="anvira-leaf-wipe__leaf" style={{ opacity: leafOpacity, transform: leafTransform }}>
