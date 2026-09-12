@@ -1,13 +1,11 @@
-import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
 import {
   NodeField,
-  StructureField,
   ArchitectureTree,
   OrchaFlow,
   NomiThread,
@@ -80,32 +78,8 @@ const SectionIntro = ({
 );
 
 const Hero = () => {
-  const px = useMotionValue(0);
-  const py = useMotionValue(0);
-  const sPx = useSpring(px, { stiffness: 55, damping: 20, mass: 0.4 });
-  const sPy = useSpring(py, { stiffness: 55, damping: 20, mass: 0.4 });
-  const reduced = prefersReducedMotion();
-
-  const fieldX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [-14, 14]);
-  const fieldY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [-10, 10]);
-  const branchX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [10, -10]);
-  const branchY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [8, -8]);
-  const leafX = useTransform(sPx, [-0.5, 0.5], reduced ? [0, 0] : [-6, 6]);
-  const leafY = useTransform(sPy, [-0.5, 0.5], reduced ? [0, 0] : [-5, 5]);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (reduced || e.pointerType !== 'mouse') return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    px.set((e.clientX - rect.left) / rect.width - 0.5);
-    py.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-  const handlePointerLeave = () => {
-    px.set(0);
-    py.set(0);
-  };
-
   return (
-    <section className="lh-hero" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
+    <section className="lh-hero">
       <div className="lh-shell lh-hero__grid">
         <div>
           <motion.div
@@ -157,23 +131,9 @@ const Hero = () => {
         </div>
 
         <div style={{ position: 'relative' }}>
-          <motion.div style={{ x: fieldX, y: fieldY }}>
-            <NodeField />
-          </motion.div>
-          <motion.img
-            src={anviraBranch}
-            alt=""
-            aria-hidden="true"
-            className="lh-hero__branch"
-            style={{ x: branchX, y: branchY }}
-          />
-          <motion.img
-            src={anviraFoliage}
-            alt=""
-            aria-hidden="true"
-            className="lh-hero__leaf"
-            style={{ x: leafX, y: leafY }}
-          />
+          <NodeField />
+          <img src={anviraBranch} alt="" aria-hidden="true" className="lh-hero__branch" />
+          <img src={anviraFoliage} alt="" aria-hidden="true" className="lh-hero__leaf" />
         </div>
       </div>
 
@@ -185,33 +145,25 @@ const Hero = () => {
   );
 };
 
-const OpeningTransition = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
-
-  const scatterOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 1, 0]);
-  const gridOpacity = useTransform(scrollYProgress, [0.4, 0.6, 1], [0, 1, 1]);
-  const l1 = useTransform(scrollYProgress, [0, 0.22, 0.32], [1, 1, 0]);
-  const l2 = useTransform(scrollYProgress, [0.28, 0.38, 0.58, 0.68], [0, 1, 1, 0]);
-  const l3 = useTransform(scrollYProgress, [0.64, 0.74, 1], [0, 1, 1]);
-
-  return (
-    <div className="lh-structure" ref={ref} aria-hidden="true">
-      <div className="lh-structure__sticky">
-        <StructureField scatterOpacity={scatterOpacity} gridOpacity={gridOpacity} />
-        <motion.p className="lh-structure__caption" style={{ opacity: l1 }}>
-          One <strong>intelligence</strong>.
-        </motion.p>
-        <motion.p className="lh-structure__caption" style={{ opacity: l2 }}>
-          Becomes <strong>systems</strong>.
-        </motion.p>
-        <motion.p className="lh-structure__caption" style={{ opacity: l3 }}>
-          Becomes <strong>infrastructure</strong>.
-        </motion.p>
-      </div>
-    </div>
-  );
-};
+const OpeningTransition = () => (
+  <div className="lh-opener">
+    <Reveal className="lh-opener__line">
+      <p>
+        One <strong>intelligence</strong>.
+      </p>
+    </Reveal>
+    <Reveal className="lh-opener__line">
+      <p>
+        Becomes <strong>systems</strong>.
+      </p>
+    </Reveal>
+    <Reveal className="lh-opener__line">
+      <p>
+        Becomes <strong>infrastructure</strong>.
+      </p>
+    </Reveal>
+  </div>
+);
 
 // A quiet watermark inside the Anvira section rather than a dedicated
 // transition — the same eye + line-sweep drawing technique as Anvira's own
@@ -404,45 +356,15 @@ const cinemaLines = [
   'Systems that verify and adapt.',
 ];
 
-// cinemaLines has 7 fixed entries — each line's opacity is its own explicit
-// useTransform call (hooks can't be called from inside a loop/callback).
-const CINEMA_SEG = 1 / 7;
-const CINEMA_PAD = CINEMA_SEG * 0.22;
-const cinemaRange = (i: number) => [i * CINEMA_SEG, (i + 1) * CINEMA_SEG] as const;
-
-const BiggerPicture = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
-
-  const [s0, e0] = cinemaRange(0);
-  const [s1, e1] = cinemaRange(1);
-  const [s2, e2] = cinemaRange(2);
-  const [s3, e3] = cinemaRange(3);
-  const [s4, e4] = cinemaRange(4);
-  const [s5, e5] = cinemaRange(5);
-  const [s6, e6] = cinemaRange(6);
-
-  const o0 = useTransform(scrollYProgress, [s0, e0 - CINEMA_PAD, e0], [1, 1, 0]);
-  const o1 = useTransform(scrollYProgress, [s1, s1 + CINEMA_PAD, e1 - CINEMA_PAD, e1], [0, 1, 1, 0]);
-  const o2 = useTransform(scrollYProgress, [s2, s2 + CINEMA_PAD, e2 - CINEMA_PAD, e2], [0, 1, 1, 0]);
-  const o3 = useTransform(scrollYProgress, [s3, s3 + CINEMA_PAD, e3 - CINEMA_PAD, e3], [0, 1, 1, 0]);
-  const o4 = useTransform(scrollYProgress, [s4, s4 + CINEMA_PAD, e4 - CINEMA_PAD, e4], [0, 1, 1, 0]);
-  const o5 = useTransform(scrollYProgress, [s5, s5 + CINEMA_PAD, e5 - CINEMA_PAD, e5], [0, 1, 1, 0]);
-  const o6 = useTransform(scrollYProgress, [s6, s6 + CINEMA_PAD, e6], [0, 1, 1]);
-  const opacities = [o0, o1, o2, o3, o4, o5, o6];
-
-  return (
-    <div className="lh-cinema" ref={ref}>
-      <div className="lh-cinema__sticky">
-        {cinemaLines.map((line, i) => (
-          <motion.p key={line} className="lh-cinema__line" style={{ opacity: opacities[i] }}>
-            {line}
-          </motion.p>
-        ))}
-      </div>
-    </div>
-  );
-};
+const BiggerPicture = () => (
+  <div className="lh-cinema">
+    {cinemaLines.map((line) => (
+      <Reveal key={line} className="lh-cinema__line">
+        <p>{line}</p>
+      </Reveal>
+    ))}
+  </div>
+);
 
 const FinalSection = () => (
   <section className="lh-final">
