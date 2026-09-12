@@ -58,7 +58,11 @@ const Docs = () => (
       <div className="max-container max-w-4xl">
         <p className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5">Documentation</p>
         <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-8">Docs</h1>
-        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4">
+          You're building AI that lives on the user's machine, remembers their context, and works for them — not
+          one more thing running in someone else's cloud.
+        </p>
+        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
           The LocalHouseLLM stack is open infrastructure. These docs are how you build on it. Some sections are still being written — references to the open-source repositories are linked throughout for current source-of-truth.
         </p>
       </div>

@@ -262,6 +262,14 @@ const AnviraHero = () => {
               Anvira brings conversation, knowledge, agents, notes and learning together in one
               local-first AI workspace.
             </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="anvira-hero__copy"
+            >
+              It lives on your machine, remembers your context, and works for you — not somewhere else's cloud.
+            </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}

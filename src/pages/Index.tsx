@@ -132,6 +132,15 @@ const Hero = () => {
           >
             Building the systems that make intelligence modular, persistent, executable and yours.
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="lh-hero__copy"
+          >
+            We believe your AI should live on your machine, remember you, and work for you — not live in someone
+            else's cloud.
+          </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
