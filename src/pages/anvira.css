@@ -299,7 +299,7 @@
 .anvira-final h2 span { display: block; }
 .anvira-final__meet { margin-top: 42px !important; font-family: Sora; font-size: 20px; }
 .anvira-final .anvira-actions { margin-top: 26px; }
-.anvira-final__branch { right: -10%; bottom: -21%; width: min(600px, 48vw); opacity: .22; transform: rotate(-33deg); mix-blend-mode: screen; pointer-events: none; object-fit: contain; }
+.anvira-final__branch { position: absolute; right: -10%; bottom: -21%; width: min(600px, 48vw); opacity: .22; transform: rotate(-33deg); mix-blend-mode: screen; pointer-events: none; object-fit: contain; }
 .anvira-footer { min-height: 92px; display: flex; align-items: center; border-top: 1px solid hsl(var(--anvira-line)); color: hsl(var(--anvira-ink-soft)); font-size: 10px; }
 .anvira-footer__inner { display: flex; justify-content: space-between; align-items: center; }
 .anvira-footer a { text-decoration: none; }
@@ -345,7 +345,6 @@
   .anvira-app__bubble--agent p, .anvira-app__bubble--user { font-size: 9.5px; }
   .anvira-app__composer { margin: 0 10px 10px; padding: 7px 9px; }
   .anvira-app__composer span { font-size: 8.5px; }
-  .anvira-hero__branch { width: 55%; right: -22%; }
   .anvira-section { padding: 105px 0; }
   .anvira-section h2 { font-size: clamp(40px, 12vw, 58px); }
   .anvira-section__intro > p { font-size: 15px; }
