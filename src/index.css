@@ -77,6 +77,14 @@
     font-feature-settings: 'ss01', 'cv11';
   }
 
+  /* Anthropic's split: bold sans for headlines, serif for anything meant to
+     be read as prose. Any element with its own font-sans/font-display/
+     font-mono utility (buttons, labels, nav, badges) overrides this by
+     specificity, so UI chrome stays sans automatically. */
+  p {
+    @apply font-serif;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight text-foreground;
     font-weight: 600;
