@@ -264,7 +264,7 @@ const AnviraSection = () => (
 );
 
 const LocalFirstSection = () => (
-  <section className="lh-section lh-section--line lh-section--deep" id="local-first">
+  <section className="lh-section lh-section--line" id="local-first">
     <div className="lh-shell">
       <SectionIntro eyebrow="Local-first" title={<>Intelligence should belong<br />to the people using it.</>}>
         <p>Local-first by default. Cloud when you choose it.</p>

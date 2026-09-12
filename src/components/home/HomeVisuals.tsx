@@ -69,10 +69,17 @@ export const ArchitectureTree = () => (
   </div>
 );
 
+const localItems = ['Models', 'Workspace', 'Memory', 'Knowledge', 'Agents'];
+
 export const LocalMachine = () => (
   <div className="lh-machine">
     <p className="lh-machine__items">
-      Models<i>·</i>Workspace<i>·</i>Memory<i>·</i>Knowledge<i>·</i>Agents
+      {localItems.map((item, i) => (
+        <span key={item}>
+          {i > 0 && <i aria-hidden="true" />}
+          {item}
+        </span>
+      ))}
     </p>
     <p className="lh-machine__caption">External connections only exist when you add them.</p>
   </div>

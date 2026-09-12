@@ -7,7 +7,6 @@
   --lh-moss-light: 98 19% 76%;
   --lh-line: 60 10% 84%;
   --lh-surface: 45 33% 98%;
-  --lh-night: 222 20% 9%;
   /* Prototype accent — muted clay, used for links/highlights only */
   --lh-accent: 15 42% 48%;
   position: relative;
@@ -22,7 +21,6 @@
 .lh-shell { width: min(1240px, calc(100% - 48px)); margin-inline: auto; }
 .lh-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; text-transform: uppercase; font-size: 10px; letter-spacing: .2em; color: hsl(var(--lh-moss)); }
 .lh-eyebrow::before { content: ''; width: 26px; height: 1px; background: currentColor; }
-.lh-section--deep .lh-eyebrow { color: hsl(var(--lh-moss-light)); }
 
 /* ---------- Hero ---------- */
 .lh-hero { position: relative; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; padding: 140px 0 60px; background: radial-gradient(circle at 70% 30%, hsl(var(--lh-moss-light) / .16), transparent 45%), hsl(var(--lh-paper)); }
@@ -69,11 +67,9 @@
 /* ---------- Generic section ---------- */
 .lh-section { position: relative; padding: 150px 0; }
 .lh-section--line { border-top: 1px solid hsl(var(--lh-line)); }
-.lh-section--deep { color: hsl(var(--lh-paper)); background: hsl(var(--lh-night)); }
 .lh-section__intro { max-width: 760px; }
 .lh-section h2 { font-size: clamp(38px, 5.4vw, 74px); line-height: 1.04; }
 .lh-section__intro > p { max-width: 600px; margin-top: 26px !important; color: hsl(var(--lh-ink-soft)); font-size: 17px; line-height: 1.8; }
-.lh-section--deep .lh-section__intro > p { color: hsl(var(--lh-paper) / .62); }
 .lh-section__stage { margin-top: 80px; }
 .lh-botanical { position: absolute; pointer-events: none; object-fit: contain; mix-blend-mode: multiply; }
 .lh-botanical--left { left: -160px; top: 12%; width: 340px; opacity: .1; transform: rotate(20deg); }
@@ -120,15 +116,16 @@
 .lh-anvira__lines span:last-child { color: hsl(var(--lh-ink)); font-style: italic; }
 
 /* ---------- Local machine ---------- */
-.lh-machine { position: relative; width: min(680px, 100%); margin-inline: auto; padding: 56px 30px; display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; border: 1px solid hsl(var(--lh-paper) / .14); border-radius: 50% / 40%; background: radial-gradient(circle, hsl(var(--lh-paper) / .06), transparent 68%); }
-.lh-machine__items { font-family: Sora, sans-serif; font-weight: 300; font-size: clamp(14px, 1.8vw, 19px); color: hsl(var(--lh-paper) / .82); }
-.lh-machine__items i { margin: 0 11px; font-style: normal; color: hsl(var(--lh-paper) / .22); }
-.lh-machine__caption { font-size: 10.5px; color: hsl(var(--lh-paper) / .42); }
+.lh-machine { position: relative; width: min(680px, 100%); margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.lh-machine__items { font-size: clamp(15px, 1.9vw, 20px); color: hsl(var(--lh-ink)); }
+.lh-machine__items span { display: inline-flex; align-items: center; }
+.lh-machine__items i { display: inline-block; width: 4px; height: 4px; margin: 0 16px; border-radius: 50%; background: hsl(var(--lh-moss)); font-style: normal; }
+.lh-machine__caption { font-size: 12px; letter-spacing: .02em; color: hsl(var(--lh-ink-soft)); }
 
 /* ---------- Bigger picture: one thesis, one elaboration, no pinning ---------- */
-.lh-cinema { position: relative; padding: 160px 0; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center; background: hsl(var(--lh-night)); }
-.lh-cinema__line { width: min(880px, 88vw); margin-inline: auto; font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: clamp(32px, 5.4vw, 72px); line-height: 1.15; color: hsl(var(--lh-paper)); }
-.lh-cinema__sub { width: min(620px, 84vw); margin-inline: auto; font-size: clamp(16px, 1.7vw, 20px); line-height: 1.6; color: hsl(var(--lh-paper) / .55); }
+.lh-cinema { position: relative; padding: 160px 0; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center; border-top: 1px solid hsl(var(--lh-line)); }
+.lh-cinema__line { width: min(880px, 88vw); margin-inline: auto; font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: clamp(32px, 5.4vw, 72px); line-height: 1.15; color: hsl(var(--lh-ink)); }
+.lh-cinema__sub { width: min(620px, 84vw); margin-inline: auto; font-size: clamp(16px, 1.7vw, 20px); line-height: 1.6; color: hsl(var(--lh-ink-soft)); }
 
 /* ---------- Final ---------- */
 .lh-final { position: relative; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; border-top: 1px solid hsl(var(--lh-line)); }
