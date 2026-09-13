@@ -70,8 +70,8 @@ export default {
         // Named aliases onto the same palette — for bespoke sections that want
         // the raw paper/ink/moss vocabulary instead of the semantic UI tokens.
         paper: {
-          DEFAULT: 'hsl(42 28% 96%)',
-          deep: 'hsl(39 18% 90%)',
+          DEFAULT: 'hsl(38 33% 95%)',
+          deep: 'hsl(36 22% 91%)',
         },
         ink: {
           DEFAULT: 'hsl(96 8% 13%)',

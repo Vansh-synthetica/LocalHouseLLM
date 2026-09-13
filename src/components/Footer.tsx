@@ -2,65 +2,155 @@ import { Link } from 'react-router-dom';
 import BrandMark from './system/BrandMark';
 
 const linkClass =
-  'text-muted-foreground hover:text-foreground transition-colors duration-200';
+  'text-muted-foreground hover:text-foreground transition-colors duration-200 text-[13px] leading-snug';
+
+const FooterColumn = ({
+  title,
+  links,
+  'aria-label': ariaLabel,
+}: {
+  title: string;
+  links: { to: string; label: string; external?: boolean }[];
+  'aria-label': string;
+}) => (
+  <nav className="space-y-4" aria-label={ariaLabel}>
+    <h4 className="text-[11px] font-display font-semibold tracking-[0.14em] uppercase text-foreground">
+      {title}
+    </h4>
+    <ul className="space-y-2.5">
+      {links.map((item) => (
+        <li key={item.label}>
+          {item.external ? (
+            <a href={item.to} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              {item.label}
+            </a>
+          ) : (
+            <Link to={item.to} className={linkClass}>
+              {item.label}
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+);
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-border bg-background">
-      <div className="max-container py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-          <div className="col-span-2 space-y-5">
+    <footer className="mt-8 border-t border-border bg-background">
+      <div className="max-container py-16 lg:py-20">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 pb-14 border-b border-border/70">
+          <div className="space-y-5 max-w-sm">
             <Link to="/" className="inline-flex items-center gap-2.5" aria-label="LocalHouseLLM home">
-              <span className="inline-flex h-6 w-6 items-center justify-center text-foreground">
+              <span className="inline-flex h-7 w-7 items-center justify-center text-foreground">
                 <BrandMark />
               </span>
-              <span className="font-display text-base font-semibold tracking-tight text-foreground">
-                LocalHouseLLM
+              <span className="font-display text-[13px] font-semibold tracking-[0.18em] uppercase text-foreground">
+                LocalHouse
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-              Open, modular infrastructure for decentralized AI — AICL, ORCHA, memory,
-              safety, tools, and intelligence modules for a local-first future.
+            <p className="text-[13px] text-muted-foreground leading-relaxed font-sans">
+              Open, modular infrastructure for local and decentralized AI — built so intelligence
+              can live on hardware you control.
             </p>
-            <div className="flex gap-4 pt-1">
-              <a href="https://github.com/LocalHouseLLM" target="_blank" rel="noopener noreferrer" className={linkClass} aria-label="LocalHouseLLM on GitHub">GitHub</a>
-              <a href="https://x.com/localhousellm" target="_blank" rel="noopener noreferrer" className={linkClass} aria-label="LocalHouseLLM on X">X</a>
-              <a href="https://www.linkedin.com/company/localhousellm" target="_blank" rel="noopener noreferrer" className={linkClass} aria-label="LocalHouseLLM on LinkedIn">LinkedIn</a>
-              <a href="https://www.instagram.com/localhousellm/" target="_blank" rel="noopener noreferrer" className={linkClass} aria-label="LocalHouseLLM on Instagram">Instagram</a>
+            <div className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
+              <a
+                href="https://github.com/LocalHouseLLM"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+                aria-label="GitHub"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://x.com/localhousellm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+                aria-label="X"
+              >
+                X
+              </a>
+              <a
+                href="https://www.linkedin.com/company/localhousellm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+                aria-label="LinkedIn"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/localhousellm/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+                aria-label="Instagram"
+              >
+                Instagram
+              </a>
             </div>
           </div>
 
-          <nav className="space-y-4" aria-label="Stack">
-            <h4 className="text-xs font-display font-semibold tracking-[0.15em] uppercase text-foreground">Stack</h4>
-            <ul className="space-y-2.5 text-sm">
-              <li><Link to="/stack" className={linkClass}>Overview</Link></li>
-              <li><Link to="/stack#aicl" className={linkClass}>AICL</Link></li>
-              <li><Link to="/stack#orcha" className={linkClass}>ORCHA</Link></li>
-              <li><Link to="/stack#memory" className={linkClass}>Memory</Link></li>
-              <li><Link to="/stack#safety" className={linkClass}>Safety</Link></li>
-              <li><Link to="/stack#tools" className={linkClass}>Tools</Link></li>
-              <li><Link to="/stack#modules" className={linkClass}>Modules</Link></li>
-            </ul>
-          </nav>
-
-          <nav className="space-y-4" aria-label="Company">
-            <h4 className="text-xs font-display font-semibold tracking-[0.15em] uppercase text-foreground">Company</h4>
-            <ul className="space-y-2.5 text-sm">
-              <li><Link to="/anvira" className={linkClass}>Anvira</Link></li>
-              <li><Link to="/docs" className={linkClass}>Docs</Link></li>
-              <li><Link to="/archive" className={linkClass}>Research</Link></li>
-              <li><Link to="/about" className={linkClass}>About</Link></li>
-              <li><Link to="/about#contact" className={linkClass}>Contact</Link></li>
-              <li><Link to="/faq" className={linkClass}>FAQ</Link></li>
-            </ul>
-          </nav>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-12 flex-1 lg:max-w-3xl lg:ml-auto">
+            <FooterColumn
+              aria-label="Products"
+              title="Products"
+              links={[
+                { to: '/anvira', label: 'Anvira' },
+                { to: '/nomi', label: 'Nomi' },
+                { to: '/start', label: 'Get started' },
+              ]}
+            />
+            <FooterColumn
+              aria-label="Stack"
+              title="Stack"
+              links={[
+                { to: '/stack', label: 'Overview' },
+                { to: '/stack#aicl', label: 'AICL' },
+                { to: '/stack#orcha', label: 'ORCHA' },
+                { to: '/stack#memory', label: 'Memory' },
+              ]}
+            />
+            <FooterColumn
+              aria-label="Resources"
+              title="Resources"
+              links={[
+                { to: '/docs', label: 'Developer docs' },
+                { to: '/archive', label: 'Research' },
+                { to: '/blog', label: 'Blog' },
+                { to: '/faq', label: 'FAQ' },
+              ]}
+            />
+            <FooterColumn
+              aria-label="Company"
+              title="Company"
+              links={[
+                { to: '/about', label: 'About' },
+                { to: '/about#contact', label: 'Contact' },
+                { to: '/work-with-us', label: 'Careers' },
+                { to: 'https://github.com/LocalHouseLLM', label: 'Open source', external: true },
+              ]}
+            />
+          </div>
         </div>
 
-        <div className="mt-14 pt-8 border-t border-border/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-muted-foreground">
-          <p>© {currentYear} LocalHouseLLM. Open, modular infrastructure for decentralized AI.</p>
-          <p className="tracking-wide">Built with intention. Local-first by design.</p>
+        <div className="pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-[12px] text-muted-foreground font-sans">
+          <p>© {currentYear} LocalHouseLLM</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link to="/faq" className={linkClass}>
+              Help
+            </Link>
+            <Link to="/sitemap" className={linkClass}>
+              Sitemap
+            </Link>
+            <a href="mailto:contact@localhousellm.com" className={linkClass}>
+              Contact
+            </a>
+          </div>
         </div>
       </div>
     </footer>

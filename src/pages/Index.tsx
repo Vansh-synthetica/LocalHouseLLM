@@ -6,8 +6,6 @@ import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
 import { NodeField, LocalMachine } from '@/components/home/HomeVisuals';
 import { WorkspaceVisual } from '@/components/anvira/AnviraVisuals';
-import anviraBranch from '@/assets/anvira-botanical-branch.png';
-import anviraFoliage from '@/assets/anvira-foliage-silhouette.png';
 import forestImage from '@/assets/video-poster.jpg';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import '@/pages/anvira.css';
@@ -17,9 +15,6 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Lenis's own scroll virtualization can fight with a sticky-heavy,
-// scroll-linked page like this one on touch devices; native mobile scroll
-// is already smooth via OS momentum, so only run it on non-touch input.
 const isCoarsePointer = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(pointer: coarse)').matches;
@@ -30,7 +25,7 @@ const revealUp = {
 };
 
 const revealStage = {
-  hidden: { opacity: 0, scale: 0.97 },
+  hidden: { opacity: 0, scale: 0.98 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
 };
 
@@ -47,12 +42,65 @@ const Reveal = ({
     className={className}
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: '-100px' }}
+    viewport={{ once: true, margin: '-80px' }}
     variants={variants}
   >
     {children}
   </motion.div>
 );
+
+const latestReleases = [
+  {
+    title: 'Introducing Anvira',
+    description:
+      'A local-first AI workspace where conversation, knowledge, agents, and notes live together — built on the LocalHouseLLM stack.',
+    date: 'March 2026',
+    category: 'Product',
+    to: '/anvira',
+    cta: 'Explore Anvira',
+  },
+  {
+    title: 'The AICL communication layer',
+    description:
+      'A protocol for messages between intelligence modules — so orchestration, memory, and experts can interoperate without a monolith.',
+    date: 'February 2026',
+    category: 'Research',
+    to: '/stack#aicl',
+    cta: 'Read overview',
+  },
+  {
+    title: 'ORCHA orchestration engine',
+    description:
+      'Decides what runs, when, and how modules compose — the execution spine applications like Anvira are built on.',
+    date: 'January 2026',
+    category: 'Engineering',
+    to: '/stack#orcha',
+    cta: 'See ORCHA',
+  },
+];
+
+const researchHighlights = [
+  {
+    title: 'Modular intelligence thesis',
+    tags: ['Research', 'Architecture'],
+    to: '/stack',
+  },
+  {
+    title: 'Local-first by default',
+    tags: ['Product', 'Privacy'],
+    to: '/anvira',
+  },
+  {
+    title: 'Safety in the stack',
+    tags: ['Safety', 'Engineering'],
+    to: '/stack#safety',
+  },
+  {
+    title: 'Open research archive',
+    tags: ['Publications'],
+    to: '/archive',
+  },
+];
 
 const SectionIntro = ({
   eyebrow,
@@ -70,149 +118,120 @@ const SectionIntro = ({
   </Reveal>
 );
 
-const Hero = () => {
-  return (
-    <section className="lh-hero">
-      <div className="lh-shell lh-hero__grid">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="lh-eyebrow"
-          >
-            LocalHouseLLM
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="lh-mark">Intelligence,</span>
-            <span>built</span>
-            <span>differently.</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="lh-hero__copy"
-          >
-            Building the systems that make intelligence modular, persistent, executable and yours.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="lh-hero__copy"
-          >
-            We believe your AI should live on your machine, remember you, and work for you — not live in someone
-            else's cloud.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            className="lh-actions"
-          >
-            <a href="#idea" className="lh-button lh-button--primary">
-              Explore LocalHouseLLM <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-            <Link to="/anvira" className="lh-button lh-button--secondary">
-              Meet Anvira
+const Hero = () => (
+  <section className="lh-hero">
+    <div className="lh-shell">
+      <div className="lh-hero__top">
+        <motion.h1
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Modular <span className="lh-mark">research</span> and{' '}
+          <span className="lh-mark">infrastructure</span> for intelligence that belongs to you.
+        </motion.h1>
+        <motion.div
+          className="lh-hero__aside"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p>
+            AI will reshape how we work and live. LocalHouseLLM is building open systems that keep
+            intelligence modular, persistent, and on hardware you control — not locked in someone
+            else&apos;s cloud.
+          </p>
+          <div className="lh-actions lh-actions--compact">
+            <Link to="/anvira" className="lh-button lh-button--primary">
+              Try Anvira <ArrowRight className="h-3.5 w-3.5" />
             </Link>
-          </motion.div>
-        </div>
+            <Link to="/stack" className="lh-button lh-button--ghost">
+              Explore the stack
+            </Link>
+          </div>
+        </motion.div>
+      </div>
 
-        <div style={{ position: 'relative' }}>
+      <motion.div
+        className="lh-hero__visual"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div className="lh-hero__visual-inner">
           <NodeField />
-          <img src={anviraBranch} alt="" aria-hidden="true" className="lh-hero__branch" />
-          <img src={anviraFoliage} alt="" aria-hidden="true" className="lh-hero__leaf" />
         </div>
-      </div>
-
-      <div className="lh-scroll-cue">
-        <span>Scroll</span>
-        <i aria-hidden="true" />
-      </div>
-    </section>
-  );
-};
-
-const OpeningTransition = () => (
-  <div className="lh-opener">
-    <Reveal className="lh-opener__line">
-      <p>
-        One <strong>intelligence</strong>.
-      </p>
-    </Reveal>
-    <Reveal className="lh-opener__line">
-      <p>
-        Becomes <strong>systems</strong>.
-      </p>
-    </Reveal>
-    <Reveal className="lh-opener__line">
-      <p>
-        Becomes <strong>infrastructure</strong>.
-      </p>
-    </Reveal>
-  </div>
+      </motion.div>
+    </div>
+  </section>
 );
 
-// One real photograph, used exactly once — the same restraint Anthropic
-// applies to its own single full-bleed image band, rather than scattering
-// abstract decoration through every section.
-const ImageBand = () => (
-  <div className="lh-imageband">
-    <div className="lh-imageband__frame" style={{ backgroundImage: `url(${forestImage})` }}>
-      <div className="lh-shell lh-imageband__quote">
+const SpotlightBand = () => (
+  <section className="lh-spotlight" aria-labelledby="spotlight-heading">
+    <div
+      className="lh-spotlight__frame"
+      style={{ backgroundImage: `url(${forestImage})` }}
+    >
+      <div className="lh-shell lh-spotlight__content">
         <Reveal>
-          <p>Grown, not assembled — intelligence that adapts to where it lives.</p>
-          <span>LocalHouseLLM</span>
+          <p className="lh-spotlight__label">Anvira</p>
+          <h2 id="spotlight-heading">
+            Local-first workspace for chat, agents, and knowledge — on your machine.
+          </h2>
+          <Link to="/anvira" className="lh-button lh-button--on-dark">
+            Read more <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </Reveal>
       </div>
     </div>
-  </div>
+  </section>
 );
 
-// A quiet watermark inside the Anvira section rather than a dedicated
-// transition — the same eye + line-sweep drawing technique as Anvira's own
-// privacy motif, sitting behind the copy so it reads as ambient texture,
-// not a moment the page stops for.
-const EyeWatermark = () => (
-  <motion.div
-    className="lh-eye-mark"
-    aria-hidden="true"
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, margin: '-100px' }}
-  >
-    <svg viewBox="0 0 240 150">
-      <motion.path
-        className="lh-eye-mark__outline"
-        d="M12 75 Q120 6 228 75 Q120 144 12 75 Z"
-        variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      />
-      <motion.circle
-        className="lh-eye-mark__pupil"
-        cx="120"
-        cy="75"
-        r="19"
-        variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-        transition={{ duration: 0.5, delay: 0.35 }}
-      />
-      <motion.line
-        className="lh-eye-mark__slash"
-        x1="26"
-        y1="26"
-        x2="214"
-        y2="124"
-        variants={{ hidden: { pathLength: 0, opacity: 0 }, visible: { pathLength: 1, opacity: 1 } }}
-        transition={{ pathLength: { duration: 1.3, delay: 0.6, ease: 'easeInOut' }, opacity: { duration: 0.2, delay: 0.6 } }}
-      />
-    </svg>
-  </motion.div>
+const LatestReleases = () => (
+  <section className="lh-section lh-section--flush" id="updates">
+    <div className="lh-shell">
+      <Reveal>
+        <h2 className="lh-section-title">Latest releases</h2>
+      </Reveal>
+      <ul className="lh-release-grid">
+        {latestReleases.map((item) => (
+          <li key={item.title}>
+            <Reveal className="lh-release-card">
+              <Link to={item.to} className="lh-release-card__link">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <div className="lh-release-card__meta">
+                  <span className="lh-meta-label">Date</span>
+                  <span>{item.date}</span>
+                  <span className="lh-meta-label">Category</span>
+                  <span>{item.category}</span>
+                </div>
+                <span className="lh-release-card__cta">
+                  {item.cta} <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
+
+const MissionBand = () => (
+  <section className="lh-mission">
+    <div className="lh-shell">
+      <Reveal>
+        <h2 className="lh-mission__title">
+          At LocalHouseLLM, we build AI infrastructure to serve people who want to{' '}
+          <span className="lh-mark">own</span> their intelligence.
+        </h2>
+        <Link to="/about" className="lh-text-link">
+          Learn more about our mission <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </Reveal>
+    </div>
+  </section>
 );
 
 const chain = [
@@ -226,7 +245,14 @@ const chain = [
 const ThesisSection = () => (
   <section className="lh-section lh-section--line" id="idea">
     <div className="lh-shell">
-      <SectionIntro eyebrow="The idea" title={<>Intelligence shouldn't<br />live inside a<br /><span className="lh-mark">single model</span>.</>}>
+      <SectionIntro
+        eyebrow="The idea"
+        title={
+          <>
+            Intelligence shouldn&apos;t live inside a single <span className="lh-mark">model</span>.
+          </>
+        }
+      >
         <p>Models are only one part of an intelligent system. Ours separates the rest into layers.</p>
       </SectionIntro>
 
@@ -246,7 +272,7 @@ const ThesisSection = () => (
       </Reveal>
 
       <Reveal className="lh-chain-cta">
-        <Link to="/stack" className="lh-button lh-button--secondary">
+        <Link to="/stack" className="lh-button lh-button--ghost">
           See the full architecture <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </Reveal>
@@ -254,11 +280,34 @@ const ThesisSection = () => (
   </section>
 );
 
-// A single calm teaser, not a full demo — the full workspace experience
-// lives on its own dedicated page at /anvira.
+const ResearchGrid = () => (
+  <section className="lh-section lh-section--line">
+    <div className="lh-shell">
+      <Reveal>
+        <h2 className="lh-section-title">From the lab</h2>
+      </Reveal>
+      <ul className="lh-research-grid">
+        {researchHighlights.map((item) => (
+          <li key={item.title}>
+            <Reveal>
+              <Link to={item.to} className="lh-research-card">
+                <div className="lh-research-card__tags">
+                  {item.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+                <h3>{item.title}</h3>
+              </Link>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
+
 const AnviraSection = () => (
   <section className="lh-section lh-section--line lh-anvira-teaser" id="anvira">
-    <EyeWatermark />
     <div className="lh-shell">
       <Reveal className="lh-anvira-teaser__intro">
         <p className="lh-eyebrow">Our first environment</p>
@@ -266,14 +315,9 @@ const AnviraSection = () => (
           Meet <span className="lh-mark">Anvira</span>.
         </h2>
         <p>
-          A local-first AI workspace where conversation, knowledge, agents, notes and learning
-          live together.
+          A local-first AI workspace where conversation, knowledge, agents, notes and learning live
+          together.
         </p>
-      </Reveal>
-      <Reveal className="lh-anvira__lines">
-        <span>One workspace.</span>
-        <span>One context.</span>
-        <span>Your intelligence.</span>
       </Reveal>
       <Reveal className="lh-anvira-preview" variants={revealStage}>
         <WorkspaceVisual />
@@ -290,7 +334,14 @@ const AnviraSection = () => (
 const LocalFirstSection = () => (
   <section className="lh-section lh-section--line" id="local-first">
     <div className="lh-shell">
-      <SectionIntro eyebrow="Local-first" title={<>Intelligence should<br /><span className="lh-mark">belong</span> to the<br />people using it.</>}>
+      <SectionIntro
+        eyebrow="Local-first"
+        title={
+          <>
+            Intelligence should <span className="lh-mark">belong</span> to the people using it.
+          </>
+        }
+      >
         <p>Local-first by default. Cloud when you choose it.</p>
       </SectionIntro>
       <Reveal className="lh-section__stage" variants={revealStage}>
@@ -300,35 +351,20 @@ const LocalFirstSection = () => (
   </section>
 );
 
-const BiggerPicture = () => (
-  <div className="lh-cinema">
-    <Reveal className="lh-cinema__line">
-      <p>The best AI won't be the biggest model. It'll be the one that's actually yours.</p>
-    </Reveal>
-    <Reveal className="lh-cinema__sub">
-      <p>Systems you can inspect, extend, and keep — not rent.</p>
-    </Reveal>
-  </div>
-);
-
 const FinalSection = () => (
   <section className="lh-final">
-    <img src={anviraBranch} alt="" aria-hidden="true" className="lh-final__branch" />
     <div className="lh-shell">
       <Reveal variants={revealStage}>
         <h2>
-          <span>Intelligence,</span>
-          <span>built to</span>
-          <span className="lh-mark">belong.</span>
+          Intelligence, built to <span className="lh-mark">belong</span>.
         </h2>
         <p>Building infrastructure for modular, persistent, executable intelligence.</p>
-        <p className="lh-final__meta">LocalHouseLLM</p>
         <div className="lh-actions">
           <Link to="/anvira" className="lh-button lh-button--primary">
-            Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
+            Try Anvira <ArrowRight className="h-3.5 w-3.5" />
           </Link>
-          <Link to="/stack" className="lh-button lh-button--secondary">
-            Explore the technology
+          <Link to="/docs" className="lh-button lh-button--ghost">
+            Developer docs
           </Link>
         </div>
       </Reveal>
@@ -337,8 +373,6 @@ const FinalSection = () => (
 );
 
 const Index = () => {
-  // Same slower, heavier scroll feel as the Anvira page, scoped to this
-  // page only, so the scroll-linked transitions read as motion.
   useSmoothScroll(!prefersReducedMotion() && !isCoarsePointer(), {
     duration: 2,
     wheelMultiplier: 0.7,
@@ -372,12 +406,13 @@ const Index = () => {
 
       <div className="lhllm-home">
         <Hero />
-        <OpeningTransition />
-        <ImageBand />
+        <SpotlightBand />
+        <LatestReleases />
+        <MissionBand />
         <ThesisSection />
+        <ResearchGrid />
         <AnviraSection />
         <LocalFirstSection />
-        <BiggerPicture />
         <FinalSection />
       </div>
     </CleanLayout>

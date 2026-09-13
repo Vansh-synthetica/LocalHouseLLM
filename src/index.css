@@ -13,7 +13,7 @@
 @layer base {
   :root {
     /* Paper — daylight */
-    --background: 42 28% 96%;        /* warm ivory paper */
+    --background: 38 33% 95%;        /* warm cream paper — Anthropic-adjacent */
     --foreground: 96 8% 13%;         /* near-black ink */
 
     --card: 45 33% 98%;              /* lifted surface */

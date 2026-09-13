@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LayoutDashboard } from 'lucide-react';
+import { Menu, X, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/hooks/useAuth';
@@ -11,7 +11,6 @@ type NavLink = { to: string; label: string };
 const navLinks: NavLink[] = [
   { to: '/stack', label: 'Stack' },
   { to: '/archive', label: 'Research' },
-  { to: '/anvira', label: 'Anvira' },
   { to: '/docs', label: 'Docs' },
   { to: '/about', label: 'About' },
 ];
@@ -33,7 +32,6 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  // Body scroll lock while mobile menu is open
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => {
@@ -42,42 +40,39 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   const linkClass = (active: boolean) =>
-    `text-sm font-medium transition-colors duration-200 ${
+    `text-[13px] font-medium tracking-[0.01em] transition-colors duration-200 ${
       active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
     }`;
 
   return (
     <>
-      {/* Skip link — a11y */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:z-[60] focus:top-3 focus:left-3 focus:px-3 focus:py-2 focus:rounded-md focus:bg-primary focus:text-primary-foreground focus:shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:z-[60] focus:top-3 focus:left-3 focus:px-3 focus:py-2 focus:rounded-full focus:bg-foreground focus:text-background focus:shadow-lg"
       >
         Skip to content
       </a>
 
       <motion.nav
-        initial={{ y: -16, opacity: 0 }}
+        initial={{ y: -12, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-background/95 backdrop-blur-md border-b border-border'
-            : 'bg-transparent'
+          scrolled ? 'bg-background/95 backdrop-blur-sm border-b border-border/80' : 'bg-background/80'
         }`}
         aria-label="Primary"
       >
-        <div className="max-container h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5 group" aria-label="LocalHouseLLM home">
-            <span className="inline-flex h-6 w-6 items-center justify-center text-foreground">
+        <div className="max-container h-[4.25rem] flex items-center justify-between gap-6">
+          <Link to="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="LocalHouseLLM home">
+            <span className="inline-flex h-7 w-7 items-center justify-center text-foreground">
               <BrandMark />
             </span>
-            <span className="font-display text-[15px] font-semibold tracking-tight text-foreground">
-              LocalHouseLLM
+            <span className="font-display text-[13px] font-semibold tracking-[0.2em] uppercase text-foreground">
+              LocalHouse
             </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-8 flex-1 justify-center">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
@@ -87,10 +82,18 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            <Link
+              to="/anvira"
+              className={linkClass(location.pathname.startsWith('/anvira'))}
+            >
+              Anvira
+            </Link>
+          </div>
 
+          <div className="hidden md:flex items-center gap-3 shrink-0">
             {user ? (
               <Link to="/dashboard">
-                <Button className="h-9 rounded-sm px-4 text-sm font-medium bg-foreground text-background hover:bg-primary hover:text-primary-foreground">
+                <Button className="h-10 rounded-full px-5 text-[13px] font-medium bg-foreground text-background hover:bg-foreground/90">
                   <LayoutDashboard className="w-4 h-4 mr-1.5" /> Dashboard
                 </Button>
               </Link>
@@ -99,19 +102,20 @@ const Navbar = () => {
                 <Link to="/login" className={linkClass(location.pathname === '/login')}>
                   Sign in
                 </Link>
-                <Link to="/register">
-                  <Button className="h-9 rounded-sm px-4 text-sm font-medium bg-foreground text-background hover:bg-primary hover:text-primary-foreground">
-                    Get started
+                <Link to="/anvira">
+                  <Button className="h-10 rounded-full pl-5 pr-4 text-[13px] font-medium bg-foreground text-background hover:bg-foreground/90 gap-1">
+                    Try Anvira
+                    <ChevronDown className="w-4 h-4 opacity-70" aria-hidden />
                   </Button>
                 </Link>
               </>
             )}
           </div>
 
-          <div className="md:hidden flex items-center gap-2">
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen((v) => !v)}
-              className="text-foreground p-2 rounded-md hover:bg-foreground/5 transition-colors"
+              className="text-foreground p-2 rounded-full hover:bg-foreground/5 transition-colors"
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -129,14 +133,14 @@ const Navbar = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
-              className="md:hidden bg-background border-b border-border max-h-[calc(100dvh-4rem)] overflow-y-auto"
+              className="md:hidden bg-background border-b border-border max-h-[calc(100dvh-4.25rem)] overflow-y-auto"
             >
               <div className="max-container py-4 flex flex-col gap-1">
-                {navLinks.map((link) => (
+                {[...navLinks, { to: '/anvira', label: 'Anvira' }].map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className="px-3 py-2.5 text-sm rounded-md hover:bg-foreground/5"
+                    className="px-3 py-2.5 text-sm rounded-lg hover:bg-foreground/5"
                   >
                     {link.label}
                   </Link>
@@ -144,15 +148,21 @@ const Navbar = () => {
 
                 {user ? (
                   <Link to="/dashboard" className="mt-3">
-                    <Button className="w-full rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground">Dashboard</Button>
+                    <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">
+                      Dashboard
+                    </Button>
                   </Link>
                 ) : (
                   <div className="mt-3 flex flex-col gap-2">
                     <Link to="/login">
-                      <Button variant="outline" className="w-full rounded-sm">Sign in</Button>
+                      <Button variant="outline" className="w-full rounded-full">
+                        Sign in
+                      </Button>
                     </Link>
-                    <Link to="/register">
-                      <Button className="w-full rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground">Get started</Button>
+                    <Link to="/anvira">
+                      <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">
+                        Try Anvira
+                      </Button>
                     </Link>
                   </div>
                 )}
