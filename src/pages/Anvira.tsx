@@ -24,6 +24,30 @@ import './anvira.css';
 
 const DOWNLOAD_URL =
   'https://github.com/Vansh-synthetica/Anvira-release/releases/download/v1.6.2/Anvira-1.6-Pochi.exe';
+const BLOCKMAP_URL =
+  'https://github.com/Vansh-synthetica/Anvira-release/releases/download/v1.6.2/Anvira-1.6-Pochi.exe.blockmap';
+
+// Fires a direct download for a single URL via a throwaway <a download>,
+// rather than navigating the page to it.
+const triggerDownload = (url: string) => {
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '';
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+};
+
+// Downloads the installer and its blockmap together from one click. Browsers
+// treat this as two downloads and may show their own "allow multiple
+// downloads" prompt the first time on a given site — that's the browser's
+// safeguard, not something a page can suppress, and only appears once per
+// origin after the user allows it.
+const handleDownloadBoth = () => {
+  triggerDownload(DOWNLOAD_URL);
+  setTimeout(() => triggerDownload(BLOCKMAP_URL), 300);
+};
 
 const NAV_LINKS = [
   { href: '#workspace', label: 'Product' },
@@ -166,9 +190,9 @@ const AnviraNav = () => {
             </a>
           ))}
         </nav>
-        <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer" className="anvira-nav__download">
+        <button type="button" onClick={handleDownloadBoth} className="anvira-nav__download">
           Download
-        </a>
+        </button>
         <button
           type="button"
           className="anvira-nav__menu"
@@ -186,9 +210,15 @@ const AnviraNav = () => {
               {l.label}
             </a>
           ))}
-          <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+          <button
+            type="button"
+            onClick={() => {
+              handleDownloadBoth();
+              setOpen(false);
+            }}
+          >
             Download Anvira
-          </a>
+          </button>
         </div>
       )}
     </header>
@@ -648,14 +678,9 @@ const Anvira = () => {
               <a href="#top" className="anvira-button anvira-button--primary">
                 Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
               </a>
-              <a
-                href={DOWNLOAD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="anvira-button anvira-button--secondary"
-              >
+              <button type="button" onClick={handleDownloadBoth} className="anvira-button anvira-button--secondary">
                 <Download className="h-3.5 w-3.5" /> Download Anvira
-              </a>
+              </button>
             </div>
           </Reveal>
         </div>
