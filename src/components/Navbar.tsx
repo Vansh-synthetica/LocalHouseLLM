@@ -63,12 +63,12 @@ const Navbar = () => {
         aria-label="Primary"
       >
         <div className="max-container h-[4.25rem] flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="LocalHouse home">
+          <Link to="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="LocalHouseLLM home">
             <span className="inline-flex h-7 w-7 items-center justify-center text-foreground">
               <BrandMark />
             </span>
-            <span className="font-display text-[13px] font-semibold tracking-[0.2em] uppercase text-foreground">
-              LocalHouse
+            <span className="font-display text-[13px] font-semibold tracking-[0.15em] uppercase text-foreground">
+              LocalHouseLLM
             </span>
           </Link>
 
