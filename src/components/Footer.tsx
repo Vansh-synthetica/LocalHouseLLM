@@ -43,7 +43,7 @@ const Footer = () => {
       <div className="max-container py-16 lg:py-20">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 pb-14 border-b border-border/70">
           <div className="space-y-5 max-w-sm">
-            <Link to="/" className="inline-flex items-center gap-2.5" aria-label="LocalHouseLLM home">
+            <Link to="/" className="inline-flex items-center gap-2.5" aria-label="LocalHouse home">
               <span className="inline-flex h-7 w-7 items-center justify-center text-foreground">
                 <BrandMark />
               </span>
@@ -139,7 +139,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-[12px] text-muted-foreground font-sans">
-          <p>© {currentYear} LocalHouseLLM</p>
+          <p>© {currentYear} LocalHouse</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link to="/faq" className={linkClass}>
               Help
