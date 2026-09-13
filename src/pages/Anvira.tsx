@@ -274,7 +274,9 @@ const AnviraHero = () => {
             >
               <span>One workspace.</span>
               <span>One context.</span>
-              <span>Your intelligence.</span>
+              <span>
+                Your <span className="anvira-mark">intelligence</span>.
+              </span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -432,25 +434,9 @@ const Anvira = () => {
   const systemRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Scoped to this page only: keeps off-canvas botanical decoration from
-    // causing horizontal scroll without using an ancestor `overflow` value,
-    // which would otherwise break every `position: sticky` element below.
     document.documentElement.style.scrollPaddingTop = '88px';
-    document.documentElement.style.overflowX = 'hidden';
-
-    // `overflow-x: hidden` hides the scrollbar but doesn't retroactively snap
-    // an existing horizontal scroll position back to 0 (e.g. after a trackpad
-    // swipe or scroll-anchoring nudges it sideways from a previous page),
-    // which visibly shifts the whole centered layout left/right. Correct it
-    // once on mount only — a continuous scroll listener that calls
-    // `scrollTo` from inside a scroll handler fights with scroll-linked
-    // animations (their scroll position reads become stale/frozen), so this
-    // is deliberately not re-checked on every scroll event.
-    if (window.scrollX !== 0) window.scrollTo({ left: 0, top: window.scrollY });
-
     return () => {
       document.documentElement.style.scrollPaddingTop = '';
-      document.documentElement.style.overflowX = '';
     };
   }, []);
 

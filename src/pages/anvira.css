@@ -1,19 +1,17 @@
-/* Dark-first, matching claude.com's own product pages: ink and paper carry
-   the same roles they always did (ink = foreground text, paper = page
-   background, surface = elevated card, line = hairline border) — only the
-   values are inverted. Because every section and visual component below
-   reads color through these four names rather than hardcoding light/dark,
-   the whole page follows from this one swap. */
+/* Same light, warm-cream world as Home (see --lh-* in home.css) — Anvira is
+   a page within the same site, not a separate dark sub-brand, so it reads
+   through the identical ink/paper/surface/line tokens at the identical
+   values rather than its own palette. */
 .anvira-site {
-  --anvira-paper: 90 6% 9%;
-  --anvira-paper-deep: 90 7% 6%;
-  --anvira-ink: 60 20% 95%;
-  --anvira-ink-soft: 70 8% 65%;
-  --anvira-moss: 103 28% 56%;
-  --anvira-moss-light: 100 24% 76%;
-  --anvira-line: 90 8% 19%;
-  --anvira-surface: 90 6% 13%;
-  --anvira-night: 90 6% 4%;
+  --anvira-paper: 38 33% 95%;
+  --anvira-paper-deep: 36 22% 91%;
+  --anvira-ink: 24 10% 12%;
+  --anvira-ink-soft: 24 6% 38%;
+  --anvira-moss: 103 18% 34%;
+  --anvira-moss-light: 98 19% 76%;
+  --anvira-line: 36 14% 86%;
+  --anvira-surface: 40 30% 97%;
+  --anvira-night: 24 10% 8%;
   position: relative;
   min-height: 100dvh;
   color: hsl(var(--anvira-ink));
@@ -47,19 +45,20 @@
 .anvira-nav__links { display: flex; align-items: center; gap: 30px; }
 .anvira-nav__links a { font-size: 12px; text-decoration: none; color: inherit; opacity: .72; transition: opacity .2s ease; }
 .anvira-nav__links a:hover { opacity: 1; }
-.anvira-nav__download { justify-self: end; padding: 10px 17px; border: 0; border-radius: 999px; text-decoration: none; font-family: inherit; font-size: 12px; cursor: pointer; color: hsl(var(--anvira-ink)) !important; background: hsl(var(--anvira-moss)); transition: transform .2s ease, background .2s ease, color .2s ease; }
-.anvira-nav__download:hover { transform: translateY(-1px); background: hsl(var(--anvira-moss-light)); color: hsl(var(--anvira-night)) !important; }
+.anvira-nav__download { justify-self: end; padding: 10px 17px; border: 0; border-radius: 999px; text-decoration: none; font-family: inherit; font-size: 12px; cursor: pointer; color: hsl(var(--anvira-paper)) !important; background: hsl(var(--anvira-moss)); transition: transform .2s ease, background .2s ease, color .2s ease; }
+.anvira-nav__download:hover { transform: translateY(-1px); background: hsl(var(--anvira-moss-light)); color: hsl(var(--anvira-ink)) !important; }
 .anvira-nav__menu { display: none; justify-self: end; border: 0; background: transparent; color: inherit; width: 40px; height: 40px; }
 .anvira-nav__mobile { display: none; }
 
-.anvira-hero { position: relative; min-height: 100dvh; background: hsl(var(--anvira-night)); }
+.anvira-hero { position: relative; min-height: 100dvh; background: hsl(var(--anvira-paper)); }
 .anvira-hero__sticky { position: sticky; top: 0; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; padding: 110px 0 48px; }
-.anvira-hero__wash { position: absolute; inset: 0; background: radial-gradient(circle at 74% 32%, hsl(var(--anvira-moss) / .35), transparent 55%), hsl(var(--anvira-night)); }
+.anvira-hero__wash { position: absolute; inset: 0; background: radial-gradient(circle at 68% 55%, hsl(var(--anvira-moss-light) / .3), transparent 40%), linear-gradient(180deg, hsl(var(--anvira-surface)), hsl(var(--anvira-paper))); }
 .anvira-hero__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(360px, .78fr) minmax(540px, 1.35fr); gap: 40px; align-items: center; }
-.anvira-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; text-transform: uppercase; font-size: 10px; letter-spacing: .18em; color: hsl(var(--anvira-moss-light)); }
+.anvira-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; text-transform: uppercase; font-size: 10px; letter-spacing: .18em; color: hsl(var(--anvira-moss)); }
 .anvira-kicker::before { content: ''; width: 28px; height: 1px; background: currentColor; }
-.anvira-hero h1 { font-family: "Source Serif 4", Georgia, serif; font-weight: 400; font-size: clamp(48px, 5.6vw, 92px); line-height: 1.05; }
+.anvira-hero h1 { font-weight: 700; font-size: clamp(40px, 5vw, 80px); line-height: 1.06; letter-spacing: -0.02em; }
 .anvira-hero h1 span { display: block; }
+.anvira-mark { text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .08em; }
 .anvira-hero__copy { max-width: 560px; margin-top: 31px !important; color: hsl(var(--anvira-ink-soft)); font-size: 17px; line-height: 1.75; }
 .anvira-actions { display: flex; gap: 11px; margin-top: 33px; }
 .anvira-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 22px; border: 1px solid hsl(var(--anvira-ink) / .3); border-radius: 999px; text-decoration: none; font-size: 12px; transition: transform .22s ease, background .22s ease, color .22s ease; }
@@ -69,8 +68,8 @@
 .anvira-button:hover { transform: translateY(-2px); }
 .anvira-button--secondary:hover { color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-ink)); }
 .anvira-hero__visual { position: relative; perspective: 1600px; }
-.anvira-hero__visual-inner { transform: rotateY(-4deg) rotateX(2deg); transform-style: preserve-3d; box-shadow: 0 50px 120px -30px hsl(var(--anvira-moss) / .35), 0 0 0 1px hsl(var(--anvira-ink) / .06); border-radius: 10px; }
-.anvira-botanical { position: absolute; pointer-events: none; object-fit: contain; mix-blend-mode: screen; }
+.anvira-hero__visual-inner { transform: rotateY(-4deg) rotateX(2deg); transform-style: preserve-3d; box-shadow: 0 48px 100px -40px hsl(var(--anvira-ink) / .35), 0 0 0 1px hsl(var(--anvira-ink) / .06); border-radius: 14px; }
+.anvira-botanical { position: absolute; pointer-events: none; object-fit: contain; mix-blend-mode: multiply; }
 .anvira-scroll-cue { position: absolute; z-index: 4; left: 50%; bottom: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; color: hsl(var(--anvira-ink-soft)); font-size: 9px; text-transform: uppercase; letter-spacing: .18em; }
 .anvira-scroll-cue i { width: 1px; height: 34px; background: hsl(var(--anvira-ink) / .35); transform-origin: top; animation: anvira-line 2s ease-in-out infinite; }
 @keyframes anvira-line { 0%, 100% { transform: scaleY(.2); opacity: .3; } 50% { transform: scaleY(1); opacity: 1; } }
@@ -79,15 +78,15 @@
 .anvira-morph__sticky { position: sticky; top: 0; height: 100dvh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .anvira-morph__wash { position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, hsl(var(--anvira-moss-light) / .18), transparent 62%); }
 .anvira-morph__interface { position: absolute; left: 50%; top: 50%; width: min(1040px, 82vw); transform: translate(-50%, -50%); filter: blur(.3px); }
-.anvira-morph__line { position: absolute; left: 50%; top: 50%; width: min(920px, 86vw); transform: translate(-50%, -50%); text-align: center; font-family: Sora, sans-serif; font-weight: 300; font-size: clamp(38px, 6.4vw, 88px); line-height: 1.05; }
+.anvira-morph__line { position: absolute; left: 50%; top: 50%; width: min(920px, 86vw); transform: translate(-50%, -50%); text-align: center; font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(38px, 6.4vw, 88px); line-height: 1.05; }
 
-.anvira-leaf-wipe { position: relative; height: 130dvh; }
+.anvira-leaf-wipe { position: relative; height: 130dvh; overflow-x: hidden; }
 .anvira-leaf-wipe__sticky { position: sticky; top: 0; height: 100dvh; overflow: hidden; }
 .anvira-leaf-wipe__leaf { position: absolute; left: 50%; top: 50%; width: min(360px, 32vw); pointer-events: none; will-change: transform; }
 .anvira-leaf-wipe__leaf svg { display: block; width: 100%; height: auto; }
 .anvira-sprig-leaf__outline { fill: hsl(var(--anvira-moss) / .16); stroke: hsl(var(--anvira-moss) / .5); stroke-width: 1.6; }
 .anvira-sprig-leaf__vein { fill: none; stroke: hsl(var(--anvira-moss) / .32); stroke-width: 1.2; stroke-linecap: round; }
-.anvira-leaf-wipe__line { position: absolute; left: 50%; top: 50%; width: min(920px, 86vw); transform: translate(-50%, -50%); text-align: center; font-family: Sora, sans-serif; font-weight: 300; font-size: clamp(38px, 6.4vw, 88px); line-height: 1.05; color: hsl(var(--anvira-ink)); }
+.anvira-leaf-wipe__line { position: absolute; left: 50%; top: 50%; width: min(920px, 86vw); transform: translate(-50%, -50%); text-align: center; font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(38px, 6.4vw, 88px); line-height: 1.05; color: hsl(var(--anvira-ink)); }
 
 /* Accurate mockup of the real Anvira desktop app (dark UI, real accent color) */
 .anvira-app { --ra-bg: #181c26; --ra-bg-elevated: #1e222e; --ra-bg-muted: #252a38; --ra-bg-sidebar: #15181f; --ra-accent: #6090e6; --ra-border: rgba(255,255,255,.075); --ra-text: rgba(255,255,255,.92); --ra-text-soft: rgba(255,255,255,.5); width: 100%; aspect-ratio: 16 / 10; display: grid; grid-template-columns: 168px 1fr; overflow: hidden; border-radius: 10px; color: var(--ra-text); background: var(--ra-bg); font-size: 11px; box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
@@ -129,17 +128,17 @@
 .anvira-app__composer button svg { width: 11px; }
 .anvira-app__mascot-float { position: absolute; right: 20px; bottom: 72px; width: 24px; height: 24px; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); }
 
-.anvira-section { position: relative; padding: 150px 0; }
+.anvira-section { position: relative; padding: 150px 0; overflow-x: hidden; }
 .anvira-section--line { border-top: 1px solid hsl(var(--anvira-line)); }
 .anvira-section__intro { max-width: 780px; }
 .anvira-section__number { display: block; margin-bottom: 28px; color: hsl(var(--anvira-moss)); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
-.anvira-section h2 { font-size: clamp(42px, 6vw, 82px); line-height: 1.02; font-weight: 300; }
+.anvira-section h2 { font-size: clamp(42px, 6vw, 82px); line-height: 1.02; font-weight: 700; }
 .anvira-section__intro > p { max-width: 610px; margin-top: 30px !important; color: hsl(var(--anvira-ink-soft)); font-size: 17px; line-height: 1.8; }
 .anvira-section__stage { margin-top: 80px; }
-.anvira-botanical--left { left: -170px; top: 14%; width: 360px; opacity: .16; transform: rotate(22deg); }
-.anvira-botanical--right { right: -170px; top: 32%; width: 370px; opacity: .18; transform: rotate(-25deg) scaleX(-1); }
-.anvira-botanical--bridge-left { left: -90px; top: -70px; width: 280px; opacity: .2; transform: rotate(-12deg); }
-.anvira-botanical--bridge-right { right: -90px; top: -60px; width: 300px; opacity: .2; transform: rotate(14deg) scaleX(-1); }
+.anvira-botanical--left { left: -170px; top: 14%; width: 360px; opacity: .1; transform: rotate(22deg); }
+.anvira-botanical--right { right: -170px; top: 32%; width: 370px; opacity: .12; transform: rotate(-25deg) scaleX(-1); }
+.anvira-botanical--bridge-left { left: -90px; top: -70px; width: 280px; opacity: .13; transform: rotate(-12deg); }
+.anvira-botanical--bridge-right { right: -90px; top: -60px; width: 300px; opacity: .13; transform: rotate(14deg) scaleX(-1); }
 
 .anvira-orbit { position: relative; width: min(900px, 100%); aspect-ratio: 10 / 7; margin-inline: auto; }
 .anvira-orbit svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -202,7 +201,7 @@
 .anvira-agent-visual__list button span { margin-right: 8px; }
 .anvira-agent-visual__detail { padding: 50px 65px; }
 .anvira-agent-visual__header { display: flex; gap: 14px; align-items: center; }
-.anvira-agent-visual__header > span { display: grid; place-items: center; width: 52px; height: 52px; background: hsl(var(--anvira-moss)); color: hsl(var(--anvira-ink)); }
+.anvira-agent-visual__header > span { display: grid; place-items: center; width: 52px; height: 52px; background: hsl(var(--anvira-moss)); color: hsl(var(--anvira-paper)); }
 .anvira-agent-visual__header div { display: grid; gap: 3px; }
 .anvira-agent-visual__header small { color: hsl(var(--anvira-ink-soft)); }
 .anvira-agent-visual__header strong { font-size: 18px; }
@@ -231,7 +230,7 @@
 .anvira-notes-visual__sources small { color: hsl(var(--anvira-ink-soft)); font-size: 8px; }
 .anvira-notes-visual__sources strong { font-size: 11px; }
 .anvira-notes-visual article { max-width: 720px; padding: 68px 70px 110px; }
-.anvira-notes-visual article h3 { margin-top: 18px; font-size: clamp(32px, 4vw, 56px); line-height: 1.08; font-weight: 300; }
+.anvira-notes-visual article h3 { margin-top: 18px; font-size: clamp(32px, 4vw, 56px); line-height: 1.08; font-weight: 700; }
 .anvira-notes-visual article > p { margin-top: 25px !important; color: hsl(var(--anvira-ink-soft)); font-family: Sora; font-size: 15px; line-height: 1.9; }
 .anvira-notes-visual blockquote { margin: 34px 0; padding: 3px 0 3px 25px; border-left: 2px solid hsl(var(--anvira-moss)); color: hsl(var(--anvira-ink-soft)); font-size: 16px; font-style: italic; line-height: 1.7; }
 .anvira-notes-visual blockquote cite { display: block; margin-top: 9px; color: hsl(var(--anvira-moss)); font-size: 9px; font-style: normal; text-transform: uppercase; letter-spacing: .12em; }
@@ -251,7 +250,7 @@
 .anvira-study-loop__center strong { margin-top: 12px; font-size: 16px; }
 .anvira-study-loop__center small { margin-top: 5px; color: hsl(var(--anvira-ink-soft)); }
 .anvira-study-loop__step { position: absolute; display: flex; align-items: center; gap: 8px; padding: 11px 14px; border: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper)); box-shadow: 0 10px 25px hsl(var(--anvira-ink) / .06); font-size: 11px; }
-.anvira-study-loop__step i { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; color: hsl(var(--anvira-ink)); background: hsl(var(--anvira-moss)); font-size: 8px; font-style: normal; }
+.anvira-study-loop__step i { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-moss)); font-size: 8px; font-style: normal; }
 .anvira-study-loop__step--1 { left: 44%; top: -3%; } .anvira-study-loop__step--2 { right: 3%; top: 17%; }
 .anvira-study-loop__step--3 { right: -2%; top: 54%; } .anvira-study-loop__step--4 { right: 17%; bottom: -1%; }
 .anvira-study-loop__step--5 { left: 27%; bottom: -4%; } .anvira-study-loop__step--6 { left: -2%; top: 56%; }
@@ -267,9 +266,9 @@
 .anvira-model-foundation__models { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: hsl(var(--anvira-line)); border: 1px solid hsl(var(--anvira-line)); }
 .anvira-model-foundation__models span { min-height: 86px; display: grid; place-items: center; padding: 12px; text-align: center; color: hsl(var(--anvira-ink-soft)); background: hsl(var(--anvira-surface)); font-size: 10px; }
 
-.anvira-local { position: relative; min-height: 100dvh; display: flex; align-items: center; text-align: center; }
+.anvira-local { position: relative; min-height: 100dvh; display: flex; align-items: center; text-align: center; overflow-x: hidden; }
 .anvira-local__inner { position: relative; }
-.anvira-local h2 { font-size: clamp(54px, 8vw, 118px); line-height: .95; font-weight: 300; }
+.anvira-local h2 { font-size: clamp(54px, 8vw, 118px); line-height: .95; font-weight: 700; }
 .anvira-local h2 span { display: block; }
 .anvira-local p { max-width: 590px; margin: 35px auto 0 !important; color: hsl(var(--anvira-ink-soft)); line-height: 1.8; }
 .anvira-local__device { width: 64px; margin: 48px auto 0; }
@@ -295,11 +294,11 @@
 
 .anvira-final { position: relative; min-height: 100dvh; display: flex; align-items: center; overflow: hidden; border-top: 1px solid hsl(var(--anvira-line)); }
 .anvira-final__content { position: relative; z-index: 2; }
-.anvira-final h2 { max-width: 1000px; font-size: clamp(58px, 9vw, 132px); line-height: .93; font-weight: 300; }
+.anvira-final h2 { max-width: 1000px; font-size: clamp(58px, 9vw, 132px); line-height: .93; font-weight: 700; }
 .anvira-final h2 span { display: block; }
 .anvira-final__meet { margin-top: 42px !important; font-family: Sora; font-size: 20px; }
 .anvira-final .anvira-actions { margin-top: 26px; }
-.anvira-final__branch { position: absolute; right: -10%; bottom: -21%; width: min(600px, 48vw); opacity: .22; transform: rotate(-33deg); mix-blend-mode: screen; pointer-events: none; object-fit: contain; }
+.anvira-final__branch { position: absolute; right: -10%; bottom: -21%; width: min(600px, 48vw); opacity: .3; transform: rotate(-33deg); mix-blend-mode: multiply; pointer-events: none; object-fit: contain; }
 .anvira-footer { min-height: 92px; display: flex; align-items: center; border-top: 1px solid hsl(var(--anvira-line)); color: hsl(var(--anvira-ink-soft)); font-size: 10px; }
 .anvira-footer__inner { display: flex; justify-content: space-between; align-items: center; }
 .anvira-footer a { text-decoration: none; }
@@ -327,7 +326,7 @@
   .anvira-nav__mobile a { padding: 13px 4px; border-bottom: 1px solid hsl(var(--anvira-line) / .6); text-decoration: none; font-size: 13px; }
   .anvira-nav__mobile button:last-child { margin-top: 12px; padding: 13px 4px; border: 0; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer; color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-ink)); text-align: center; }
   .anvira-hero__sticky { padding-top: 120px; padding-bottom: 90px; }
-  .anvira-hero h1 { font-size: clamp(47px, 15vw, 72px); }
+  .anvira-hero h1 { font-size: clamp(34px, 10.6vw, 60px); }
   .anvira-hero__copy { font-size: 15px; line-height: 1.7; }
   .anvira-actions { flex-direction: column; align-items: stretch; }
   .anvira-app { aspect-ratio: auto; min-height: 460px; grid-template-columns: 52px 1fr; }
@@ -377,9 +376,9 @@
   .anvira-model-foundation__models { grid-template-columns: repeat(2, 1fr); }
   .anvira-system-visual__words { font-size: 18px; }
   .anvira-system-visual__words i { margin: 0 10px; }
-  .anvira-local h2 { font-size: clamp(49px, 15vw, 78px); }
+  .anvira-local h2 { font-size: clamp(32px, 10.1vw, 56px); }
   .anvira-final { min-height: 85dvh; }
-  .anvira-final h2 { font-size: clamp(52px, 15vw, 82px); }
+  .anvira-final h2 { font-size: clamp(32px, 10.1vw, 56px); }
   .anvira-final__branch { width: 75vw; right: -35%; bottom: -10%; opacity: .23; }
   .anvira-morph { height: 150dvh; }
   .anvira-leaf-wipe { height: 110dvh; }
