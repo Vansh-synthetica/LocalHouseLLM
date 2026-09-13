@@ -122,7 +122,7 @@ const Docs = () => {
                 <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-4">{s.heading}</h2>
                 <p className="text-muted-foreground leading-relaxed mb-5">{s.body}</p>
                 {s.code && (
-                  <pre className="p-5 rounded-md border border-border font-mono text-xs md:text-sm leading-relaxed bg-card whitespace-pre overflow-x-auto">{s.code}</pre>
+                  <pre className="p-5 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card whitespace-pre overflow-x-auto">{s.code}</pre>
                 )}
               </article>
             ))}
@@ -134,10 +134,10 @@ const Docs = () => {
         <div className="max-container max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight mb-5">Where to go next.</h2>
           <div className="flex flex-wrap gap-3">
-            <a href="#quickstart"><Button className="rounded-md bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11 px-6 font-sans">Start here <ArrowRight className="w-4 h-4 ml-1" /></Button></a>
-            <Link to="/stack"><Button variant="outline" className="rounded-md border-border bg-transparent h-11 px-6 font-sans">The stack</Button></Link>
+            <a href="#quickstart"><Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 h-11 px-6 font-sans">Start here <ArrowRight className="w-4 h-4 ml-1" /></Button></a>
+            <Link to="/stack"><Button variant="outline" className="rounded-full border-border bg-transparent h-11 px-6 font-sans">The stack</Button></Link>
             <a href="https://github.com/LocalHouseLLM" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" className="rounded-md border-border bg-transparent h-11 px-6 font-sans">GitHub</Button>
+              <Button variant="outline" className="rounded-full border-border bg-transparent h-11 px-6 font-sans">GitHub</Button>
             </a>
           </div>
         </div>

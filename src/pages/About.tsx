@@ -199,12 +199,12 @@ const About = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               <a href="#contact">
-                <Button className="rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11 px-6">
+                <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
                   Contact us
                 </Button>
               </a>
               <a href="mailto:vanshbukkarwal@localhousellm.com">
-                <Button variant="outline" className="rounded-sm h-11 px-6">
+                <Button variant="outline" className="rounded-full h-11 px-6">
                   Reach out directly
                 </Button>
               </a>
@@ -256,23 +256,23 @@ const About = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm text-foreground mb-2">Name</label>
-                <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Your name" required className="rounded-sm bg-card border-border" />
+                <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Your name" required className="rounded-xl bg-card border-border" />
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm text-foreground mb-2">Email</label>
-                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Your email address" required className="rounded-sm bg-card border-border" />
+                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Your email address" required className="rounded-xl bg-card border-border" />
               </div>
               <div>
                 <label htmlFor="subject" className="block text-sm text-foreground mb-2">Subject</label>
-                <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="Subject of your message" required className="rounded-sm bg-card border-border" />
+                <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="Subject of your message" required className="rounded-xl bg-card border-border" />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm text-foreground mb-2">Message</label>
-                <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Your message" required className="rounded-sm min-h-[150px] bg-card border-border" />
+                <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Your message" required className="rounded-xl min-h-[150px] bg-card border-border" />
               </div>
               <Button
                 type="submit"
-                className="w-full rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11"
+                className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90 h-11"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Sending...' : 'Send message'}

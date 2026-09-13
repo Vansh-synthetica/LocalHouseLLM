@@ -47,7 +47,7 @@
 .anvira-nav__links { display: flex; align-items: center; gap: 30px; }
 .anvira-nav__links a { font-size: 12px; text-decoration: none; color: inherit; opacity: .72; transition: opacity .2s ease; }
 .anvira-nav__links a:hover { opacity: 1; }
-.anvira-nav__download { justify-self: end; padding: 10px 17px; border: 0; border-radius: 8px; text-decoration: none; font-family: inherit; font-size: 12px; cursor: pointer; color: hsl(var(--anvira-ink)) !important; background: hsl(var(--anvira-moss)); transition: transform .2s ease, background .2s ease, color .2s ease; }
+.anvira-nav__download { justify-self: end; padding: 10px 17px; border: 0; border-radius: 999px; text-decoration: none; font-family: inherit; font-size: 12px; cursor: pointer; color: hsl(var(--anvira-ink)) !important; background: hsl(var(--anvira-moss)); transition: transform .2s ease, background .2s ease, color .2s ease; }
 .anvira-nav__download:hover { transform: translateY(-1px); background: hsl(var(--anvira-moss-light)); color: hsl(var(--anvira-night)) !important; }
 .anvira-nav__menu { display: none; justify-self: end; border: 0; background: transparent; color: inherit; width: 40px; height: 40px; }
 .anvira-nav__mobile { display: none; }
@@ -62,7 +62,7 @@
 .anvira-hero h1 span { display: block; }
 .anvira-hero__copy { max-width: 560px; margin-top: 31px !important; color: hsl(var(--anvira-ink-soft)); font-size: 17px; line-height: 1.75; }
 .anvira-actions { display: flex; gap: 11px; margin-top: 33px; }
-.anvira-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 20px; border: 1px solid hsl(var(--anvira-ink) / .3); border-radius: 8px; text-decoration: none; font-size: 12px; transition: transform .22s ease, background .22s ease, color .22s ease; }
+.anvira-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 22px; border: 1px solid hsl(var(--anvira-ink) / .3); border-radius: 999px; text-decoration: none; font-size: 12px; transition: transform .22s ease, background .22s ease, color .22s ease; }
 .anvira-button svg { width: 15px; }
 .anvira-button--primary { color: hsl(var(--anvira-paper)) !important; background: hsl(var(--anvira-ink)); border-color: transparent; }
 .anvira-button--secondary { background: transparent; }
@@ -325,7 +325,7 @@
   .anvira-nav__menu { display: grid; place-items: center; }
   .anvira-nav__mobile { position: fixed; inset: 72px 0 auto; display: grid; gap: 0; padding: 18px 16px 22px; border-bottom: 1px solid hsl(var(--anvira-line)); background: hsl(var(--anvira-paper) / .97); backdrop-filter: blur(20px); color: hsl(var(--anvira-ink)); }
   .anvira-nav__mobile a { padding: 13px 4px; border-bottom: 1px solid hsl(var(--anvira-line) / .6); text-decoration: none; font-size: 13px; }
-  .anvira-nav__mobile button:last-child { margin-top: 12px; padding: 13px 4px; border: 0; font: inherit; font-size: 13px; cursor: pointer; color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-ink)); text-align: center; }
+  .anvira-nav__mobile button:last-child { margin-top: 12px; padding: 13px 4px; border: 0; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer; color: hsl(var(--anvira-paper)); background: hsl(var(--anvira-ink)); text-align: center; }
   .anvira-hero__sticky { padding-top: 120px; padding-bottom: 90px; }
   .anvira-hero h1 { font-size: clamp(47px, 15vw, 72px); }
   .anvira-hero__copy { font-size: 15px; line-height: 1.7; }

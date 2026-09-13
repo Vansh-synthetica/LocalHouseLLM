@@ -40,14 +40,14 @@ const Actions = ({ entry }: { entry: ArchiveEntry }) => (
       <>
         <Link
           to={`/archive/${entry.slug}`}
-          className="inline-flex items-center gap-2 rounded-sm bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
+          className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
         >
           <BookOpen className="w-4 h-4" /> Read in browser
         </Link>
         <a
           href={entry.pdfUrl}
           download
-          className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-foreground/40 transition-colors"
+          className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-foreground/40 transition-colors"
         >
           <Download className="w-4 h-4" /> Download PDF
         </a>
@@ -58,7 +58,7 @@ const Actions = ({ entry }: { entry: ArchiveEntry }) => (
         href={entry.externalUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-foreground/40 transition-colors"
+        className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-foreground/90 hover:bg-foreground/5 hover:border-foreground/40 transition-colors"
       >
         <ArrowUpRight className="w-4 h-4" /> {entry.source === 'SSRN' ? 'Read on SSRN' : 'External source'}
       </a>
@@ -73,7 +73,7 @@ const PaperCard = ({ entry, i }: { entry: ArchiveEntry; i: number }) => (
     viewport={{ once: true, margin: '-60px' }}
     variants={fadeUp}
     custom={i}
-    className="group relative rounded-sm border border-border bg-card p-6 md:p-8 transition-all duration-300 hover:border-foreground/30"
+    className="group relative rounded-2xl border border-border bg-card p-6 md:p-8 transition-all duration-300 hover:border-foreground/30"
   >
     <Meta entry={entry} />
     <h3 className="mt-3 text-lg md:text-xl font-semibold leading-snug tracking-tight">
@@ -92,7 +92,7 @@ const PaperCard = ({ entry, i }: { entry: ArchiveEntry; i: number }) => (
         {entry.tags.map((t) => (
           <li
             key={t}
-            className="rounded-sm border border-border px-2.5 py-1 text-[11px] text-muted-foreground"
+            className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground"
           >
             {t}
           </li>
@@ -201,7 +201,7 @@ const Archive = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="rounded-sm border border-border bg-card p-7 md:p-12"
+            className="rounded-2xl border border-border bg-card p-7 md:p-12"
           >
             <Meta entry={featured} />
             <h2 className="mt-4 text-2xl md:text-4xl font-semibold tracking-tight leading-[1.12] max-w-3xl">
@@ -243,7 +243,7 @@ const Archive = () => {
                 role="tab"
                 aria-selected={active === c}
                 onClick={() => setActive(c)}
-                className={`rounded-sm px-4 py-2 text-sm transition-colors border ${
+                className={`rounded-full px-4 py-2 text-sm transition-colors border ${
                   active === c
                     ? 'bg-foreground text-background border-transparent'
                     : 'border-border text-muted-foreground hover:text-foreground hover:bg-foreground/5'
@@ -379,7 +379,7 @@ const Archive = () => {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={i}
-                className="group flex items-start justify-between gap-4 rounded-sm border border-border p-6 md:p-8 hover:border-foreground/30 hover:bg-foreground/[0.03] transition-all"
+                className="group flex items-start justify-between gap-4 rounded-2xl border border-border p-6 md:p-8 hover:border-foreground/30 hover:bg-foreground/[0.03] transition-all"
               >
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold">{repo.name}</h3>

@@ -193,7 +193,7 @@ const Stack = () => {
             </ul>
 
             <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">What is inside a packet</h3>
-            <div className="p-6 rounded-sm border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`{
+            <div className="p-6 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`{
   "id":         "pkt_01H...",
   "from":       "orcha",
   "to":         "expert.medical",
@@ -248,7 +248,7 @@ const Stack = () => {
             </ol>
 
             <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">A 10-minute integration sketch</h3>
-            <div className="p-6 rounded-sm border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`import { Orcha } from "@localhousellm/orcha";
+            <div className="p-6 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`import { Orcha } from "@localhousellm/orcha";
 
 const orcha = new Orcha({
   modules:  [retrieval, mathExpert, medicalExpert],
@@ -443,12 +443,12 @@ const result = await orcha.handle({
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/docs">
-                <Button className="rounded-sm bg-foreground text-background hover:bg-primary hover:text-primary-foreground h-11 px-6">
+                <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 h-11 px-6">
                   Read the docs <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
               <a href="https://github.com/LocalHouseLLM" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="rounded-sm h-11 px-6">
+                <Button variant="outline" className="rounded-full h-11 px-6">
                   GitHub
                 </Button>
               </a>
