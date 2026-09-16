@@ -212,15 +212,24 @@ assert decode(wire).symbols[0].value == "hello"`}</div>
               orchestrator.
             </p>
 
-            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">Performance: Why binary?</h3>
+            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">Performance: why binary?</h3>
             <p className="text-muted-foreground mb-4">
-              When modules talk over a network, standard HTTP APIs introduce significant overhead. Because AICL is a compact binary wire protocol (backed by a native Rust core), it strips that overhead away entirely.
+              When modules talk over a network, standard HTTP APIs introduce significant overhead. Because AICL is a
+              compact binary wire protocol backed by a native Rust core, it strips that overhead away at the
+              transport layer — though once a model is doing real work, the wire format stops being the bottleneck,
+              and the numbers say so honestly.
             </p>
             <ul className="space-y-3 text-muted-foreground mb-10 list-disc pl-6">
-              <li><strong className="text-foreground">Cross-process calls:</strong> ~65× faster than FastAPI/HTTPS (16.3µs vs 1,063µs average).</li>
-              <li><strong className="text-foreground">Streaming performance:</strong> ~31× faster for token streaming (452µs vs 14,005µs).</li>
-              <li><strong className="text-foreground">Zero-network overhead:</strong> When running fully in-process, it bypasses HTTP/TCP entirely for maximum inference speed.</li>
+              <li><strong className="text-foreground">Request/response, cross-process:</strong> ~56× faster than FastAPI/HTTPS (26.3µs vs 1,480µs average).</li>
+              <li><strong className="text-foreground">Streaming, 51 chunks:</strong> ~13× faster (546µs vs 7,161µs per stream).</li>
+              <li><strong className="text-foreground">End-to-end over HTTP, real inference (60 rounds):</strong> essentially tied with a no-relay baseline (1,173.5ms vs 1,176.2ms average) — model latency dominates once real inference is involved.</li>
+              <li><strong className="text-foreground">End-to-end, fully in-process:</strong> ~68ms faster than routing over HTTP (1,104.0ms average, 89.4ms under the no-relay baseline).</li>
             </ul>
+            <p className="text-muted-foreground mb-10">
+              In the same pass, we also found and kept a real regression: cross-process latency rose from 16.3µs to
+              26.3µs after a wire-format rewrite. It's reproducible at both 5k and 20k iterations — we're reporting
+              it rather than only the numbers that look good.
+            </p>
 
             <p className="text-muted-foreground">
               The open-source reference implementation is on{' '}
