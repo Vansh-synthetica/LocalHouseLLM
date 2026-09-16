@@ -101,8 +101,8 @@ const Footer = () => {
               title="Products"
               links={[
                 { to: '/anvira', label: 'Anvira' },
-                { to: '/nomi', label: 'Nomi' },
-                { to: '/start', label: 'Get started' },
+                { to: '/stack#memory', label: 'Nomi' },
+                { to: '/docs', label: 'Get started' },
               ]}
             />
             <FooterColumn
@@ -121,7 +121,7 @@ const Footer = () => {
               links={[
                 { to: '/docs', label: 'Developer docs' },
                 { to: '/archive', label: 'Research' },
-                { to: '/blog', label: 'Blog' },
+                { to: 'https://github.com/Vansh-synthetica/aicl', label: 'AICL Source', external: true },
                 { to: '/faq', label: 'FAQ' },
               ]}
             />
@@ -131,8 +131,8 @@ const Footer = () => {
               links={[
                 { to: '/about', label: 'About' },
                 { to: '/about#contact', label: 'Contact' },
-                { to: '/work-with-us', label: 'Careers' },
-                { to: 'https://github.com/LocalHouseLLM', label: 'Open source', external: true },
+                { to: '/about', label: 'Careers' },
+                { to: 'https://github.com/LocalHouseLLM', label: 'GitHub', external: true },
               ]}
             />
           </div>
@@ -143,9 +143,6 @@ const Footer = () => {
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link to="/faq" className={linkClass}>
               Help
-            </Link>
-            <Link to="/sitemap" className={linkClass}>
-              Sitemap
             </Link>
             <a href="mailto:contact@localhousellm.com" className={linkClass}>
               Contact

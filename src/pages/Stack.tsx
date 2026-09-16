@@ -192,26 +192,39 @@ const Stack = () => {
               <li><strong className="text-foreground">Safety surface.</strong> Verification can inspect packets, not opaque text blobs.</li>
             </ul>
 
-            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">What is inside a packet</h3>
-            <div className="p-6 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`{
-  "id":         "pkt_01H...",
-  "from":       "orcha",
-  "to":         "expert.medical",
-  "intent":     "answer.question",
-  "payload":    { "question": "...", "context_ref": "mem_..." },
-  "constraints":{ "max_tokens": 1200, "must_cite": true },
-  "trace":      { "request_id": "...", "parent": "..." },
-  "policy":     ["pii.redact", "no.medical.advice"]
-}`}</div>
+            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">A compact binary wire protocol</h3>
+            <p className="text-muted-foreground mb-4">
+              AICL isn't just JSON over HTTP. It's a typed binary packet format matching a strict ISA specification, with a native Rust core handling the hot path and a Python SDK for developers.
+            </p>
+            <div className="p-6 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`from aicl import encode, decode, Packet
+from aicl.bin.types import Symbol
+from aicl.bin.symbol_types import S_STRING
 
-            <p className="text-muted-foreground mb-3">
+# Packets are encoded directly to binary via the Rust core
+pkt = Packet(symbols=[Symbol(S_STRING, "hello")])
+wire = encode(pkt)
+
+assert decode(wire).symbols[0].value == "hello"`}</div>
+
+            <p className="text-muted-foreground mb-10">
               AICL is the wire format; ORCHA (below) is the policy that decides what to send. Decoupling the two
               means an ORCHA upgrade does not break modules, and a new module does not require touching the
               orchestrator.
             </p>
+
+            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">Performance: Why binary?</h3>
+            <p className="text-muted-foreground mb-4">
+              When modules talk over a network, standard HTTP APIs introduce significant overhead. Because AICL is a compact binary wire protocol (backed by a native Rust core), it strips that overhead away entirely.
+            </p>
+            <ul className="space-y-3 text-muted-foreground mb-10 list-disc pl-6">
+              <li><strong className="text-foreground">Cross-process calls:</strong> ~65× faster than FastAPI/HTTPS (16.3µs vs 1,063µs average).</li>
+              <li><strong className="text-foreground">Streaming performance:</strong> ~31× faster for token streaming (452µs vs 14,005µs).</li>
+              <li><strong className="text-foreground">Zero-network overhead:</strong> When running fully in-process, it bypasses HTTP/TCP entirely for maximum inference speed.</li>
+            </ul>
+
             <p className="text-muted-foreground">
               The open-source reference implementation is on{' '}
-              <a href="https://github.com/LocalHouseLLM/AICL" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">GitHub</a>,
+              <a href="https://github.com/Vansh-synthetica/aicl" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">GitHub</a>,
               with a draft specification published alongside our{' '}
               <Link to="/archive" className="text-foreground underline underline-offset-4">research papers</Link>.
             </p>
@@ -228,8 +241,7 @@ const Stack = () => {
               ORCHA
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
-              ORCHA is the orchestration engine at the centre of the stack — the layer that decides what should
-              happen, in what order, by which expert, and how to put the pieces back together.
+              ORCHA is a local-first agent orchestration engine: a typed packet format, a generic graph runtime, and a real tool-execution layer for building agents that run models locally inside a sandboxed workspace.
             </p>
           </Reveal>
 
@@ -238,35 +250,41 @@ const Stack = () => {
           </Reveal>
 
           <Reveal>
-            <ol className="space-y-3 text-muted-foreground mb-10 list-decimal pl-6">
-              <li><strong className="text-foreground">Decompose.</strong> Break the request into typed sub-tasks.</li>
-              <li><strong className="text-foreground">Route.</strong> Match each sub-task to the most capable available module, using AICL capability advertisements.</li>
-              <li><strong className="text-foreground">Execute.</strong> Run sub-tasks in parallel where possible; respect dependency edges.</li>
-              <li><strong className="text-foreground">Aggregate.</strong> Reconcile partial answers into a single coherent response.</li>
-              <li><strong className="text-foreground">Evaluate.</strong> Score confidence, check verifier output, decide whether to ship or retry.</li>
-              <li><strong className="text-foreground">Retry.</strong> Reroute, refine the prompt, or escalate to a stronger module — deterministically.</li>
-            </ol>
+            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">The open developer SDK</h3>
+            <p className="text-muted-foreground mb-6">
+              The open-source layer of ORCHA provides a generic DAG execution engine, a robust capability registry, and a single-agent tool-calling loop. It strictly sandboxes tools (like filesystem, search, git, and terminal) to explicit workspace roots.
+            </p>
 
-            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">A 10-minute integration sketch</h3>
-            <div className="p-6 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`import { Orcha } from "@localhousellm/orcha";
+            <div className="p-6 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card mb-10 whitespace-pre overflow-x-auto">{`from orcha.builders.agent import AgentGraphConfig, build_agent_runner
+from orcha.capabilities.base import CapabilityContext, PermissionPolicy
+from orcha.capabilities.registry import CapabilityRegistry
+from orcha.nodes.agent import AgentConfig
 
-const orcha = new Orcha({
-  modules:  [retrieval, mathExpert, medicalExpert],
-  memory:   userMemory,
-  safety:   defaultVerifier,
-});
+# Real tools, sandboxed to a workspace root.
+registry = CapabilityRegistry().register_defaults()
+executor = registry.build(
+    ["filesystem", "workspace", "search", "git"],
+    ctx=CapabilityContext(roots=["/path/to/workspace"]),
+    policy=PermissionPolicy(access_mode="action"),
+)
 
-const result = await orcha.handle({
-  user:    "u_123",
-  intent:  "answer.question",
-  payload: { question: "..." },
-});`}</div>
+runner = build_agent_runner(AgentGraphConfig(
+    agent_config=AgentConfig(completion_fn=my_completion_fn, max_iterations=6),
+    executor=executor,
+))
+
+result = await runner.run("find every TODO in this repo")`}</div>
+
+            <h3 className="font-display text-xl md:text-2xl font-semibold mb-4">What's not here (The proprietary runtime)</h3>
+            <p className="text-muted-foreground mb-10">
+              ORCHA's adaptive task-decomposition runtime — multi-step planning, corrective retries, and verification against an objective — stays closed and powers Anvira's more sophisticated agentic behavior. What ships in the open SDK is the foundational graph and tool layer that the closed runtime is built on top of.
+            </p>
 
             <p className="text-muted-foreground">
               A full walk-through lives in the{' '}
               <Link to="/docs" className="text-foreground underline underline-offset-4">docs</Link>. The{' '}
-              <a href="https://github.com/LocalHouseLLM/orcha01" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">
-                ORCHA source
+              <a href="https://github.com/Vansh-synthetica/orcha" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">
+                ORCHA SDK
               </a>{' '}
               is open on GitHub.
             </p>

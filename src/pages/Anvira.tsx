@@ -16,7 +16,6 @@ import {
   ModelFoundation,
   SystemVisual,
 } from '@/components/anvira/AnviraVisuals';
-import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import '@/pages/home.css';
 import './anvira.css';
 
@@ -46,14 +45,6 @@ const handleDownloadBoth = () => {
   triggerDownload(DOWNLOAD_URL);
   setTimeout(() => triggerDownload(BLOCKMAP_URL), 300);
 };
-
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const isCoarsePointer = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(pointer: coarse)').matches;
 
 const revealUp = {
   hidden: { opacity: 0, y: 26 },
@@ -475,13 +466,6 @@ const AnviraFinal = () => (
 );
 
 const Anvira = () => {
-  useSmoothScroll(!prefersReducedMotion() && !isCoarsePointer(), {
-    duration: 2,
-    wheelMultiplier: 0.7,
-    touchMultiplier: 1,
-    lerp: 0.06,
-  });
-
   return (
     <CleanLayout>
       <SEO

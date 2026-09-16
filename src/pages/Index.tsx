@@ -7,17 +7,8 @@ import SEO from '@/components/SEO';
 import { NodeField, LocalMachine } from '@/components/home/HomeVisuals';
 import { WorkspaceVisual } from '@/components/anvira/AnviraVisuals';
 import forestImage from '@/assets/video-poster.jpg';
-import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import '@/pages/anvira.css';
 import './home.css';
-
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const isCoarsePointer = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(pointer: coarse)').matches;
 
 const revealUp = {
   hidden: { opacity: 0, y: 26 },
@@ -373,13 +364,6 @@ const FinalSection = () => (
 );
 
 const Index = () => {
-  useSmoothScroll(!prefersReducedMotion() && !isCoarsePointer(), {
-    duration: 2,
-    wheelMultiplier: 0.7,
-    touchMultiplier: 1,
-    lerp: 0.06,
-  });
-
   const homeSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
