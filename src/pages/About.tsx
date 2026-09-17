@@ -10,6 +10,7 @@ import { Reveal, SectionIntro } from '@/components/system/Motion';
 const leadership = [
   { name: 'Vansh Bukkarwal', role: 'CEO & Founder' },
   { name: 'Shandie', role: 'Co-owner' },
+  { name: 'Mimi', role: 'tuna eater'},
 ];
 
 const coFounders = [{ name: 'Raghav', role: 'Co-Founder' }];
