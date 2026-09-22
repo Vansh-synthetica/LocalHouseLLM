@@ -20,6 +20,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
+  const isDarkRoute = location.pathname.startsWith('/anvira');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -39,10 +40,16 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
-  const linkClass = (active: boolean) =>
-    `text-[13px] font-medium tracking-[0.01em] transition-colors duration-200 ${
+  const linkClass = (active: boolean) => {
+    if (isDarkRoute) {
+      return `text-[13px] font-medium tracking-[0.01em] transition-colors duration-200 ${
+        active ? 'text-white' : 'text-white/55 hover:text-white'
+      }`;
+    }
+    return `text-[13px] font-medium tracking-[0.01em] transition-colors duration-200 ${
       active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
     }`;
+  };
 
   return (
     <>
@@ -58,16 +65,26 @@ const Navbar = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-background/95 backdrop-blur-sm border-b border-border/80' : 'bg-background/80'
+          isDarkRoute
+            ? scrolled
+              ? 'bg-[#07070a]/90 backdrop-blur-md border-b border-white/10'
+              : 'bg-gradient-to-b from-black/50 to-transparent border-b border-transparent'
+            : scrolled
+              ? 'bg-background/95 backdrop-blur-sm border-b border-border/80'
+              : 'bg-background/80'
         }`}
         aria-label="Primary"
       >
         <div className="max-container h-[4.25rem] flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="LocalHouseLLM home">
-            <span className="inline-flex h-7 w-7 items-center justify-center text-foreground">
+          <Link
+            to="/"
+            className={`flex items-center gap-2.5 shrink-0 group ${isDarkRoute ? 'text-white' : 'text-foreground'}`}
+            aria-label="LocalHouseLLM home"
+          >
+            <span className="inline-flex h-7 w-7 items-center justify-center">
               <BrandMark />
             </span>
-            <span className="font-display text-[13px] font-semibold tracking-[0.15em] uppercase text-foreground">
+            <span className="font-display text-[13px] font-semibold tracking-[0.15em] uppercase">
               LocalHouseLLM
             </span>
           </Link>
@@ -84,9 +101,15 @@ const Navbar = () => {
             ))}
             <Link
               to="/anvira"
-              className={linkClass(location.pathname.startsWith('/anvira'))}
+              className={linkClass(location.pathname === '/anvira')}
             >
               Anvira
+            </Link>
+            <Link
+              to="/anvira-notes"
+              className={linkClass(location.pathname === '/anvira-notes')}
+            >
+              Anvira Notes
             </Link>
           </div>
 
@@ -103,7 +126,13 @@ const Navbar = () => {
                   Sign in
                 </Link>
                 <Link to="/anvira">
-                  <Button className="h-10 rounded-full pl-5 pr-4 text-[13px] font-medium bg-foreground text-background hover:bg-foreground/90 gap-1">
+                  <Button
+                    className={`h-10 rounded-full pl-5 pr-4 text-[13px] font-medium gap-1 ${
+                      isDarkRoute
+                        ? 'bg-white text-black hover:bg-white/90'
+                        : 'bg-foreground text-background hover:bg-foreground/90'
+                    }`}
+                  >
                     Try Anvira
                     <ChevronDown className="w-4 h-4 opacity-70" aria-hidden />
                   </Button>
@@ -115,7 +144,9 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen((v) => !v)}
-              className="text-foreground p-2 rounded-full hover:bg-foreground/5 transition-colors"
+              className={`p-2 rounded-full transition-colors ${
+                isDarkRoute ? 'text-white hover:bg-white/10' : 'text-foreground hover:bg-foreground/5'
+              }`}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -136,7 +167,7 @@ const Navbar = () => {
               className="md:hidden bg-background border-b border-border max-h-[calc(100dvh-4.25rem)] overflow-y-auto"
             >
               <div className="max-container py-4 flex flex-col gap-1">
-                {[...navLinks, { to: '/anvira', label: 'Anvira' }].map((link) => (
+                {[...navLinks, { to: '/anvira', label: 'Anvira' }, { to: '/anvira-notes', label: 'Anvira Notes' }].map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}

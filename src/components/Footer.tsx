@@ -101,6 +101,7 @@ const Footer = () => {
               title="Products"
               links={[
                 { to: '/anvira', label: 'Anvira' },
+                { to: '/anvira-notes', label: 'Anvira Notes' },
                 { to: '/stack#memory', label: 'Nomi' },
                 { to: '/docs', label: 'Get started' },
               ]}

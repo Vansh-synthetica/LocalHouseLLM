@@ -14,6 +14,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Anvira from "./pages/Anvira";
+import AnviraNotes from "./pages/AnviraNotes";
 import Archive from "./pages/Archive";
 import PaperReader from "./pages/PaperReader";
 import Stack from "./pages/Stack";
@@ -47,6 +48,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/anvira" element={<Anvira />} />
+              <Route path="/anvira-notes" element={<AnviraNotes />} />
               <Route path="/about" element={<About />} />
               <Route path="/stack" element={<Stack />} />
               <Route path="/archive" element={<Archive />} />
