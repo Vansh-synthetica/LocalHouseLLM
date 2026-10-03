@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 
 // Premium typography — Sora headings, Manrope body
 import '@fontsource/sora/300.css';
@@ -20,4 +20,12 @@ import '@fontsource/source-serif-4/400-italic.css';
 import App from './App.tsx';
 import './index.css';
 
-createRoot(document.getElementById('root')!).render(<App />);
+const root = document.getElementById('root')!;
+
+// Public pages ship as prerendered HTML (scripts/prerender.mjs); hydrate them.
+// App-only routes are served an empty shell, so render from scratch there.
+if (root.firstElementChild) {
+  hydrateRoot(root, <App />);
+} else {
+  createRoot(root).render(<App />);
+}

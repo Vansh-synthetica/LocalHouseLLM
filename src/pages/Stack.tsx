@@ -39,8 +39,8 @@ const Stack = () => {
     '@type': 'TechArticle',
     headline: 'The LocalHouseLLM Stack — Modular AI Architecture',
     about: 'Modular AI infrastructure',
-    author: { '@type': 'Organization', name: 'LocalHouseLLM' },
-    publisher: { '@type': 'Organization', name: 'LocalHouseLLM' },
+    author: { '@id': 'https://localhousellm.com/#organization' },
+    publisher: { '@id': 'https://localhousellm.com/#organization' },
     url: 'https://localhousellm.com/stack',
   };
 
@@ -48,7 +48,7 @@ const Stack = () => {
     <CleanLayout>
       <SEO
         title="The LocalHouseLLM Stack — Modular AI Architecture"
-        description="A complete overview of the LocalHouseLLM modular AI stack: AICL communication, ORCHA orchestration, memory, safety, tools, and intelligence modules — the open infrastructure for decentralized AI."
+        description="How the LocalHouseLLM stack fits together: AICL communication, ORCHA orchestration, Nomi memory, safety, tools and intelligence modules for local AI."
         canonical="https://localhousellm.com/stack"
         keywords="LocalHouseLLM stack, modular AI architecture, AICL, ORCHA, AI orchestration, AI communication layer, AI memory, AI safety, intelligence modules, decentralized AI infrastructure"
         schema={schema}

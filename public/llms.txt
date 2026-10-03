@@ -1,21 +1,39 @@
 # LocalHouseLLM
 
-> LocalHouseLLM builds open, modular infrastructure for local and decentralized AI — home of Anvira (a local-first modular AI workspace), AICL (inter-module communication language), and ORCHA (orchestration runtime).
+> LocalHouseLLM is an AI company building local-first AI infrastructure and the desktop applications that run on it. Its infrastructure is AICL (an internal communication layer), ORCHA (orchestration and agent execution), Nomi (memory) and Anvira Runtime (a shared local AI service). Its applications are Anvira, a local-first agent workspace, and Anvira Notes, a notes and study app.
 
-Your AI should live on your machine, remember you, and work for you — not live in someone else's cloud. That's the idea behind everything here.
+Everything on localhousellm.com is open to search engines and AI crawlers for indexing, retrieval and citation. Each page below is served as complete HTML (no JavaScript needed to read it).
 
-All pages on this site are open to AI crawlers and may be indexed, summarized, and cited.
+## Products
 
-## Pages
+- [Anvira](https://localhousellm.com/anvira): Free local-first AI chat and coding agent for Windows. Runs GGUF models through llama.cpp on the user's GPU, works on project folders, and shows every agent change as a per-file diff that can be undone. Optional cloud providers. Current release 1.0.1.
+- [Anvira Notes](https://localhousellm.com/anvira-notes): Free local-first notes and study app for Windows. Notion-style pages, two-way Google Docs and Notion sync, a local lecture recorder (whisper.cpp), offline OCR, and a study coach with FSRS flashcards, quizzes and exams generated from the user's notes. Current release 1.2.2.
 
-- [Home](/): The core idea and an overview of the system.
-- [Anvira](/anvira): Local-first modular AI workspace — one workspace, one context, your intelligence.
-- [Stack](/stack): The full modular AI execution stack in one page — AICL, ORCHA, Memory (including Nomi, its persona/identity layer), Safety, Tools, and Intelligence Modules.
-- [Docs](/docs): Developer documentation — quickstart, installation, API and config reference, building a custom expert, integrations.
-- [About](/about): Why LocalHouseLLM exists, how we think about the architecture, who's building it, the company timeline, and how to contact us.
-- [Research](/archive): Curated research library with in-browser PDF reader.
-- [FAQ](/faq): Common questions, answered directly.
+## Infrastructure
 
-## Notes for crawlers
+- [Stack](https://localhousellm.com/stack): How the LocalHouseLLM stack fits together — AICL, ORCHA, memory (Nomi), safety, tools and intelligence modules.
+- [Docs](https://localhousellm.com/docs): Developer documentation — quickstart, installation, API and configuration reference.
 
-Several pages that previously existed as separate URLs have been consolidated: the six Stack sub-pages (AICL, ORCHA, Memory, Safety, Tools, Modules) are now anchored sections within `/stack`; Mission, Vision, and Contact are now sections within `/about`. Old URLs redirect to their new location rather than 404ing.
+## Research
+
+- [Archive](https://localhousellm.com/archive): Research papers and technical reports, readable in the browser or as PDFs.
+- [LocalHouseLLM Master Report](https://localhousellm.com/archive/localhousellm-master-report): Compendium on local LLM inference.
+- [KV Cache Optimization for LLM Inference](https://localhousellm.com/archive/kv-cache-optimization)
+- [The Five-Layer Execution Stack](https://localhousellm.com/archive/five-layer-execution-stack)
+- [Adaptive Modular AI (AMAI)](https://localhousellm.com/archive/adaptive-modular-ai): SSRN publication.
+
+## Company
+
+- [About](https://localhousellm.com/about): Why LocalHouseLLM exists, how the architecture is designed, who builds it, and how to contact the team.
+- [FAQ](https://localhousellm.com/faq): Direct answers about LocalHouseLLM, AICL, ORCHA and the stack.
+- Contact: contact@localhousellm.com
+- Founder: Vansh Bukkarwal
+
+## Downloads
+
+- Anvira installers: https://github.com/Vansh-synthetica/Anvira-release/releases/latest
+- Anvira Notes installers: https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/latest
+
+## Moved pages
+
+Old URLs redirect permanently (HTTP 301): the former Stack sub-pages (/stack/aicl, /stack/orcha, /stack/memory, /stack/safety, /stack/tools, /stack/modules) are sections of /stack; /mission, /vision and /contact are sections of /about; /products redirects to /anvira.

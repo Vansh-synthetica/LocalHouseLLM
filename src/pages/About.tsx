@@ -41,12 +41,11 @@ const About = () => {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'About LocalHouseLLM',
-    description: 'LocalHouseLLM builds modular AI architecture, specialized expert systems, and adaptive learning infrastructure.',
-    author: {
-      '@type': 'Organization',
-      name: 'LocalHouseLLM',
-      founder: { '@type': 'Person', name: 'Vansh Bukkarwal', jobTitle: 'Founder & CEO' },
-    },
+    url: 'https://localhousellm.com/about',
+    description: 'Who builds LocalHouseLLM, why it exists, how its local-first AI stack fits together, and how to contact the team.',
+    isPartOf: { '@id': 'https://localhousellm.com/#website' },
+    about: { '@id': 'https://localhousellm.com/#organization' },
+    mainEntity: { '@id': 'https://localhousellm.com/#organization' },
   };
 
   const { toast } = useToast();

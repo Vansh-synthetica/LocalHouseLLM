@@ -301,22 +301,27 @@ const AnviraSection = () => (
   <section className="lh-section lh-section--line lh-anvira-teaser" id="anvira">
     <div className="lh-shell">
       <Reveal className="lh-anvira-teaser__intro">
-        <p className="lh-eyebrow">Our first environment</p>
+        <p className="lh-eyebrow">Our first products</p>
         <h2>
-          Meet <span className="lh-mark">Anvira</span>.
+          Meet <span className="lh-mark">Anvira</span> and Anvira Notes.
         </h2>
         <p>
-          A local-first AI workspace where conversation, knowledge, agents, notes and learning live
-          together.
+          A local-first agent workspace and a notes-and-study app, both running on one shared
+          local runtime — on your machine, with models you choose.
         </p>
       </Reveal>
       <Reveal className="lh-anvira-preview" variants={revealStage}>
         <WorkspaceVisual />
       </Reveal>
       <Reveal>
-        <Link to="/anvira" className="lh-button lh-button--primary">
-          Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
+        <div className="lh-actions lh-actions--compact">
+          <Link to="/anvira" className="lh-button lh-button--primary">
+            Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+          <Link to="/anvira-notes" className="lh-button lh-button--ghost">
+            Explore Anvira Notes
+          </Link>
+        </div>
       </Reveal>
     </div>
   </section>
@@ -366,23 +371,23 @@ const FinalSection = () => (
 const Index = () => {
   const homeSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'LocalHouseLLM',
+    '@type': 'WebPage',
+    '@id': 'https://localhousellm.com/#webpage',
     url: 'https://localhousellm.com/',
-    description:
-      'LocalHouseLLM builds infrastructure for modular, persistent, executable intelligence — communication, execution, memory and intelligence modules that applications like Anvira are built on.',
-    sameAs: [
-      'https://github.com/LocalHouseLLM',
-      'https://x.com/localhousellm',
-      'https://www.linkedin.com/company/localhousellm',
+    name: 'LocalHouseLLM — Local-First AI Infrastructure, Anvira and Anvira Notes',
+    isPartOf: { '@id': 'https://localhousellm.com/#website' },
+    about: { '@id': 'https://localhousellm.com/#organization' },
+    mentions: [
+      { '@id': 'https://localhousellm.com/anvira#app' },
+      { '@id': 'https://localhousellm.com/anvira-notes#app' },
     ],
   };
 
   return (
     <CleanLayout>
       <SEO
-        title="LocalHouseLLM — Intelligence, Built Differently"
-        description="LocalHouseLLM builds the infrastructure that makes intelligence modular, persistent, executable and yours — AICL, Orcha, Nomi, and the environments built on them, starting with Anvira."
+        title="LocalHouseLLM — Local-First AI Infrastructure and Apps"
+        description="LocalHouseLLM builds local-first AI infrastructure — AICL, ORCHA, Nomi and Anvira Runtime — and the apps on it: the Anvira agent workspace and Anvira Notes."
         keywords="LocalHouseLLM, AI infrastructure, modular AI, AICL, ORCHA, Nomi, Anvira, Zynvera, local-first AI, decentralized AI, adaptive modular AI"
         canonical="https://localhousellm.com/"
         schema={homeSchema}

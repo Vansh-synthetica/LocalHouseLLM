@@ -30,6 +30,7 @@ const CleanLayout = ({ children }: CleanLayoutProps) => {
     wheelMultiplier: 0.75,
     touchMultiplier: 1,
     lerp: 0.055,
+    anchors: { offset: -84 },
   });
 
   useEffect(() => {

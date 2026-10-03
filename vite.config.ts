@@ -17,4 +17,8 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Build-time prerender (src/entry-server.tsx): bundle CJS-only packages so Node can import them.
+  ssr: {
+    noExternal: ["react-helmet-async"],
+  },
 }));

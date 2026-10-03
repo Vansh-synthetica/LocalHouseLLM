@@ -45,9 +45,14 @@ const PaperReader = () => {
     keywords: entry.tags.join(', '),
     about: entry.category,
     url,
-    author: { '@type': 'Organization', name: 'LocalHouseLLM' },
-    publisher: { '@type': 'Organization', name: 'LocalHouseLLM' },
+    mainEntityOfPage: url,
+    author: { '@id': 'https://localhousellm.com/#organization' },
+    publisher: { '@id': 'https://localhousellm.com/#organization' },
     isPartOf: { '@type': 'CollectionPage', name: 'LocalHouseLLM Archive', url: 'https://localhousellm.com/archive' },
+    ...(entry.externalUrl ? { sameAs: entry.externalUrl } : {}),
+    ...(entry.pdfUrl
+      ? { encoding: { '@type': 'MediaObject', encodingFormat: 'application/pdf', contentUrl: `https://localhousellm.com${entry.pdfUrl}` } }
+      : {}),
   };
 
   const others = archive.filter((e) => e.slug !== entry.slug).slice(0, 3);
@@ -55,7 +60,7 @@ const PaperReader = () => {
   return (
     <CleanLayout>
       <SEO
-        title={`${entry.title.length > 62 ? entry.title.slice(0, 59) + '…' : entry.title} | LocalHouseLLM`}
+        title={entry.title.length <= 48 ? `${entry.title} | LocalHouseLLM` : entry.title}
         description={entry.abstract.slice(0, 155)}
         keywords={`${entry.tags.join(', ')}, ${entry.category}, LocalHouseLLM research`}
         canonical={url}
@@ -206,7 +211,7 @@ const PaperReader = () => {
             {others.map((e) => (
               <Link
                 key={e.slug}
-                to={e.pdfUrl ? `/archive/${e.slug}` : '/archive'}
+                to={`/archive/${e.slug}`}
                 className="group rounded-2xl border border-border/50 p-6 hover:border-border hover:bg-foreground/[0.03] transition-all"
               >
                 <p className="text-[11px] tracking-[0.16em] uppercase text-muted-foreground">

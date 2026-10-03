@@ -71,7 +71,7 @@ const Docs = () => {
         description="Developer documentation for the LocalHouseLLM modular AI stack: quickstart, installation, API reference, config reference, custom expert guide, and integrations."
         canonical="https://localhousellm.com/docs"
         keywords="LocalHouseLLM docs, ORCHA documentation, AICL documentation, modular AI SDK, AI orchestration SDK, AI developer documentation"
-        schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'LocalHouseLLM Developer Documentation', author: { '@type': 'Organization', name: 'LocalHouseLLM' }, url: 'https://localhousellm.com/docs' }}
+        schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'LocalHouseLLM Developer Documentation', author: { '@id': 'https://localhousellm.com/#organization' }, publisher: { '@id': 'https://localhousellm.com/#organization' }, url: 'https://localhousellm.com/docs', isPartOf: { '@id': 'https://localhousellm.com/#website' } }}
       />
       <Breadcrumbs items={[{ name: 'Docs', to: '/docs' }]} />
 

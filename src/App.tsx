@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -37,14 +38,18 @@ import AccountSettings from "./pages/app/AccountSettings";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AuthProvider>
+/** Providers shared by the browser app and the build-time prerenderer. */
+export const AppShell = ({ children }: { children: ReactNode }) => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      {children}
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export const AppRoutes = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/anvira" element={<Anvira />} />
@@ -116,10 +121,17 @@ const App = () => (
 
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </AuthProvider>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+);
+
+const App = () => (
+  <HelmetProvider>
+    <AppShell>
+      <BrowserRouter>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </BrowserRouter>
+    </AppShell>
   </HelmetProvider>
 );
 

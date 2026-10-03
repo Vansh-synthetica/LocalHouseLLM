@@ -1,6 +1,7 @@
 import { type ReactNode, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Download, Loader2 } from 'lucide-react';
+import { ParallaxStage, TiltCard } from './AvMotion';
 
 /**
  * Fires a direct file download via a throwaway <a download>, rather than

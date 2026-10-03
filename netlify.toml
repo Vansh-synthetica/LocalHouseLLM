@@ -1,0 +1,7 @@
+# Pinned here so the prerender step always runs (UI build settings are overridden by this file).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

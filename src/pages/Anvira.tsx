@@ -417,7 +417,11 @@ const Anvira = () => {
     <CleanLayout>
       <SEO
         title="Anvira — Free Local AI Coding Agent & Chat App for Windows"
-        description="Anvira is a free, local-first AI chat and coding agent for Windows. Runs local GGUF models on your GPU via llama.cpp — every agent change lands in a reviewable diff you can undo."
+        description="Anvira is a free, local-first AI chat and coding agent for Windows. It runs GGUF models on your GPU via llama.cpp, and every change is a diff you can undo."
+        ogImage={shotHome}
+        ogImageAlt="Anvira home screen with a project, model picker and Chat/Agent switch"
+        ogImageWidth={1750}
+        ogImageHeight={960}
         keywords="Anvira, Anvira AI, Anvira Runtime, local AI agent, local coding assistant, offline AI coding agent, AI agent for Windows, local-first AI, GGUF models, llama.cpp, local LLM app, AI pair programmer, local AI infrastructure, ORCHA agent orchestration, Python SDK, TypeScript SDK, LocalHouseLLM"
         canonical="https://localhousellm.com/anvira"
         schema={{
@@ -447,7 +451,7 @@ const Anvira = () => {
               ],
               url: 'https://localhousellm.com/anvira',
               downloadUrl: RELEASES_URL,
-              publisher: { '@type': 'Organization', name: 'LocalHouseLLM', url: 'https://localhousellm.com' },
+              publisher: { '@id': 'https://localhousellm.com/#organization' },
               offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
             },
             {

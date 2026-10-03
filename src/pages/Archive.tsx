@@ -53,6 +53,14 @@ const Actions = ({ entry }: { entry: ArchiveEntry }) => (
         </a>
       </>
     )}
+    {!entry.pdfUrl && (
+      <Link
+        to={`/archive/${entry.slug}`}
+        className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
+      >
+        <BookOpen className="w-4 h-4" /> Paper summary
+      </Link>
+    )}
     {entry.externalUrl && (
       <a
         href={entry.externalUrl}
@@ -127,9 +135,10 @@ const Archive = () => {
       headline: e.title,
       abstract: e.abstract,
       datePublished: e.date,
-      url: e.externalUrl ?? `https://localhousellm.com/archive/${e.slug}`,
+      url: `https://localhousellm.com/archive/${e.slug}`,
+      ...(e.externalUrl ? { sameAs: e.externalUrl } : {}),
       about: e.category,
-      publisher: { '@type': 'Organization', name: 'LocalHouseLLM' },
+      publisher: { '@id': 'https://localhousellm.com/#organization' },
     })),
   };
 
@@ -137,7 +146,7 @@ const Archive = () => {
     <CleanLayout>
       <SEO
         title="Archive — LocalHouseLLM Research Papers & Technical Reports"
-        description="Read LocalHouseLLM research in the browser: papers on modular AI, orchestration runtimes, local-first inference, KV-cache optimization, reasoning, and decentralized intelligence."
+        description="LocalHouseLLM research papers and technical reports on local LLM inference, KV-cache optimization, modular AI, orchestration and reasoning — free to read."
         keywords="LocalHouseLLM archive, LocalHouseLLM research papers, modular AI research, local AI inference research, KV cache optimization, AMAI, Shadow AMAI, ADAPT, CoT looping, AICL research"
         canonical="https://localhousellm.com/archive"
         type="article"
