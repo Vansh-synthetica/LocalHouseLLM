@@ -11,6 +11,11 @@ const heroEdges: [number, number][] = [
   [12, 2], [12, 5], [8, 13], [6, 13],
 ];
 
+// [edge index, seconds per trip, start delay]
+const pulses: [number, number, number][] = [
+  [1, 3.4, 0], [4, 4.2, 1.1], [6, 3.8, 2.3], [10, 4.6, 0.6], [15, 3.6, 1.8], [19, 4.4, 2.9],
+];
+
 export const NodeField = () => (
   <div className="lh-hero__field" aria-hidden="true">
     <svg viewBox="0 0 480 420" preserveAspectRatio="xMidYMid meet" className="lh-hero__field-svg">
@@ -19,8 +24,16 @@ export const NodeField = () => (
         const [x2, y2] = heroNodes[b];
         const mx = (x1 + x2) / 2 + (i % 2 === 0 ? 14 : -14);
         const my = (y1 + y2) / 2 + (i % 3 === 0 ? -10 : 10);
-        return <path key={i} className="lh-edge" d={`M${x1},${y1} Q${mx},${my} ${x2},${y2}`} />;
+        return <path key={i} id={`lh-edge-${i}`} className="lh-edge" d={`M${x1},${y1} Q${mx},${my} ${x2},${y2}`} />;
       })}
+      {/* Signals travelling between nodes: native SVG animation, so it runs in the prerendered HTML. */}
+      {pulses.map(([edge, dur, delay]) => (
+        <circle key={edge} r={2.2} className="lh-pulse">
+          <animateMotion dur={`${dur}s`} begin={`${delay}s`} repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href={`#lh-edge-${edge}`} />
+          </animateMotion>
+        </circle>
+      ))}
       {heroNodes.map(([x, y, r], i) => (
         <circle
           key={i}

@@ -40,9 +40,11 @@ createServer((req, res) => {
   const direct = path === '/' ? resolve(dist, 'index.html') : fileAt(path);
   if (direct) return send(res, 200, direct);
 
+  // Netlify matches rules with the trailing slash optional ("/a" and "/a/" are the same).
+  const bare = (x) => (x.length > 1 ? x.replace(/\/+$/, '') : x);
   for (const r of rules) {
     const splat = r.from.endsWith('/*') && path.startsWith(r.from.slice(0, -1));
-    if (r.from !== path && !splat) continue;
+    if (bare(r.from) !== bare(path) && !splat) continue;
     if (r.status === 301) {
       res.writeHead(301, { Location: r.to });
       return res.end();

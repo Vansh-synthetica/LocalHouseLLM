@@ -5,6 +5,9 @@ import { ArrowRight } from 'lucide-react';
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
 import { NodeField, LocalMachine } from '@/components/home/HomeVisuals';
+import { ParallaxImage, ScrollWords, StackFlow } from '@/components/home/HomeMotion';
+import { CountUp } from '@/components/anvira/AvMotion';
+import { archive, getEntry } from '@/data/archive';
 import { WorkspaceVisual } from '@/components/anvira/AnviraVisuals';
 import forestImage from '@/assets/video-poster.jpg';
 import '@/pages/anvira.css';
@@ -42,55 +45,48 @@ const Reveal = ({
 
 const latestReleases = [
   {
-    title: 'Introducing Anvira',
+    title: 'Anvira Notes 1.2.2',
     description:
-      'A local-first AI workspace where conversation, knowledge, agents, and notes live together — built on the LocalHouseLLM stack.',
-    date: 'March 2026',
-    category: 'Product',
+      'Google Docs fidelity in both directions, offline OCR, faster Study on small models, and a first-run guide that only offers models your PC can run.',
+    date: '1 October 2026',
+    category: 'Product release',
+    to: '/anvira-notes',
+    cta: 'Explore Anvira Notes',
+  },
+  {
+    title: 'Anvira 1.0.1',
+    description:
+      'The local agent workspace now updates itself and its runtime from one button, adds an optional account, and explains engine errors in plain language.',
+    date: '21 September 2026',
+    category: 'Product release',
     to: '/anvira',
     cta: 'Explore Anvira',
   },
   {
-    title: 'The AICL communication layer',
+    title: 'Anvira Runtime 1.0.0',
     description:
-      'A protocol for messages between intelligence modules — so orchestration, memory, and experts can interoperate without a monolith.',
-    date: 'February 2026',
-    category: 'Research',
-    to: '/stack#aicl',
-    cta: 'Read overview',
-  },
-  {
-    title: 'ORCHA orchestration engine',
-    description:
-      'Decides what runs, when, and how modules compose — the execution spine applications like Anvira are built on.',
-    date: 'January 2026',
-    category: 'Engineering',
-    to: '/stack#orcha',
-    cta: 'See ORCHA',
+      'One local service that both apps share: an authenticated local API, CLI, Python and TypeScript SDKs, model management, ORCHA agent execution and Nomi memory.',
+    date: '20 September 2026',
+    category: 'Infrastructure',
+    to: '/anvira#runtime',
+    cta: 'How the runtime works',
   },
 ];
 
 const researchHighlights = [
-  {
-    title: 'Modular intelligence thesis',
-    tags: ['Research', 'Architecture'],
-    to: '/stack',
-  },
-  {
-    title: 'Local-first by default',
-    tags: ['Product', 'Privacy'],
-    to: '/anvira',
-  },
-  {
-    title: 'Safety in the stack',
-    tags: ['Safety', 'Engineering'],
-    to: '/stack#safety',
-  },
-  {
-    title: 'Open research archive',
-    tags: ['Publications'],
-    to: '/archive',
-  },
+  'localhousellm-master-report',
+  'kv-cache-optimization',
+  'five-layer-execution-stack',
+  'adaptive-modular-ai',
+]
+  .map((slug) => getEntry(slug))
+  .filter((e): e is NonNullable<typeof e> => Boolean(e));
+
+const facts: { value: number; suffix?: string; label: string }[] = [
+  { value: 21, suffix: '/21', label: 'agent workflow checks passed by a 7B model in our own testing' },
+  { value: archive.length, label: 'research papers and technical reports, free to read' },
+  { value: 2, label: 'desktop applications sharing one local runtime' },
+  { value: 0, label: 'cloud services required — local by default, cloud only if you add it' },
 ];
 
 const SectionIntro = ({
@@ -113,20 +109,18 @@ const Hero = () => (
   <section className="lh-hero">
     <div className="lh-shell">
       <div className="lh-hero__top">
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        >
-          Modular <span className="lh-mark">research</span> and{' '}
-          <span className="lh-mark">infrastructure</span> for intelligence that belongs to you.
-        </motion.h1>
-        <motion.div
-          className="lh-hero__aside"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <h1 className="lh-hero__title">
+          <span className="lh-rise" style={{ ['--d' as string]: '0ms' }}>
+            Modular <span className="lh-draw" style={{ ['--d' as string]: '700ms' }}>research</span> and
+          </span>{' '}
+          <span className="lh-rise" style={{ ['--d' as string]: '90ms' }}>
+            <span className="lh-draw" style={{ ['--d' as string]: '850ms' }}>infrastructure</span> for
+          </span>{' '}
+          <span className="lh-rise" style={{ ['--d' as string]: '180ms' }}>
+            intelligence that belongs to you.
+          </span>
+        </h1>
+        <div className="lh-hero__aside lh-rise" style={{ ['--d' as string]: '260ms' }}>
           <p>
             AI will reshape how we work and live. LocalHouseLLM is building open systems that keep
             intelligence modular, persistent, and on hardware you control — not locked in someone
@@ -140,29 +134,22 @@ const Hero = () => (
               Explore the stack
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      <motion.div
-        className="lh-hero__visual"
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <div className="lh-hero__visual lh-rise" style={{ ['--d' as string]: '360ms' }}>
         <div className="lh-hero__visual-inner">
           <NodeField />
         </div>
-      </motion.div>
+      </div>
     </div>
   </section>
 );
 
 const SpotlightBand = () => (
   <section className="lh-spotlight" aria-labelledby="spotlight-heading">
-    <div
-      className="lh-spotlight__frame"
-      style={{ backgroundImage: `url(${forestImage})` }}
-    >
+    <div className="lh-spotlight__frame">
+      <ParallaxImage src={forestImage} className="lh-parallax" />
       <div className="lh-shell lh-spotlight__content">
         <Reveal>
           <p className="lh-spotlight__label">Anvira</p>
@@ -209,14 +196,33 @@ const LatestReleases = () => (
   </section>
 );
 
+const FactsBand = () => (
+  <section className="lh-facts" aria-label="LocalHouseLLM in numbers">
+    <div className="lh-shell">
+      <ul className="lh-facts__grid">
+        {facts.map((f, i) => (
+          <li key={f.label}>
+            <Reveal className="lh-fact">
+              <strong style={{ transitionDelay: `${i * 60}ms` }}>
+                <CountUp to={f.value} suffix={f.suffix} />
+              </strong>
+              <span>{f.label}</span>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
+
 const MissionBand = () => (
   <section className="lh-mission">
     <div className="lh-shell">
       <Reveal>
-        <h2 className="lh-mission__title">
-          At LocalHouseLLM, we build AI infrastructure to serve people who want to{' '}
-          <span className="lh-mark">own</span> their intelligence.
-        </h2>
+        <ScrollWords
+          className="lh-mission__title"
+          text="At LocalHouseLLM, we build AI infrastructure to serve people who want to own their intelligence."
+        />
         <Link to="/about" className="lh-text-link">
           Learn more about our mission <ArrowRight className="h-3.5 w-3.5" />
         </Link>
@@ -224,14 +230,6 @@ const MissionBand = () => (
     </div>
   </section>
 );
-
-const chain = [
-  { name: 'AICL', role: 'the messages that move between every module' },
-  { name: 'ORCHA', role: 'decides what happens, and when' },
-  { name: 'Memory', role: 'the context that persists, user-owned' },
-  { name: 'Intelligence Modules', role: 'the experts that do the reasoning' },
-  { name: 'Applications', role: "Anvira, and what's built next" },
-];
 
 const ThesisSection = () => (
   <section className="lh-section lh-section--line" id="idea">
@@ -244,23 +242,13 @@ const ThesisSection = () => (
           </>
         }
       >
-        <p>Models are only one part of an intelligent system. Ours separates the rest into layers.</p>
+        <p>
+          Models are only one part of an intelligent system. Ours separates the rest into layers —
+          here is what happens to a single request, step by step.
+        </p>
       </SectionIntro>
 
-      <Reveal className="lh-chain">
-        {chain.map((c, i) => (
-          <div className="lh-chain__item" key={c.name}>
-            <div className="lh-chain__rail">
-              <span className="lh-chain__dot" />
-              {i < chain.length - 1 && <span className="lh-chain__line" />}
-            </div>
-            <div className={`lh-chain__body${i === chain.length - 1 ? ' lh-chain__body--last' : ''}`}>
-              <strong>{c.name}</strong>
-              <p>{c.role}</p>
-            </div>
-          </div>
-        ))}
-      </Reveal>
+      <StackFlow />
 
       <Reveal className="lh-chain-cta">
         <Link to="/stack" className="lh-button lh-button--ghost">
@@ -279,20 +267,27 @@ const ResearchGrid = () => (
       </Reveal>
       <ul className="lh-research-grid">
         {researchHighlights.map((item) => (
-          <li key={item.title}>
+          <li key={item.slug}>
             <Reveal>
-              <Link to={item.to} className="lh-research-card">
+              <Link to={`/archive/${item.slug}`} className="lh-research-card">
                 <div className="lh-research-card__tags">
-                  {item.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
+                  <span>{item.category}</span>
+                  <span>{item.source}</span>
                 </div>
                 <h3>{item.title}</h3>
+                <span className="lh-research-card__more">
+                  Read <ArrowRight className="h-3.5 w-3.5" />
+                </span>
               </Link>
             </Reveal>
           </li>
         ))}
       </ul>
+      <Reveal>
+        <Link to="/archive" className="lh-text-link">
+          All research and reports <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </Reveal>
     </div>
   </section>
 );
@@ -396,6 +391,7 @@ const Index = () => {
       <div className="lhllm-home">
         <Hero />
         <SpotlightBand />
+        <FactsBand />
         <LatestReleases />
         <MissionBand />
         <ThesisSection />
