@@ -9,11 +9,9 @@ import { Reveal, SectionIntro } from '@/components/system/Motion';
 
 const leadership = [
   { name: 'Vansh Bukkarwal', role: 'CEO & Founder' },
-  { name: 'Shandie', role: 'Co-owner' },
+  { name: 'Shandie', role: 'Co-Founder' },
   { name: 'Mimi', role: 'tuna eater'},
 ];
-
-const coFounders = [{ name: 'Raghav', role: 'Co-Founder' }];
 
 const timeline = [
   { date: 'April 2025', title: 'LocalHouseLLM founded', body: 'LocalHouseLLM begins with a mission to make intelligent systems local, modular, and user-owned.' },
@@ -170,12 +168,6 @@ const About = () => {
 
           <div className="divide-y divide-border border-t border-b border-border">
             {leadership.map((p) => (
-              <div key={p.name} className="flex items-baseline justify-between py-5">
-                <span className="font-display text-lg font-semibold text-foreground">{p.name}</span>
-                <span className="text-sm text-muted-foreground">{p.role}</span>
-              </div>
-            ))}
-            {coFounders.map((p) => (
               <div key={p.name} className="flex items-baseline justify-between py-5">
                 <span className="font-display text-lg font-semibold text-foreground">{p.name}</span>
                 <span className="text-sm text-muted-foreground">{p.role}</span>
