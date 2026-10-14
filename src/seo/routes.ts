@@ -66,6 +66,8 @@ export const appOnlyPaths = [
   '/verify-email',
   '/dashboard',
   '/dashboard/*',
+  // Anvira account pages (profile, password reset): signed-in tools, noindex.
+  '/account/*',
   // License-status lookup tool; intentionally noindex.
   '/orcha/license',
 ];

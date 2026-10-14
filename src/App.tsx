@@ -30,6 +30,8 @@ import {
   ForgotPassword,
   ResetPassword,
   VerifyEmail,
+  AccountProfile,
+  AccountReset,
   AppLayout,
   Dashboard,
   ProfilePage,
@@ -121,6 +123,9 @@ const AppRoutes = () => (
                 <Route path="settings" element={<AccountSettings />} />
               </Route>
               <Route path="/account" element={<Navigate to="/dashboard/settings" replace />} />
+              {/* Anvira Notes opens /account/profile from "Manage profile" — keep this URL working. */}
+              <Route path="/account/profile" element={<AccountProfile />} />
+              <Route path="/account/reset" element={<AccountReset />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -52,6 +52,10 @@ export const ForgotPassword = page(['/forgot-password'], 'src/pages/auth/ForgotP
 export const ResetPassword = page(['/reset-password'], 'src/pages/auth/ResetPassword.tsx', () => import('./pages/auth/ResetPassword'));
 export const VerifyEmail = page(['/verify-email'], 'src/pages/auth/VerifyEmail.tsx', () => import('./pages/auth/VerifyEmail'));
 
+// Anvira account (the desktop app's sign-in, not the website's) — opened by Anvira Notes' "Manage profile".
+export const AccountProfile = page(['/account/profile'], 'src/pages/account/AccountProfile.tsx', () => import('./pages/account/AccountProfile'));
+export const AccountReset = page(['/account/reset'], 'src/pages/account/AccountReset.tsx', () => import('./pages/account/AccountReset'));
+
 export const AppLayout = page(['/dashboard/*'], 'src/components/app/AppLayout.tsx', () => import('./components/app/AppLayout'));
 export const Dashboard = page(['/dashboard'], 'src/pages/app/Dashboard.tsx', () => import('./pages/app/Dashboard'));
 export const ProfilePage = page(['/dashboard/profile'], 'src/pages/app/ProfilePage.tsx', () => import('./pages/app/ProfilePage'));
