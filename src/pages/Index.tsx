@@ -9,7 +9,18 @@ import { ParallaxImage, ScrollWords, StackFlow } from '@/components/home/HomeMot
 import { CountUp } from '@/components/anvira/AvMotion';
 import { archive, getEntry } from '@/data/archive';
 import { WorkspaceVisual } from '@/components/anvira/AnviraVisuals';
+import { DownloadButton } from '@/components/anvira/AvKit';
+import {
+  type ProductId,
+  formatReleaseDate,
+  formatSize,
+  latestRelease,
+  recentHighlights,
+  releaseProducts,
+} from '@/data/releases';
 import forestImage from '@/assets/video-poster.jpg';
+import iconAnvira from '@/assets/anvira/icon-anvira.png';
+import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
 import '@/pages/anvira.css';
 import './home.css';
 
@@ -43,35 +54,54 @@ const Reveal = ({
   </motion.div>
 );
 
-const latestReleases = [
-  {
-    title: 'Anvira Notes 1.2.2',
-    description:
-      'Google Docs fidelity in both directions, offline OCR, faster Study on small models, and a first-run guide that only offers models your PC can run.',
-    date: '1 October 2026',
-    category: 'Product release',
-    to: '/anvira-notes',
-    cta: 'Explore Anvira Notes',
-  },
-  {
-    title: 'Anvira 1.0.1',
-    description:
-      'The local agent workspace now updates itself and its runtime from one button, adds an optional account, and explains engine errors in plain language.',
-    date: '21 September 2026',
-    category: 'Product release',
-    to: '/anvira',
-    cta: 'Explore Anvira',
-  },
-  {
-    title: 'Anvira Runtime 1.0.0',
-    description:
-      'One local service that both apps share: an authenticated local API, CLI, Python and TypeScript SDKs, model management, ORCHA agent execution and Nomi memory.',
-    date: '20 September 2026',
-    category: 'Infrastructure',
-    to: '/anvira#runtime',
-    cta: 'How the runtime works',
-  },
-];
+// Hand-written card copy for specific versions. When a newer version ships
+// before this is updated, the card falls back to that release's own highlights.
+const CARD_COPY: Record<string, string> = {
+  'anvira-notes@1.2.11':
+    'One look across the whole app, more private Messages, and your profile on the web — on top of study groups, graded mock exams and GPU acceleration.',
+  'anvira@1.0.1':
+    'The local agent workspace now updates itself and its runtime from one button, adds an optional account, and explains engine errors in plain language.',
+  'anvira-runtime@1.0.2':
+    'The local AI engine under both apps now serves several requests at once, so chat and Ask AI never wait behind an exam or lesson being written.',
+};
+
+const CARD_LINKS: Record<ProductId, { to: string; cta: string; category: string }> = {
+  'anvira-notes': { to: '/anvira-notes', cta: 'Explore Anvira Notes', category: 'Product release' },
+  anvira: { to: '/anvira', cta: 'Explore Anvira', category: 'Product release' },
+  'anvira-runtime': { to: '/anvira#runtime', cta: 'How the runtime works', category: 'Infrastructure' },
+};
+
+const latestReleases = releaseProducts
+  .map((p) => {
+    const r = latestRelease(p.id);
+    return {
+      key: p.id,
+      title: `${p.name} ${r.version}`,
+      description:
+        CARD_COPY[`${p.id}@${r.version}`] ??
+        `${recentHighlights(p.id, 3)
+          .map((h) => h.text)
+          .join(' · ')}.`,
+      iso: r.date,
+      date: formatReleaseDate(r.date),
+      ...CARD_LINKS[p.id],
+    };
+  })
+  .sort((a, b) => b.iso.localeCompare(a.iso));
+
+const allReleases = releaseProducts.flatMap((p) => p.releases.map((r) => r.date)).sort();
+const releaseCount = allReleases.length;
+const releaseDays = Math.max(
+  1,
+  Math.round((Date.parse(allReleases[allReleases.length - 1]) - Date.parse(allReleases[0])) / 86_400_000),
+);
+
+const notesLatest = latestRelease('anvira-notes');
+const [notesNewest] = recentHighlights('anvira-notes', 1);
+const ANNOUNCE =
+  notesNewest?.text === 'Messages'
+    ? { text: `Anvira Notes ${notesLatest.version}: study groups, mock exams and grades`, to: '/anvira-notes#messages' }
+    : { text: `Anvira Notes ${notesLatest.version}: ${notesNewest?.text ?? 'what’s new'}`, to: '/releases/anvira-notes' };
 
 const researchHighlights = [
   'localhousellm-master-report',
@@ -85,8 +115,8 @@ const researchHighlights = [
 const facts: { value: number; suffix?: string; label: string }[] = [
   { value: 21, suffix: '/21', label: 'agent workflow checks passed by a 7B model in our own testing' },
   { value: archive.length, label: 'research papers and technical reports, free to read' },
-  { value: 2, label: 'desktop applications sharing one local runtime' },
-  { value: 0, label: 'cloud services required — local by default, cloud only if you add it' },
+  { value: releaseCount, label: `releases shipped in ${releaseDays} days, each with public notes` },
+  { value: 0, label: 'notes or prompts sent to a cloud AI by default — models run on your PC' },
 ];
 
 const SectionIntro = ({
@@ -108,6 +138,11 @@ const SectionIntro = ({
 const Hero = () => (
   <section className="lh-hero">
     <div className="lh-shell">
+      <Link to={ANNOUNCE.to} className="lh-announce lh-rise" style={{ ['--d' as string]: '0ms' }}>
+        <span className="lh-announce__tag">New</span>
+        <span className="lh-announce__text">{ANNOUNCE.text}</span>
+        <ArrowRight className="h-3.5 w-3.5" />
+      </Link>
       <div className="lh-hero__top">
         <h1 className="lh-hero__title">
           <span className="lh-rise" style={{ ['--d' as string]: '0ms' }}>
@@ -127,9 +162,9 @@ const Hero = () => (
             else&apos;s cloud.
           </p>
           <div className="lh-actions lh-actions--compact">
-            <Link to="/anvira" className="lh-button lh-button--primary">
-              Try Anvira <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            <a href="#anvira" className="lh-button lh-button--primary">
+              Get the free apps <ArrowRight className="h-3.5 w-3.5" />
+            </a>
             <Link to="/stack" className="lh-button lh-button--ghost">
               Explore the stack
             </Link>
@@ -173,14 +208,14 @@ const LatestReleases = () => (
       </Reveal>
       <ul className="lh-release-grid">
         {latestReleases.map((item) => (
-          <li key={item.title}>
+          <li key={item.key}>
             <Reveal className="lh-release-card">
               <Link to={item.to} className="lh-release-card__link">
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
                 <div className="lh-release-card__meta">
                   <span className="lh-meta-label">Date</span>
-                  <span>{item.date}</span>
+                  <time dateTime={item.iso}>{item.date}</time>
                   <span className="lh-meta-label">Category</span>
                   <span>{item.category}</span>
                 </div>
@@ -192,6 +227,11 @@ const LatestReleases = () => (
           </li>
         ))}
       </ul>
+      <Reveal>
+        <Link to="/releases" className="lh-text-link">
+          All release notes <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </Reveal>
     </div>
   </section>
 );
@@ -292,6 +332,23 @@ const ResearchGrid = () => (
   </section>
 );
 
+const APPS: { id: ProductId; name: string; to: string; icon: string; body: string }[] = [
+  {
+    id: 'anvira-notes',
+    name: 'Anvira Notes',
+    to: '/anvira-notes',
+    icon: iconAnviraNotes,
+    body: 'Notion-style notes and a study coach in one app: flashcards, quizzes and graded mock exams made from your own notes, Google Docs and Notion sync, and study groups.',
+  },
+  {
+    id: 'anvira',
+    name: 'Anvira',
+    to: '/anvira',
+    icon: iconAnvira,
+    body: 'A local AI chat and coding agent: point it at a project folder and it plans, writes and verifies the work — every change a diff you can undo.',
+  },
+];
+
 const AnviraSection = () => (
   <section className="lh-section lh-section--line lh-anvira-teaser" id="anvira">
     <div className="lh-shell">
@@ -308,16 +365,35 @@ const AnviraSection = () => (
       <Reveal className="lh-anvira-preview" variants={revealStage}>
         <WorkspaceVisual />
       </Reveal>
-      <Reveal>
-        <div className="lh-actions lh-actions--compact">
-          <Link to="/anvira" className="lh-button lh-button--primary">
-            Explore Anvira <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-          <Link to="/anvira-notes" className="lh-button lh-button--ghost">
-            Explore Anvira Notes
-          </Link>
-        </div>
-      </Reveal>
+      <ul className="lh-apps">
+        {APPS.map((app) => {
+          const r = latestRelease(app.id);
+          return (
+            <li key={app.id}>
+              <Reveal className="lh-app">
+                <div className="lh-app__top">
+                  <img src={app.icon} alt="" width={52} height={52} />
+                  <div>
+                    <h3>
+                      <Link to={app.to}>{app.name}</Link>
+                    </h3>
+                    <p className="lh-app__meta">
+                      Version {r.version} · Windows 10 &amp; 11{r.installer ? ` · ${formatSize(r.installer.size)}` : ''}
+                    </p>
+                  </div>
+                </div>
+                <p className="lh-app__body">{app.body}</p>
+                <div className="lh-actions lh-actions--compact">
+                  <DownloadButton product={app.id} label="Download free" className="lh-button lh-button--primary" />
+                  <Link to={app.to} className="lh-button lh-button--ghost">
+                    Learn more
+                  </Link>
+                </div>
+              </Reveal>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   </section>
 );
@@ -372,18 +448,39 @@ const Index = () => {
     name: 'LocalHouseLLM — Local-First AI Infrastructure, Anvira and Anvira Notes',
     isPartOf: { '@id': 'https://localhousellm.com/#website' },
     about: { '@id': 'https://localhousellm.com/#organization' },
-    mentions: [
-      { '@id': 'https://localhousellm.com/anvira#app' },
-      { '@id': 'https://localhousellm.com/anvira-notes#app' },
-    ],
+    primaryImageOfPage: 'https://localhousellm.com/og/default.png',
+    dateModified: latestReleases[0]?.iso,
+    mainEntity: {
+      '@type': 'ItemList',
+      name: 'LocalHouseLLM apps',
+      itemListElement: APPS.map((app, i) => {
+        const r = latestRelease(app.id);
+        return {
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'SoftwareApplication',
+            '@id': `https://localhousellm.com${app.to}#app`,
+            name: app.name,
+            url: `https://localhousellm.com${app.to}`,
+            description: app.body,
+            applicationCategory: app.id === 'anvira' ? 'DeveloperApplication' : 'EducationApplication',
+            operatingSystem: 'Windows 10, Windows 11',
+            softwareVersion: r.version,
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          },
+        };
+      }),
+    },
   };
 
   return (
     <CleanLayout>
       <SEO
-        title="LocalHouseLLM — Local-First AI Infrastructure and Apps"
-        description="LocalHouseLLM builds local-first AI infrastructure — AICL, ORCHA, Nomi and Anvira Runtime — and the apps on it: the Anvira agent workspace and Anvira Notes."
-        keywords="LocalHouseLLM, AI infrastructure, modular AI, AICL, ORCHA, Nomi, Anvira, Zynvera, local-first AI, decentralized AI, adaptive modular AI"
+        title="LocalHouseLLM — Local-First AI Apps and Infrastructure"
+        description="LocalHouseLLM makes free, local-first AI apps for Windows — Anvira Notes and the Anvira coding agent — and the open AI infrastructure they run on."
+        keywords="LocalHouseLLM, Local House LLM, Anvira, Anvira Notes, Anvira Runtime, local AI, local-first AI, AI notes app, local AI coding agent, AI infrastructure, AICL, ORCHA, Nomi, modular AI"
+        modifiedTime={latestReleases[0]?.iso}
         canonical="https://localhousellm.com/"
         schema={homeSchema}
       />

@@ -13,11 +13,22 @@ import {
   ShieldCheck,
   Sparkles,
   Terminal,
+  ArrowUpRight,
 } from 'lucide-react';
 
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
-import { Reveal, SectionHead, ShowcaseRow, FeatureCard, Frame, Faq, DownloadButton } from '@/components/anvira/AvKit';
+import {
+  Reveal,
+  SectionHead,
+  ShowcaseRow,
+  FeatureCard,
+  Frame,
+  Faq,
+  DownloadButton,
+  InstallerFacts,
+} from '@/components/anvira/AvKit';
+import { formatReleaseDate, formatSize, getProduct, isoDay, latestRelease, releaseAnchor } from '@/data/releases';
 
 import iconAnvira from '@/assets/anvira/icon-anvira.png';
 import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
@@ -28,8 +39,9 @@ import shotModels from '@/assets/anvira/04-settings-models.png';
 
 import '@/pages/anvira-premium.css';
 
-const RELEASES_URL = 'https://github.com/Vansh-synthetica/Anvira-release/releases/latest';
-const REPO = 'Vansh-synthetica/Anvira-release';
+const latest = latestRelease('anvira');
+const runtime = latestRelease('anvira-runtime');
+const REQUIRES = 'Windows 10 or 11 (64-bit)';
 
 const features = [
   {
@@ -91,24 +103,18 @@ const faqs = [
     a: 'No. An account is optional and only adds sync. Your chats, files and projects stay on your PC either way.',
   },
   {
+    q: 'What do I need to run Anvira?',
+    a: 'A 64-bit Windows 10 or 11 PC, about 320 MB of disk space for the app, and room for the models you download. An NVIDIA GPU makes models much faster but is optional — Anvira Runtime also runs them on the processor.',
+  },
+  {
+    q: 'Why does Windows show a SmartScreen warning?',
+    a: 'The installer is not code-signed yet. Choose More info → Run anyway. It installs per user, needs no administrator rights, and every release lists its SHA-256 checksum so you can verify the file.',
+  },
+  {
     q: 'How small a model can I actually use?',
     a: 'It depends on the task. In our own workflow testing, a 7B model passed all 21 checks we test agent behavior against. 3B models handle a good amount of real work but aren’t reliable for everything yet, and 1.5B models are currently best suited to grounded Notes and Study tasks. We’d rather tell you that than oversell it.',
   },
 ];
-
-const changelog = {
-  added: [
-    'Updates by themselves — Anvira and Anvira Runtime both offer new versions from a small top-right button.',
-    'Optional account — sign in from the sidebar or Settings → Account, with no change to how local-first storage works.',
-    'Settings → About → Check for updates, now accurate.',
-  ],
-  fixed: [
-    'The window always fits your screen and remembers where you left it.',
-    'A dropped connection to the AI engine now explains what happened, instead of a bare "terminated".',
-    'Memory recall across chats works correctly.',
-    'Very long messages fold behind "Show more" instead of taking over the screen.',
-  ],
-};
 
 const AnviraHero = () => (
   <section className="av-hero" id="top">
@@ -117,7 +123,7 @@ const AnviraHero = () => (
         <Reveal>
           <span className="av-eyebrow">
             <img src={iconAnvira} alt="" />
-            Anvira <strong>1.0.1</strong> · by LocalHouseLLM
+            Anvira <strong>{latest.version}</strong> · by LocalHouseLLM
           </span>
         </Reveal>
         <motion.h1
@@ -145,12 +151,15 @@ const AnviraHero = () => (
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <div className="av-actions">
-            <DownloadButton repo={REPO} label="Download for Windows" />
+            <DownloadButton product="anvira" label="Download for Windows" />
             <a href="#agent" className="av-btn av-btn--ghost">
               See it work <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <p className="av-hero__note">Free · one-click install · per-user, no admin rights · runs fully offline</p>
+          <p className="av-hero__note">
+            Free · Windows 10 &amp; 11{latest.installer ? ` · ${formatSize(latest.installer.size)}` : ''} · per-user, no admin
+            rights · runs fully offline
+          </p>
         </motion.div>
       </div>
 
@@ -240,7 +249,8 @@ const RuntimeSection = () => (
       <SectionHead eyebrow="Anvira Runtime" title="One local foundation, not another isolated AI app.">
         Anvira doesn&apos;t embed its own AI stack in isolation. It connects to Anvira Runtime — a
         per-user background service that manages models, memory, permissions and agent execution,
-        so the same foundation can serve more than one application.
+        so the same foundation can serve more than one application. Runtime {runtime.version}, the
+        current release, serves several requests at once, so chat never waits behind a long agent run.
       </SectionHead>
       <div className="av-grid">
         <FeatureCard icon={<Terminal />} title="A local API, CLI and SDKs">
@@ -332,26 +342,49 @@ const ModelsSection = () => (
 const ChangelogSection = () => (
   <section className="av-section av-section--tight" id="changelog">
     <div className="av-shell">
-      <SectionHead eyebrow="Anvira 1.0.1" title="What's new in this release.">
-        The short version — full notes and checksums ship with every GitHub release.
+      <SectionHead eyebrow={`Anvira ${latest.version} · ${formatReleaseDate(latest.date)}`} title="What's new in this release.">
+        The short version. Full notes for every version of Anvira, Anvira Notes and Anvira Runtime
+        are on the release notes page.
       </SectionHead>
       <Reveal className="av-changelog">
-        <div className="av-changelog__col">
-          <h4>New</h4>
-          <ul>
-            {changelog.added.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+        {(latest.notes ?? []).map((section, i) => (
+          <div className="av-changelog__col" key={section.title || i}>
+            <h3 className="av-changelog__title">{section.title || 'Highlights'}</h3>
+            <div className="av-notes" dangerouslySetInnerHTML={{ __html: section.html }} />
+          </div>
+        ))}
+      </Reveal>
+      <Reveal className="av-changelog__more">
+        <Link to={`/releases/anvira#${releaseAnchor('anvira', latest.version)}`} className="av-btn av-btn--ghost av-btn--sm">
+          All Anvira release notes <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </Reveal>
+    </div>
+  </section>
+);
+
+const DownloadSection = () => (
+  <section className="av-section av-section--tight" id="download">
+    <div className="av-shell">
+      <Reveal className="av-download">
+        <div className="av-download__head">
+          <img src={iconAnvira} alt="" width={56} height={56} />
+          <div>
+            <h2>Download Anvira {latest.version}</h2>
+            <p>Free for Windows. One installer with Anvira Runtime included, so the first launch works offline.</p>
+          </div>
         </div>
-        <div className="av-changelog__col">
-          <h4>Fixed</h4>
-          <ul>
-            {changelog.fixed.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+        <InstallerFacts product="anvira" requires={REQUIRES} className="av-facts" />
+        <div className="av-actions">
+          <DownloadButton product="anvira" label={`Download Anvira ${latest.version}`} />
+          <a href={latest.url} target="_blank" rel="noopener noreferrer" className="av-btn av-btn--ghost">
+            View on GitHub <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
+        <p className="av-download__fine">
+          Windows may show a SmartScreen notice because the installer is not code-signed yet: choose
+          More info → Run anyway. After that, updates arrive inside the app.
+        </p>
       </Reveal>
     </div>
   </section>
@@ -399,7 +432,7 @@ const AnviraFinal = () => (
         </h2>
         <p>One composer. Chat or Agent. Every change reviewable, every model local.</p>
         <div className="av-actions">
-          <DownloadButton repo={REPO} label="Download Anvira" />
+          <DownloadButton product="anvira" label="Download Anvira" />
           <a href="#top" className="av-btn av-btn--ghost">
             <Bot className="h-4 w-4" /> Back to top
           </a>
@@ -417,11 +450,12 @@ const Anvira = () => {
     <CleanLayout>
       <SEO
         title="Anvira — Free Local AI Coding Agent & Chat App for Windows"
-        description="Anvira is a free, local-first AI chat and coding agent for Windows. It runs GGUF models on your GPU via llama.cpp, and every change is a diff you can undo."
-        ogImage={shotHome}
-        ogImageAlt="Anvira home screen with a project, model picker and Chat/Agent switch"
-        ogImageWidth={1750}
-        ogImageHeight={960}
+        description="Anvira is a free, local-first AI chat app and coding agent for Windows. It runs GGUF models on your own GPU via llama.cpp; every change is a diff you can undo."
+        ogImage="/og/anvira.png"
+        ogImageAlt="Anvira — a free local AI chat and coding agent for Windows"
+        ogImageWidth={1200}
+        ogImageHeight={630}
+        modifiedTime={latest.date}
         keywords="Anvira, Anvira AI, Anvira Runtime, local AI agent, local coding assistant, offline AI coding agent, AI agent for Windows, local-first AI, GGUF models, llama.cpp, local LLM app, AI pair programmer, local AI infrastructure, ORCHA agent orchestration, Python SDK, TypeScript SDK, LocalHouseLLM"
         canonical="https://localhousellm.com/anvira"
         schema={{
@@ -433,8 +467,22 @@ const Anvira = () => {
               name: 'Anvira',
               alternateName: 'Anvira AI Agent',
               applicationCategory: 'DeveloperApplication',
-              operatingSystem: 'Windows',
-              softwareVersion: '1.0.1',
+              operatingSystem: 'Windows 10, Windows 11',
+              softwareVersion: latest.version,
+              datePublished: isoDay(getProduct('anvira').releases.at(-1)!.date),
+              dateModified: isoDay(latest.date),
+              releaseNotes: 'https://localhousellm.com/releases/anvira',
+              softwareRequirements: 'Windows 10 or 11 (64-bit). NVIDIA GPU optional.',
+              ...(latest.installer && {
+                downloadUrl: latest.installer.url,
+                fileSize: formatSize(latest.installer.size),
+              }),
+              installUrl: 'https://localhousellm.com/anvira#download',
+              screenshot: [shotHome, shotConversation, shotChanges, shotModels].map((src) =>
+                src.startsWith('http') ? src : `https://localhousellm.com${src}`,
+              ),
+              image: 'https://localhousellm.com/og/anvira.png',
+              isAccessibleForFree: true,
               description:
                 'Anvira is a free, local-first chat and coding agent that runs local GGUF models via llama.cpp with GPU acceleration, with a reviewable diff and undo for every agent-made change.',
               featureList: [
@@ -450,9 +498,9 @@ const Anvira = () => {
                 'Local API, CLI and Python/TypeScript SDKs (Anvira Runtime)',
               ],
               url: 'https://localhousellm.com/anvira',
-              downloadUrl: RELEASES_URL,
               publisher: { '@id': 'https://localhousellm.com/#organization' },
-              offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+              author: { '@id': 'https://localhousellm.com/#organization' },
+              offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
             },
             {
               '@type': 'FAQPage',
@@ -486,6 +534,7 @@ const Anvira = () => {
         <ModelsSection />
         <RuntimeSection />
         <ChangelogSection />
+        <DownloadSection />
         <FaqSection />
         <CrossLinkSection />
         <AnviraFinal />

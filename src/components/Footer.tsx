@@ -100,9 +100,10 @@ const Footer = () => {
               aria-label="Products"
               title="Products"
               links={[
-                { to: '/anvira', label: 'Anvira' },
                 { to: '/anvira-notes', label: 'Anvira Notes' },
-                { to: '/stack#memory', label: 'Nomi' },
+                { to: '/anvira', label: 'Anvira' },
+                { to: '/anvira#runtime', label: 'Anvira Runtime' },
+                { to: '/releases', label: 'Release notes' },
                 { to: '/docs', label: 'Get started' },
               ]}
             />

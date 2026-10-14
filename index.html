@@ -18,6 +18,10 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site summary" />
+    <link rel="alternate" type="application/atom+xml" href="/releases.xml" title="LocalHouseLLM release notes" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <!-- Site-wide entities. Page-level schemas reference these by @id. -->
     <script type="application/ld+json">
@@ -32,9 +36,12 @@
           "url": "https://localhousellm.com/",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://localhousellm.com/favicon.png"
+            "url": "https://localhousellm.com/logo.png",
+            "width": 512,
+            "height": 512
           },
-          "description": "LocalHouseLLM is an AI company building local-first AI infrastructure — the AICL communication layer, the ORCHA orchestration and agent-execution system, the Nomi memory layer, and the shared Anvira Runtime — plus the Anvira and Anvira Notes desktop applications built on it.",
+          "image": "https://localhousellm.com/og/default.png",
+          "description": "LocalHouseLLM is an AI company building local-first AI infrastructure — the AICL communication layer, the ORCHA orchestration and agent-execution system, the Nomi memory layer, and the shared Anvira Runtime — plus the free Anvira and Anvira Notes desktop applications for Windows built on it.",
           "foundingDate": "2025-04",
           "founder": { "@id": "https://localhousellm.com/#founder" },
           "email": "contact@localhousellm.com",
@@ -50,7 +57,7 @@
             "https://www.linkedin.com/company/localhousellm",
             "https://www.instagram.com/localhousellm/"
           ],
-          "knowsAbout": ["Local AI", "On-device AI", "Local LLM inference", "AI agents", "AI orchestration", "AI memory", "Modular AI", "llama.cpp", "GGUF models"]
+          "knowsAbout": ["Local AI", "On-device AI", "Local LLM inference", "AI agents", "AI orchestration", "AI memory", "Modular AI", "llama.cpp", "GGUF models", "AI note-taking", "Spaced repetition", "AI study tools"]
         },
         {
           "@type": "Person",

@@ -1,4 +1,5 @@
 import { archive } from '@/data/archive';
+import { releaseProducts } from '@/data/releases';
 
 /**
  * Every public, indexable URL on the site. This one list drives the build-time
@@ -25,10 +26,23 @@ const page = (
   priority: number,
 ): SiteRoute => ({ path, sources: [source], fallbackLastmod, changefreq, priority });
 
+const withReleases = (route: SiteRoute, data = 'src/data/releases-summary.json'): SiteRoute => ({
+  ...route,
+  sources: [...route.sources, data],
+});
+
 export const siteRoutes: SiteRoute[] = [
-  page('/', 'src/pages/Index.tsx', '2026-10-03', 'weekly', 1.0),
-  page('/anvira', 'src/pages/Anvira.tsx', '2026-10-03', 'weekly', 0.95),
-  page('/anvira-notes', 'src/pages/AnviraNotes.tsx', '2026-10-03', 'weekly', 0.95),
+  // These pages change whenever a release lands, so the synced release data is a source too.
+  withReleases(page('/', 'src/pages/Index.tsx', '2026-10-14', 'weekly', 1.0)),
+  withReleases(page('/anvira', 'src/pages/Anvira.tsx', '2026-10-14', 'weekly', 0.95)),
+  withReleases(page('/anvira-notes', 'src/pages/AnviraNotes.tsx', '2026-10-14', 'weekly', 0.95)),
+  withReleases(page('/releases', 'src/pages/Releases.tsx', '2026-10-14', 'daily', 0.85), 'src/data/releases.json'),
+  ...releaseProducts.map((p) =>
+    withReleases(
+      page(`/releases/${p.id}`, 'src/pages/Releases.tsx', p.releases[0]?.date.slice(0, 10) ?? '2026-10-14', 'weekly', 0.75),
+      'src/data/releases.json',
+    ),
+  ),
   page('/stack', 'src/pages/Stack.tsx', '2026-09-22', 'weekly', 0.9),
   page('/docs', 'src/pages/Docs.tsx', '2026-09-12', 'monthly', 0.8),
   page('/about', 'src/pages/About.tsx', '2026-09-22', 'monthly', 0.8),
@@ -75,7 +89,8 @@ export const legacyRedirects: [from: string, to: string][] = [
   ['/benchmarks', '/stack'],
   ['/use-cases', '/'],
   ['/use-cases/*', '/'],
-  ['/release-logs', '/'],
+  ['/release-logs', '/releases'],
+  ['/changelog', '/releases'],
   ['/sitemap', '/'],
   ['/opensource', '/archive'],
   ['/research', '/archive'],

@@ -1,0 +1,13 @@
+{
+  "name": "LocalHouseLLM",
+  "short_name": "LocalHouseLLM",
+  "description": "Local-first AI apps and infrastructure: Anvira, Anvira Notes and Anvira Runtime.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f4f0ea",
+  "theme_color": "#f4f0ea",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

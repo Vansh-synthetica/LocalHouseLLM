@@ -5,6 +5,22 @@ import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/hooks/useAuth';
 import BrandMark from './system/BrandMark';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { type ProductId, latestRelease } from '@/data/releases';
+import iconAnvira from '@/assets/anvira/icon-anvira.png';
+import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
+
+const downloadApps: { id: ProductId; name: string; to: string; icon: string; tagline: string }[] = [
+  { id: 'anvira-notes', name: 'Anvira Notes', to: '/anvira-notes', icon: iconAnviraNotes, tagline: 'notes & study' },
+  { id: 'anvira', name: 'Anvira', to: '/anvira', icon: iconAnvira, tagline: 'AI coding agent' },
+];
 
 type NavLink = { to: string; label: string };
 
@@ -125,18 +141,42 @@ const Navbar = () => {
                 <Link to="/login" className={linkClass(location.pathname === '/login')}>
                   Sign in
                 </Link>
-                <Link to="/anvira">
-                  <Button
-                    className={`h-10 rounded-full pl-5 pr-4 text-[13px] font-medium gap-1 ${
-                      isDarkRoute
-                        ? 'bg-white text-black hover:bg-white/90'
-                        : 'bg-foreground text-background hover:bg-foreground/90'
-                    }`}
-                  >
-                    Try Anvira
-                    <ChevronDown className="w-4 h-4 opacity-70" aria-hidden />
-                  </Button>
-                </Link>
+                <DropdownMenu modal={false}>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      className={`h-10 rounded-full pl-5 pr-4 text-[13px] font-medium gap-1 ${
+                        isDarkRoute
+                          ? 'bg-white text-black hover:bg-white/90'
+                          : 'bg-foreground text-background hover:bg-foreground/90'
+                      }`}
+                    >
+                      Download
+                      <ChevronDown className="w-4 h-4 opacity-70" aria-hidden />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" sideOffset={10} className="w-[19rem] rounded-2xl p-2">
+                    <DropdownMenuLabel className="px-2.5 pt-1.5 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                      Free for Windows 10 &amp; 11
+                    </DropdownMenuLabel>
+                    {downloadApps.map((app) => (
+                      <DropdownMenuItem key={app.id} asChild className="rounded-xl p-2.5 cursor-pointer">
+                        <Link to={`${app.to}#download`} className="flex items-center gap-3">
+                          <img src={app.icon} alt="" width={36} height={36} className="h-9 w-9 rounded-[10px]" />
+                          <span className="flex flex-col">
+                            <span className="text-[14px] font-semibold text-foreground">{app.name}</span>
+                            <span className="text-[12px] text-muted-foreground">
+                              Version {latestRelease(app.id).version} · {app.tagline}
+                            </span>
+                          </span>
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                    <DropdownMenuSeparator className="my-1.5" />
+                    <DropdownMenuItem asChild className="rounded-xl px-2.5 py-2 cursor-pointer text-[13px]">
+                      <Link to="/releases">Release notes for every version</Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </>
             )}
           </div>
@@ -167,7 +207,12 @@ const Navbar = () => {
               className="md:hidden bg-background border-b border-border max-h-[calc(100dvh-4.25rem)] overflow-y-auto"
             >
               <div className="max-container py-4 flex flex-col gap-1">
-                {[...navLinks, { to: '/anvira', label: 'Anvira' }, { to: '/anvira-notes', label: 'Anvira Notes' }].map((link) => (
+                {[
+                  ...navLinks,
+                  { to: '/anvira', label: 'Anvira' },
+                  { to: '/anvira-notes', label: 'Anvira Notes' },
+                  { to: '/releases', label: 'Release notes' },
+                ].map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
@@ -190,9 +235,14 @@ const Navbar = () => {
                         Sign in
                       </Button>
                     </Link>
-                    <Link to="/anvira">
+                    <Link to="/anvira-notes#download">
                       <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">
-                        Try Anvira
+                        Download Anvira Notes
+                      </Button>
+                    </Link>
+                    <Link to="/anvira#download">
+                      <Button variant="outline" className="w-full rounded-full">
+                        Download Anvira
                       </Button>
                     </Link>
                   </div>

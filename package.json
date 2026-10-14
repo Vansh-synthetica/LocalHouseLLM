@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-server && node scripts/prerender.mjs",
+    "build": "node scripts/sync-releases.mjs --soft && vite build && vite build --ssr src/entry-server.tsx --outDir dist-server && node scripts/prerender.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:spa": "vite build"
+    "build:spa": "vite build",
+    "sync:releases": "node scripts/sync-releases.mjs",
+    "seo:audit": "node scripts/seo-audit.mjs",
+    "og:images": "node scripts/make-og-images.mjs"
   },
   "dependencies": {
     "@fontsource/manrope": "^5.2.8",

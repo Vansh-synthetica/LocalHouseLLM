@@ -1,7 +1,8 @@
-import { type ReactNode, useState } from 'react';
+import { type MouseEvent, type ReactNode, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Download, Loader2 } from 'lucide-react';
+import { Check, Copy, Download, Loader2 } from 'lucide-react';
 import { ParallaxStage, TiltCard } from './AvMotion';
+import { type ProductId, formatReleaseDate, formatSize, getProduct, latestRelease } from '@/data/releases';
 
 /**
  * Fires a direct file download via a throwaway <a download>, rather than
@@ -18,45 +19,133 @@ const triggerFileDownload = (url: string) => {
 };
 
 /**
- * One-click download button: resolves the newest .exe asset from a GitHub
- * repo's "latest" release on click and downloads it directly — no detour
- * through the GitHub releases page. Falls back to opening that page if the
- * GitHub API call fails (rate limit, offline, asset renamed, etc).
+ * One-click download link for an app's Windows installer.
+ *
+ * The href is the installer from the last release sync (src/data/releases.ts),
+ * so crawlers, no-JS visitors and "copy link" all get a real file URL. On click
+ * it asks GitHub for the current "latest" release first, in case a newer one
+ * shipped since the site was built, and falls back to the synced file.
  */
 export const DownloadButton = ({
-  repo,
+  product,
   label,
   className = 'av-btn av-btn--primary',
 }: {
-  repo: string;
+  product: ProductId;
   label: string;
   className?: string;
 }) => {
   const [state, setState] = useState<'idle' | 'loading'>('idle');
-  const releasesUrl = `https://github.com/${repo}/releases/latest`;
+  const { repo } = getProduct(product);
+  const known = latestRelease(product);
+  const href = known.installer?.url ?? `https://github.com/${repo}/releases/latest`;
 
-  const handleClick = async () => {
+  const handleClick = async (e: MouseEvent<HTMLAnchorElement>) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
     if (state === 'loading') return;
     setState('loading');
+    let url = href;
     try {
       const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
-      if (!res.ok) throw new Error('release lookup failed');
-      const data = await res.json();
-      const asset = (data.assets ?? []).find((a: { name: string }) => /\.exe$/i.test(a.name));
-      if (!asset) throw new Error('no installer asset found');
-      triggerFileDownload(asset.browser_download_url);
+      if (res.ok) {
+        const data = await res.json();
+        const asset = (data.assets ?? []).find((a: { name: string }) => /\.exe$/i.test(a.name));
+        if (asset) url = asset.browser_download_url;
+      }
     } catch {
-      window.open(releasesUrl, '_blank', 'noopener,noreferrer');
+      // Offline or rate-limited: the synced installer is still a valid download.
     } finally {
+      triggerFileDownload(url);
       setState('idle');
     }
   };
 
   return (
-    <button type="button" onClick={handleClick} className={className} disabled={state === 'loading'}>
+    <a
+      href={href}
+      onClick={handleClick}
+      className={className}
+      aria-busy={state === 'loading'}
+      data-version={known.version}
+      rel="nofollow"
+    >
       {state === 'loading' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-      {state === 'loading' ? 'Preparing download…' : label}
+      {state === 'loading' ? 'Starting download…' : label}
+    </a>
+  );
+};
+
+/** Copies a value (e.g. a SHA-256) and briefly confirms it. */
+export const CopyValue = ({ value, label = 'Copy', className }: { value: string; label?: string; className?: string }) => {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      className={className}
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(value);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1600);
+        } catch {
+          setCopied(false);
+        }
+      }}
+      aria-label={copied ? 'Copied' : `${label} to clipboard`}
+    >
+      {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? 'Copied' : label}
     </button>
+  );
+};
+
+/**
+ * Version, date, size, requirements and checksum of an app's current release —
+ * the facts people look for before running an unsigned installer.
+ */
+export const InstallerFacts = ({
+  product,
+  requires,
+  className = 'dl-facts',
+}: {
+  product: ProductId;
+  requires: string;
+  className?: string;
+}) => {
+  const r = latestRelease(product);
+  return (
+    <dl className={className}>
+      <div>
+        <dt>Version</dt>
+        <dd>{r.version}</dd>
+      </div>
+      <div>
+        <dt>Released</dt>
+        <dd>
+          <time dateTime={r.date}>{formatReleaseDate(r.date)}</time>
+        </dd>
+      </div>
+      {r.installer && (
+        <div>
+          <dt>Download size</dt>
+          <dd>{formatSize(r.installer.size)}</dd>
+        </div>
+      )}
+      <div>
+        <dt>Requires</dt>
+        <dd>{requires}</dd>
+      </div>
+      {r.installer?.sha256 && (
+        <div className="dl-facts__sha">
+          <dt>SHA-256 · {r.installer.name}</dt>
+          <dd>
+            <code>{r.installer.sha256}</code>
+            <CopyValue value={r.installer.sha256} />
+          </dd>
+        </div>
+      )}
+    </dl>
   );
 };
 

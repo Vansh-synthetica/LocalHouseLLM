@@ -2,10 +2,14 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { HelmetProvider, type HelmetServerState } from 'react-helmet-async';
 
-import { AppRoutes, AppShell } from './App';
-import { AuthProvider } from '@/hooks/useAuth';
+import { AppBody, AppShell } from './App';
+import { preloadAllPages } from './pages';
 
 export { siteRoutes, appOnlyPaths, legacyRedirects, SITE_URL } from '@/seo/routes';
+export { pageModulesFor } from './pages';
+
+/** Await before render(): loads every page chunk so rendering is synchronous. */
+export const ready = preloadAllPages();
 
 /** Renders one URL to static HTML plus the <head> tags its page declared via <SEO>. */
 export function render(url: string) {
@@ -14,9 +18,7 @@ export function render(url: string) {
     <HelmetProvider context={helmetContext}>
       <AppShell>
         <StaticRouter location={url}>
-          <AuthProvider>
-            <AppRoutes />
-          </AuthProvider>
+          <AppBody />
         </StaticRouter>
       </AppShell>
     </HelmetProvider>,

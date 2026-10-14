@@ -21,6 +21,7 @@ import {
   Layers,
   LayoutTemplate,
   ListChecks,
+  MessageCircle,
   Mic,
   MousePointer2,
   Plus,
@@ -28,7 +29,9 @@ import {
   RotateCcw,
   Route,
   ScanText,
+  Send,
   Table2,
+  Timer,
   Trophy,
   Users,
   Zap,
@@ -36,7 +39,16 @@ import {
 
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
-import { DownloadButton } from '@/components/anvira/AvKit';
+import { DownloadButton, InstallerFacts } from '@/components/anvira/AvKit';
+import {
+  formatReleaseDate,
+  formatSize,
+  getProduct,
+  isoDay,
+  latestRelease,
+  recentHighlights,
+  releaseAnchor,
+} from '@/data/releases';
 import { CountUp, Magnetic, ScrollProgress, TiltCard } from '@/components/anvira/AvMotion';
 
 import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
@@ -55,8 +67,9 @@ import shotFlashcard from '@/assets/anvira-notes/12-study-flashcard.png';
 
 import '@/pages/anvira-notes.css';
 
-const RELEASES_URL = 'https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/latest';
-const REPO = 'Vansh-synthetica/Anvira-Notes-release';
+const PRODUCT = getProduct('anvira-notes');
+const latest = latestRelease('anvira-notes');
+const REQUIRES = 'Windows 10 or 11 (64-bit)';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 type Color = 'purple' | 'pink' | 'orange' | 'yellow' | 'green' | 'blue' | 'teal' | 'red';
@@ -273,6 +286,18 @@ const HeroStage = () => {
   );
 };
 
+// The newest headline feature, straight from the release notes. Messages gets a
+// friendlier line than its bare release-note title while it is the newest one.
+const [newest] = recentHighlights('anvira-notes', 1);
+const NEWS =
+  newest?.text === 'Messages'
+    ? { label: `New in ${newest.version}`, text: 'Messages: chat and study with classmates', href: '#messages' }
+    : {
+        label: `New in ${newest?.version ?? latest.version}`,
+        text: newest?.text ?? latest.summary,
+        href: '#changelog',
+      };
+
 const Hero = () => (
   <section className="an-hero" id="top">
     <div className="an-hero__canvas" aria-hidden="true" />
@@ -283,14 +308,14 @@ const Hero = () => (
     </div>
     <div className="an-shell">
       <motion.a
-        href="#changelog"
+        href={NEWS.href}
         className="an-new"
         initial={{ opacity: 0, y: -12, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 18 }}
       >
         <img src={iconAnviraNotes} alt="" />
-        <b>New in 1.2</b> Google Docs fidelity, both ways
+        <b>{NEWS.label}</b> {NEWS.text}
         <ArrowRight className="an-new__arrow" />
       </motion.a>
 
@@ -313,7 +338,8 @@ const Hero = () => (
         transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
       >
         Notion-style notebooks and a Duolingo-style study coach in one free app. Write your notes,
-        then turn them into flashcards, quizzes and exams — with private AI that runs on your own PC.
+        then turn them into flashcards, quizzes and graded mock exams — with private AI that runs on
+        your own PC.
       </motion.p>
 
       <motion.div
@@ -323,7 +349,7 @@ const Hero = () => (
         transition={{ duration: 0.8, delay: 0.45, ease: EASE }}
       >
         <Magnetic>
-          <DownloadButton repo={REPO} label="Download for Windows" className="an-btn an-btn--dark" />
+          <DownloadButton product="anvira-notes" label="Download for Windows" className="an-btn an-btn--dark" />
         </Magnetic>
         <a href="#study" className="an-btn an-btn--light">
           Try the Study demo <MousePointer2 />
@@ -335,8 +361,14 @@ const Hero = () => (
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7 }}
       >
-        Free <span>·</span> v1.2.2 <span>·</span> No account needed <span>·</span> Works with Google
-        Docs &amp; Notion
+        Free <span>·</span> v{latest.version}
+        {latest.installer && (
+          <>
+            {' '}
+            <span>·</span> {formatSize(latest.installer.size)}
+          </>
+        )}{' '}
+        <span>·</span> Windows 10 &amp; 11 <span>·</span> Works with Google Docs &amp; Notion
       </motion.p>
 
       <HeroStage />
@@ -355,6 +387,9 @@ const CHIPS: { t: string; c: Color }[] = [
   { t: 'Spreadsheets', c: 'green' },
   { t: 'Mind maps', c: 'pink' },
   { t: 'FSRS flashcards', c: 'yellow' },
+  { t: 'Mock exams', c: 'green' },
+  { t: 'Grades', c: 'orange' },
+  { t: 'Messages', c: 'blue' },
   { t: 'Quizzes', c: 'teal' },
   { t: 'Lecture recorder', c: 'red' },
   { t: 'Offline OCR', c: 'purple' },
@@ -1045,7 +1080,7 @@ const Study = () => (
   <section className="an-section an-band" id="study">
     <div className="an-shell">
       <Head pill="Study" color="pink" icon={<GraduationCap />} title="Studying, but make it a game." center>
-        A learning path, lessons, FSRS flashcards, quizzes and timed exams — all made from what you
+        A learning path, lessons, FSRS flashcards, quizzes and mock exams — all made from what you
         already wrote. Daily goal, streak and XP included.
       </Head>
       <StudyTabs />
@@ -1065,6 +1100,199 @@ const Study = () => (
       </div>
     </div>
   </section>
+);
+
+/* ------------------------------------------------------------------ */
+/* Mock exams & Messages                                               */
+/* ------------------------------------------------------------------ */
+
+const Feature = ({
+  id,
+  color,
+  pill,
+  icon,
+  title,
+  body,
+  points,
+  visual,
+  reverse = false,
+}: {
+  id: string;
+  color: Color;
+  pill: string;
+  icon: ReactNode;
+  title: ReactNode;
+  body: string;
+  points: string[];
+  visual: ReactNode;
+  reverse?: boolean;
+}) => (
+  <section className="an-section an-section--feature" id={id}>
+    <div className="an-shell">
+      <div className={`an-row an-feature c-${color} ${reverse ? 'an-row--rev' : ''}`}>
+        <div className="an-row__text">
+          <Pop>
+            <Pill color={color} icon={icon}>
+              {pill}
+            </Pill>
+          </Pop>
+          <Pop delay={0.05}>
+            <h2 className="an-feature__title">{title}</h2>
+          </Pop>
+          <Pop delay={0.1}>
+            <p>{body}</p>
+          </Pop>
+          <ul className="an-checks">
+            {points.map((p, i) => (
+              <motion.li
+                key={p}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 + i * 0.08, ease: EASE, duration: 0.5 }}
+              >
+                <i>
+                  <Check />
+                </i>
+                {p}
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+        <Pop className="an-row__panel" delay={0.08} y={50}>
+          {visual}
+        </Pop>
+      </div>
+    </div>
+  </section>
+);
+
+const EXAM_CELLS = ['a', 'a', 'a', 'f', 'a', 'a', 'c', '', '', 'f', '', '', '', '', '', '', '', '', '', ''];
+
+const ExamVisual = () => (
+  <div className="an-exam" aria-hidden="true">
+    <div className="an-exam__paper">
+      <div className="an-exam__top">
+        <span>Biology · Standard</span>
+        <span className="an-exam__timer">
+          <Timer /> 24:18
+        </span>
+      </div>
+      <div className="an-exam__grid">
+        {EXAM_CELLS.map((c, i) => (
+          <i key={i} className={c ? `is-${c}` : ''}>
+            {i + 1}
+          </i>
+        ))}
+      </div>
+      <p className="an-exam__q">
+        <b>Q7.</b> Which stage of cellular respiration makes most of the ATP?
+      </p>
+      <div className="an-exam__opts">
+        <span>Glycolysis</span>
+        <span className="is-picked">Electron transport chain</span>
+        <span>Krebs cycle</span>
+      </div>
+    </div>
+    <div className="an-exam__grade an-bob">
+      <small>Biology grade</small>
+      <b>B+</b>
+      <span className="an-exam__range">
+        <i />
+      </span>
+      <em>likely 74–88%</em>
+    </div>
+  </div>
+);
+
+const ChatVisual = () => (
+  <div className="an-chat" aria-hidden="true">
+    <div className="an-chat__doc">
+      <span className="an-chat__doctitle">Lecture 6 – Cell energy</span>
+      {[92, 80, 86, 58, 74].map((w, i) => (
+        <i key={i} style={{ width: `${w}%` }} />
+      ))}
+    </div>
+    <div className="an-chat__pop">
+      <div className="an-chat__head">
+        <span className="an-chat__avatar" style={{ background: '#19b46c' }}>
+          B
+        </span>
+        <span>
+          <b>Bio study group</b>
+          <small>4 people · Maya is typing…</small>
+        </span>
+      </div>
+      <div className="an-chat__msgs">
+        <p className="an-msg">
+          <b>Maya</b>anyone done Q7 from the mock?
+        </p>
+        <p className="an-msg an-msg--me">ETC — about 28 ATP. Sharing my page 👇</p>
+        <p className="an-msg an-msg--me an-msg--card">
+          <BookOpen />
+          <span>
+            <b>Lecture 6 – Cell energy</b>
+            <small>Page · 5 blocks</small>
+          </span>
+        </p>
+        <span className="an-react">👍 2</span>
+      </div>
+      <div className="an-chat__input">
+        Message the group…
+        <Send />
+      </div>
+    </div>
+    <span className="an-chat__bubble an-bob">
+      A<em>3</em>
+    </span>
+  </div>
+);
+
+const Exams = () => (
+  <Feature
+    id="exams"
+    color="green"
+    pill="Mock exams & grades"
+    icon={<Trophy />}
+    title={
+      <>
+        Sit a mock exam.
+        <br />
+        Get a real grade.
+      </>
+    }
+    body="Pick a subject, a length — Quick 10, Standard 20 or Full 30 questions — and whether it is timed. Questions come from all over your notes and files, every new exam asks new ones, and nothing is marked until you hand it in."
+    points={[
+      'Question grid, flags, and a clock that stops while you are away',
+      'Every mistake explained from your own notes; written answers marked by the AI',
+      'One click turns your mistakes into flashcards',
+      'A grade per subject with a range that narrows as you sit more exams',
+    ]}
+    visual={<ExamVisual />}
+  />
+);
+
+const Messages = () => (
+  <Feature
+    id="messages"
+    color="blue"
+    pill="Messages"
+    icon={<MessageCircle />}
+    title={
+      <>
+        Study together, without leaving your notes.
+      </>
+    }
+    body="Direct chats and study groups inside Anvira Notes (Ctrl 3). A message that arrives while you write pops up as a small chat in the corner — your typing is never interrupted — and a page or lesson can be shared into a chat in one click."
+    points={[
+      'Find classmates by @username, or join a group with its invite code',
+      'Replies, reactions, edits, typing and Seen — a real messenger',
+      'Free groups hold up to 15 people; mute, block or turn pop-ups off any time',
+      'Only messages go through Anvira’s server — your notes and files stay on your PC',
+    ]}
+    visual={<ChatVisual />}
+    reverse
+  />
 );
 
 /* ------------------------------------------------------------------ */
@@ -1190,7 +1418,7 @@ const Rows = () => (
 const STATS: { to: number; suffix?: string; label: string; color: Color }[] = [
   { to: 22, label: 'templates included, plus a web library', color: 'purple' },
   { to: 2, label: 'two-way syncs: Google Docs and Notion', color: 'green' },
-  { to: 0, label: 'accounts needed to start studying', color: 'orange' },
+  { to: 30, label: 'questions in a Full mock exam, marked when you hand it in', color: 'orange' },
   { to: 7, suffix: 'B', label: 'largest model the first-run guide offers', color: 'blue' },
 ];
 
@@ -1211,55 +1439,26 @@ const Stats = () => (
   </section>
 );
 
-const TIMELINE: { version: string; title: string; items: string[]; color: Color }[] = [
-  {
-    version: '1.2',
-    title: 'Google Docs fidelity, both ways',
-    color: 'purple',
-    items: [
-      'Fonts, page size, margins and pictures survive the round trip to Google Docs',
-      'Offline OCR, a steadier whiteboard brush and faster Study for small models',
-      'First-run guide with a hardware scan that only offers models of 7B or smaller',
-      'Security audit, crash-safe saves and more accurate, crash-proof recording',
-    ],
-  },
-  { version: '1.1', title: 'Collaborative cursors', color: 'pink', items: ['Live cursors between Anvira users on the same page'] },
-  {
-    version: '1.0.3',
-    title: 'Lecture recorder & research',
-    color: 'orange',
-    items: [
-      'Local lecture recorder turns speech into a transcript and lecture notes',
-      'Ask Pochi from "/" and built-in web research',
-      'View public Google Docs without signing in; runtime auto-recovery',
-    ],
-  },
-  {
-    version: '1.0.2',
-    title: 'Google Docs + Notion sync',
-    color: 'yellow',
-    items: ['Two-way sync, Settings → Connections, and Send to Google Docs or Notion'],
-  },
-  {
-    version: '1.0.1',
-    title: "Today's session",
-    color: 'green',
-    items: ['Review forecast, Trash with Undo, favourites and recents', 'Import files as pages and Word (.docx) export'],
-  },
-  {
-    version: '1.0.0',
-    title: 'The first release',
-    color: 'blue',
-    items: ['Notes, Study, Anvira Runtime, model library, auto-update and optional account'],
-  },
-];
+const TL_COLORS: Color[] = ['purple', 'pink', 'orange', 'yellow', 'green', 'blue', 'teal', 'red'];
+
+// Built from the GitHub release notes (src/data/releases.ts), newest first.
+const TIMELINE = PRODUCT.releases.slice(0, 8).map((r, i) => ({
+  version: r.version,
+  date: r.date,
+  latest: r.latest,
+  anchor: releaseAnchor('anvira-notes', r.version),
+  color: TL_COLORS[i % TL_COLORS.length],
+  title: r.highlights[0]?.text ?? r.name,
+  items: r.highlights.slice(1, 5).map((h) => h.text),
+}));
+const FIRST_RELEASE = PRODUCT.releases[PRODUCT.releases.length - 1];
 
 const Timeline = () => (
   <section className="an-section" id="changelog">
     <div className="an-shell">
       <Head pill="Release history" color="green" icon={<CalendarCheck />} title="Shipping fast. Like, really fast." center>
-        Updates install themselves from a small button in the app — nothing downloads until you
-        click.
+        {PRODUCT.releases.length} releases since {formatReleaseDate(FIRST_RELEASE.date)}. Updates install
+        themselves from a small button in the app — nothing downloads until you click.
       </Head>
       <ol className="an-timeline">
         {TIMELINE.map((t, i) => (
@@ -1280,33 +1479,72 @@ const Timeline = () => (
             />
             <div className="an-tl__card">
               <span className="an-tl__ver">v{t.version}</span>
-              {i === 0 && <span className="an-tl__latest">Latest</span>}
-              <h4>{t.title}</h4>
-              <ul>
-                {t.items.map((it) => (
-                  <li key={it}>{it}</li>
-                ))}
-              </ul>
+              {t.latest && <span className="an-tl__latest">Latest</span>}
+              <time className="an-tl__date" dateTime={t.date}>
+                {formatReleaseDate(t.date)}
+              </time>
+              <h3>{t.title}</h3>
+              {t.items.length > 0 && (
+                <ul>
+                  {t.items.map((it) => (
+                    <li key={it}>{it}</li>
+                  ))}
+                </ul>
+              )}
+              <Link to={`/releases/anvira-notes#${t.anchor}`} className="an-tl__more">
+                Read the {t.version} notes <ArrowRight />
+              </Link>
             </div>
           </motion.li>
         ))}
       </ol>
+      <Pop className="an-tl__all">
+        <Link to="/releases/anvira-notes" className="an-btn an-btn--light">
+          Every Anvira Notes release <ArrowRight />
+        </Link>
+      </Pop>
     </div>
   </section>
 );
 
 const FAQS = [
-  { q: 'Is Anvira Notes free?', a: 'Yes. Anvira Notes is free for Windows — notebooks, templates and Study are all included, with no paid tier.' },
-  { q: 'Do I need an internet connection?', a: 'No. Notes and Study run on Anvira Runtime on your PC, so Ask AI, summaries and Study generation all work offline.' },
+  {
+    q: 'Is Anvira Notes free?',
+    a: 'Yes. Anvira Notes is free for Windows — notebooks, templates, Study, mock exams and Messages are all included. Anvira Pro is on its way for optional cloud extras (cloud AI for exams and marking, weak-spot re-tests and exam packs, bigger groups, encrypted sync). Everything that runs on your PC stays free.',
+  },
+  {
+    q: 'Do I need an account?',
+    a: 'Yes — a free one. Since 1.2.8 the app opens with a sign-in screen (or Create an account). Your notes and files still stay on your PC. With Remember me, which is on by default, you sign in once and the app opens straight to your notes from then on, offline too.',
+  },
+  {
+    q: 'Does it work offline?',
+    a: 'Yes. Notes, Study, mock exams and the AI run on Anvira Runtime on your own PC, so they work without internet once you have signed in. Messages, Google Docs and Notion sync, and web research need a connection.',
+  },
+  {
+    q: 'How do mock exams and grades work?',
+    a: 'Pick a notebook, a length (10, 20 or 30 questions), timed or not, and whether to include written answers. Nothing is marked until you hand it in. Then you get a score, every mistake explained from your notes, and one-click flashcards from your mistakes. All exams in a subject add up to one grade with a range, like "likely 74–88%", that narrows as you sit more.',
+  },
+  {
+    q: 'Can I chat with classmates?',
+    a: 'Yes. Messages (Ctrl 3) has direct chats and groups — free groups hold up to 15 people — with replies, reactions, typing, Seen and one-click sharing of a page or lesson. Messages are stored on Anvira’s server so they reach the other person; your notes and files stay on your PC.',
+  },
   {
     q: 'Does it sync with Google Docs and Notion?',
-    a: 'Yes — two-way. Link a page to a Google Doc or Notion page and changes merge both ways. Editing a Google Doc needs a Google sign-in, and local pictures need public hosting to be pushed to Google.',
+    a: 'Yes — two-way. Link a page to a Google Doc or Notion page and changes merge both ways, including pictures, fonts and margins. Editing a Google Doc needs a Google sign-in.',
   },
-  { q: 'Can it make flashcards and quizzes from my notes?', a: 'Yes. Turn any notebook into a learning path, or drop in a PDF or slide deck with “Study from a file” and it becomes lessons, flashcards and quizzes.' },
-  { q: 'Can I record a lecture?', a: 'Yes. The recorder transcribes on your PC with whisper.cpp and turns the transcript into AI lecture notes. Nothing is uploaded.' },
-  { q: 'What spaced-repetition system do the flashcards use?', a: 'FSRS decides when each card comes back, and you can export your decks to Anki at any time.' },
-  { q: 'Do I need an account?', a: 'No. An account is optional and only adds sync and presence. Notes and Study work fully without signing in.' },
-  { q: 'Why does Windows show a SmartScreen warning?', a: 'The installer isn’t code-signed yet. Choose More info → Run anyway. It installs per user and doesn’t need administrator rights.' },
+  {
+    q: 'Can it make flashcards and quizzes from my notes?',
+    a: 'Yes. Turn any notebook into a learning path, or drop in a PDF or slide deck with “Study from a file” and it becomes lessons, flashcards and quizzes. FSRS decides when each card comes back, and decks export to Anki.',
+  },
+  {
+    q: 'Do I need a graphics card?',
+    a: 'No. The AI runs on your processor; a first-run hardware scan only offers models your PC can handle (7B or smaller). If you have an NVIDIA GPU, Settings → AI & Models → Turn on GPU makes it much faster — a one-time download of about 650 MB.',
+  },
+  { q: 'Can I record a lecture?', a: 'Yes. The recorder transcribes on your PC with whisper.cpp and turns the transcript into lecture notes. Nothing is uploaded.' },
+  {
+    q: 'Why does Windows show a SmartScreen warning?',
+    a: 'The installer isn’t code-signed yet. Choose More info → Run anyway. It installs per user, doesn’t need administrator rights, and each release lists its SHA-256 checksum so you can verify the file.',
+  },
 ];
 const FAQ_COLORS: Color[] = ['purple', 'pink', 'orange', 'green', 'blue', 'teal', 'yellow', 'red'];
 
@@ -1345,6 +1583,32 @@ const Faq = () => (
   </section>
 );
 
+const DownloadPanel = () => (
+  <section className="an-section an-section--tight" id="download">
+    <div className="an-shell">
+      <Pop className="an-download">
+        <div className="an-download__head">
+          <img src={iconAnviraNotes} alt="" width={64} height={64} />
+          <div>
+            <h2>Download Anvira Notes {latest.version}</h2>
+            <p>
+              Free for Windows. Already installed? It offers this update by itself — click{' '}
+              <b>Update available</b> at the top right. Your notes, lessons and settings are kept.
+            </p>
+          </div>
+        </div>
+        <InstallerFacts product="anvira-notes" requires={REQUIRES} className="an-facts" />
+        <div className="an-actions an-actions--left">
+          <DownloadButton product="anvira-notes" label={`Download ${latest.version}`} className="an-btn an-btn--dark" />
+          <Link to={`/releases/anvira-notes#${releaseAnchor('anvira-notes', latest.version)}`} className="an-btn an-btn--light">
+            What’s new in {latest.version} <ArrowRight />
+          </Link>
+        </div>
+      </Pop>
+    </div>
+  </section>
+);
+
 const Final = () => (
   <section className="an-section an-section--tight">
     <div className="an-shell">
@@ -1361,13 +1625,13 @@ const Final = () => (
 
         <img src={iconAnviraNotes} alt="" className="an-final__icon" />
         <h2>Your notes, ready to study.</h2>
-        <p>Free for Windows. Private AI on your PC. Works with Google Docs and Notion.</p>
+        <p>Free for Windows. Private AI on your PC. Mock exams, grades and study groups included.</p>
         <div className="an-actions">
           <Magnetic>
-            <DownloadButton repo={REPO} label="Download Anvira Notes" className="an-btn an-btn--white" />
+            <DownloadButton product="anvira-notes" label="Download Anvira Notes" className="an-btn an-btn--white" />
           </Magnetic>
-          <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer" className="an-btn an-btn--glass">
-            Release notes <ArrowUpRight />
+          <a href={latest.url} target="_blank" rel="noopener noreferrer" className="an-btn an-btn--glass">
+            View on GitHub <ArrowUpRight />
           </a>
         </div>
         <p className="an-final__fine">Per-user install · no admin rights · SmartScreen: More info → Run anyway</p>
@@ -1391,13 +1655,14 @@ const Final = () => (
 const AnviraNotes = () => (
   <CleanLayout>
     <SEO
-      title="Anvira Notes — Free AI Notes & Study App With Flashcards"
-      description="Anvira Notes is a free, local-first notes and study app: Notion-style pages, Google Docs and Notion sync, a lecture recorder, and FSRS flashcards from your notes."
-      ogImage={shotEditor}
-      ogImageAlt="Anvira Notes editor open on a Biology 101 page with sources and tags"
-      ogImageWidth={1700}
-      ogImageHeight={959}
-      keywords="Anvira Notes, AI notes app, study app, flashcards app, FSRS spaced repetition, Anki export, mind maps, lecture recorder, Google Docs sync, Notion sync, offline notes app, Notion alternative, AI study tool, LocalHouseLLM"
+      title="Anvira Notes — Free AI Notes, Flashcards & Mock Exams App"
+      description="Anvira Notes is a free notes and study app for Windows: Notion-style pages, Google Docs and Notion sync, AI flashcards, mock exams with grades, and study groups."
+      ogImage="/og/anvira-notes.png"
+      ogImageAlt="Anvira Notes — free AI notes and study app for Windows"
+      ogImageWidth={1200}
+      ogImageHeight={630}
+      modifiedTime={latest.date}
+      keywords="Anvira Notes, AI notes app, study app, mock exam generator, AI exam grader, flashcards app, FSRS spaced repetition, Anki export, study group chat, mind maps, lecture recorder, Google Docs sync, Notion sync, offline notes app, Notion alternative, AI study tool, LocalHouseLLM"
       canonical="https://localhousellm.com/anvira-notes"
       schema={{
         '@context': 'https://schema.org',
@@ -1408,8 +1673,23 @@ const AnviraNotes = () => (
             name: 'Anvira Notes',
             alternateName: 'Anvira Notes AI Study App',
             applicationCategory: 'EducationApplication',
-            operatingSystem: 'Windows',
-            softwareVersion: '1.2.2',
+            applicationSubCategory: 'Note-taking and study',
+            operatingSystem: 'Windows 10, Windows 11',
+            softwareVersion: latest.version,
+            datePublished: isoDay(FIRST_RELEASE.date),
+            dateModified: isoDay(latest.date),
+            releaseNotes: 'https://localhousellm.com/releases/anvira-notes',
+            softwareRequirements: 'Windows 10 or 11 (64-bit). NVIDIA GPU optional.',
+            ...(latest.installer && {
+              downloadUrl: latest.installer.url,
+              fileSize: formatSize(latest.installer.size),
+            }),
+            installUrl: 'https://localhousellm.com/anvira-notes#download',
+            screenshot: [shotEditor, shotStudyPath, shotQuizQuestion, shotFlashcard, shotTableChart].map((src) =>
+              src.startsWith('http') ? src : `https://localhousellm.com${src}`,
+            ),
+            image: 'https://localhousellm.com/og/anvira-notes.png',
+            isAccessibleForFree: true,
             description:
               'Anvira Notes combines Notion-style notebooks with an adaptive Study mode — flashcards, quizzes and exams generated from your own notes and files, with private AI that runs on your PC.',
             featureList: [
@@ -1421,13 +1701,16 @@ const AnviraNotes = () => (
               'Templates plus a web template library',
               'Tables that turn into charts, diagrams and mind maps',
               'FSRS spaced-repetition flashcards with Anki export',
-              'Study path with quizzes, timed exams and grade calculation',
+              'Study path with lessons and quizzes from your notes',
+              'Mock exams with AI marking, explained mistakes and grades per subject',
+              'Messages: direct chats and study groups with page and lesson sharing',
+              'Optional NVIDIA GPU acceleration',
               'Export to PDF, Word, Markdown, HTML and text',
             ],
             url: 'https://localhousellm.com/anvira-notes',
-            downloadUrl: RELEASES_URL,
             publisher: { '@id': 'https://localhousellm.com/#organization' },
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+            author: { '@id': 'https://localhousellm.com/#organization' },
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
           },
           {
             '@type': 'FAQPage',
@@ -1455,9 +1738,12 @@ const AnviraNotes = () => (
         <Marquee />
         <Bento />
         <Study />
+        <Exams />
+        <Messages />
         <Rows />
         <Stats />
         <Timeline />
+        <DownloadPanel />
         <Faq />
         <Final />
       </div>

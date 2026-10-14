@@ -10,7 +10,9 @@ import { ArrowRight, Search, Home } from "lucide-react";
 const suggestedPages = [
   { to: "/about", label: "About — Why LocalHouseLLM", desc: "Mission, team, and how to reach us" },
   { to: "/archive", label: "Research", desc: "Papers on modular, adaptive, decentralized AI" },
+  { to: "/anvira-notes", label: "Anvira Notes", desc: "Free notes and study app with flashcards and mock exams" },
   { to: "/anvira", label: "Anvira — AI Workspace", desc: "Local-first modular AI workspace" },
+  { to: "/releases", label: "Release notes", desc: "What changed in every version" },
   { to: "/stack", label: "Stack", desc: "The full modular AI architecture" },
   { to: "/docs", label: "Docs", desc: "Developer documentation" },
   { to: "/", label: "Home", desc: "Back to the start" },

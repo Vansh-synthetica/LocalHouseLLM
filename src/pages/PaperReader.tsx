@@ -60,7 +60,7 @@ const PaperReader = () => {
   return (
     <CleanLayout>
       <SEO
-        title={entry.title.length <= 48 ? `${entry.title} | LocalHouseLLM` : entry.title}
+        title={entry.seoTitle ?? (entry.title.length <= 48 ? `${entry.title} | LocalHouseLLM` : entry.title)}
         description={entry.abstract.slice(0, 155)}
         keywords={`${entry.tags.join(', ')}, ${entry.category}, LocalHouseLLM research`}
         canonical={url}

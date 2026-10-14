@@ -6,6 +6,8 @@ import SEO from '@/components/SEO';
 
 const faqs = [
   { q: 'What is LocalHouseLLM?', a: 'LocalHouseLLM is an AI infrastructure company building open, modular components for decentralized AI: the AICL communication protocol, the ORCHA orchestration engine, memory, safety, tools, and intelligence modules. The stack is open infrastructure anyone can compose and own.' },
+  { q: 'What apps does LocalHouseLLM make?', a: 'Two free Windows apps built on its own local AI runtime. Anvira Notes is a notes and study app: Notion-style pages, Google Docs and Notion sync, flashcards, quizzes, graded mock exams and study groups. Anvira is a local AI chat and coding agent that works on project folders and shows every change as a diff you can undo. Both run AI models on your own PC through Anvira Runtime.' },
+  { q: 'Where can I download Anvira and Anvira Notes, and see what is new?', a: 'Each app page has a download button for the current Windows installer, with its size and SHA-256 checksum. Release notes for every version of Anvira, Anvira Notes and Anvira Runtime are on the Release notes page, and the apps offer updates by themselves.' },
   { q: 'How is LocalHouseLLM different from a hosted AI provider?', a: 'Hosted AI providers ship a single closed model behind an API. LocalHouseLLM ships interoperable layers you can run on your own hardware, swap independently, and inspect at the packet level. You own the deployment, the memory, and the verification rules.' },
   { q: 'What is AICL?', a: 'AICL — the Adaptive Inter-module Communication Language — is the structured packet protocol AI modules use to talk to each other inside the LocalHouseLLM stack. It defines schemas, routing metadata, capability discovery, and provenance so every exchange is observable and verifiable.' },
   { q: 'What is ORCHA?', a: 'ORCHA is the orchestration engine. It decomposes requests, routes work to the most capable available module, runs sub-tasks in parallel where possible, aggregates results, and applies the verification layer before responding. ORCHA is the policy; AICL is the wire format underneath it.' },
@@ -30,10 +32,10 @@ const Faq = () => {
   return (
     <CleanLayout>
       <SEO
-        title="FAQ — LocalHouseLLM"
-        description="Frequently asked questions about LocalHouseLLM, AICL, ORCHA, modular AI infrastructure, and how to build on the decentralized AI stack."
+        title="LocalHouseLLM FAQ — Anvira, Anvira Notes, AICL and ORCHA"
+        description="Answers about LocalHouseLLM, its free apps Anvira and Anvira Notes, where to download them, and the AICL and ORCHA modular AI stack."
         canonical="https://localhousellm.com/faq"
-        keywords="LocalHouseLLM FAQ, what is LocalHouseLLM, what is AICL, what is ORCHA, modular AI FAQ, decentralized AI FAQ"
+        keywords="LocalHouseLLM FAQ, what is LocalHouseLLM, Anvira, Anvira Notes, download Anvira Notes, what is AICL, what is ORCHA, modular AI FAQ, decentralized AI FAQ"
         schema={schema}
       />
       <Breadcrumbs items={[{ name: 'FAQ', to: '/faq' }]} />

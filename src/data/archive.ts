@@ -13,6 +13,8 @@ export type ArchiveCategory =
 export type ArchiveEntry = {
   slug: string;
   title: string;
+  /** Shorter <title> for search results when the full title would be cut off (~60 chars). */
+  seoTitle?: string;
   series: 'LocalHouseLLM Research Collection' | 'SSRN Publication' | 'Technical Report';
   source: string;
   year: string;
@@ -37,6 +39,7 @@ export type ArchiveEntry = {
 export const archive: ArchiveEntry[] = [
   {
     slug: 'localhousellm-master-report',
+    seoTitle: 'LocalHouseLLM Master Report: Local LLM Inference Compendium',
     title: 'LocalHouseLLM Master Report: The Complete Local Inference Compendium',
     series: 'Technical Report',
     source: 'LocalHouseLLM Research',
@@ -134,6 +137,7 @@ export const archive: ArchiveEntry[] = [
   },
   {
     slug: 'five-layer-execution-stack',
+    seoTitle: 'The Five-Layer Execution Stack for Local AI Inference',
     title: 'AI Optimization for Local Inference: The Five-Layer Execution Stack',
     series: 'LocalHouseLLM Research Collection',
     source: 'LocalHouseLLM Research',
@@ -150,6 +154,7 @@ export const archive: ArchiveEntry[] = [
   },
   {
     slug: 'adaptive-modular-ai',
+    seoTitle: 'Adaptive Modular AI (AMAI): Scalable, Safe Language Models',
     title:
       'Adaptive Modular AI: A New Paradigm for Scalable, Safe, and Efficient Language Models',
     series: 'SSRN Publication',
@@ -165,6 +170,7 @@ export const archive: ArchiveEntry[] = [
   },
   {
     slug: 'shadow-amai',
+    seoTitle: 'Shadow AMAI: Unconstrained Adaptive Modular Intelligence',
     title: 'Shadow AMAI: An Architecture for Unconstrained Adaptive Modular Intelligence',
     series: 'SSRN Publication',
     source: 'SSRN',
@@ -179,6 +185,7 @@ export const archive: ArchiveEntry[] = [
   },
   {
     slug: 'cot-looping-systems',
+    seoTitle: 'CoT Looping Systems and Continuous Hypothesis Propagation',
     title: 'CoT Looping Systems, Continuous Hypothesis Propagation, and Predictability Ratios',
     series: 'SSRN Publication',
     source: 'SSRN',
@@ -193,6 +200,7 @@ export const archive: ArchiveEntry[] = [
   },
   {
     slug: 'adapt-parallel-task-execution',
+    seoTitle: 'ADAPT: Parallel Task Execution for Memory-Efficient LLMs',
     title:
       'ADAPT: Adaptive Decomposition and Parallel Task Execution for Memory-Efficient Large Language Model Inference',
     series: 'SSRN Publication',

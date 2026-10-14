@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
 const SITE_URL = 'https://localhousellm.com';
-const DEFAULT_IMAGE = `${SITE_URL}/favicon.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/og/default.png`;
 
 interface SEOProps {
   title?: string;
@@ -42,6 +42,11 @@ const SEO = ({
   const { pathname } = useLocation();
   const url = canonical ?? `${SITE_URL}${pathname === '/' ? '/' : pathname.replace(/\/+$/, '')}`;
   const image = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
+  // The default share image has a known size; others pass theirs explicitly.
+  const isDefaultImage = image === DEFAULT_IMAGE;
+  const imageWidth = ogImageWidth ?? (isDefaultImage ? 1200 : undefined);
+  const imageHeight = ogImageHeight ?? (isDefaultImage ? 630 : undefined);
+  const imageAlt = ogImageAlt ?? (isDefaultImage ? 'LocalHouseLLM — local-first AI that belongs to you' : undefined);
   const robots = noindex
     ? 'noindex, follow'
     : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
@@ -61,9 +66,9 @@ const SEO = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-      {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
-      {ogImageWidth && <meta property="og:image:width" content={String(ogImageWidth)} />}
-      {ogImageHeight && <meta property="og:image:height" content={String(ogImageHeight)} />}
+      {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+      {imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
+      {imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
       <meta property="og:site_name" content="LocalHouseLLM" />
       <meta property="og:locale" content="en_US" />
 
@@ -71,7 +76,7 @@ const SEO = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
-      {ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt} />}
+      {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
       <meta name="twitter:site" content="@localhousellm" />
 
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}

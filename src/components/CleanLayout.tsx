@@ -33,8 +33,23 @@ const CleanLayout = ({ children }: CleanLayoutProps) => {
     anchors: { offset: -84 },
   });
 
+  // New page: start at the top, unless the link points at a section
+  // (e.g. /anvira-notes#download or /stack#orcha) — then go to that section.
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    const id = decodeURIComponent(location.hash.slice(1));
+    const target = id ? document.getElementById(id) : null;
+    if (!target) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
+    // Jump after layout and smooth-scroll setup have settled, then once more in
+    // case images above the section changed its position.
+    const jump = () =>
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 84, behavior: 'instant' });
+    const timers = [window.setTimeout(jump, 80), window.setTimeout(jump, 600)];
+    return () => timers.forEach(window.clearTimeout);
+    // Only on page changes: in-page hash links are handled by the browser and Lenis.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   return (

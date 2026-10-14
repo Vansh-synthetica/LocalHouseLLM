@@ -1,0 +1,1009 @@
+{
+  "syncedAt": "2026-10-14T09:35:59.535Z",
+  "products": [
+    {
+      "id": "anvira-notes",
+      "name": "Anvira Notes",
+      "repo": "Vansh-synthetica/Anvira-Notes-release",
+      "page": "/anvira-notes",
+      "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
+      "latest": "v1.2.11",
+      "releases": [
+        {
+          "tag": "v1.2.11",
+          "version": "1.2.11",
+          "name": "Anvira Notes 1.2.11",
+          "date": "2026-10-14T09:34:53Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.11",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.11.exe",
+            "size": 129450103,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.11/Anvira-Notes-Setup-1.2.11.exe",
+            "sha256": "bd04622ec15b02d164e4f35df891b79d17815d024c42411210870b4be8e8bb61"
+          },
+          "summary": "One look across the app. Messages, Settings, dialogs, the chat pop-ups and Study's dark mode now share the same graphite as Notes, with one blue accent, so moving between sections feels like one app. Study keeps its…",
+          "highlights": [
+            {
+              "kind": "Better",
+              "text": "One look across the app"
+            },
+            {
+              "kind": "Better",
+              "text": "A new start-up screen"
+            },
+            {
+              "kind": "Better",
+              "text": "Messages are more private and more robust"
+            },
+            {
+              "kind": "Better",
+              "text": "Manage your profile on the web"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Better",
+              "html": "<ul><li><strong>One look across the app.</strong> Messages, Settings, dialogs, the chat pop-ups and Study's dark mode now share the same graphite as Notes, with one blue accent, so moving between sections feels like one app. Study keeps its light look by default.</li><li><strong>A new start-up screen:</strong> the LocalHouseLLM mark draws itself, with Anvira Notes beneath it.</li><li><strong>Messages are more private and more robust.</strong> Each person's updates now travel on their own private channel, and typing goes over a channel only the chat's members can join, so nobody receives anything that isn't theirs. Long chat histories page back without skipping or repeating a message, a message that fails to send says why, and a chat catches up on reactions and read receipts after the connection drops.</li><li><strong>Manage your profile on the web.</strong> Settings → Account, the account menu and the Messages profile window have <strong>Manage profile</strong>, which opens your profile on localhousellm.com. Changes appear in the app when you come back to it.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.10",
+          "version": "1.2.10",
+          "name": "Anvira Notes 1.2.10",
+          "date": "2026-10-13T20:25:37Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.10",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.10.exe",
+            "size": 129446204,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.10/Anvira-Notes-Setup-1.2.10.exe",
+            "sha256": "154e6fd72dee808457bb718f9f8217edb4006e58ae3822c867aa85561b501861"
+          },
+          "summary": "Remember me works. Anvira Notes asked you to sign in every time it started, even with Remember me ticked: your sign-in was saved, but read back too early at startup, before Windows' secure storage was ready, so it…",
+          "highlights": [
+            {
+              "kind": "Fixed",
+              "text": "Remember me works"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.9",
+          "version": "1.2.9",
+          "name": "Anvira Notes 1.2.9",
+          "date": "2026-10-13T20:09:02Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.9",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.9.exe",
+            "size": 129444230,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.9/Anvira-Notes-Setup-1.2.9.exe",
+            "sha256": "bf4e93e6db7ecff2d900bbb86783829b3ba4092ff47d0058dd866cc8ffce7ec7"
+          },
+          "summary": "Messages (in the sidebar, or Ctrl 3). Talk to classmates and run group projects without leaving Anvira.",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Messages"
+            },
+            {
+              "kind": "New",
+              "text": "Anvira Pro is on its way"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.8",
+          "version": "1.2.8",
+          "name": "Anvira Notes 1.2.8",
+          "date": "2026-10-13T13:20:19Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.8",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.8.exe",
+            "size": 129435537,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.8/Anvira-Notes-Setup-1.2.8.exe",
+            "sha256": "a0e203a0733231532de8c11f454b20e7b1594dff7011dab0e4f3f7d34380d591"
+          },
+          "summary": "Sign in to use Anvira Notes. The app now opens with a sign-in screen (or Create an account, free). Your notes and files still stay on this PC. With Remember me (on by default) you sign in once: the app opens straight…",
+          "highlights": [
+            {
+              "kind": "Changed",
+              "text": "Sign in to use Anvira Notes"
+            },
+            {
+              "kind": "Better",
+              "text": "Updates say what they bring"
+            },
+            {
+              "kind": "Better",
+              "text": "Runtime updates are clearer"
+            },
+            {
+              "kind": "Better",
+              "text": "Smoother everywhere"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.7",
+          "version": "1.2.7",
+          "name": "Anvira Notes 1.2.7",
+          "date": "2026-10-13T11:31:48Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.7",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.7.exe",
+            "size": 129424406,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.7/Anvira-Notes-Setup-1.2.7.exe",
+            "sha256": "00bb77c97b06297afb6f11fea29d4d79eecdd097d6e001003b8086979f4ed229"
+          },
+          "summary": "Turn on GPU acceleration from Settings. If your PC has an NVIDIA graphics card but Anvira Runtime was installed without its GPU pack, Settings → AI & Models now says so and offers Turn on GPU (a one-time download of…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Turn on GPU acceleration from Settings"
+            },
+            {
+              "kind": "Better",
+              "text": "Every new mock exam really asks new questions"
+            },
+            {
+              "kind": "Better",
+              "text": "Fairer multiple-choice questions"
+            },
+            {
+              "kind": "Better",
+              "text": "Cleaner reading of PDFs"
+            },
+            {
+              "kind": "Better",
+              "text": "Study guide, cheat sheet and grade extraction start sooner"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.6",
+          "version": "1.2.6",
+          "name": "Anvira Notes 1.2.6",
+          "date": "2026-10-07T19:18:35Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.6",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.6.exe",
+            "size": 129434723,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.6/Anvira-Notes-Setup-1.2.6.exe",
+            "sha256": "96922e4dd687068059a8f2561e47a6e57cb92a4bfb9ce55c0ffa2b86fe565585"
+          },
+          "summary": "Deleted notebooks can be brought back. Deleting a notebook used to remove it for good. It now shows Undo right away, and stays in Settings → Data → Deleted notebooks for 30 days, with its pages, files, history and exams.",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Deleted notebooks can be brought back"
+            },
+            {
+              "kind": "New",
+              "text": "Undo for Ask AI page edits"
+            },
+            {
+              "kind": "Faster",
+              "text": "Mock exams are made much faster"
+            },
+            {
+              "kind": "Faster",
+              "text": "No more freezes with big notebooks"
+            },
+            {
+              "kind": "Faster",
+              "text": "Explanations of your mistakes appear as they are written"
+            },
+            {
+              "kind": "Faster",
+              "text": "Typing stays smooth in big notebooks"
+            },
+            {
+              "kind": "Faster",
+              "text": "Search and Ctrl+P"
+            },
+            {
+              "kind": "Better",
+              "text": "Ask AI with 3B models"
+            },
+            {
+              "kind": "Better",
+              "text": "Ask AI with very small models (about 0.5B)"
+            },
+            {
+              "kind": "Better",
+              "text": "Flashcard and daily sessions you leave early still count"
+            },
+            {
+              "kind": "Better",
+              "text": "Closing the window waits for unsaved typing"
+            },
+            {
+              "kind": "Better",
+              "text": "Damaged files repair themselves"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.5",
+          "version": "1.2.5",
+          "name": "Anvira Notes 1.2.5",
+          "date": "2026-10-05T21:19:59Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.5",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.5.exe",
+            "size": 129426315,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.5/Anvira-Notes-Setup-1.2.5.exe",
+            "sha256": "3e716ff02c280bd0f6391983b9864fd7872189bb000c2bfdf90d9cae6fad59cd"
+          },
+          "summary": "Mock exams. A new Mock exam card at the top of Study. Pick a subject (a notebook), a length (Quick 10, Standard 20 or Full 30 questions), timed or not, and whether to include written answers. Questions come from all…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Mock exams"
+            },
+            {
+              "kind": "New",
+              "text": "Sit it like a real exam"
+            },
+            {
+              "kind": "New",
+              "text": "Results that teach"
+            },
+            {
+              "kind": "New",
+              "text": "Grades per subject"
+            },
+            {
+              "kind": "New",
+              "text": "Keep studying while it's written"
+            },
+            {
+              "kind": "Better",
+              "text": "Fair questions"
+            },
+            {
+              "kind": "Better",
+              "text": "Quizzes with very small models (about 0.5B)"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.4",
+          "version": "1.2.4",
+          "name": "Anvira Notes 1.2.4",
+          "date": "2026-10-04T20:39:57Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.4",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.4.exe",
+            "size": 129453573,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.4/Anvira-Notes-Setup-1.2.4.exe",
+            "sha256": "35fccd1d41a7f51710d9cc76d55f461e0f9acb6241818f1256ce497d9b243134"
+          },
+          "summary": "Pictures you can place anywhere. Click a picture and drag a corner to resize it (its shape is kept). A small bar over the picture sets where it sits: left, center or right, picture on the left or right with text…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Pictures you can place anywhere"
+            },
+            {
+              "kind": "New",
+              "text": "Pictures reach Google Docs and Notion"
+            },
+            {
+              "kind": "New",
+              "text": "Study plans that cover the whole book"
+            },
+            {
+              "kind": "New",
+              "text": "Live cursors"
+            },
+            {
+              "kind": "New",
+              "text": "\"Create notebooks automatically\" setting"
+            },
+            {
+              "kind": "Better",
+              "text": "Mind maps"
+            },
+            {
+              "kind": "Better",
+              "text": "Ask Pochi"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Who's here"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Whiteboard"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Google Docs"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Notion"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.3",
+          "version": "1.2.3",
+          "name": "Anvira Notes 1.2.3",
+          "date": "2026-10-03T22:29:06Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.3",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.3.exe",
+            "size": 129466322,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.3/Anvira-Notes-Setup-1.2.3.exe",
+            "sha256": "4d1ab99e8a640d6ef9438a47c0e3077a800d0a22c1a750f9d151601bc5698f1a"
+          },
+          "summary": "Tiny AI models (about 0.5B) now work properly. Qwen2.5 0.5B, Qwen3 0.6B and other models under 1.5B get their own way of being asked: the task and your text are clearly separated, a worked example shows what a good…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Tiny AI models (about 0.5B) now work properly"
+            },
+            {
+              "kind": "New",
+              "text": "Thinking switched off for tiny Qwen3 models"
+            },
+            {
+              "kind": "Better",
+              "text": "Writing tools with small models"
+            },
+            {
+              "kind": "Better",
+              "text": "Ask AI with small models"
+            },
+            {
+              "kind": "Better",
+              "text": "Editing pages and sheets with small models"
+            },
+            {
+              "kind": "Better",
+              "text": "No more runaway answers"
+            },
+            {
+              "kind": "Better",
+              "text": "Ghost text arrives faster"
+            },
+            {
+              "kind": "Better",
+              "text": "Lecture notes and meeting notes with small models"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Summarize page, web research and meeting notes on PCs without an NVIDIA GPU"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Summarize page"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.2",
+          "version": "1.2.2",
+          "name": "Anvira Notes 1.2.2",
+          "date": "2026-10-01T20:11:06Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.2",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.2.exe",
+            "size": 129463169,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.2/Anvira-Notes-Setup-1.2.2.exe",
+            "sha256": "57e4b4109c57ee6dbb2f650c9b688f3c4a866a4ee2b3fc18cae2027002f0c018"
+          },
+          "summary": "Offline OCR. Extract text from images and scanned documents directly on your PC — no internet required. Pictures with no writing are automatically ignored.",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Offline OCR"
+            },
+            {
+              "kind": "New",
+              "text": "Sources: read text inside slide pictures"
+            },
+            {
+              "kind": "New",
+              "text": "Whiteboard brush stabilizer"
+            },
+            {
+              "kind": "New",
+              "text": "First-run guide"
+            },
+            {
+              "kind": "New",
+              "text": "Hardware scan and PC-sized models"
+            },
+            {
+              "kind": "New",
+              "text": "Speech: fix misheard words"
+            },
+            {
+              "kind": "New",
+              "text": "Citations fixed"
+            },
+            {
+              "kind": "Better",
+              "text": "Google Docs fidelity, both directions"
+            },
+            {
+              "kind": "Better",
+              "text": "Notes editor"
+            },
+            {
+              "kind": "Better",
+              "text": "Study: faster lessons for small models"
+            },
+            {
+              "kind": "Better",
+              "text": "Speech never loses a lecture"
+            },
+            {
+              "kind": "Better",
+              "text": "Cheaper page switches"
+            },
+            {
+              "kind": "Better",
+              "text": "Micro-animations"
+            },
+            {
+              "kind": "Better",
+              "text": "Crash-safe saves"
+            },
+            {
+              "kind": "Better",
+              "text": "Security audit (34 issues fixed)"
+            },
+            {
+              "kind": "Better",
+              "text": "Electron 44 readiness"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Notes editor bugs"
+            },
+            {
+              "kind": "Fixed",
+              "text": "\"/\" menu"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Whiteboard mind maps"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Google floating pictures"
+            },
+            {
+              "kind": "Fixed",
+              "text": "PDF export"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Google sync"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Study streaks"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.0",
+          "version": "1.2.0",
+          "name": "Anvira Notes 1.2.0",
+          "date": "2026-09-30T19:34:37Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.0",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.0.exe",
+            "size": 126490411,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.0/Anvira-Notes-Setup-1.2.0.exe",
+            "sha256": "ac0813bdaeb22014ea36d1d8d064f152fbcabdfaeb806110c9330a1e598c7f50"
+          },
+          "summary": "Google Docs live sync + collaborative cursors. See collaborators as colored carets in the editor exactly where they are, with a name flag that appears on hover or while they're typing. Google Docs users appear in the…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Google Docs live sync + collaborative cursors"
+            },
+            {
+              "kind": "New",
+              "text": "OCR works offline"
+            },
+            {
+              "kind": "New",
+              "text": "Sources: read text inside slide pictures"
+            },
+            {
+              "kind": "New",
+              "text": "Study: faster lessons for small models"
+            },
+            {
+              "kind": "New",
+              "text": "Whiteboard: stabilized full-detail brush"
+            },
+            {
+              "kind": "Better",
+              "text": "Google Docs fidelity, both ways"
+            },
+            {
+              "kind": "Better",
+              "text": "Cheaper page switches"
+            },
+            {
+              "kind": "Better",
+              "text": "Smoother Notes editor"
+            },
+            {
+              "kind": "Better",
+              "text": "Notes micro-interactions"
+            },
+            {
+              "kind": "Better",
+              "text": "Google floating pictures deleted from Anvira"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Notes editor bugs fixed"
+            },
+            {
+              "kind": "Fixed",
+              "text": "\"/\" menu appears and closes properly"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Whiteboard mind maps work correctly"
+            }
+          ]
+        },
+        {
+          "tag": "v1.1.0",
+          "version": "1.1.0",
+          "name": "Anvira Notes 1.1.0",
+          "date": "2026-09-30T11:21:44Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.1.0",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.1.0.exe",
+            "size": 126490412,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.1.0/Anvira-Notes-Setup-1.1.0.exe",
+            "sha256": "ef6e0cba0e14e44112cf32328eb7799fbbc2703f2a791a2febf91b37671cff84"
+          },
+          "summary": "Record a lecture. Press Record (next to Ask AI) and Anvira Notes writes down what's said as it's said, on your PC, in English or other languages including Hindi. When you stop, Turn into notes gives you a page with a…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Record a lecture"
+            },
+            {
+              "kind": "New",
+              "text": "Ask Pochi from \"/\""
+            },
+            {
+              "kind": "New",
+              "text": "Google Docs without signing in"
+            },
+            {
+              "kind": "New",
+              "text": "See who's on the page"
+            },
+            {
+              "kind": "New",
+              "text": "Web research that works"
+            },
+            {
+              "kind": "Better",
+              "text": "Google Docs look like Google Docs"
+            },
+            {
+              "kind": "Better",
+              "text": "Anvira Runtime is steadier"
+            },
+            {
+              "kind": "Better",
+              "text": "Links"
+            },
+            {
+              "kind": "Better",
+              "text": "Search in the sidebar"
+            }
+          ]
+        },
+        {
+          "tag": "v1.0.3",
+          "version": "1.0.3",
+          "name": "Anvira Notes 1.0.3",
+          "date": "2026-09-28T21:04:14Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.0.3",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.0.3.exe",
+            "size": 126491747,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.0.3/Anvira-Notes-Setup-1.0.3.exe",
+            "sha256": "bf0a1213e2cf049d074b66163d37cea411ff130254c0983e01ea3feeb9f96911"
+          },
+          "summary": "Record a lecture. Press Record (next to Ask AI) and Anvira Notes writes down what's said as it's said, on your PC, in English or other languages including Hindi. When you stop, Turn into notes gives you a page with a…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Record a lecture"
+            },
+            {
+              "kind": "New",
+              "text": "Ask Pochi from \"/\""
+            },
+            {
+              "kind": "New",
+              "text": "Google Docs without signing in"
+            },
+            {
+              "kind": "New",
+              "text": "See who's on the page"
+            },
+            {
+              "kind": "New",
+              "text": "Web research that works"
+            },
+            {
+              "kind": "Better",
+              "text": "Google Docs look like Google Docs"
+            },
+            {
+              "kind": "Better",
+              "text": "Anvira Runtime is steadier"
+            },
+            {
+              "kind": "Better",
+              "text": "Links"
+            },
+            {
+              "kind": "Better",
+              "text": "Search in the sidebar"
+            }
+          ]
+        },
+        {
+          "tag": "v1.0.2",
+          "version": "1.0.2",
+          "name": "Anvira Notes 1.0.2",
+          "date": "2026-09-28T10:49:59Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.0.2",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.0.2.exe",
+            "size": 126426255,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.0.2/Anvira-Notes-Setup-1.0.2.exe",
+            "sha256": "08ccf756f3ff32576be970df23d6a94f0ce956d8aa9de0b444e5e21f26850fc7"
+          },
+          "summary": "Open any Google Doc or Notion page here. New → Google Doc or Notion page…: paste its link, or browse Google Drive / Notion. It opens as a page you edit in Anvira Notes.",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Open any Google Doc or Notion page here"
+            },
+            {
+              "kind": "New",
+              "text": "Live, both ways"
+            },
+            {
+              "kind": "New",
+              "text": "See who is working on it"
+            },
+            {
+              "kind": "New",
+              "text": "Send to Google Docs / Send to Notion"
+            },
+            {
+              "kind": "New",
+              "text": "Settings → Connections"
+            }
+          ]
+        },
+        {
+          "tag": "v1.0.1",
+          "version": "1.0.1",
+          "name": "Anvira Notes 1.0.1",
+          "date": "2026-09-27T21:16:54Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.0.1",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.0.1.exe",
+            "size": 126409704,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.0.1/Anvira-Notes-Setup-1.0.1.exe",
+            "sha256": "28aabee0abea1bdca7b1759398e538f9a18d9c0a07f4897412f99f0de21740bd"
+          },
+          "summary": "Today's session. One tap in Study starts a short daily lesson that mixes your due flashcards and quiz questions from every notebook, Duolingo-style. Questions you miss come back at the end, and every answer keeps…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Today's session"
+            },
+            {
+              "kind": "New",
+              "text": "Reviews coming up"
+            },
+            {
+              "kind": "New",
+              "text": "Trash"
+            },
+            {
+              "kind": "New",
+              "text": "Favourites and recents"
+            },
+            {
+              "kind": "New",
+              "text": "Duplicate and move pages"
+            },
+            {
+              "kind": "New",
+              "text": "Import files as pages"
+            },
+            {
+              "kind": "New",
+              "text": "Word export"
+            }
+          ]
+        },
+        {
+          "tag": "v1.0.0",
+          "version": "1.0.0",
+          "name": "Anvira Notes 1.0.0",
+          "date": "2026-09-21T22:12:54Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.0.0",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.0.0.exe",
+            "size": 126459025,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.0.0/Anvira-Notes-Setup-1.0.0.exe",
+            "sha256": "d4d31cb08bc17977f2e08f16d6a2c29597478deb0fb690c5c4442921b67e58e6"
+          },
+          "summary": "Notes and Study in one app, powered by Anvira Runtime (local AI on your PC). A LocalHouseLLM product.",
+          "highlights": [
+            {
+              "kind": "Study",
+              "text": "Study from a file"
+            },
+            {
+              "kind": "Also",
+              "text": "AI & Models"
+            },
+            {
+              "kind": "Also",
+              "text": "Updates by themselves"
+            },
+            {
+              "kind": "Also",
+              "text": "Optional account"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anvira",
+      "name": "Anvira",
+      "repo": "Vansh-synthetica/Anvira-release",
+      "page": "/anvira",
+      "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-release/releases",
+      "latest": "v1.0.1",
+      "releases": [
+        {
+          "tag": "v1.0.1",
+          "version": "1.0.1",
+          "name": "Anvira 1.0.1",
+          "date": "2026-09-21T22:12:28Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/tag/v1.0.1",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Setup-1.0.1.exe",
+            "size": 131062769,
+            "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/download/v1.0.1/Anvira-Setup-1.0.1.exe",
+            "sha256": "ac0b3191e78b86f97cad358e439eaafa86d27a829afa648a0dbc39ec0e8535de"
+          },
+          "summary": "Updates by themselves. When a newer Anvira is published, a small button appears at the top right. Click it to download, then again to restart into the new version. Nothing downloads or restarts until you click.…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Updates by themselves"
+            },
+            {
+              "kind": "New",
+              "text": "Runtime updates"
+            },
+            {
+              "kind": "New",
+              "text": "Optional account"
+            }
+          ],
+          "notes": [
+            {
+              "title": "New",
+              "html": "<ul><li><strong>Updates by themselves.</strong> When a newer Anvira is published, a small button appears at the top right. Click it to download, then again to restart into the new version. Nothing downloads or restarts until you click. <strong>Settings → About → Check for updates</strong> looks right now.</li><li><strong>Runtime updates.</strong> A second button appears when a newer Anvira Runtime is available. It updates the AI engine in place; your models and settings are kept.</li><li><strong>Optional account.</strong> Sign in or create an account from the sidebar or <strong>Settings → Account</strong>. Everything still works without one, and your chats and files stay on your PC.</li></ul>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li>The window now always fits your screen and remembers where you left it (it could hang off the right or bottom edge).</li><li>The composer &quot;+&quot; menu and dialogs are no longer cut off on small screens.</li><li>The Search page quick-jump buttons work again.</li><li>The start-up animation is smoother and the first-run dialog waits for it.</li><li>Memory recall across chats works.</li><li>A dropped connection to the AI engine now says what happened (&quot;The AI engine stopped in the middle of the answer&quot;) with a hint, instead of a bare &quot;terminated&quot;.</li><li>Very long messages fold up behind <strong>Show more</strong> so one big paste does not take over the screen.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.0.0",
+          "version": "1.0.0",
+          "name": "Anvira 1.0.0",
+          "date": "2026-09-20T22:35:15Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/tag/v1.0.0",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Setup-1.0.0.exe",
+            "size": 130731792,
+            "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/download/v1.0.0/Anvira-Setup-1.0.0.exe",
+            "sha256": "3564761a93f0b1ed20d99f53e229a15f24c01e33436669f8934b2bbafb09f198"
+          },
+          "summary": "Anvira is an agent workspace that runs on your own PC. Chat with local AI models, point an agent at a project folder, and keep everything on your computer. It is built on Anvira Runtime and is a LocalHouseLLM product.",
+          "highlights": [
+            {
+              "kind": "What's in it",
+              "text": "Chat"
+            },
+            {
+              "kind": "What's in it",
+              "text": "Agent mode"
+            },
+            {
+              "kind": "What's in it",
+              "text": "Model library"
+            },
+            {
+              "kind": "What's in it",
+              "text": "Projects, scheduled tasks, rules, skills and memory"
+            },
+            {
+              "kind": "What's in it",
+              "text": "Anvira Runtime included"
+            }
+          ]
+        },
+        {
+          "tag": "v1.6.3",
+          "version": "1.6.3",
+          "name": "Anvira 1.6.3",
+          "date": "2026-09-17T21:00:08Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/tag/v1.6.3",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-1.6-Pochi.exe",
+            "size": 808108335,
+            "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/download/v1.6.3/Anvira-1.6-Pochi.exe",
+            "sha256": "786726949b42f2bdce46542602a670af7eee8ef7eccfe56ffb0fc92bc7c08d21"
+          },
+          "summary": "Real web access for local models, and a lot more reliable tool-calling in general.",
+          "highlights": []
+        },
+        {
+          "tag": "v1.6.2",
+          "version": "1.6.2",
+          "name": "Anvira 1.6.2",
+          "date": "2026-09-13T17:57:24Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/tag/v1.6.2",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-1.6-Pochi.exe",
+            "size": 808105878,
+            "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/download/v1.6.2/Anvira-1.6-Pochi.exe",
+            "sha256": "efb22babb3fc97337f20062d3a97ef12b041a132d715c6ea9c7b096b1d202528"
+          },
+          "summary": "Fixes agentic tool-calling reliability for local models: small/quantized models were structurally able to choose describing an answer over actually calling a tool, even under JSON-schema-constrained decoding — now…",
+          "highlights": []
+        },
+        {
+          "tag": "v1.6.1",
+          "version": "1.6.1",
+          "name": "1.6.1",
+          "date": "2026-09-13T16:27:52Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/tag/v1.6.1",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-1.6-Pochi.exe",
+            "size": 808091961,
+            "url": "https://github.com/Vansh-synthetica/Anvira-release/releases/download/v1.6.1/Anvira-1.6-Pochi.exe",
+            "sha256": "1aec186a1be1bc4fd0c026d222a6c95d42ca2bdb55e586a262ba434295da60e7"
+          },
+          "summary": "",
+          "highlights": []
+        }
+      ]
+    },
+    {
+      "id": "anvira-runtime",
+      "name": "Anvira Runtime",
+      "repo": "Vansh-synthetica/Anvira-Runtime",
+      "page": "/anvira#runtime",
+      "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases",
+      "latest": "v1.0.2",
+      "releases": [
+        {
+          "tag": "v1.0.2",
+          "version": "1.0.2",
+          "name": "Anvira Runtime 1.0.2",
+          "date": "2026-10-13T11:31:06Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/tag/v1.0.2",
+          "latest": true,
+          "installer": {
+            "name": "AnviraRuntime-1.0.2-win-x64.zip",
+            "size": 49241429,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/download/v1.0.2/AnviraRuntime-1.0.2-win-x64.zip",
+            "sha256": "2e84a6ee86c231e7e0f9147f27246b30064bf316009766ef8ac7fc31cd9f724b"
+          },
+          "summary": "The AI serves more than one request at a time. llama-server now runs several slots over one shared context pool: 4 on a GPU with a 16k context, 2 on the processor (whose context grows to 8k for this: a few hundred MB…",
+          "highlights": [
+            {
+              "kind": "Faster",
+              "text": "The AI serves more than one request at a time"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Faster",
+              "html": "<ul><li><strong>The AI serves more than one request at a time.</strong> llama-server now runs several slots over one shared context pool: 4 on a GPU with a 16k context, 2 on the processor (whose context grows to 8k for this: a few hundred MB of memory for a small model), 1 when the context is smaller. Chat, Ask AI and ghost text no longer wait behind an exam or lesson being written, and every slot can still use the whole context, so a long prompt never gets less room than before.</li><li>New setting <code>models.parallel</code> (default: automatic) to choose the number of slots yourself: <code>anvira config set models.parallel 2</code>.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.0.1",
+          "version": "1.0.1",
+          "name": "Anvira Runtime 1.0.1",
+          "date": "2026-10-03T22:29:32Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/tag/v1.0.1",
+          "latest": false,
+          "installer": {
+            "name": "AnviraRuntime-1.0.1-win-x64.zip",
+            "size": 49242406,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/download/v1.0.1/AnviraRuntime-1.0.1-win-x64.zip",
+            "sha256": "1e8c3c1439c09d175fb69923b9eebc65f436f0d6612087d3019b0277985808d4"
+          },
+          "summary": "Anvira Runtime 1.0.1: better answers from small models.",
+          "highlights": [
+            {
+              "kind": "What's new",
+              "text": "llama.cpp's own settings reach the model"
+            },
+            {
+              "kind": "What's new",
+              "text": "Why it matters"
+            }
+          ]
+        },
+        {
+          "tag": "v1.0.0",
+          "version": "1.0.0",
+          "name": "Anvira Runtime 1.0.0",
+          "date": "2026-09-20T16:25:36Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/tag/v1.0.0",
+          "latest": false,
+          "installer": {
+            "name": "AnviraRuntime-1.0.0-win-x64.zip",
+            "size": 49018089,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/download/v1.0.0/AnviraRuntime-1.0.0-win-x64.zip",
+            "sha256": "e97e1c8c4de37a8338a5083b45d005d8e18388964589bb45c6ee038070cd0075"
+          },
+          "summary": "Windows x64 self-contained package: its own Python, ORCHA, Nomi, AICL, CPU llama-server, and the Microsoft VC++ runtime (no installs needed). The -cuda zip adds NVIDIA GPU acceleration (needs an NVIDIA driver 525+);…",
+          "highlights": []
+        }
+      ]
+    }
+  ]
+}

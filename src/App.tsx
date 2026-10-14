@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { type ReactNode, Suspense } from "react";
 import { Navigate } from "react-router-dom";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -11,30 +11,30 @@ import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import PublicOnlyRoute from "@/components/PublicOnlyRoute";
 
-import Index from "./pages/Index";
-import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import Anvira from "./pages/Anvira";
-import AnviraNotes from "./pages/AnviraNotes";
-import Archive from "./pages/Archive";
-import PaperReader from "./pages/PaperReader";
-import Stack from "./pages/Stack";
-import Docs from "./pages/Docs";
-import Faq from "./pages/Faq";
-import OrchaLicense from "./pages/orcha/License";
-
-// Auth
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import ForgotPassword from "./pages/auth/ForgotPassword";
-import ResetPassword from "./pages/auth/ResetPassword";
-import VerifyEmail from "./pages/auth/VerifyEmail";
-
-// App (authenticated)
-import AppLayout from "./components/app/AppLayout";
-import Dashboard from "./pages/app/Dashboard";
-import ProfilePage from "./pages/app/ProfilePage";
-import AccountSettings from "./pages/app/AccountSettings";
+// Every other page is its own chunk — see src/pages.ts.
+import {
+  Index,
+  About,
+  Anvira,
+  AnviraNotes,
+  Releases,
+  Archive,
+  PaperReader,
+  Stack,
+  Docs,
+  Faq,
+  OrchaLicense,
+  Login,
+  Register,
+  ForgotPassword,
+  ResetPassword,
+  VerifyEmail,
+  AppLayout,
+  Dashboard,
+  ProfilePage,
+  AccountSettings,
+} from "./pages";
 
 const queryClient = new QueryClient();
 
@@ -49,11 +49,13 @@ export const AppShell = ({ children }: { children: ReactNode }) => (
   </QueryClientProvider>
 );
 
-export const AppRoutes = () => (
+const AppRoutes = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/anvira" element={<Anvira />} />
               <Route path="/anvira-notes" element={<AnviraNotes />} />
+              <Route path="/releases" element={<Releases />} />
+              <Route path="/releases/:product" element={<Releases />} />
               <Route path="/about" element={<About />} />
               <Route path="/stack" element={<Stack />} />
               <Route path="/archive" element={<Archive />} />
@@ -89,7 +91,8 @@ export const AppRoutes = () => (
               <Route path="/use-cases/research" element={<Navigate to="/" replace />} />
               <Route path="/use-cases/enterprise-private-ai" element={<Navigate to="/" replace />} />
               <Route path="/use-cases/edge-ai" element={<Navigate to="/" replace />} />
-              <Route path="/release-logs" element={<Navigate to="/" replace />} />
+              <Route path="/release-logs" element={<Navigate to="/releases" replace />} />
+              <Route path="/changelog" element={<Navigate to="/releases" replace />} />
               <Route path="/sitemap" element={<Navigate to="/" replace />} />
 
               {/* Legacy redirects (pre-existing) */}
@@ -123,13 +126,27 @@ export const AppRoutes = () => (
             </Routes>
 );
 
+/**
+ * Everything under the router, shared by the browser app and the prerenderer so
+ * both trees match. The Suspense boundary (for lazily loaded pages) sits above
+ * AuthProvider on purpose: auth state updates as soon as it mounts, and an update
+ * reaching a boundary that is still hydrating makes React throw away the
+ * prerendered HTML and re-render the page (React error #421).
+ */
+export const AppBody = () => (
+  <Suspense fallback={null}>
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
+  </Suspense>
+);
+
 const App = () => (
   <HelmetProvider>
     <AppShell>
-      <BrowserRouter>
-        <AuthProvider>
-          <AppRoutes />
-        </AuthProvider>
+      {/* startTransition keeps the current page on screen while the next page's chunk loads. */}
+      <BrowserRouter future={{ v7_startTransition: true }}>
+        <AppBody />
       </BrowserRouter>
     </AppShell>
   </HelmetProvider>

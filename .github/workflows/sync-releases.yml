@@ -1,0 +1,61 @@
+name: Sync app releases
+
+# Keeps src/data/releases*.json in step with the GitHub releases of Anvira,
+# Anvira Notes and Anvira Runtime. A commit here triggers a Netlify deploy, so
+# new versions, download links, sizes, checksums and release notes reach the
+# site without anyone editing it.
+#
+# Runs on a schedule, on demand, and instantly when a release repo sends a
+# repository_dispatch event of type "app-release" (see README).
+
+on:
+  schedule:
+    - cron: '17 */2 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [app-release]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-releases
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pull release data from GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/sync-releases.mjs
+
+      - name: Commit if anything changed
+        id: commit
+        run: |
+          if git diff --quiet -- src/data; then
+            echo "Release data already up to date."
+            exit 0
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/releases.json src/data/releases-summary.json
+          versions=$(node -e "const d=require('./src/data/releases-summary.json');console.log(d.products.map(p=>p.name+' '+(p.releases.find(r=>r.tag===p.latest)||{}).version).join(', '))")
+          git commit -m "Sync release data: ${versions}"
+          git push
+
+      # Give Netlify time to build and publish, then tell IndexNow engines what changed.
+      - name: Notify search engines (IndexNow)
+        if: steps.commit.outputs.changed == 'true'
+        continue-on-error: true
+        run: |
+          sleep 300
+          node scripts/indexnow.mjs / /releases /releases/anvira-notes /releases/anvira /releases/anvira-runtime /anvira-notes /anvira
