@@ -1,6 +1,6 @@
 
 import { useLocation, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
@@ -20,8 +20,12 @@ const suggestedPages = [
 
 const NotFound = () => {
   const location = useLocation();
+  // 404.html is prerendered once for every unknown URL, so the visited path is only
+  // known in the browser: show it after mount, or hydration would not match.
+  const [path, setPath] = useState<string | null>(null);
 
   useEffect(() => {
+    setPath(location.pathname);
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
@@ -71,7 +75,13 @@ const NotFound = () => {
               </h1>
 
               <p className="text-muted-foreground text-base md:text-lg mb-3 max-w-md mx-auto">
-                The page <code className="text-foreground/80 bg-foreground/10 px-2 py-0.5 rounded text-sm">{location.pathname}</code> doesn't exist or has been moved.
+                {path ? (
+                  <>
+                    The page <code className="text-foreground/80 bg-foreground/10 px-2 py-0.5 rounded text-sm">{path}</code> doesn't exist or has been moved.
+                  </>
+                ) : (
+                  "This page doesn't exist or has been moved."
+                )}
               </p>
 
               <p className="text-muted-foreground text-sm mb-8">

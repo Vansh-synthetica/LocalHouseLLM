@@ -1,5 +1,5 @@
 import { type FormEvent, type ReactNode, useCallback, useEffect, useId, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { Session } from '@supabase/supabase-js';
 import { AtSign, Camera, Check, Loader2, LogOut, Trash2, X } from 'lucide-react';
 
@@ -86,13 +86,13 @@ const Avatar = ({ person, size = 88 }: { person: Pick<AnviraPerson, 'display_nam
       alt=""
       width={size}
       height={size}
-      className="rounded-full object-cover ring-4 ring-background shadow-sm"
+      className="rounded-full object-cover shadow-sm"
       style={{ width: size, height: size }}
     />
   ) : (
     <span
       aria-hidden="true"
-      className="inline-grid place-items-center rounded-full font-display font-semibold text-white ring-4 ring-background shadow-sm"
+      className="inline-grid place-items-center rounded-full font-display font-semibold text-white shadow-sm"
       style={{ width: size, height: size, background: person.avatar_color ?? AVATAR_COLORS[0], fontSize: size * 0.36 }}
     >
       {initials(person.display_name, person.handle)}
@@ -122,29 +122,69 @@ const squareImage = async (file: File): Promise<Blob> => {
 /* Sign in                                                             */
 /* ------------------------------------------------------------------ */
 
-const SignIn = () => {
-  const [mode, setMode] = useState<'signin' | 'forgot'>('signin');
+export type AuthMode = 'signin' | 'signup' | 'forgot';
+
+const COPY: Record<AuthMode, { title: string; lead: string; cta: string }> = {
+  signin: {
+    title: 'Sign in to Anvira',
+    lead: 'One account for Anvira Notes and this site. Sign in to change your photo, name, @username and how people find you in Messages.',
+    cta: 'Sign in',
+  },
+  signup: {
+    title: 'Create your Anvira account',
+    lead: 'Free. The same account signs you in to Anvira Notes, and your notes and files stay on your PC.',
+    cta: 'Create account',
+  },
+  forgot: {
+    title: 'Reset your password',
+    lead: 'Enter your Anvira account email and we’ll send you a link to choose a new password.',
+    cta: 'Send the link',
+  },
+};
+
+const SignIn = ({ initialMode = 'signin' }: { initialMode?: AuthMode }) => {
+  const [mode, setModeState] = useState<AuthMode>(initialMode);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
+  // After sign-up: the address waiting for its confirmation email.
+  const [confirming, setConfirming] = useState('');
+
+  const setMode = (m: AuthMode) => {
+    setModeState(m);
+    setError('');
+    setNotice('');
+  };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
     setNotice('');
-    if (!/^\S+@\S+\.\S+$/.test(email.trim())) return setError('Please enter the email you use for Anvira Notes.');
+    const addr = email.trim().toLowerCase();
+    if (!/^\S+@\S+\.\S+$/.test(addr)) return setError('Please enter your email address.');
+    if (mode !== 'forgot' && !password) return setError('Please enter a password.');
+    if (mode === 'signup' && password.length < 8) return setError('Please choose a password of at least 8 characters.');
     setBusy(true);
     if (mode === 'signin') {
-      if (!password) {
-        setBusy(false);
-        return setError('Please enter your password.');
-      }
-      const { error: err } = await anvira.auth.signInWithPassword({ email: email.trim(), password });
+      const { error: err } = await anvira.auth.signInWithPassword({ email: addr, password });
       if (err) setError(friendlyError(err));
+    } else if (mode === 'signup') {
+      const { data, error: err } = await anvira.auth.signUp({
+        email: addr,
+        password,
+        options: {
+          data: { full_name: name.trim() || undefined },
+          emailRedirectTo: `${window.location.origin}/account/profile`,
+        },
+      });
+      if (err) setError(friendlyError(err));
+      // With email confirmation on, there is no session yet: ask them to confirm.
+      else if (!data.session) setConfirming(addr);
     } else {
-      const { error: err } = await anvira.auth.resetPasswordForEmail(email.trim(), {
+      const { error: err } = await anvira.auth.resetPasswordForEmail(addr, {
         redirectTo: `${window.location.origin}/account/reset`,
       });
       if (err) setError(friendlyError(err));
@@ -153,18 +193,62 @@ const SignIn = () => {
     setBusy(false);
   };
 
+  const resend = async () => {
+    setBusy(true);
+    setNotice('');
+    setError('');
+    const { error: err } = await anvira.auth.resend({
+      type: 'signup',
+      email: confirming,
+      options: { emailRedirectTo: `${window.location.origin}/account/profile` },
+    });
+    setBusy(false);
+    if (err) setError(friendlyError(err));
+    else setNotice('Sent again. It can take a minute — check your spam folder too.');
+  };
+
+  if (confirming) {
+    return (
+      <div className="mx-auto w-full max-w-md">
+        <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">Check your email</h1>
+        <p className="mt-3 text-muted-foreground">
+          We sent a confirmation link to <strong className="text-foreground">{confirming}</strong>. Open it to finish creating
+          your account, then sign in here or in Anvira Notes.
+        </p>
+        <div className="mt-8 space-y-4 rounded-2xl border border-border/70 bg-card p-6 sm:p-8">
+          <div role="alert" aria-live="polite" className="min-h-[1.25rem] text-[13px]">
+            {error && <span className="text-destructive">{error}</span>}
+            {notice && <span className="text-muted-foreground">{notice}</span>}
+          </div>
+          <Button type="button" variant="outline" disabled={busy} onClick={resend} className="h-11 w-full rounded-full">
+            {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Send it again
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              setConfirming('');
+              setMode('signin');
+            }}
+            className="h-11 w-full rounded-full bg-foreground text-background hover:bg-foreground/90"
+          >
+            I’ve confirmed — sign in
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto w-full max-w-md">
-      <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">
-        {mode === 'signin' ? 'Your Anvira profile' : 'Reset your password'}
-      </h1>
-      <p className="mt-3 text-muted-foreground">
-        {mode === 'signin'
-          ? 'Sign in with your Anvira Notes account to change your photo, name, @username and how people find you in Messages.'
-          : 'Enter your Anvira account email and we’ll send you a link to choose a new password.'}
-      </p>
+      <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">{COPY[mode].title}</h1>
+      <p className="mt-3 text-muted-foreground">{COPY[mode].lead}</p>
 
       <form onSubmit={submit} noValidate className="mt-8 space-y-5 rounded-2xl border border-border/70 bg-card p-6 sm:p-8">
+        {mode === 'signup' && (
+          <Field label="Your name" htmlFor="anv-name" hint="Shown to classmates in Messages. You can change it later.">
+            <Input id="anv-name" autoComplete="name" value={name} maxLength={60} onChange={(e) => setName(e.target.value)} className="h-11" />
+          </Field>
+        )}
         <Field label="Email" htmlFor="anv-email">
           <Input
             id="anv-email"
@@ -176,12 +260,12 @@ const SignIn = () => {
             autoFocus
           />
         </Field>
-        {mode === 'signin' && (
-          <Field label="Password" htmlFor="anv-password">
+        {mode !== 'forgot' && (
+          <Field label="Password" htmlFor="anv-password" hint={mode === 'signup' ? 'At least 8 characters.' : undefined}>
             <Input
               id="anv-password"
               type="password"
-              autoComplete="current-password"
+              autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="h-11"
@@ -196,28 +280,29 @@ const SignIn = () => {
 
         <Button type="submit" disabled={busy} className="h-11 w-full rounded-full bg-foreground text-background hover:bg-foreground/90">
           {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {mode === 'signin' ? 'Sign in' : 'Send the link'}
+          {COPY[mode].cta}
         </Button>
 
-        <button
-          type="button"
-          onClick={() => {
-            setMode(mode === 'signin' ? 'forgot' : 'signin');
-            setError('');
-            setNotice('');
-          }}
-          className="block w-full text-center text-[13px] text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          {mode === 'signin' ? 'Forgot password?' : 'Back to sign in'}
-        </button>
+        {mode !== 'signup' && (
+          <button
+            type="button"
+            onClick={() => setMode(mode === 'signin' ? 'forgot' : 'signin')}
+            className="block w-full text-center text-[13px] text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+          >
+            {mode === 'signin' ? 'Forgot password?' : 'Back to sign in'}
+          </button>
+        )}
       </form>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        No account yet? Create one free in{' '}
-        <Link to="/anvira-notes#download" className="font-medium text-foreground underline underline-offset-4">
-          Anvira Notes
-        </Link>
-        .
+        {mode === 'signup' ? 'Already have an account? ' : 'No account yet? '}
+        <button
+          type="button"
+          onClick={() => setMode(mode === 'signup' ? 'signin' : 'signup')}
+          className="font-medium text-foreground underline underline-offset-4"
+        >
+          {mode === 'signup' ? 'Sign in' : 'Create one free'}
+        </button>
       </p>
     </div>
   );
@@ -464,7 +549,7 @@ const ProfileEditor = ({ session }: { session: Session }) => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl">
+    <div className="mx-auto w-full max-w-3xl [&_p]:font-sans">
       <header className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
         <Avatar person={preview} />
         <div className="min-w-0 flex-1">
@@ -508,13 +593,19 @@ const ProfileEditor = ({ session }: { session: Session }) => {
                 </Button>
               )}
             </div>
-            <div className="w-full">
-              {hasDetails ? (
-                <StatusLine status={photoStatus.kind === 'idle' ? { kind: 'idle' } : photoStatus} />
-              ) : (
-                <p className="text-[12.5px] text-muted-foreground">Photos, bios, school and website are coming to Anvira very soon.</p>
-              )}
-            </div>
+            {/* Only take up room when there is something to say — an empty line left a big gap here. */}
+            {!hasDetails ? (
+              <p className="w-full text-[12.5px] text-muted-foreground">Photos, bios, school and website are coming to Anvira very soon.</p>
+            ) : (
+              photoStatus.kind !== 'idle' && (
+                <div className="w-full">
+                  <StatusLine status={photoStatus} />
+                </div>
+              )
+            )}
+            {hasDetails && photoStatus.kind === 'idle' && (
+              <p className="w-full -mt-1 text-[12.5px] text-muted-foreground">JPEG, PNG or WebP. It is cropped to a square.</p>
+            )}
           </div>
 
           <form onSubmit={saveProfile} className="space-y-5" noValidate>
@@ -531,6 +622,7 @@ const ProfileEditor = ({ session }: { session: Session }) => {
                     maxLength={20}
                     onChange={(e) => setHandle(e.target.value.toLowerCase().replace(/\s/g, ''))}
                     className="pl-9"
+                    placeholder="yourname"
                     autoComplete="username"
                     aria-invalid={handleState === 'taken' || handleState === 'invalid'}
                     spellCheck={false}
@@ -546,7 +638,7 @@ const ProfileEditor = ({ session }: { session: Session }) => {
                 maxLength={BIO_MAX}
                 rows={3}
                 disabled={!hasDetails}
-                placeholder="Biology, second year. Happy to swap flashcards."
+                placeholder="A line about you, up to 160 characters"
                 onChange={(e) => setBio(e.target.value)}
               />
             </Field>
@@ -683,11 +775,18 @@ const ProfileEditor = ({ session }: { session: Session }) => {
 
 const AccountProfile = () => {
   const { session, ready } = useAnviraSession();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const initialMode: AuthMode = pathname.endsWith('/signup') ? 'signup' : 'signin';
+  // Signed in on /account/signin or /account/signup: go to the profile.
+  useEffect(() => {
+    if (session && pathname !== '/account/profile') navigate('/account/profile', { replace: true });
+  }, [session, pathname, navigate]);
   return (
     <CleanLayout>
       <SEO
-        title="Your Anvira profile — LocalHouseLLM"
-        description="Manage the profile Anvira Notes shows in Messages: photo, name, @username, bio and more."
+        title={initialMode === 'signup' && !session ? 'Create your Anvira account — LocalHouseLLM' : 'Your Anvira account — LocalHouseLLM'}
+        description="Sign in or create your free Anvira account, and manage the profile Anvira Notes shows in Messages."
         noindex
       />
       <div className="max-container px-4 py-12 md:py-20">
@@ -702,7 +801,7 @@ const AccountProfile = () => {
         ) : session ? (
           <ProfileEditor key={session.user.id} session={session} />
         ) : (
-          <SignIn />
+          <SignIn key={initialMode} initialMode={initialMode} />
         )}
       </div>
     </CleanLayout>

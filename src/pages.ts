@@ -46,20 +46,11 @@ export const Docs = page(['/docs'], 'src/pages/Docs.tsx', () => import('./pages/
 export const Faq = page(['/faq'], 'src/pages/Faq.tsx', () => import('./pages/Faq'));
 export const OrchaLicense = page(['/orcha/license'], 'src/pages/orcha/License.tsx', () => import('./pages/orcha/License'));
 
-export const Login = page(['/login'], 'src/pages/auth/Login.tsx', () => import('./pages/auth/Login'));
-export const Register = page(['/register'], 'src/pages/auth/Register.tsx', () => import('./pages/auth/Register'));
-export const ForgotPassword = page(['/forgot-password'], 'src/pages/auth/ForgotPassword.tsx', () => import('./pages/auth/ForgotPassword'));
-export const ResetPassword = page(['/reset-password'], 'src/pages/auth/ResetPassword.tsx', () => import('./pages/auth/ResetPassword'));
-export const VerifyEmail = page(['/verify-email'], 'src/pages/auth/VerifyEmail.tsx', () => import('./pages/auth/VerifyEmail'));
 
-// Anvira account (the desktop app's sign-in, not the website's) — opened by Anvira Notes' "Manage profile".
-export const AccountProfile = page(['/account/profile'], 'src/pages/account/AccountProfile.tsx', () => import('./pages/account/AccountProfile'));
+// Anvira accounts (the apps' sign-in). Anvira Notes' "Manage profile" opens /account/profile.
+export const AccountProfile = page(['/account/profile', '/account/signin', '/account/signup'], 'src/pages/account/AccountProfile.tsx', () => import('./pages/account/AccountProfile'));
 export const AccountReset = page(['/account/reset'], 'src/pages/account/AccountReset.tsx', () => import('./pages/account/AccountReset'));
 
-export const AppLayout = page(['/dashboard/*'], 'src/components/app/AppLayout.tsx', () => import('./components/app/AppLayout'));
-export const Dashboard = page(['/dashboard'], 'src/pages/app/Dashboard.tsx', () => import('./pages/app/Dashboard'));
-export const ProfilePage = page(['/dashboard/profile'], 'src/pages/app/ProfilePage.tsx', () => import('./pages/app/ProfilePage'));
-export const AccountSettings = page(['/dashboard/settings'], 'src/pages/app/AccountSettings.tsx', () => import('./pages/app/AccountSettings'));
 
 const entriesFor = (pathname: string) =>
   registry.filter((e) => e.patterns.some((pattern) => matchPath({ path: pattern, end: true }, pathname)));

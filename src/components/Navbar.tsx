@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LayoutDashboard, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '@/hooks/useAuth';
+import { useAnviraSession } from '@/integrations/anvira/useAnviraSession';
 import BrandMark from './system/BrandMark';
 import {
   DropdownMenu,
@@ -35,7 +35,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const { user } = useAuth();
+  // Accounts are Anvira accounts (the same sign-in as the apps).
+  const { session } = useAnviraSession();
+  const accountName = (session?.user.user_metadata?.full_name as string | undefined) || session?.user.email || '';
+  const accountInitial = accountName.trim().charAt(0).toUpperCase() || '·';
+  const onAccount = location.pathname.startsWith('/account');
   const isDarkRoute = location.pathname === '/anvira';
 
   useEffect(() => {
@@ -130,17 +134,28 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-3 shrink-0">
-            {user ? (
-              <Link to="/dashboard">
-                <Button className="h-10 rounded-full px-5 text-[13px] font-medium bg-foreground text-background hover:bg-foreground/90">
-                  <LayoutDashboard className="w-4 h-4 mr-1.5" /> Dashboard
-                </Button>
-              </Link>
-            ) : (
-              <>
-                <Link to="/login" className={linkClass(location.pathname === '/login')}>
-                  Sign in
-                </Link>
+            <>
+                {session ? (
+                  <Link
+                    to="/account/profile"
+                    className={`${linkClass(onAccount)} inline-flex items-center gap-2`}
+                    title={accountName}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`grid h-7 w-7 place-items-center rounded-full text-[12px] font-semibold ${
+                        isDarkRoute ? 'bg-white/15 text-white' : 'bg-foreground/10 text-foreground'
+                      }`}
+                    >
+                      {accountInitial}
+                    </span>
+                    Your account
+                  </Link>
+                ) : (
+                  <Link to="/account/signin" className={linkClass(onAccount)}>
+                    Sign in
+                  </Link>
+                )}
                 <DropdownMenu modal={false}>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -177,8 +192,7 @@ const Navbar = () => {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              </>
-            )}
+            </>
           </div>
 
           <div className="md:hidden flex items-center">
@@ -222,17 +236,10 @@ const Navbar = () => {
                   </Link>
                 ))}
 
-                {user ? (
-                  <Link to="/dashboard" className="mt-3">
-                    <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">
-                      Dashboard
-                    </Button>
-                  </Link>
-                ) : (
-                  <div className="mt-3 flex flex-col gap-2">
-                    <Link to="/login">
+                <div className="mt-3 flex flex-col gap-2">
+                    <Link to={session ? '/account/profile' : '/account/signin'}>
                       <Button variant="outline" className="w-full rounded-full">
-                        Sign in
+                        {session ? 'Your account' : 'Sign in'}
                       </Button>
                     </Link>
                     <Link to="/anvira-notes#download">
@@ -245,8 +252,7 @@ const Navbar = () => {
                         Download Anvira
                       </Button>
                     </Link>
-                  </div>
-                )}
+                </div>
               </div>
             </motion.div>
           )}

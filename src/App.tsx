@@ -7,9 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
-import { AuthProvider } from "@/hooks/useAuth";
-import ProtectedRoute from "@/components/ProtectedRoute";
-import PublicOnlyRoute from "@/components/PublicOnlyRoute";
 
 import NotFound from "./pages/NotFound";
 // Every other page is its own chunk — see src/pages.ts.
@@ -25,17 +22,8 @@ import {
   Docs,
   Faq,
   OrchaLicense,
-  Login,
-  Register,
-  ForgotPassword,
-  ResetPassword,
-  VerifyEmail,
   AccountProfile,
   AccountReset,
-  AppLayout,
-  Dashboard,
-  ProfilePage,
-  AccountSettings,
 } from "./pages";
 
 const queryClient = new QueryClient();
@@ -101,31 +89,21 @@ const AppRoutes = () => (
               <Route path="/opensource" element={<Navigate to="/archive" replace />} />
               <Route path="/research" element={<Navigate to="/archive" replace />} />
 
-              {/* Auth */}
-              <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
-              <Route path="/register" element={<PublicOnlyRoute><Register /></PublicOnlyRoute>} />
-              <Route path="/signup" element={<Navigate to="/register" replace />} />
-              <Route path="/forgot-password" element={<PublicOnlyRoute><ForgotPassword /></PublicOnlyRoute>} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/verify-email" element={<VerifyEmail />} />
-
-              {/* Authenticated app */}
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<Dashboard />} />
-                <Route path="profile" element={<ProfilePage />} />
-                <Route path="settings" element={<AccountSettings />} />
-              </Route>
-              <Route path="/account" element={<Navigate to="/dashboard/settings" replace />} />
-              {/* Anvira Notes opens /account/profile from "Manage profile" — keep this URL working. */}
+              {/* Accounts are Anvira accounts — the same sign-in as the apps. The website's older sign-in
+                  used a Supabase project that no longer exists, so its URLs now lead here. Anvira Notes
+                  opens /account/profile from "Manage profile": keep that URL working. */}
+              <Route path="/account" element={<Navigate to="/account/profile" replace />} />
               <Route path="/account/profile" element={<AccountProfile />} />
+              <Route path="/account/signin" element={<AccountProfile />} />
+              <Route path="/account/signup" element={<AccountProfile />} />
               <Route path="/account/reset" element={<AccountReset />} />
+              <Route path="/login" element={<Navigate to="/account/signin" replace />} />
+              <Route path="/register" element={<Navigate to="/account/signup" replace />} />
+              <Route path="/signup" element={<Navigate to="/account/signup" replace />} />
+              <Route path="/forgot-password" element={<Navigate to="/account/signin" replace />} />
+              <Route path="/reset-password" element={<Navigate to="/account/signin" replace />} />
+              <Route path="/verify-email" element={<Navigate to="/account/signin" replace />} />
+              <Route path="/dashboard/*" element={<Navigate to="/account/profile" replace />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -133,16 +111,15 @@ const AppRoutes = () => (
 
 /**
  * Everything under the router, shared by the browser app and the prerenderer so
- * both trees match. The Suspense boundary (for lazily loaded pages) sits above
- * AuthProvider on purpose: auth state updates as soon as it mounts, and an update
- * reaching a boundary that is still hydrating makes React throw away the
- * prerendered HTML and re-render the page (React error #421).
+ * both trees match. Keep any provider whose state changes on mount (like a sign-in
+ * session) inside this Suspense boundary, not above it: an update reaching a
+ * boundary that is still hydrating makes React throw away the prerendered HTML and
+ * re-render the page (React error #421). Accounts use the Anvira session
+ * (src/integrations/anvira), read where needed.
  */
 export const AppBody = () => (
   <Suspense fallback={null}>
-    <AuthProvider>
-      <AppRoutes />
-    </AuthProvider>
+    <AppRoutes />
   </Suspense>
 );
 

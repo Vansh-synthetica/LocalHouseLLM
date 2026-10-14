@@ -59,14 +59,7 @@ export const siteRoutes: SiteRoute[] = [
 
 /** Paths that only work in the browser (auth + signed-in app). Served from a noindex shell. */
 export const appOnlyPaths = [
-  '/login',
-  '/register',
-  '/forgot-password',
-  '/reset-password',
-  '/verify-email',
-  '/dashboard',
-  '/dashboard/*',
-  // Anvira account pages (profile, password reset): signed-in tools, noindex.
+  // Anvira account pages (sign in, sign up, profile, password reset): noindex.
   '/account/*',
   // License-status lookup tool; intentionally noindex.
   '/orcha/license',
@@ -96,6 +89,14 @@ export const legacyRedirects: [from: string, to: string][] = [
   ['/sitemap', '/'],
   ['/opensource', '/archive'],
   ['/research', '/archive'],
-  ['/signup', '/register'],
-  ['/account', '/dashboard/settings'],
+  // The old website sign-in (its Supabase project no longer exists) → Anvira accounts.
+  ['/login', '/account/signin'],
+  ['/register', '/account/signup'],
+  ['/signup', '/account/signup'],
+  ['/forgot-password', '/account/signin'],
+  ['/reset-password', '/account/signin'],
+  ['/verify-email', '/account/signin'],
+  ['/dashboard', '/account/profile'],
+  ['/dashboard/*', '/account/profile'],
+  ['/account', '/account/profile'],
 ];
