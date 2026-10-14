@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-14T09:35:59.535Z",
+  "syncedAt": "2026-10-14T20:11:47.627Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,86 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.11",
+      "latest": "v1.2.12",
       "releases": [
+        {
+          "tag": "v1.2.12",
+          "version": "1.2.12",
+          "name": "Anvira Notes 1.2.12",
+          "date": "2026-10-14T17:30:35Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.12",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.12.exe",
+            "size": 129466056,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.12/Anvira-Notes-Setup-1.2.12.exe",
+            "sha256": "fa951639990ba9f1a96145d92b5c2f65896f04536475a597e65f4e77964e1dc4"
+          },
+          "summary": "Photos and files. Attach them with the paperclip, paste a screenshot, or drag files onto a chat. Photos show in the conversation and open full-size (← → between them); files download with one click. Up to 10 at a…",
+          "highlights": [
+            {
+              "kind": "New in Messages",
+              "text": "Photos and files"
+            },
+            {
+              "kind": "New in Messages",
+              "text": "Formatting"
+            },
+            {
+              "kind": "New in Messages",
+              "text": "@mentions in groups"
+            },
+            {
+              "kind": "New in Messages",
+              "text": "Search a chat"
+            },
+            {
+              "kind": "New in Messages",
+              "text": "\"New messages\" line"
+            },
+            {
+              "kind": "New in Messages",
+              "text": "\"Active now\""
+            },
+            {
+              "kind": "New in Messages",
+              "text": "Drafts are kept per chat"
+            },
+            {
+              "kind": "New in Messages",
+              "text": "Chat list tabs"
+            },
+            {
+              "kind": "New in Messages",
+              "text": "Small touches"
+            },
+            {
+              "kind": "Profiles",
+              "text": "Profile photos"
+            },
+            {
+              "kind": "Profiles",
+              "text": "Profile changes arrive at once"
+            }
+          ],
+          "notes": [
+            {
+              "title": "New in Messages",
+              "html": "<ul><li><strong>Photos and files.</strong> Attach them with the paperclip, paste a screenshot, or drag files onto a chat. Photos show in the conversation and open full-size (← → between them); files download with one click. Up to 10 at a time, 25 MB each. They are private to the chat: only its members can see them.</li><li><strong>Formatting.</strong> **\\*\\*bold\\*\\***, *\\*italic\\**, ~strike~, `<code> </code>code<code> </code>` and code blocks, with Ctrl+B and Ctrl+I.</li><li><strong>@mentions in groups.</strong> Type @ to pick someone. Mentions of you are highlighted. A muted chat stays muted, mentions included.</li><li><strong>Search a chat</strong> with Ctrl+F or the search button, including older messages. Enter jumps through the matches.</li><li><strong>&quot;New messages&quot; line</strong> where you left off.</li><li><strong>&quot;Active now&quot;</strong> when the other person has the chat open (members only, never stored).</li><li><strong>Drafts are kept per chat</strong> and shown in the chat list, so switching chats never loses what you were typing.</li><li><strong>Chat list tabs</strong> (All, Unread, Groups) and <strong>pinned chats</strong> at the top.</li><li><strong>Small touches.</strong> Double-click a message for a quick ❤️, forward a message to another chat, see who has read it in groups (&quot;Seen by 3&quot;), and hear a soft chime for new messages (Settings → Messages → Sound).</li></ul>"
+            },
+            {
+              "title": "Profiles",
+              "html": "<ul><li><strong>Profile photos</strong> set on localhousellm.com show everywhere: chats, the pop-up chats, member lists and your own button in the sidebar.</li><li><strong>Profile changes arrive at once</strong>, for you and everyone you chat with.</li><li>A direct chat's info panel shows the other person's bio, school and website.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.11",
           "version": "1.2.11",
           "name": "Anvira Notes 1.2.11",
           "date": "2026-10-14T09:34:53Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.11",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.11.exe",
             "size": 129450103,
@@ -39,12 +110,6 @@
             {
               "kind": "Better",
               "text": "Manage your profile on the web"
-            }
-          ],
-          "notes": [
-            {
-              "title": "Better",
-              "html": "<ul><li><strong>One look across the app.</strong> Messages, Settings, dialogs, the chat pop-ups and Study's dark mode now share the same graphite as Notes, with one blue accent, so moving between sections feels like one app. Study keeps its light look by default.</li><li><strong>A new start-up screen:</strong> the LocalHouseLLM mark draws itself, with Anvira Notes beneath it.</li><li><strong>Messages are more private and more robust.</strong> Each person's updates now travel on their own private channel, and typing goes over a channel only the chat's members can join, so nobody receives anything that isn't theirs. Long chat histories page back without skipping or repeating a message, a message that fails to send says why, and a chat catches up on reactions and read receipts after the connection drops.</li><li><strong>Manage your profile on the web.</strong> Settings → Account, the account menu and the Messages profile window have <strong>Manage profile</strong>, which opens your profile on localhousellm.com. Changes appear in the app when you come back to it.</li></ul>"
             }
           ]
         },
