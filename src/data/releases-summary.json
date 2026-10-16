@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-14T20:11:47.627Z",
+  "syncedAt": "2026-10-16T18:02:22.967Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,66 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.12",
+      "latest": "v1.2.13",
       "releases": [
+        {
+          "tag": "v1.2.13",
+          "version": "1.2.13",
+          "name": "Anvira Notes 1.2.13",
+          "date": "2026-10-16T17:37:03Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.13",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.13.exe",
+            "size": 130728989,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.13/Anvira-Notes-Setup-1.2.13.exe",
+            "sha256": "c0ce018b96f5c91d546504f0111ea5f48e6278204e3994962ce2e82d6f101188"
+          },
+          "summary": "Open it from the new card at the top of Study. Type any molecule (a name like caffeine, a formula like SF4 or SO4^2-, a condensed formula like CH3CH2OH, or SMILES), draw one, or open a .mol, .sdf, .xyz, .pdb or .cif…",
+          "highlights": [
+            {
+              "kind": "New: Chemistry Lab",
+              "text": "3D models"
+            },
+            {
+              "kind": "New: Chemistry Lab",
+              "text": "Lewis structures, step by step"
+            },
+            {
+              "kind": "New: Chemistry Lab",
+              "text": "VSEPR"
+            },
+            {
+              "kind": "New: Chemistry Lab",
+              "text": "Symmetry"
+            },
+            {
+              "kind": "New: Chemistry Lab",
+              "text": "Spectra"
+            },
+            {
+              "kind": "New: Chemistry Lab",
+              "text": "Properties"
+            },
+            {
+              "kind": "New: Chemistry Lab",
+              "text": "Explorers"
+            }
+          ],
+          "notes": [
+            {
+              "title": "New: Chemistry Lab",
+              "html": "<p>Open it from the new card at the top of <strong>Study</strong>. Type any molecule (a name like <em>caffeine</em>, a formula like <em>SF4</em> or <em>SO4^2-</em>, a condensed formula like <em>CH3CH2OH</em>, or SMILES), draw one, or open a .mol, .sdf, .xyz, .pdb or .cif file.</p><ul><li><strong>3D models</strong> you can rotate, with lone pairs, bond angles, bond lengths, dipole arrows, partial charges and electrostatic-potential surfaces. Click atoms to measure distances, angles and dihedrals.</li><li><strong>Lewis structures, step by step</strong>: counting valence electrons, placing lone pairs, forming double bonds and checking formal charges. Includes every resonance form, the resonance hybrid, and a switch between the &quot;octet rule&quot; and &quot;lowest formal charges&quot; conventions.</li><li><strong>VSEPR</strong>: AXE notation, electron and molecular geometry, hybridisation, and real bond angles (lone pairs squeeze them: water comes out near its measured 104.5°).</li><li><strong>Symmetry</strong>: the point group, with its axes and mirror planes drawn in 3D, and whether the molecule is polar or chiral (R/S and E/Z labels).</li><li><strong>Spectra</strong>: an IR spectrum with every vibration animated, estimated ¹H and ¹³C NMR, and mass-spectrum isotope patterns.</li><li><strong>Properties</strong>: molar mass, composition, functional groups, intermolecular forces, logP, polar surface area, Lipinski's rule of five, conformers, and π orbitals.</li><li><strong>Explorers</strong>: build any VSEPR shape, view atomic orbitals (1s to 6f) and electron configurations, MO diagrams for diatomics (why O₂ is paramagnetic), 12 crystal unit cells, and an interactive periodic table with trends.</li></ul><p>Around 200 molecules and ions work offline. Any other compound is looked up on PubChem, and proteins by their PDB code (e.g. 1CRN), when you are online. Copy any picture straight into a note.</p><p>Built on OpenChemLib and 3Dmol.js (both open source, BSD licence).</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.12",
           "version": "1.2.12",
           "name": "Anvira Notes 1.2.12",
           "date": "2026-10-14T17:30:35Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.12",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.12.exe",
             "size": 129466056,
@@ -67,16 +118,6 @@
             {
               "kind": "Profiles",
               "text": "Profile changes arrive at once"
-            }
-          ],
-          "notes": [
-            {
-              "title": "New in Messages",
-              "html": "<ul><li><strong>Photos and files.</strong> Attach them with the paperclip, paste a screenshot, or drag files onto a chat. Photos show in the conversation and open full-size (← → between them); files download with one click. Up to 10 at a time, 25 MB each. They are private to the chat: only its members can see them.</li><li><strong>Formatting.</strong> **\\*\\*bold\\*\\***, *\\*italic\\**, ~strike~, `<code> </code>code<code> </code>` and code blocks, with Ctrl+B and Ctrl+I.</li><li><strong>@mentions in groups.</strong> Type @ to pick someone. Mentions of you are highlighted. A muted chat stays muted, mentions included.</li><li><strong>Search a chat</strong> with Ctrl+F or the search button, including older messages. Enter jumps through the matches.</li><li><strong>&quot;New messages&quot; line</strong> where you left off.</li><li><strong>&quot;Active now&quot;</strong> when the other person has the chat open (members only, never stored).</li><li><strong>Drafts are kept per chat</strong> and shown in the chat list, so switching chats never loses what you were typing.</li><li><strong>Chat list tabs</strong> (All, Unread, Groups) and <strong>pinned chats</strong> at the top.</li><li><strong>Small touches.</strong> Double-click a message for a quick ❤️, forward a message to another chat, see who has read it in groups (&quot;Seen by 3&quot;), and hear a soft chime for new messages (Settings → Messages → Sound).</li></ul>"
-            },
-            {
-              "title": "Profiles",
-              "html": "<ul><li><strong>Profile photos</strong> set on localhousellm.com show everywhere: chats, the pop-up chats, member lists and your own button in the sidebar.</li><li><strong>Profile changes arrive at once</strong>, for you and everyone you chat with.</li><li>A direct chat's info panel shows the other person's bio, school and website.</li></ul>"
             }
           ]
         },
