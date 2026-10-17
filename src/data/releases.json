@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-16T18:02:22.967Z",
+  "syncedAt": "2026-10-17T22:16:55.098Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,81 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.13",
+      "latest": "v1.2.15",
       "releases": [
+        {
+          "tag": "v1.2.15",
+          "version": "1.2.15",
+          "name": "Anvira Notes 1.2.15",
+          "date": "2026-10-17T20:55:17Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.15",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.15.exe",
+            "size": 130718477,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.15/Anvira-Notes-Setup-1.2.15.exe",
+            "sha256": "b42a053eeb5f6564211cfe55764fcf1ece291491b0d2a0adfeaa142930c03e24"
+          },
+          "summary": "No more off-topic questions. Quizzes and flashcards could include questions that had nothing to do with your notes (Earth's mantle in a biology lesson). Every question and card is now checked against the part of your…",
+          "highlights": [
+            {
+              "kind": "Study fixes",
+              "text": "No more off-topic questions"
+            },
+            {
+              "kind": "Study fixes",
+              "text": "Every file is used"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Study fixes",
+              "html": "<ul><li><strong>No more off-topic questions.</strong> Quizzes and flashcards could include questions that had nothing to do with your notes (Earth's mantle in a biology lesson). Every question and card is now checked against the part of your material it was written from, and anything that is not about it is left out.</li><li><strong>Every file is used.</strong> With several files or pages selected, a lesson could come only from the longest one. Now each one is read, and the lesson takes its questions and cards evenly from all of them.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.14",
+          "version": "1.2.14",
+          "name": "Anvira Notes 1.2.14",
+          "date": "2026-10-17T20:43:11Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.14",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.14.exe",
+            "size": 130717402,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.14/Anvira-Notes-Setup-1.2.14.exe",
+            "sha256": "5df821adff263d5c06412fd07d0f4c906d65ffc1f63ccdd89a7beee021dbfe89"
+          },
+          "summary": "The sidebar no longer covers the lab. The Chemistry Lab now fits beside the sidebar, so the back button and the 3D/Lewis switch are always visible, and you can still switch sections from the sidebar.",
+          "highlights": [
+            {
+              "kind": "Chemistry Lab fixes",
+              "text": "The sidebar no longer covers the lab"
+            },
+            {
+              "kind": "Chemistry Lab fixes",
+              "text": "The 3D view follows the theme"
+            },
+            {
+              "kind": "Chemistry Lab fixes",
+              "text": "Molecules open properly framed"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Chemistry Lab fixes",
+              "html": "<ul><li><strong>The sidebar no longer covers the lab.</strong> The Chemistry Lab now fits beside the sidebar, so the back button and the 3D/Lewis switch are always visible, and you can still switch sections from the sidebar.</li><li><strong>The 3D view follows the theme.</strong> It was white in dark mode; it now matches the dark (and light) theme.</li><li><strong>Molecules open properly framed.</strong> A new molecule no longer appears tiny or zoomed far in: it opens from a three-quarter angle with every atom in view, and fits itself again when the window or the view changes size (until you move it yourself).</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.13",
           "version": "1.2.13",
           "name": "Anvira Notes 1.2.13",
           "date": "2026-10-16T17:37:03Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.13",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.13.exe",
             "size": 130728989,

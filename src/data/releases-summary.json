@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-16T18:02:22.967Z",
+  "syncedAt": "2026-10-17T22:16:55.098Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,75 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.13",
+      "latest": "v1.2.15",
       "releases": [
+        {
+          "tag": "v1.2.15",
+          "version": "1.2.15",
+          "name": "Anvira Notes 1.2.15",
+          "date": "2026-10-17T20:55:17Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.15",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.15.exe",
+            "size": 130718477,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.15/Anvira-Notes-Setup-1.2.15.exe",
+            "sha256": "b42a053eeb5f6564211cfe55764fcf1ece291491b0d2a0adfeaa142930c03e24"
+          },
+          "summary": "No more off-topic questions. Quizzes and flashcards could include questions that had nothing to do with your notes (Earth's mantle in a biology lesson). Every question and card is now checked against the part of your…",
+          "highlights": [
+            {
+              "kind": "Study fixes",
+              "text": "No more off-topic questions"
+            },
+            {
+              "kind": "Study fixes",
+              "text": "Every file is used"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Study fixes",
+              "html": "<ul><li><strong>No more off-topic questions.</strong> Quizzes and flashcards could include questions that had nothing to do with your notes (Earth's mantle in a biology lesson). Every question and card is now checked against the part of your material it was written from, and anything that is not about it is left out.</li><li><strong>Every file is used.</strong> With several files or pages selected, a lesson could come only from the longest one. Now each one is read, and the lesson takes its questions and cards evenly from all of them.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.14",
+          "version": "1.2.14",
+          "name": "Anvira Notes 1.2.14",
+          "date": "2026-10-17T20:43:11Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.14",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.14.exe",
+            "size": 130717402,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.14/Anvira-Notes-Setup-1.2.14.exe",
+            "sha256": "5df821adff263d5c06412fd07d0f4c906d65ffc1f63ccdd89a7beee021dbfe89"
+          },
+          "summary": "The sidebar no longer covers the lab. The Chemistry Lab now fits beside the sidebar, so the back button and the 3D/Lewis switch are always visible, and you can still switch sections from the sidebar.",
+          "highlights": [
+            {
+              "kind": "Chemistry Lab fixes",
+              "text": "The sidebar no longer covers the lab"
+            },
+            {
+              "kind": "Chemistry Lab fixes",
+              "text": "The 3D view follows the theme"
+            },
+            {
+              "kind": "Chemistry Lab fixes",
+              "text": "Molecules open properly framed"
+            }
+          ]
+        },
         {
           "tag": "v1.2.13",
           "version": "1.2.13",
           "name": "Anvira Notes 1.2.13",
           "date": "2026-10-16T17:37:03Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.13",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.13.exe",
             "size": 130728989,
@@ -51,12 +111,6 @@
             {
               "kind": "New: Chemistry Lab",
               "text": "Explorers"
-            }
-          ],
-          "notes": [
-            {
-              "title": "New: Chemistry Lab",
-              "html": "<p>Open it from the new card at the top of <strong>Study</strong>. Type any molecule (a name like <em>caffeine</em>, a formula like <em>SF4</em> or <em>SO4^2-</em>, a condensed formula like <em>CH3CH2OH</em>, or SMILES), draw one, or open a .mol, .sdf, .xyz, .pdb or .cif file.</p><ul><li><strong>3D models</strong> you can rotate, with lone pairs, bond angles, bond lengths, dipole arrows, partial charges and electrostatic-potential surfaces. Click atoms to measure distances, angles and dihedrals.</li><li><strong>Lewis structures, step by step</strong>: counting valence electrons, placing lone pairs, forming double bonds and checking formal charges. Includes every resonance form, the resonance hybrid, and a switch between the &quot;octet rule&quot; and &quot;lowest formal charges&quot; conventions.</li><li><strong>VSEPR</strong>: AXE notation, electron and molecular geometry, hybridisation, and real bond angles (lone pairs squeeze them: water comes out near its measured 104.5°).</li><li><strong>Symmetry</strong>: the point group, with its axes and mirror planes drawn in 3D, and whether the molecule is polar or chiral (R/S and E/Z labels).</li><li><strong>Spectra</strong>: an IR spectrum with every vibration animated, estimated ¹H and ¹³C NMR, and mass-spectrum isotope patterns.</li><li><strong>Properties</strong>: molar mass, composition, functional groups, intermolecular forces, logP, polar surface area, Lipinski's rule of five, conformers, and π orbitals.</li><li><strong>Explorers</strong>: build any VSEPR shape, view atomic orbitals (1s to 6f) and electron configurations, MO diagrams for diatomics (why O₂ is paramagnetic), 12 crystal unit cells, and an interactive periodic table with trends.</li></ul><p>Around 200 molecules and ions work offline. Any other compound is looked up on PubChem, and proteins by their PDB code (e.g. 1CRN), when you are online. Copy any picture straight into a note.</p><p>Built on OpenChemLib and 3Dmol.js (both open source, BSD licence).</p>"
             }
           ]
         },
