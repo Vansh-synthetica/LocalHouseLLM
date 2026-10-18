@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-18T18:37:47.269Z",
+  "syncedAt": "2026-10-18T22:24:49.878Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,83 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.16",
+      "latest": "v1.2.18",
       "releases": [
+        {
+          "tag": "v1.2.18",
+          "version": "1.2.18",
+          "name": "Anvira Notes 1.2.18",
+          "date": "2026-10-18T22:18:22Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.18",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.18.exe",
+            "size": 137488055,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.18/Anvira-Notes-Setup-1.2.18.exe",
+            "sha256": "4df102e45196496a59e9a7cbc6a64c38462eea31ecf0a05115f3e60f75d7efed"
+          },
+          "summary": "No more questions about the wrong subject. With small AI models, a lesson could include questions or cards about a different subject than your notes (the solar system in a biology lesson, chlorophyll in a history…",
+          "highlights": [
+            {
+              "kind": "Study items stay on your notes",
+              "text": "No more questions about the wrong subject"
+            },
+            {
+              "kind": "Study items stay on your notes",
+              "text": "Every item is checked against your notes,"
+            },
+            {
+              "kind": "Study items stay on your notes",
+              "text": "Tagalog lessons from English notes are checked too"
+            },
+            {
+              "kind": "Study items stay on your notes",
+              "text": "Study guides, cheat sheets, mind maps and mock-exam explanations"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Study items stay on your notes",
+              "html": "<ul><li><strong>No more questions about the wrong subject.</strong> With small AI models, a lesson could include questions or cards about a different subject than your notes (the solar system in a biology lesson, chlorophyll in a history lesson). The examples Pochi learns the format from were pulling the model toward their own topic. They now use made-up names that no real notes contain, so anything copied from them is always caught and left out.</li><li><strong>Every item is checked against your notes,</strong> including practice problems, mock-exam questions and mind maps, not only quizzes and flashcards.</li><li><strong>Tagalog lessons from English notes are checked too.</strong> Each Tagalog card or question must share a term, name or number with your notes, so off-topic or garbled ones are left out.</li><li><strong>Study guides, cheat sheets, mind maps and mock-exam explanations</strong> now stick to what your notes say instead of adding outside facts.</li><li>In our tests with small local models, off-topic items reaching the student went from 7 to 0, and the 3B model now keeps more good Tagalog flashcards.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.17",
+          "version": "1.2.17",
+          "name": "Anvira Notes 1.2.17",
+          "date": "2026-10-18T20:12:58Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.17",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.17.exe",
+            "size": 137486568,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.17/Anvira-Notes-Setup-1.2.17.exe",
+            "sha256": "bfe1595829ddffb1496b2e46a7e9deba385732a4c1366986ee2e112d45ac6c48"
+          },
+          "summary": "Pochi's desk. Study now opens with Pochi telling you what matters today (cards due, your next lesson, a mock exam waiting) above a real ask box. Type a question and press Enter, and the chat opens with it already…",
+          "highlights": [
+            {
+              "kind": "A new Study home",
+              "text": "Pochi's desk"
+            },
+            {
+              "kind": "A new Study home",
+              "text": "Calmer layout"
+            },
+            {
+              "kind": "A new Study home",
+              "text": "English or Tagalog in one click"
+            }
+          ]
+        },
         {
           "tag": "v1.2.16",
           "version": "1.2.16",
           "name": "Anvira Notes 1.2.16",
           "date": "2026-10-18T17:04:55Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.16",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.16.exe",
             "size": 137477663,
@@ -55,16 +123,6 @@
             {
               "kind": "New: Tagalog",
               "text": "Tagalog PDFs and photos are read too"
-            }
-          ],
-          "notes": [
-            {
-              "title": "New: Physics Lab",
-              "html": "<p>Open it from Study, next to the Chemistry Lab.</p><ul><li><strong>Solve any problem.</strong> Type a physics problem in English or Tagalog (&quot;A ball is thrown at 20 m/s at 45° from a 15 m cliff…&quot; or &quot;Inihagis ang bato nang 25 m/s…&quot;). The lab reads the numbers and units, solves it step by step with every formula shown, and draws the problem as a live simulation. Move any value and the steps, the answers and the simulation all update. The math is done in the app itself, so the answers are always exact, even without an AI model.</li><li><strong>Mechanics:</strong> projectiles (with air resistance), straight-line motion, forces and friction on a slope, collisions, springs, pendulums, circular motion, orbits, and a sandbox with real physics for stacking, throwing and knocking things over.</li><li><strong>Waves &amp; optics:</strong> travelling, superposed and standing waves, the Doppler effect and sonic booms, ray diagrams for lenses and mirrors, refraction and total internal reflection, and single and double slits.</li><li><strong>Electricity &amp; magnetism:</strong> a circuit builder (batteries, resistors, bulbs, switches, capacitors), electric fields you can drag charges around in, and magnetic fields of wires, solenoids and moving charges.</li><li><strong>Thermal &amp; modern physics:</strong> an ideal gas made of moving particles, gas processes on a P–V diagram, heating water through melting and boiling, radioactive decay, and the photoelectric effect.</li></ul>"
-            },
-            {
-              "title": "New: Tagalog",
-              "html": "<ul><li><strong>Study in Tagalog.</strong> In Settings → Study, set <strong>Language / Wika</strong> to Tagalog and the Study screens switch to Tagalog.</li><li><strong>The AI answers in your language.</strong> Ask in Tagalog and Pochi answers in Tagalog. Quizzes, flashcards, mock exams, study guides and mind maps can be made in Tagalog, even from English notes: pick the language in the lesson maker, or set <strong>AI writes in</strong> in Settings.</li><li><strong>Tagalog PDFs and photos are read too.</strong> OCR now recognises Tagalog text.</li><li>For the best Tagalog, use the Gemma 3 4B model (Settings → AI &amp; Models).</li></ul>"
             }
           ]
         },

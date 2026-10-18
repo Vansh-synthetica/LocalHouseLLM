@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-18T18:37:47.269Z",
+  "syncedAt": "2026-10-18T22:24:49.878Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,93 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.16",
+      "latest": "v1.2.18",
       "releases": [
+        {
+          "tag": "v1.2.18",
+          "version": "1.2.18",
+          "name": "Anvira Notes 1.2.18",
+          "date": "2026-10-18T22:18:22Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.18",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.18.exe",
+            "size": 137488055,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.18/Anvira-Notes-Setup-1.2.18.exe",
+            "sha256": "4df102e45196496a59e9a7cbc6a64c38462eea31ecf0a05115f3e60f75d7efed"
+          },
+          "summary": "No more questions about the wrong subject. With small AI models, a lesson could include questions or cards about a different subject than your notes (the solar system in a biology lesson, chlorophyll in a history…",
+          "highlights": [
+            {
+              "kind": "Study items stay on your notes",
+              "text": "No more questions about the wrong subject"
+            },
+            {
+              "kind": "Study items stay on your notes",
+              "text": "Every item is checked against your notes,"
+            },
+            {
+              "kind": "Study items stay on your notes",
+              "text": "Tagalog lessons from English notes are checked too"
+            },
+            {
+              "kind": "Study items stay on your notes",
+              "text": "Study guides, cheat sheets, mind maps and mock-exam explanations"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Study items stay on your notes",
+              "html": "<ul><li><strong>No more questions about the wrong subject.</strong> With small AI models, a lesson could include questions or cards about a different subject than your notes (the solar system in a biology lesson, chlorophyll in a history lesson). The examples Pochi learns the format from were pulling the model toward their own topic. They now use made-up names that no real notes contain, so anything copied from them is always caught and left out.</li><li><strong>Every item is checked against your notes,</strong> including practice problems, mock-exam questions and mind maps, not only quizzes and flashcards.</li><li><strong>Tagalog lessons from English notes are checked too.</strong> Each Tagalog card or question must share a term, name or number with your notes, so off-topic or garbled ones are left out.</li><li><strong>Study guides, cheat sheets, mind maps and mock-exam explanations</strong> now stick to what your notes say instead of adding outside facts.</li><li>In our tests with small local models, off-topic items reaching the student went from 7 to 0, and the 3B model now keeps more good Tagalog flashcards.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.17",
+          "version": "1.2.17",
+          "name": "Anvira Notes 1.2.17",
+          "date": "2026-10-18T20:12:58Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.17",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.17.exe",
+            "size": 137486568,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.17/Anvira-Notes-Setup-1.2.17.exe",
+            "sha256": "bfe1595829ddffb1496b2e46a7e9deba385732a4c1366986ee2e112d45ac6c48"
+          },
+          "summary": "Pochi's desk. Study now opens with Pochi telling you what matters today (cards due, your next lesson, a mock exam waiting) above a real ask box. Type a question and press Enter, and the chat opens with it already…",
+          "highlights": [
+            {
+              "kind": "A new Study home",
+              "text": "Pochi's desk"
+            },
+            {
+              "kind": "A new Study home",
+              "text": "Calmer layout"
+            },
+            {
+              "kind": "A new Study home",
+              "text": "English or Tagalog in one click"
+            }
+          ],
+          "notes": [
+            {
+              "title": "A new Study home",
+              "html": "<ul><li><strong>Pochi's desk.</strong> Study now opens with Pochi telling you what matters today (cards due, your next lesson, a mock exam waiting) above a real ask box. Type a question and press Enter, and the chat opens with it already asked. Shortcuts for today's session, studying from a file, flashcards, quizzes and explanations sit right below.</li><li><strong>Calmer layout.</strong> Today's session, your notebooks and the Chemistry Lab, Physics Lab and mock exams are now quiet cards instead of a stack of bright banners. Each notebook shows its progress and its next lesson.</li><li><strong>English or Tagalog in one click.</strong> The Study header has an EN / TL switch.</li></ul>"
+            },
+            {
+              "title": "Inside a notebook",
+              "html": "<ul><li>Open a notebook to see its lessons as a path, with Pochi standing on the next one and an <strong>Up next</strong> card to start it. Long paths open scrolled to where you are.</li><li>Beside the path: today's review for that notebook, <strong>Ask about this notebook</strong> (chat, study guide and whiteboard from its notes), its weak spots, and buttons to make more lessons.</li><li>Every lesson still opens with Start, a timed exam, share, Anki export, edit and delete.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.16",
           "version": "1.2.16",
           "name": "Anvira Notes 1.2.16",
           "date": "2026-10-18T17:04:55Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.16",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.16.exe",
             "size": 137477663,
