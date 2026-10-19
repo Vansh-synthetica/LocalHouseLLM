@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-18T22:24:49.878Z",
+  "syncedAt": "2026-10-19T04:38:06.982Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,50 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.18",
+      "latest": "v1.2.19",
       "releases": [
+        {
+          "tag": "v1.2.19",
+          "version": "1.2.19",
+          "name": "Anvira Notes 1.2.19",
+          "date": "2026-10-18T22:46:22Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.19",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.19.exe",
+            "size": 137483925,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.19/Anvira-Notes-Setup-1.2.19.exe",
+            "sha256": "8a5f2b8ea4194e5a9de7a06b7d761b0c7be21d91ffa831d94c40f1ff8f0fe927"
+          },
+          "summary": "Measured on a laptop with an RTX 3050 and the Qwen2.5-Coder 3B model. The quality checks keep the same number of questions and cards as before.",
+          "highlights": [
+            {
+              "kind": "Faster AI, same quality",
+              "text": "Lessons and mock exams up to 43% faster on a GPU"
+            },
+            {
+              "kind": "Faster AI, same quality",
+              "text": "Mock exams are marked faster,"
+            },
+            {
+              "kind": "Faster AI, same quality",
+              "text": "The first answer in a notebook chat starts right away"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Faster AI, same quality",
+              "html": "<p>Measured on a laptop with an RTX 3050 and the Qwen2.5-Coder 3B model. The quality checks keep the same number of questions and cards as before.</p><ul><li><strong>Lessons and mock exams up to 43% faster on a GPU.</strong> Anvira Runtime can run several requests on the graphics card at once, and Anvira now uses that: a lesson's sections are written side by side instead of one after another. Eight sections went from 39 s to 22–26 s.</li><li><strong>Mock exams are marked faster,</strong> and <strong>mind maps of long notes are built faster,</strong> the same way.</li><li><strong>The first answer in a notebook chat starts right away.</strong> Your notes are now read once, while the suggested questions load, instead of again when you ask. On a computer without a graphics card the wait before the first word went from about 12 s to under half a second for a few pages of notes.</li><li>Computers without a graphics card keep sending one request at a time, which our tests showed is fastest there.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.18",
           "version": "1.2.18",
           "name": "Anvira Notes 1.2.18",
           "date": "2026-10-18T22:18:22Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.18",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.18.exe",
             "size": 137488055,
@@ -39,12 +74,6 @@
             {
               "kind": "Study items stay on your notes",
               "text": "Study guides, cheat sheets, mind maps and mock-exam explanations"
-            }
-          ],
-          "notes": [
-            {
-              "title": "Study items stay on your notes",
-              "html": "<ul><li><strong>No more questions about the wrong subject.</strong> With small AI models, a lesson could include questions or cards about a different subject than your notes (the solar system in a biology lesson, chlorophyll in a history lesson). The examples Pochi learns the format from were pulling the model toward their own topic. They now use made-up names that no real notes contain, so anything copied from them is always caught and left out.</li><li><strong>Every item is checked against your notes,</strong> including practice problems, mock-exam questions and mind maps, not only quizzes and flashcards.</li><li><strong>Tagalog lessons from English notes are checked too.</strong> Each Tagalog card or question must share a term, name or number with your notes, so off-topic or garbled ones are left out.</li><li><strong>Study guides, cheat sheets, mind maps and mock-exam explanations</strong> now stick to what your notes say instead of adding outside facts.</li><li>In our tests with small local models, off-topic items reaching the student went from 7 to 0, and the 3B model now keeps more good Tagalog flashcards.</li></ul>"
             }
           ]
         },
