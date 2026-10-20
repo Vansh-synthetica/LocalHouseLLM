@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-19T04:38:06.982Z",
+  "syncedAt": "2026-10-20T11:33:20.810Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,98 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.19",
+      "latest": "v1.2.20",
       "releases": [
+        {
+          "tag": "v1.2.20",
+          "version": "1.2.20",
+          "name": "Anvira Notes 1.2.20",
+          "date": "2026-10-20T10:26:19Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.20",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.20.exe",
+            "size": 137876757,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.20/Anvira-Notes-Setup-1.2.20.exe",
+            "sha256": "a3c8c27fec0d1aa8b333f047a805307353cb34a181c1c0bd626d457d26427508"
+          },
+          "summary": "Quizzes, flashcards and mock exams no longer show a question your notes do not back. Before anything reaches you, Anvira finds the sentence in your notes that states its answer, checks that the sentence is about what…",
+          "highlights": [
+            {
+              "kind": "Every question checked against your notes",
+              "text": "You get the number of questions you asked for"
+            },
+            {
+              "kind": "Every question checked against your notes",
+              "text": "The answer comes from your notes"
+            },
+            {
+              "kind": "Mock exams",
+              "text": "Choose the question types"
+            },
+            {
+              "kind": "Mock exams",
+              "text": "Identification questions"
+            },
+            {
+              "kind": "Mock exams",
+              "text": "Faster to make"
+            },
+            {
+              "kind": "New: Math Lab",
+              "text": "Solve"
+            },
+            {
+              "kind": "New: Math Lab",
+              "text": "Coordinate plane"
+            },
+            {
+              "kind": "New: Math Lab",
+              "text": "Functions and graphs"
+            },
+            {
+              "kind": "New: Math Lab",
+              "text": "Algebra, Geometry, Calculus"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Every question checked against your notes",
+              "html": "<p>Quizzes, flashcards and mock exams no longer show a question your notes do not back. Before anything reaches you, Anvira finds the sentence in your notes that states its answer, checks that the sentence is about what the question asks, that the numbers agree, and that no other option is also right. Then the AI answers the question again without seeing the answer key; if it disagrees, the question is left out. &quot;Which is NOT…&quot; questions, options that contain the answer, and names or terms your notes never use are left out too.</p><p>Tested on 58 questions and cards written by the Qwen2.5-Coder 3B model and checked by hand: all 17 wrong or unfair ones were caught, and all 41 good ones were kept. Before this update, about a quarter of a mock exam's questions could be wrong.</p><ul><li><strong>You get the number of questions you asked for.</strong> A quiz of 25 sometimes came out with 5. Anvira now reads all of your material and, when the checks leave out questions, writes more from parts not asked about yet. If your notes really cannot support that many, it says so instead.</li><li><strong>The answer comes from your notes.</strong> After each quiz answer and on the mock exam results you see &quot;From your notes&quot;, with the sentence that proves it.</li></ul>"
+            },
+            {
+              "title": "Mock exams",
+              "html": "<ul><li><strong>Choose the question types:</strong> Mixed (multiple choice, identification and written, in sections like a real exam), Multiple choice, Identification or Written.</li><li><strong>Identification questions</strong> are new: write the term, name or number. Small spelling slips are accepted, and you can change a mark you disagree with.</li><li><strong>Faster to make:</strong> each part of your notes is read once for all question types, and no more extra rounds to chase the last question or two.</li></ul>"
+            },
+            {
+              "title": "Cheat sheet and study guide cover every source",
+              "html": "<p>Both used to read only the part of the notebook that best matched one search, so with 6 lessons they often covered only 2. Now every source is read and gets its own section, and lines your notes do not back are left out.</p>"
+            },
+            {
+              "title": "Ask Pochi with many sources",
+              "html": "<p>Notebook chat now handles 6 to 10 sources, even with small models. Pochi always knows which sources the notebook has and what each covers. A question about everything (&quot;summarize all the lessons&quot;, &quot;compare lesson 3 and 4&quot;) gets every lesson, and the passages it reads are cut down to the sentences that matter, so more fits in the same space. Tested on a 10-source notebook: the passage with the answer was included for 19 of 20 questions at a small model's budget (it was 10 of 20), and every lesson was visible on overview questions (it was 2 to 7 of 10).</p>"
+            },
+            {
+              "title": "Tagalog lessons",
+              "html": "<p>Questions are written and checked in the language of your notes, then translated. A translation is only kept if every term and number survives and it means the same when translated back. Models that cannot write reliable Tagalog (such as Qwen2.5-Coder 3B) keep the lesson in your notes' language and tell you so; choose Gemma 3 4B in Settings → AI &amp; Models for Tagalog lessons.</p>"
+            },
+            {
+              "title": "New: Math Lab",
+              "html": "<p>Next to the Chemistry and Physics Labs on the Study page.</p><ul><li><strong>Solve:</strong> type an equation, a system, &quot;factor …&quot;, &quot;derivative of …&quot;, &quot;integrate …&quot;, two points or a word problem, and see every step worked out and graphed. The math engine computes every answer exactly; the AI only reads word problems and explains on request.</li><li><strong>Coordinate plane:</strong> plot and drag points, see their quadrant, distance, midpoint, slope and the line through them; practice plotting and reading points; connect-the-dots pictures; translations, reflections, rotations and dilations.</li><li><strong>Functions and graphs:</strong> a graphing calculator with sliders and key points (roots, turning points, intersections), lines, parabolas and the unit circle.</li><li><strong>Algebra, Geometry, Calculus:</strong> equations and systems step by step, factor and expand, triangles and circles, derivatives with tangent lines, and area under a curve.</li></ul>"
+            },
+            {
+              "title": "Fixes",
+              "html": "<ul><li>&quot;Practise mock exam&quot; is now spelled &quot;Practice mock exam&quot;.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.19",
           "version": "1.2.19",
           "name": "Anvira Notes 1.2.19",
           "date": "2026-10-18T22:46:22Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.19",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.19.exe",
             "size": 137483925,
@@ -35,12 +118,6 @@
             {
               "kind": "Faster AI, same quality",
               "text": "The first answer in a notebook chat starts right away"
-            }
-          ],
-          "notes": [
-            {
-              "title": "Faster AI, same quality",
-              "html": "<p>Measured on a laptop with an RTX 3050 and the Qwen2.5-Coder 3B model. The quality checks keep the same number of questions and cards as before.</p><ul><li><strong>Lessons and mock exams up to 43% faster on a GPU.</strong> Anvira Runtime can run several requests on the graphics card at once, and Anvira now uses that: a lesson's sections are written side by side instead of one after another. Eight sections went from 39 s to 22–26 s.</li><li><strong>Mock exams are marked faster,</strong> and <strong>mind maps of long notes are built faster,</strong> the same way.</li><li><strong>The first answer in a notebook chat starts right away.</strong> Your notes are now read once, while the suggested questions load, instead of again when you ask. On a computer without a graphics card the wait before the first word went from about 12 s to under half a second for a few pages of notes.</li><li>Computers without a graphics card keep sending one request at a time, which our tests showed is fastest there.</li></ul>"
             }
           ]
         },
