@@ -1,0 +1,310 @@
+/* Pochi Club — SHARED FILE: identical copies in Anvira Notes (src/pochi-club/) and the website (LocalHouseLLM src/pochi-club/).
+   Everything is scoped under .pc so it never touches the host's styles. Pochi's moves come from the Pochi Market demo
+   (renamed pcx-*), appended at the end by the generator. */
+
+.pc {
+  --pc-bg: #fbf8ff;
+  --pc-card: #ffffff;
+  --pc-soft: #f3eefc;
+  --pc-line: #e7e0f3;
+  --pc-text: #2b2440;
+  --pc-text-2: #5d5575;
+  --pc-text-3: #8d86a3;
+  --pc-accent: #7b68ee;
+  --pc-accent-2: #a594ff;
+  --pc-pink: #ec8fb5;
+  --pc-orange: #f2a65a;
+  --pc-green: #4caf7d;
+  --pc-gold: #e8b43a;
+  --pc-shadow: 0 10px 30px -18px rgba(70, 50, 140, 0.45);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--pc-text);
+  background:
+    radial-gradient(900px 420px at 15% -10%, rgba(185, 169, 255, 0.28), transparent 60%),
+    radial-gradient(700px 380px at 110% 10%, rgba(244, 185, 168, 0.22), transparent 60%),
+    var(--pc-bg);
+  font-family: Inter, 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.pc[data-theme='dark'] {
+  --pc-bg: #17151f;
+  --pc-card: #211e2c;
+  --pc-soft: #2a2638;
+  --pc-line: #353047;
+  --pc-text: #f1edfb;
+  --pc-text-2: #c4bdd8;
+  --pc-text-3: #8f88a6;
+  --pc-accent: #a594ff;
+  --pc-accent-2: #7b68ee;
+  --pc-shadow: 0 12px 34px -18px rgba(0, 0, 0, 0.7);
+  background:
+    radial-gradient(900px 420px at 15% -10%, rgba(123, 104, 238, 0.22), transparent 60%),
+    radial-gradient(700px 380px at 110% 10%, rgba(236, 143, 181, 0.12), transparent 60%),
+    var(--pc-bg);
+}
+.pc *,
+.pc *::before,
+.pc *::after { box-sizing: border-box; }
+.pc button { font: inherit; color: inherit; }
+.pc :where(p, h1, h2, h3, h4, small, input, select, textarea, li) { font-family: inherit; }
+
+/* header */
+.pc-top { display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-bottom: 1px solid var(--pc-line); background: color-mix(in srgb, var(--pc-card) 82%, transparent); backdrop-filter: blur(10px); flex-wrap: wrap; }
+.pc-icon { width: 34px; height: 34px; border-radius: 11px; border: 1px solid var(--pc-line); background: var(--pc-card); cursor: pointer; font-size: 16px; }
+.pc-icon:hover { background: var(--pc-soft); }
+.pc-brand { display: flex; align-items: center; gap: 10px; }
+.pc-brand b { display: block; font-size: 16px; letter-spacing: -0.01em; }
+.pc-brand small { display: block; font-size: 11.5px; color: var(--pc-text-3); }
+.pc-brand-mark { width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, var(--pc-accent-2), var(--pc-pink)); box-shadow: var(--pc-shadow); animation: pc-wobble 6s ease-in-out infinite; }
+.pc-tabs { display: flex; gap: 4px; padding: 3px; border-radius: 14px; background: var(--pc-soft); border: 1px solid var(--pc-line); margin-left: auto; flex-wrap: wrap; }
+.pc-tabs button { position: relative; border: 0; background: none; padding: 7px 13px; border-radius: 11px; cursor: pointer; font-weight: 650; color: var(--pc-text-2); transition: background 0.15s, color 0.15s, transform 0.15s; }
+.pc-tabs button:hover { color: var(--pc-text); }
+.pc-tabs button.on { background: var(--pc-card); color: var(--pc-accent); box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.25); }
+.pc-dot { position: absolute; top: 1px; right: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 99px; background: var(--pc-pink); color: #fff; font-size: 10px; font-style: normal; font-weight: 800; display: grid; place-items: center; }
+.pc-wallet { position: relative; }
+.pc-coin { display: inline-flex; align-items: center; gap: 5px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.pc-coin i { font-style: normal; }
+.pc-coin.big { padding: 7px 14px; border-radius: 99px; background: linear-gradient(135deg, #fff4d6, #ffe7b8); color: #7a5410; border: 1px solid #f3d590; box-shadow: 0 6px 18px -10px rgba(200, 140, 20, 0.7); font-size: 16px; }
+.pc[data-theme='dark'] .pc-coin.big { background: linear-gradient(135deg, #4a3a17, #3a2d10); color: #ffd98a; border-color: #6a5320; }
+.pc-burst { position: absolute; right: 8px; top: -6px; font-weight: 900; color: var(--pc-gold); animation: pc-rise 1.4s ease-out forwards; pointer-events: none; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
+
+.pc-strip { padding: 7px 18px; font-size: 12.5px; background: var(--pc-soft); color: var(--pc-text-2); border-bottom: 1px solid var(--pc-line); }
+.pc-strip.warn { background: color-mix(in srgb, var(--pc-orange) 16%, var(--pc-card)); }
+
+.pc-body { flex: 1; min-height: 0; overflow-y: auto; padding: 18px; }
+
+/* cards and bits */
+.pc-card { background: var(--pc-card); border: 1px solid var(--pc-line); border-radius: 18px; padding: 14px 16px; box-shadow: var(--pc-shadow); }
+.pc-h { margin: 0 0 10px; font-size: 15px; font-weight: 800; }
+.pc-label { display: block; margin: 10px 0 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pc-text-3); }
+.pc-label:first-child { margin-top: 0; }
+.pc-small { margin: 6px 0 0; font-size: 12.5px; color: var(--pc-text-2); }
+.pc-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 13px; margin-bottom: 6px; }
+.pc-row span { color: var(--pc-text-3); font-size: 12px; }
+.pc-input { width: 100%; height: 34px; padding: 0 11px; border-radius: 11px; border: 1px solid var(--pc-line); background: var(--pc-soft); color: var(--pc-text); font: inherit; outline: none; }
+.pc-input:focus { border-color: var(--pc-accent); background: var(--pc-card); }
+select.pc-input { margin-bottom: 6px; }
+.pc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pc-chip { padding: 5px 11px; border-radius: 99px; border: 1px solid var(--pc-line); background: var(--pc-card); color: var(--pc-text-2); font-size: 12.5px; font-weight: 650; cursor: pointer; transition: transform 0.12s, background 0.12s, color 0.12s; }
+.pc-chip:hover:not(:disabled) { transform: translateY(-1px); color: var(--pc-text); border-color: var(--pc-accent-2); }
+.pc-chip.on { background: var(--pc-accent); border-color: transparent; color: #fff; }
+.pc-chip:disabled { opacity: 0.55; cursor: default; }
+.pc-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 16px; border-radius: 13px; border: 1px solid var(--pc-line); background: var(--pc-card); font-weight: 750; cursor: pointer; transition: transform 0.12s, box-shadow 0.12s, filter 0.12s; box-shadow: 0 3px 0 var(--pc-line); }
+.pc-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.pc-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--pc-line); }
+.pc-btn.primary { background: linear-gradient(135deg, var(--pc-accent), var(--pc-accent-2)); border-color: transparent; color: #fff; box-shadow: 0 3px 0 color-mix(in srgb, var(--pc-accent) 60%, #000); }
+.pc-btn.gold { background: linear-gradient(135deg, #f6cf62, #eaa83a); border-color: transparent; color: #4a3108; }
+.pc-btn.sm { padding: 6px 11px; font-size: 12.5px; border-radius: 11px; }
+.pc-btn:disabled { opacity: 0.5; cursor: default; }
+.pc-link { border: 0; background: none; padding: 0; color: var(--pc-accent); font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.pc-tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 99px; background: var(--pc-soft); color: var(--pc-text-2); font-size: 11.5px; font-weight: 750; }
+.pc-tag.good { background: color-mix(in srgb, var(--pc-green) 18%, var(--pc-card)); color: var(--pc-green); }
+.pc-meter { display: block; height: 9px; border-radius: 99px; background: var(--pc-soft); overflow: hidden; }
+.pc-meter i { display: block; height: 100%; border-radius: 99px; transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); background-size: 200% 100%; animation: pc-shimmer 3s linear infinite; }
+.pc-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 99px; vertical-align: -1px; border: 1px solid rgba(0, 0, 0, 0.1); }
+.pc-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.pc-stats > div { padding: 10px 12px; border-radius: 13px; background: var(--pc-soft); display: flex; flex-direction: column; gap: 2px; }
+.pc-stats small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--pc-text-3); }
+
+/* the buddy */
+.pc-buddy { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; }
+.pc-side { display: flex; flex-direction: column; gap: 14px; }
+.pc-stage { position: relative; min-height: 440px; border-radius: 26px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--pc-line); box-shadow: var(--pc-shadow); }
+.pc-stage-deco { position: absolute; inset: 0; pointer-events: none; }
+.pc-stage-deco i { position: absolute; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.85); box-shadow: 0 0 0 16px rgba(255, 255, 255, 0.14), 0 0 0 34px rgba(255, 255, 255, 0.08); animation: pc-halo 18s linear infinite; }
+.pc-stage-deco i:nth-child(1) { width: 260px; height: 260px; left: calc(50% - 130px); top: calc(46% - 130px); }
+.pc-stage-deco i:nth-child(2) { width: 14px; height: 14px; left: 18%; top: 20%; background: rgba(255, 255, 255, 0.85); animation: pc-twinkle 3s ease-in-out infinite; }
+.pc-stage-deco i:nth-child(3) { width: 10px; height: 10px; right: 20%; top: 28%; background: rgba(255, 255, 255, 0.8); animation: pc-twinkle 4.2s ease-in-out infinite 1s; }
+.home-cloud { background: linear-gradient(160deg, #efe9ff, #fdf8ff 55%, #f3ecff); }
+.home-moon { background: linear-gradient(145deg, #ded7ff, #f6edff 60%, #e8e0ff); }
+.home-jelly { background: linear-gradient(145deg, #dbf6fb, #edfaff 57%, #e2f4ed); }
+.home-stars { background: radial-gradient(ellipse at 50% 44%, #f6edff 0, #e8eaff 50%, #e1e1f7 100%); }
+.pc[data-theme='dark'] .home-cloud { background: linear-gradient(160deg, #2d2744, #241f35 60%, #2a2440); }
+.pc[data-theme='dark'] .home-moon { background: linear-gradient(145deg, #2c2650, #221d3a 60%, #2a2246); }
+.pc[data-theme='dark'] .home-jelly { background: linear-gradient(145deg, #1d3640, #1a2a33 57%, #1e3330); }
+.pc[data-theme='dark'] .home-stars { background: radial-gradient(ellipse at 50% 44%, #2c2a4d 0, #1f1d36 55%, #191729 100%); }
+.home-stars .pc-stage-deco,
+.home-stars.pc-mirror-stage { background-image: radial-gradient(rgba(255, 255, 255, 0.9) 1px, transparent 1.4px); background-size: 25px 25px; }
+.pc-speech { position: absolute; top: 26px; left: 50%; transform: translateX(-50%); max-width: 70%; margin: 0; padding: 10px 14px; border-radius: 16px; background: var(--pc-card); border: 1px solid var(--pc-line); box-shadow: var(--pc-shadow); font-weight: 650; text-align: center; animation: pc-pop 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+.pc-speech::after { content: ''; position: absolute; left: 50%; bottom: -7px; width: 12px; height: 12px; background: var(--pc-card); border-right: 1px solid var(--pc-line); border-bottom: 1px solid var(--pc-line); transform: translateX(-50%) rotate(45deg); }
+.pc-stage-bar { position: absolute; bottom: 18px; display: flex; gap: 8px; }
+
+.pc-sprite-wrap { position: relative; display: grid; place-items: center; }
+.pc-sprite { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 14px 24px rgba(123, 104, 238, 0.28)); }
+.pc-float { animation: pcx-pochi-float 4.5s ease-in-out infinite; }
+.pc-sprite.is-playing { animation: none; }
+.pc-particle { position: absolute; left: 50%; top: 50%; pointer-events: none; color: #bd90dc; font-size: 18px; font-weight: 800; text-shadow: 0 2px 8px #fff; animation: pc-particle 1.3s cubic-bezier(0.2, 0.7, 0.25, 1) var(--wait) both; }
+.pc-particle.is-heart { color: #e68cad; font-size: 21px; }
+
+.pc-memories { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pc-memories li { display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 8px; padding: 7px 9px; border-radius: 12px; background: var(--pc-soft); font-size: 13px; animation: pc-card-in 0.4s ease both; }
+.pc-memories small { color: var(--pc-text-3); font-size: 11px; }
+
+/* shop */
+.pc-shop,
+.pc-movebook { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 16px; align-items: start; }
+.pc-mirror { position: sticky; top: 0; }
+.pc-mirror-stage { border-radius: 22px; min-height: 220px; display: grid; place-items: center; border: 1px solid var(--pc-line); box-shadow: var(--pc-shadow); margin-bottom: 8px; }
+.pc-shop-bar { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.pc-shop-tools { display: grid; grid-template-columns: 1fr 140px; gap: 8px; }
+.pc-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.pc-item,
+.pc-move { position: relative; display: flex; flex-direction: column; gap: 5px; padding: 12px; border-radius: 18px; background: var(--pc-card); border: 1px solid var(--pc-line); box-shadow: var(--pc-shadow); transition: transform 0.18s cubic-bezier(0.2, 1.3, 0.4, 1), box-shadow 0.18s; animation: pc-card-in 0.35s ease both; }
+.pc-item:hover,
+.pc-move:hover { transform: translateY(-3px) rotate(-0.4deg); }
+.pc-item b,
+.pc-move b { font-size: 13.5px; }
+.pc-item small,
+.pc-move small { font-size: 12px; color: var(--pc-text-2); flex: 1; }
+.pc-item-art { position: relative; height: 110px; border-radius: 14px; background: var(--pc-soft); display: grid; place-items: center; overflow: hidden; }
+.pc-item-art svg { width: 100%; height: 100%; overflow: visible; }
+.pc-rarity { position: absolute; top: 7px; left: 7px; font-size: 10px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 7px; border-radius: 99px; background: var(--pc-card); color: var(--pc-text-3); }
+.r-rare .pc-rarity { color: #3c8ed8; }
+.r-epic .pc-rarity { color: #9c5bd6; }
+.r-legendary .pc-rarity { color: #c2851a; background: #fff3d1; }
+.r-festival .pc-rarity { color: #1f9aa8; background: #dff7f8; }
+.r-legendary { border-color: #f1d488; }
+.r-legendary .pc-item-art { background: linear-gradient(135deg, #fff6dc, #f7ecff); }
+.r-epic .pc-item-art { background: linear-gradient(135deg, #f4ebff, #ffeef6); }
+.pc[data-theme='dark'] .r-legendary .pc-item-art,
+.pc[data-theme='dark'] .r-epic .pc-item-art { background: var(--pc-soft); }
+.pc-item.is-locked .pc-item-art svg { filter: grayscale(1) opacity(0.5); }
+.pc-lock { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 700; color: var(--pc-text-3); }
+.pc-home-swatch { border: 1px solid var(--pc-line); }
+
+.pc-packs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.pc-pack { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 20px; background: linear-gradient(160deg, var(--pc-card), var(--pc-soft)); border: 1px solid var(--pc-line); box-shadow: var(--pc-shadow); animation: pc-card-in 0.35s ease both; }
+.pc-pack header { display: flex; align-items: center; gap: 10px; }
+.pc-pack header small { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; color: var(--pc-accent); }
+.pc-pack header b { font-size: 15px; }
+.pc-pack-icon { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; font-size: 22px; background: var(--pc-card); border: 1px solid var(--pc-line); animation: pc-wobble 5s ease-in-out infinite; }
+.pc-pack ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.pc-pack li { font-size: 12.5px; padding: 5px 8px; border-radius: 10px; background: var(--pc-card); }
+.pc-pack.is-own { border-color: color-mix(in srgb, var(--pc-green) 45%, var(--pc-line)); }
+
+.pc-cards.moves { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+.pc-move-icon { font-size: 26px; }
+.pc-move.is-locked { opacity: 0.72; }
+.pc-move.is-fav { border-color: var(--pc-gold); }
+.pc-move.is-fav::after { content: '★'; position: absolute; top: 9px; right: 11px; color: var(--pc-gold); }
+.pc-move-actions { display: flex; gap: 6px; }
+
+/* quests and wallet */
+.pc-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.pc-quests { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.pc-quests li { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 15px; background: var(--pc-soft); border: 1px solid transparent; animation: pc-card-in 0.35s ease both; }
+.pc-quests li.is-done { border-color: var(--pc-accent-2); background: color-mix(in srgb, var(--pc-accent) 10%, var(--pc-card)); }
+.pc-quests li.is-claimed { opacity: 0.75; }
+.pc-quests b { display: block; font-size: 13.5px; }
+.pc-quests small { color: var(--pc-text-2); font-size: 12px; }
+.pc-quest-icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; background: var(--pc-card); }
+.pc-earn,
+.pc-history { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.pc-earn li,
+.pc-history li { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--pc-line); font-size: 13px; }
+.pc-history li { display: grid; grid-template-columns: 1fr auto auto; }
+.pc-history small { color: var(--pc-text-3); font-size: 11px; }
+.pc-history .plus { color: var(--pc-green); }
+.pc-history .minus { color: var(--pc-text-2); }
+.pc-history li.is-void { opacity: 0.55; }
+
+/* toasts and confetti */
+.pc-toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); padding: 10px 16px; border-radius: 14px; background: var(--pc-text); color: var(--pc-bg); font-weight: 750; box-shadow: var(--pc-shadow); animation: pc-pop 0.3s cubic-bezier(0.2, 1.4, 0.4, 1) both; z-index: 20; }
+.pc-toast.good { background: linear-gradient(135deg, var(--pc-accent), var(--pc-pink)); color: #fff; }
+.pc-toast.warn { background: #fff4e0; color: #7a4a10; border: 1px solid #f3cf90; }
+.pc-confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 19; }
+.pc-confetti i { position: absolute; top: -12px; width: 8px; height: 12px; border-radius: 2px; animation: pc-confetti 1.6s cubic-bezier(0.3, 0.6, 0.4, 1) forwards; }
+
+@media (max-width: 980px) {
+  .pc-buddy,
+  .pc-shop,
+  .pc-movebook,
+  .pc-grid-2 { grid-template-columns: minmax(0, 1fr); }
+  .pc-mirror { position: static; }
+  .pc-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pc-tabs { margin-left: 0; }
+}
+
+@keyframes pc-wobble { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg) translateY(-2px); } }
+@keyframes pc-rise { 0% { opacity: 0; transform: translateY(6px) scale(0.6); } 20% { opacity: 1; transform: translateY(-4px) scale(1.15); } 100% { opacity: 0; transform: translateY(-34px) scale(1); } }
+@keyframes pc-halo { to { transform: rotate(360deg); } }
+@keyframes pc-twinkle { 0%, 100% { opacity: 0.25; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.15); } }
+@keyframes pc-pop { from { opacity: 0; transform: translateX(-50%) scale(0.7); } to { opacity: 1; transform: translateX(-50%) scale(1); } }
+@keyframes pc-card-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pc-shimmer { from { background-position: 200% 0; } to { background-position: 0 0; } }
+@keyframes pc-particle { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.1) rotate(25deg); } }
+@keyframes pc-confetti { 0% { opacity: 1; transform: translateY(0) rotate(0); } 100% { opacity: 0; transform: translateY(520px) rotate(540deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pc *,
+  .pc *::before,
+  .pc *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── Pochi's moves and accessory animations, from the Pochi Market demo ── */
+@keyframes pcx-pochi-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1.2deg)}}
+.pc .pochi-blink{opacity:0;transform-origin:center;animation:pcx-pochi-blink 4.7s ease-in-out infinite}
+@keyframes pcx-pochi-blink{0%,46%,50%,100%{opacity:0;transform:scaleY(0)}47%,49%{opacity:1;transform:scaleY(1)}}
+.pc .accessory-pop{transform-box:fill-box;transform-origin:center;animation:pcx-accessory-pop .55s cubic-bezier(.17,.89,.32,1.55) both}
+@keyframes pcx-accessory-pop{0%{opacity:0;transform:scale(.25) rotate(-18deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+.pc .aura-orbit{transform-box:fill-box;transform-origin:center;animation:pcx-orbit-spin 18s linear infinite}
+@keyframes pcx-orbit-spin{to{transform:rotate(360deg)}}
+@keyframes pcx-confetti-fall{0%{opacity:0;transform:translate3d(0,-20px,0) rotate(0)}10%{opacity:1}100%{opacity:.1;transform:translate3d(var(--dx),105vh,0) rotate(var(--turn))}}
+@keyframes pcx-float-reward{0%{opacity:0;transform:translateY(8px) scale(.8)}20%{opacity:1;transform:translateY(0) scale(1.1)}100%{opacity:0;transform:translateY(-38px) scale(.9)}}
+@keyframes pcx-bond-heartbeat{0%,100%{transform:scale(1)}9%{transform:scale(1.13)}18%{transform:scale(1)}}
+.pc .pochi-sprite{transform-box:fill-box;transform-origin:50% 76%}
+.pc .pc-sprite.is-playing .pochi-sprite{animation-duration:var(--pochi-move-duration,1.6s);animation-fill-mode:both;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+.pc .pc-sprite[data-move="hello"].is-playing .pochi-sprite{animation-name:pcx-pochi-wave}
+.pc .pc-sprite[data-move="wiggle"].is-playing .pochi-sprite{animation-name:pcx-pochi-wiggle}
+.pc .pc-sprite[data-move="hop"].is-playing .pochi-sprite{animation-name:pcx-pochi-hop}
+.pc .pc-sprite[data-move="spin"].is-playing .pochi-sprite{animation-name:pcx-pochi-spin}
+.pc .pc-sprite[data-move="dance"].is-playing .pochi-sprite{animation-name:pcx-pochi-dance}
+.pc .pc-sprite[data-move="stretch"].is-playing .pochi-sprite{animation-name:pcx-pochi-stretch}
+.pc .pc-sprite[data-move="nap"].is-playing .pochi-sprite{animation-name:pcx-pochi-nap}
+.pc .pc-sprite[data-move="heartstorm"].is-playing .pochi-sprite{animation-name:pcx-pochi-heartstorm}
+@keyframes pcx-pochi-wave{0%,100%{transform:rotate(0) translateY(0)}22%{transform:rotate(-12deg) translateY(-4%)}43%{transform:rotate(10deg) translateY(-3%)}63%{transform:rotate(-8deg)}82%{transform:rotate(6deg)}}
+@keyframes pcx-pochi-wiggle{0%,100%{transform:translateX(0) rotate(0)}20%{transform:translateX(-5%) rotate(-7deg)}40%{transform:translateX(5%) rotate(7deg)}60%{transform:translateX(-4%) rotate(-5deg)}80%{transform:translateX(3%) rotate(4deg)}}
+@keyframes pcx-pochi-hop{0%,100%{transform:translateY(0) scale(1,1)}32%{transform:translateY(-24%) scale(.96,1.04)}56%{transform:translateY(0) scale(1.08,.9)}73%{transform:translateY(-8%) scale(.99,1.01)}}
+@keyframes pcx-pochi-spin{0%,100%{transform:rotate(0) scale(1)}45%{transform:rotate(180deg) scale(1.12)}80%{transform:rotate(330deg) scale(.96)}}
+@keyframes pcx-pochi-dance{0%,100%{transform:translateY(0) rotate(0)}18%{transform:translateY(-13%) rotate(-14deg)}36%{transform:translateY(0) rotate(13deg)}54%{transform:translateY(-17%) rotate(11deg) scale(1.04)}72%{transform:translateY(0) rotate(-12deg)}88%{transform:translateY(-7%) rotate(6deg)}}
+@keyframes pcx-pochi-stretch{0%,100%{transform:scale(1)}25%{transform:scale(.84,1.12) rotate(-5deg)}54%{transform:scale(1.1,.94) rotate(4deg)}78%{transform:scale(.96,1.04)}}
+@keyframes pcx-pochi-nap{0%,100%{transform:translateY(0) rotate(0)}28%{transform:translateY(4%) rotate(-7deg)}64%{transform:translateY(5%) rotate(-7deg) scale(1,.96)}83%{transform:translateY(-2%) rotate(2deg)}}
+@keyframes pcx-pochi-heartstorm{0%,100%{transform:translateY(0) scale(1)}20%{transform:translateY(-20%) rotate(-8deg) scale(1.08)}42%{transform:translateY(0) rotate(7deg) scale(.95)}63%{transform:translateY(-15%) rotate(7deg) scale(1.1)}83%{transform:translateY(0) rotate(-3deg)}}
+@keyframes pcx-move-particle-float{0%{opacity:0;translate:0 8px;scale:.4;rotate:-18deg}20%{opacity:1;scale:1.12}100%{opacity:0;translate:var(--dx) var(--dy);scale:.78;rotate:22deg}}
+/* Fifteen original movement loops for the three task packs. */
+.pc .pc-sprite[data-move="desk-walk"].is-playing .pochi-sprite{animation-name:pcx-pochi-desk-walk}
+.pc .pc-sprite[data-move="scoot-seat"].is-playing .pochi-sprite{animation-name:pcx-pochi-scoot-seat}
+.pc .pc-sprite[data-move="page-flip"].is-playing .pochi-sprite{animation-name:pcx-pochi-page-flip}
+.pc .pc-sprite[data-move="focus-nod"].is-playing .pochi-sprite{animation-name:pcx-pochi-focus-nod}
+.pc .pc-sprite[data-move="note-scribble"].is-playing .pochi-sprite{animation-name:pcx-pochi-note-scribble}
+.pc .pc-sprite[data-move="window-walk"].is-playing .pochi-sprite{animation-name:pcx-pochi-window-walk}
+.pc .pc-sprite[data-move="stretch-awake"].is-playing .pochi-sprite{animation-name:pcx-pochi-stretch-awake}
+.pc .pc-sprite[data-move="pillow-crawl"].is-playing .pochi-sprite{animation-name:pcx-pochi-pillow-crawl}
+.pc .pc-sprite[data-move="curl-up"].is-playing .pochi-sprite{animation-name:pcx-pochi-curl-up}
+.pc .pc-sprite[data-move="wake-wiggle"].is-playing .pochi-sprite{animation-name:pcx-pochi-wake-wiggle}
+.pc .pc-sprite[data-move="quest-clap"].is-playing .pochi-sprite{animation-name:pcx-pochi-quest-clap}
+.pc .pc-sprite[data-move="sparkle-spin"].is-playing .pochi-sprite{animation-name:pcx-pochi-sparkle-spin}
+.pc .pc-sprite[data-move="sky-hop"].is-playing .pochi-sprite{animation-name:pcx-pochi-sky-hop}
+.pc .pc-sprite[data-move="confetti-dance"].is-playing .pochi-sprite{animation-name:pcx-pochi-confetti-dance}
+.pc .pc-sprite[data-move="heart-pop"].is-playing .pochi-sprite{animation-name:pcx-pochi-heart-pop}
+@keyframes pcx-pochi-desk-walk{0%,100%{transform:translate(0,0) rotate(0)}15%{transform:translate(-5%,0) rotate(-4deg)}30%{transform:translate(-7%,-7%) rotate(-2deg)}48%{transform:translate(0,0) rotate(0)}64%{transform:translate(6%,-7%) rotate(3deg)}80%{transform:translate(8%,0) rotate(2deg)}}
+@keyframes pcx-pochi-scoot-seat{0%,100%{transform:translate(0,0) scale(1,1)}22%{transform:translate(-8%,2%) scale(1.02,.96)}46%{transform:translate(4%,3%) scale(.97,1.04)}68%{transform:translate(0,-3%) scale(1.03,.98)}84%{transform:translate(0,0) scale(1,1)}}
+@keyframes pcx-pochi-page-flip{0%,100%{transform:rotate(0) translateY(0)}20%{transform:rotate(-8deg) translateY(-2%)}42%{transform:rotate(10deg) translateY(-7%)}64%{transform:rotate(-5deg) translateY(0)}82%{transform:rotate(4deg) translateY(-2%)}}
+@keyframes pcx-pochi-focus-nod{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(2%) scale(1,.97)}42%{transform:translateY(-6%) scale(1.01,1.03)}58%{transform:translateY(0) scale(1)}76%{transform:translateY(1%) scale(1,.98)}}
+@keyframes pcx-pochi-note-scribble{0%,100%{transform:rotate(0) translateX(0)}12%{transform:rotate(-9deg) translateX(-2%)}24%{transform:rotate(8deg) translateX(2%)}36%{transform:rotate(-10deg) translateX(-3%)}48%{transform:rotate(9deg) translateX(3%)}60%{transform:rotate(-7deg) translateX(-2%)}76%{transform:rotate(4deg)}}
+@keyframes pcx-pochi-window-walk{0%,100%{transform:translateX(0) rotate(0)}20%{transform:translateX(-7%) rotate(-5deg)}45%{transform:translateX(-10%) translateY(-4%) rotate(-2deg)}68%{transform:translateX(8%) translateY(-2%) rotate(5deg)}86%{transform:translateX(4%) rotate(2deg)}}
+@keyframes pcx-pochi-stretch-awake{0%,100%{transform:scale(1,1) rotate(0)}18%{transform:scale(.94,1.08) rotate(-3deg)}42%{transform:scale(.83,1.2) rotate(-5deg) translateY(-3%)}62%{transform:scale(1.09,.91) rotate(3deg)}82%{transform:scale(.97,1.04)}}
+@keyframes pcx-pochi-pillow-crawl{0%,100%{transform:translate(0,0) scale(1,1)}15%{transform:translate(-4%,5%) scale(1.04,.94)}33%{transform:translate(-8%,1%) scale(.98,1.03)}51%{transform:translate(0,5%) scale(1.05,.93)}70%{transform:translate(9%,1%) scale(.98,1.02)}86%{transform:translate(4%,3%) scale(1.02,.98)}}
+@keyframes pcx-pochi-curl-up{0%,100%{transform:scale(1,1) rotate(0) translateY(0)}28%{transform:scale(1.05,.95) rotate(-8deg) translateY(1%)}58%{transform:scale(.88,.91) rotate(-13deg) translateY(3%)}82%{transform:scale(.96,1) rotate(-4deg) translateY(1%)}}
+@keyframes pcx-pochi-wake-wiggle{0%,100%{transform:translateY(0) rotate(0)}18%{transform:translateY(-6%) rotate(-8deg)}36%{transform:translateY(0) rotate(9deg)}54%{transform:translateY(-9%) rotate(-7deg)}72%{transform:translateY(0) rotate(6deg)}88%{transform:translateY(-3%) rotate(-3deg)}}
+@keyframes pcx-pochi-quest-clap{0%,100%{transform:scale(1) translateY(0)}15%{transform:scale(.96,1.05) translateY(-4%)}30%{transform:scale(1.04,.96) translateY(0)}45%{transform:scale(.96,1.05) translateY(-5%)}60%{transform:scale(1.05,.95) translateY(0)}78%{transform:scale(.98,1.02) translateY(-2%)}}
+@keyframes pcx-pochi-sparkle-spin{0%{transform:rotate(0) translateY(0) scale(1)}32%{transform:rotate(125deg) translateY(-10%) scale(1.08)}68%{transform:rotate(270deg) translateY(-5%) scale(.96)}100%{transform:rotate(360deg) translateY(0) scale(1)}}
+@keyframes pcx-pochi-sky-hop{0%,100%{transform:translateY(0) scale(1,1)}22%{transform:translateY(-12%) scale(.92,1.08)}48%{transform:translateY(-40%) scale(1.02,1)}67%{transform:translateY(-30%) scale(1,1)}82%{transform:translateY(2%) scale(1.12,.86)}}
+@keyframes pcx-pochi-confetti-dance{0%,100%{transform:translateY(0) rotate(0)}14%{transform:translateY(-13%) rotate(-12deg)}28%{transform:translateY(0) rotate(13deg)}42%{transform:translateY(-19%) rotate(10deg) scale(1.06)}56%{transform:translateY(0) rotate(-15deg)}70%{transform:translateY(-12%) rotate(13deg)}84%{transform:translateY(0) rotate(-7deg)}}
+@keyframes pcx-pochi-heart-pop{0%,100%{transform:scale(1) translateY(0)}18%{transform:scale(.82) translateY(2%)}38%{transform:scale(1.22) translateY(-13%)}54%{transform:scale(.94) translateY(0)}70%{transform:scale(1.12) translateY(-7%)}86%{transform:scale(1) translateY(0)}}

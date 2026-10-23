@@ -564,6 +564,14 @@ const ProfileEditor = ({ session }: { session: Session }) => {
       </header>
 
       <div className="mt-10 space-y-6">
+        <Section id={`${ids}-study`} title="Study" description="Pochi Club: the Tuna Coins you earn studying in Anvira Notes, Pochi's closet and moves.">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">The same Pochi as in the app. It works offline in the app and syncs here.</p>
+            <Button asChild className="rounded-full">
+              <Link to="/account/study">Open Pochi Club</Link>
+            </Button>
+          </div>
+        </Section>
         <Section id={`${ids}-profile`} title="Profile" description="What people see when you chat in Anvira Notes.">
           <div className="flex flex-wrap items-center gap-4">
             <Avatar person={preview} size={64} />
@@ -775,13 +783,15 @@ const ProfileEditor = ({ session }: { session: Session }) => {
 
 const AccountProfile = () => {
   const { session, ready } = useAnviraSession();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const navigate = useNavigate();
   const initialMode: AuthMode = pathname.endsWith('/signup') ? 'signup' : 'signin';
-  // Signed in on /account/signin or /account/signup: go to the profile.
+  // Signed in on /account/signin or /account/signup: go to the profile, or back to the account page that sent them (?next=).
   useEffect(() => {
-    if (session && pathname !== '/account/profile') navigate('/account/profile', { replace: true });
-  }, [session, pathname, navigate]);
+    if (!session || pathname === '/account/profile') return;
+    const next = new URLSearchParams(search).get('next');
+    navigate(next && /^\/account\/[a-z]+$/.test(next) ? next : '/account/profile', { replace: true });
+  }, [session, pathname, search, navigate]);
   return (
     <CleanLayout>
       <SEO

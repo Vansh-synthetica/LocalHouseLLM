@@ -50,6 +50,7 @@ export const OrchaLicense = page(['/orcha/license'], 'src/pages/orcha/License.ts
 // Anvira accounts (the apps' sign-in). Anvira Notes' "Manage profile" opens /account/profile.
 export const AccountProfile = page(['/account/profile', '/account/signin', '/account/signup'], 'src/pages/account/AccountProfile.tsx', () => import('./pages/account/AccountProfile'));
 export const AccountReset = page(['/account/reset'], 'src/pages/account/AccountReset.tsx', () => import('./pages/account/AccountReset'));
+export const AccountStudy = page(['/account/study'], 'src/pages/account/AccountStudy.tsx', () => import('./pages/account/AccountStudy'));
 
 
 const entriesFor = (pathname: string) =>

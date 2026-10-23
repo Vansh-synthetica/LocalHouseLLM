@@ -24,6 +24,7 @@ import {
   OrchaLicense,
   AccountProfile,
   AccountReset,
+  AccountStudy,
 } from "./pages";
 
 const queryClient = new QueryClient();
@@ -97,6 +98,7 @@ const AppRoutes = () => (
               <Route path="/account/signin" element={<AccountProfile />} />
               <Route path="/account/signup" element={<AccountProfile />} />
               <Route path="/account/reset" element={<AccountReset />} />
+              <Route path="/account/study" element={<AccountStudy />} />
               <Route path="/login" element={<Navigate to="/account/signin" replace />} />
               <Route path="/register" element={<Navigate to="/account/signup" replace />} />
               <Route path="/signup" element={<Navigate to="/account/signup" replace />} />
