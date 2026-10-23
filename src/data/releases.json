@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-20T11:33:20.810Z",
+  "syncedAt": "2026-10-23T21:31:11.190Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,58 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.20",
+      "latest": "v1.2.21",
       "releases": [
+        {
+          "tag": "v1.2.21",
+          "version": "1.2.21",
+          "name": "Anvira Notes 1.2.21",
+          "date": "2026-10-23T21:30:43Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.21",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.21.exe",
+            "size": 137880294,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.21/Anvira-Notes-Setup-1.2.21.exe",
+            "sha256": "caba0cc3bbfc8253b5d19fbfd22d8abe3f1682f8556f34bd221b716a1ffcfd96"
+          },
+          "summary": "Studying now earns Tuna Coins for Pochi. Open Pochi Club from the little coin badge under Pochi on the Study page.",
+          "highlights": [
+            {
+              "kind": "New: Pochi Club",
+              "text": "Buddy"
+            },
+            {
+              "kind": "New: Pochi Club",
+              "text": "Shop"
+            },
+            {
+              "kind": "New: Pochi Club",
+              "text": "Moves"
+            },
+            {
+              "kind": "New: Pochi Club",
+              "text": "Quests"
+            },
+            {
+              "kind": "New: Pochi Club",
+              "text": "Wallet"
+            }
+          ],
+          "notes": [
+            {
+              "title": "New: Pochi Club",
+              "html": "<p>Studying now earns <strong>Tuna Coins</strong> for Pochi. Open Pochi Club from the little coin badge under Pochi on the Study page.</p><ul><li><strong>Buddy:</strong> name Pochi, pick a mood and a home (Cloud nook, Moon garden, Jelly lagoon, Stargazer room), say hello and play a routine. Friendship grows each day you study and say hello, and memories keep track of your milestones.</li><li><strong>Shop:</strong> 20 accessories (hats, glasses, outfits, bags, auras), 6 colours and 3 animation packs. Hover an item to try it on before you buy.</li><li><strong>Moves:</strong> 8 moves that unlock as you study, plus 15 more in the packs. Choose Pochi's favourite move and a two-move routine.</li><li><strong>Quests:</strong> small daily goals (say good morning, finish a lesson, reach your daily goal, give Pochi a new look) with a few extra coins.</li><li><strong>Wallet:</strong> your balance and every coin earned and spent.</li></ul><p><strong>How coins come in:</strong> 1 coin for every 4 XP from lessons, flashcards, quizzes and practice; +40 for reaching your daily goal; +30 for a mock exam; streak bonuses at 3, 7, 14, 30, 60 and 100 days; and 120 to start. Coins can only be earned by studying, never bought. Study on five days in all to get the Moon Jelly Crown.</p><p><strong>Works offline, on every device:</strong> your club is kept on this PC, so it works with no connection, and it syncs with your Anvira account when you are online. Signed in at localhousellm.com, open <strong>Account → Study</strong> to see the same Pochi, shop and coins in your browser.</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.20",
           "version": "1.2.20",
           "name": "Anvira Notes 1.2.20",
           "date": "2026-10-20T10:26:19Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.20",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.20.exe",
             "size": 137876757,
