@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-23T21:31:11.190Z",
+  "syncedAt": "2026-10-26T15:57:00.046Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,46 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.21",
+      "latest": "v1.2.22",
       "releases": [
+        {
+          "tag": "v1.2.22",
+          "version": "1.2.22",
+          "name": "Anvira Notes 1.2.22",
+          "date": "2026-10-26T15:56:44Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.22",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.22.exe",
+            "size": 137883243,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.22/Anvira-Notes-Setup-1.2.22.exe",
+            "sha256": "09e362a0d366b0d6c3a0df04089d5d0a4757b5a0113cfc9a25ea7d7b35feb065"
+          },
+          "summary": "Gifts from Anvira now show up in Pochi Club: the coins land in your wallet, and a gift can open the whole shop, with every move and home.",
+          "highlights": [
+            {
+              "kind": "Pochi Club",
+              "text": "Gifts from Anvira"
+            },
+            {
+              "kind": "Pochi Club",
+              "text": "Firefly Trail can be bought"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Pochi Club",
+              "html": "<ul><li><strong>Gifts from Anvira</strong> now show up in Pochi Club: the coins land in your wallet, and a gift can open the whole shop, with every move and home.</li><li><strong>Firefly Trail can be bought.</strong> It costs 340 coins, and the account would not save a purchase over 300, so it disappeared after syncing. Fixed.</li><li>Big balances are easier to read (1,000,120, or 1M on the Study page).</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.21",
           "version": "1.2.21",
           "name": "Anvira Notes 1.2.21",
           "date": "2026-10-23T21:30:43Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.21",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.21.exe",
             "size": 137880294,

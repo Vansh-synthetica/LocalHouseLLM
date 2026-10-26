@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-23T21:31:11.190Z",
+  "syncedAt": "2026-10-26T15:57:00.046Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,46 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.21",
+      "latest": "v1.2.22",
       "releases": [
+        {
+          "tag": "v1.2.22",
+          "version": "1.2.22",
+          "name": "Anvira Notes 1.2.22",
+          "date": "2026-10-26T15:56:44Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.22",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.22.exe",
+            "size": 137883243,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.22/Anvira-Notes-Setup-1.2.22.exe",
+            "sha256": "09e362a0d366b0d6c3a0df04089d5d0a4757b5a0113cfc9a25ea7d7b35feb065"
+          },
+          "summary": "Gifts from Anvira now show up in Pochi Club: the coins land in your wallet, and a gift can open the whole shop, with every move and home.",
+          "highlights": [
+            {
+              "kind": "Pochi Club",
+              "text": "Gifts from Anvira"
+            },
+            {
+              "kind": "Pochi Club",
+              "text": "Firefly Trail can be bought"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Pochi Club",
+              "html": "<ul><li><strong>Gifts from Anvira</strong> now show up in Pochi Club: the coins land in your wallet, and a gift can open the whole shop, with every move and home.</li><li><strong>Firefly Trail can be bought.</strong> It costs 340 coins, and the account would not save a purchase over 300, so it disappeared after syncing. Fixed.</li><li>Big balances are easier to read (1,000,120, or 1M on the Study page).</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.21",
           "version": "1.2.21",
           "name": "Anvira Notes 1.2.21",
           "date": "2026-10-23T21:30:43Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.21",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.21.exe",
             "size": 137880294,
@@ -43,12 +74,6 @@
             {
               "kind": "New: Pochi Club",
               "text": "Wallet"
-            }
-          ],
-          "notes": [
-            {
-              "title": "New: Pochi Club",
-              "html": "<p>Studying now earns <strong>Tuna Coins</strong> for Pochi. Open Pochi Club from the little coin badge under Pochi on the Study page.</p><ul><li><strong>Buddy:</strong> name Pochi, pick a mood and a home (Cloud nook, Moon garden, Jelly lagoon, Stargazer room), say hello and play a routine. Friendship grows each day you study and say hello, and memories keep track of your milestones.</li><li><strong>Shop:</strong> 20 accessories (hats, glasses, outfits, bags, auras), 6 colours and 3 animation packs. Hover an item to try it on before you buy.</li><li><strong>Moves:</strong> 8 moves that unlock as you study, plus 15 more in the packs. Choose Pochi's favourite move and a two-move routine.</li><li><strong>Quests:</strong> small daily goals (say good morning, finish a lesson, reach your daily goal, give Pochi a new look) with a few extra coins.</li><li><strong>Wallet:</strong> your balance and every coin earned and spent.</li></ul><p><strong>How coins come in:</strong> 1 coin for every 4 XP from lessons, flashcards, quizzes and practice; +40 for reaching your daily goal; +30 for a mock exam; streak bonuses at 3, 7, 14, 30, 60 and 100 days; and 120 to start. Coins can only be earned by studying, never bought. Study on five days in all to get the Moon Jelly Crown.</p><p><strong>Works offline, on every device:</strong> your club is kept on this PC, so it works with no connection, and it syncs with your Anvira account when you are online. Signed in at localhousellm.com, open <strong>Account → Study</strong> to see the same Pochi, shop and coins in your browser.</p>"
             }
           ]
         },
