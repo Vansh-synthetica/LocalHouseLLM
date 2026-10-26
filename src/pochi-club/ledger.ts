@@ -14,8 +14,12 @@ import { BOND_TIERS, HOMES, ITEMS, MOVES, PACKS, PALETTES, RANKS, type Mood } fr
 
 export type EventKind = 'earn' | 'spend' | 'care'
 
-/** Why coins came in. Study is the only real source; the rest are bonuses for studying (and one welcome gift). */
-export type EarnReason = 'welcome' | 'study' | 'goal' | 'streak' | 'exam' | 'quest'
+/**
+ * Why coins came in. Study is the only real source; the rest are bonuses for studying (and one welcome gift). A
+ * 'gift' comes from Anvira itself: only the database owner can add one (the server refuses it from any app), and a
+ * gift with ref 'everything' also opens the whole shop.
+ */
+export type EarnReason = 'welcome' | 'study' | 'goal' | 'streak' | 'exam' | 'quest' | 'gift'
 export type SpendWhat = 'item' | 'palette' | 'pack'
 
 export interface PochiEvent {
@@ -53,6 +57,8 @@ export const STREAK_BONUS: [number, number][] = [
 /** Most one event may earn, and one day in all (the server holds to the same limits). */
 export const MAX_EARN_EVENT = 300
 export const MAX_EARN_DAY = 800
+/** The most one gift from Anvira may hold (gifts are outside the daily limit). */
+export const MAX_GIFT = 1_000_000
 
 export const coinsForXp = (xp: number) => Math.max(0, Math.min(80, Math.round(xp * COINS_PER_XP)))
 
@@ -112,6 +118,8 @@ export interface ClubState {
   coins: number
   /** study stars: lifetime coins from studying — what unlocks items, moves and homes */
   stars: number
+  /** a gift of everything from Anvira: the whole shop is hers, every move and home open */
+  everything: boolean
   /** everything earned, ever */
   earned: number
   owned: Set<string>
@@ -144,10 +152,11 @@ export const priceOf = (what: string, ref: string): number | null => {
 
 export const unlockOf = (what: string, ref: string): number => (what === 'item' ? ITEMS.find((i) => i.id === ref)?.unlockAt ?? 0 : 0)
 
-const EARN_REASONS = new Set<string>(['welcome', 'study', 'goal', 'streak', 'exam', 'quest'])
+const EARN_REASONS = new Set<string>(['welcome', 'study', 'goal', 'streak', 'exam', 'quest', 'gift'])
 
 /** Whether an earn event follows the rules (amounts within limits; one welcome, one goal bonus a day…). */
 function earnValid(e: PochiEvent): boolean {
+  if (e.reason === 'gift') return Number.isInteger(e.amount) && e.amount > 0 && e.amount <= MAX_GIFT
   if (!EARN_REASONS.has(e.reason) || !Number.isInteger(e.amount) || e.amount <= 0 || e.amount > MAX_EARN_EVENT) return false
   if (e.reason === 'welcome') return e.amount === WELCOME_COINS
   if (e.reason === 'goal') return e.amount === GOAL_BONUS
@@ -178,11 +187,12 @@ export function reduce(events: PochiEvent[], now = new Date()): ClubState {
       const k = onceKey(x)
       if (k && once.has(k)) continue
       const d = x.at.slice(0, 10)
-      if ((byDay.get(d) ?? 0) + x.amount > MAX_EARN_DAY) continue
+      const gift = x.reason === 'gift'
+      if (!gift && (byDay.get(d) ?? 0) + x.amount > MAX_EARN_DAY) continue
       if (k) once.add(k)
-      byDay.set(d, (byDay.get(d) ?? 0) + x.amount)
+      if (!gift) byDay.set(d, (byDay.get(d) ?? 0) + x.amount)
       e += x.amount
-      if (x.reason !== 'welcome' && x.reason !== 'quest') st += x.amount
+      if (x.reason !== 'welcome' && x.reason !== 'quest' && !gift) st += x.amount
     }
     return { earned: e, stars: st }
   })()
@@ -191,6 +201,7 @@ export function reduce(events: PochiEvent[], now = new Date()): ClubState {
   let stars = 0
   let earned = 0
   let bond = 0
+  let everything = false
   const owned = new Set<string>()
   const palettes = new Set<string>(['lavender'])
   const packs = new Set<string>()
@@ -215,7 +226,14 @@ export function reduce(events: PochiEvent[], now = new Date()): ClubState {
       history.push({ ...e, ok: false })
       continue
     }
-    if (e.kind === 'earn' && earnValid(e)) {
+    if (e.kind === 'earn' && e.reason === 'gift' && earnValid(e)) {
+      // a gift from Anvira: outside the daily limit, and not study stars
+      ok = true
+      coins += e.amount
+      earned += e.amount
+      if (e.ref === 'everything') everything = true
+      moments.push({ icon: '🎁', title: e.note ?? 'A gift from Anvira', at: e.at })
+    } else if (e.kind === 'earn' && earnValid(e)) {
       const sofar = earnByDay.get(uday) ?? 0
       if (sofar + e.amount <= MAX_EARN_DAY) {
         ok = true
@@ -259,12 +277,18 @@ export function reduce(events: PochiEvent[], now = new Date()): ClubState {
   }
   // the festival crown: five study days in all
   if (studyDays.size >= 5) owned.add('moon-jelly-crown')
+  if (everything) {
+    for (const it of ITEMS) owned.add(it.id)
+    for (const p of PALETTES) palettes.add(p.id)
+    for (const p of PACKS) packs.add(p.id)
+  }
 
   const ri = RANKS.reduce((acc, r, i) => (stars >= r.at ? i : acc), 0)
   const bi = BOND_TIERS.reduce((acc, t, i) => (bond >= t.from ? i : acc), 0)
   return {
     coins,
     stars,
+    everything,
     earned,
     owned,
     palettes,
@@ -285,9 +309,13 @@ export function reduce(events: PochiEvent[], now = new Date()): ClubState {
 export const moveUnlocked = (s: ClubState, id: string) => {
   const m = MOVES.find((x) => x.id === id)
   if (!m) return false
+  if (s.everything) return true
   return m.packId ? s.packs.has(m.packId) : s.stars >= m.unlockAt && s.bond >= m.bond
 }
-export const homeUnlocked = (s: ClubState, id: string) => s.stars >= (HOMES.find((h) => h.id === id)?.unlockAt ?? Infinity)
+export const homeUnlocked = (s: ClubState, id: string) => {
+  const h = HOMES.find((x) => x.id === id)
+  return !!h && (s.everything || s.stars >= h.unlockAt)
+}
 
 /** A look made safe: only what is owned and unlocked, every field in range. */
 export function sanitizeLook(raw: Partial<Look> | null | undefined, s: ClubState): Look {

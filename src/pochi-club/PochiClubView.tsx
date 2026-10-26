@@ -434,7 +434,7 @@ export default function PochiClubView({ club, host, stats, onClose, dark, banner
                   <li key={e.id} className={e.ok ? '' : 'is-void'}>
                     <span>{historyTitle(e)}</span>
                     <small>{new Date(e.at).toLocaleString()}</small>
-                    <b className={e.kind === 'earn' ? 'plus' : 'minus'}>{e.ok ? (e.kind === 'earn' ? '+' : '−') + e.amount : 'not counted'}</b>
+                    <b className={e.kind === 'earn' ? 'plus' : 'minus'}>{e.ok ? (e.kind === 'earn' ? '+' : '−') + e.amount.toLocaleString() : 'not counted'}</b>
                   </li>
                 ))}
                 {s.history.length === 0 && <li className="pc-small">Nothing yet: finish a lesson and the first coins come in.</li>}
@@ -460,7 +460,7 @@ function historyTitle(e: { kind: string; reason: string; ref: string; note?: str
     const name = e.reason === 'item' ? ITEMS.find((i) => i.id === e.ref)?.name : e.reason === 'palette' ? PALETTES.find((p) => p.id === e.ref)?.name : PACKS.find((p) => p.id === e.ref)?.name
     return `Bought ${name ?? e.ref}`
   }
-  return { welcome: 'Welcome gift', study: 'Studied', goal: 'Daily goal reached', streak: `${e.ref.split(':')[1] ?? ''}-day streak`, exam: 'Mock exam finished', quest: 'Quest claimed' }[e.reason] ?? e.reason
+  return { welcome: 'Welcome gift', study: 'Studied', goal: 'Daily goal reached', streak: `${e.ref.split(':')[1] ?? ''}-day streak`, exam: 'Mock exam finished', quest: 'Quest claimed', gift: 'A gift from Anvira' }[e.reason] ?? e.reason
 }
 
 function Confetti() {
@@ -616,7 +616,7 @@ function Shop({ s, look, club, buy }: { s: ClubState; look: Look; club: Club; bu
                     <span style={{ fontSize: 34 }}>{h.icon}</span>
                   </div>
                   <b>{h.name}</b>
-                  <small>{ok ? 'Unlocked by studying' : `Unlocks at ${h.unlockAt} study stars`}</small>
+                  <small>{ok ? (s.stars >= h.unlockAt ? 'Unlocked by studying' : 'A gift from Anvira') : `Unlocks at ${h.unlockAt} study stars`}</small>
                   {ok ? (
                     <button type="button" className={`pc-btn sm ${look.home === h.id ? '' : 'primary'}`} disabled={look.home === h.id} onClick={() => club.setLook({ home: h.id })}>
                       {look.home === h.id ? 'Home now' : 'Move in'}
