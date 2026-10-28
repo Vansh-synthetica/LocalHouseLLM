@@ -84,7 +84,7 @@ const Footer = () => {
                 LinkedIn
               </a>
               <a
-                href="https://www.instagram.com/localhousellm._com/"
+                href="https://www.instagram.com/localhousellm_com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={linkClass}
