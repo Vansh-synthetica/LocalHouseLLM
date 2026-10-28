@@ -6,41 +6,103 @@ import CleanLayout from '@/components/CleanLayout';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SEO from '@/components/SEO';
 
-const sections = [
+const ORCHA_REPO = 'https://github.com/Vansh-synthetica/orcha';
+const AICL_REPO = 'https://github.com/Vansh-synthetica/aicl';
+const DISCORD_URL = 'https://discord.gg/URfnsy4Mt3';
+
+type Block =
+  | { kind: 'code'; text: string }
+  | { kind: 'note'; text: string }
+  | { kind: 'links'; links: { label: string; href: string }[] };
+
+const sections: { heading: string; body: string; blocks?: Block[] }[] = [
   {
     heading: 'Quickstart',
-    body: 'Install the SDK, instantiate ORCHA, register a module, and send your first AICL packet — about ten minutes end-to-end.',
-    code: `npm install @localhousellm/orcha @localhousellm/aicl
-
-import { Orcha } from "@localhousellm/orcha";
-const orcha = new Orcha({ modules: [helloModule] });
-await orcha.handle({ intent: "echo", payload: { text: "hi" } });`,
+    body: 'Install ORCHA, point it at a local model, and run a tool-using agent sandboxed to a folder: about ten minutes end to end.',
+    blocks: [
+      {
+        kind: 'code',
+        text: `pip install "localhousellm-orcha[local] @ git+https://github.com/Vansh-synthetica/orcha"
+ollama pull qwen2.5:7b-instruct
+git clone https://github.com/Vansh-synthetica/orcha
+python orcha/examples/basic_agent.py "list the files in the current directory"`,
+      },
+      { kind: 'note', text: "Works with any OpenAI-compatible local server: Ollama, LM Studio, llama.cpp's llama-server or vLLM." },
+    ],
   },
   {
     heading: 'Installation',
-    body: 'SDKs ship for Node and Python. Both speak the same AICL wire format, so mixed-language deployments are first-class.',
-    code: `# Python\npip install localhousellm-orcha\n\n# Node\nnpm install @localhousellm/orcha`,
+    body: "Both SDKs are Python 3.10+. Until they're published on PyPI, install them from GitHub.",
+    blocks: [
+      {
+        kind: 'code',
+        text: `# ORCHA: agent orchestration (core needs only pydantic; [local] adds httpx for local model servers)
+pip install "localhousellm-orcha[local] @ git+https://github.com/Vansh-synthetica/orcha"
+
+# AICL: the binary wire protocol (pure standard library)
+pip install "localhousellm-aicl @ git+https://github.com/Vansh-synthetica/aicl"`,
+      },
+      { kind: 'note', text: 'ORCHA extras: [config] YAML configs, [pdf] PDF text extraction, [lang] LangGraph, [agents] Deep Agents, [eval] ragas, [obs] Phoenix/OpenTelemetry, [all] everything.' },
+      { kind: 'note', text: "AICL's native transport needs its Rust core built (cd core-rust && cargo build --release). The pure-Python codec (aicl.bin, aicl.semantic) works without it." },
+      { kind: 'note', text: 'Your first AICL packet:' },
+      {
+        kind: 'code',
+        text: `from aicl import encode, decode, Packet
+from aicl.bin.types import Symbol
+from aicl.bin.symbol_types import S_STRING
+
+wire = encode(Packet(symbols=[Symbol(S_STRING, "hello")]))
+assert decode(wire).symbols[0].value == "hello"`,
+      },
+    ],
   },
   {
     heading: 'API reference',
-    body: 'The full surface — Orcha, Module, Memory, Tool, Verifier — is documented per method, with request and response schemas pulled directly from the AICL spec.',
+    body: "The public surface is documented in each repo's README. ORCHA: orcha.core (OrchaPacket), orcha.graph (Graph, Node, GraphRuntime), orcha.capabilities (CapabilityRegistry, ToolExecutor, PermissionPolicy), orcha.nodes (AgentNode, ToolNode, IntentGateNode, RetrievalNode), orcha.builders.agent, orcha.experts, orcha.integrations, orcha.evaluation. AICL: aicl.bin, aicl.semantic, aicl.sdk, aicl.transport, aicl.sl.",
+    blocks: [
+      {
+        kind: 'links',
+        links: [
+          { label: 'ORCHA', href: ORCHA_REPO },
+          { label: 'AICL', href: AICL_REPO },
+        ],
+      },
+    ],
   },
   {
     heading: 'Config reference',
-    body: 'Every layer is configurable: routing policy, retry budgets, memory backend, safety thresholds, telemetry sinks. Configuration is typed and validated at startup.',
+    body: 'ORCHA is configured in code: tool permissions through PermissionPolicy (action, approval or partial modes), workspace roots through CapabilityContext, and model backends through your completion function or orcha.experts. YAML expert-registry configs are available with the [config] extra.',
   },
   {
-    heading: 'Build a custom expert',
-    body: 'Implement the Module interface, declare your capabilities, and register with an Orcha instance. The orchestrator routes matching intents to you automatically.',
-    code: `export const myExpert: Module = {
-  name: "expert.myDomain",
-  capabilities: ["answer.myDomain"],
-  async handle(packet) { /* ... */ },
-};`,
+    heading: 'Build a tool-using agent',
+    body: 'Build a tool executor from the capability registry, sandboxed to your workspace, and hand it to the agent runner with your own completion function for any local model server.',
+    blocks: [
+      {
+        kind: 'code',
+        text: `from orcha.builders.agent import AgentGraphConfig, build_agent_runner
+from orcha.capabilities.base import CapabilityContext, PermissionPolicy
+from orcha.capabilities.registry import CapabilityRegistry
+from orcha.nodes.agent import AgentConfig
+
+registry = CapabilityRegistry().register_defaults()
+executor = registry.build(
+    ["filesystem", "workspace", "search", "git"],
+    ctx=CapabilityContext(roots=["/path/to/workspace"]),
+    policy=PermissionPolicy(access_mode="action"),
+)
+runner = build_agent_runner(AgentGraphConfig(
+    agent_config=AgentConfig(completion_fn=my_completion_fn, max_iterations=6),
+    executor=executor,
+))
+result = await runner.run("find every TODO in this repo")
+print(result.answer)`,
+      },
+      { kind: 'note', text: 'A complete runnable version, including my_completion_fn, is examples/basic_agent.py in the ORCHA repo.' },
+    ],
   },
   {
     heading: 'Integrations',
-    body: 'First-party connectors for vector databases, object storage, identity providers, and observability stacks. Anything else can be wrapped as a Tool in a few lines.',
+    body: 'ORCHA ships lazily-imported boundaries for LangGraph, Deep Agents, ragas evaluation and Phoenix/OpenTelemetry tracing. Anything else can be wrapped as a capability (tool).',
   },
 ];
 
@@ -68,7 +130,7 @@ const Docs = () => {
     <CleanLayout>
       <SEO
         title="Docs — LocalHouseLLM Developer Documentation"
-        description="Developer documentation for the LocalHouseLLM modular AI stack: quickstart, installation, API reference, config reference, custom expert guide, and integrations."
+        description="Developer documentation for the LocalHouseLLM modular AI stack: quickstart, installation, API reference, config reference, tool-using agent guide, and integrations."
         canonical="https://localhousellm.com/docs"
         keywords="LocalHouseLLM docs, ORCHA documentation, AICL documentation, modular AI SDK, AI orchestration SDK, AI developer documentation"
         schema={{ '@context': 'https://schema.org', '@type': 'TechArticle', headline: 'LocalHouseLLM Developer Documentation', author: { '@id': 'https://localhousellm.com/#organization' }, publisher: { '@id': 'https://localhousellm.com/#organization' }, url: 'https://localhousellm.com/docs', isPartOf: { '@id': 'https://localhousellm.com/#website' } }}
@@ -84,9 +146,9 @@ const Docs = () => {
             one more thing running in someone else's cloud.
           </p>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            The LocalHouseLLM stack is open infrastructure. These docs are how you build on it. Some sections are
-            still being written — references to the open-source repositories are linked throughout for current
-            source-of-truth.
+            The LocalHouseLLM stack is open infrastructure, and these docs are how you build on it. The open SDKs,
+            ORCHA and AICL, are Python libraries. Some sections are still being written; the GitHub READMEs are the
+            source of truth.
           </p>
         </div>
       </section>
@@ -121,8 +183,31 @@ const Docs = () => {
               <article key={s.heading} id={slug(s.heading)} className="scroll-mt-28">
                 <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-4">{s.heading}</h2>
                 <p className="text-muted-foreground leading-relaxed mb-5">{s.body}</p>
-                {s.code && (
-                  <pre className="p-5 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card whitespace-pre overflow-x-auto">{s.code}</pre>
+                {s.blocks && (
+                  <div className="space-y-4">
+                    {s.blocks.map((b, i) => {
+                      if (b.kind === 'code') {
+                        return (
+                          <pre key={i} className="p-5 rounded-2xl border border-border font-mono text-xs md:text-sm leading-relaxed bg-card whitespace-pre overflow-x-auto">{b.text}</pre>
+                        );
+                      }
+                      if (b.kind === 'note') {
+                        return <p key={i} className="text-sm text-muted-foreground leading-relaxed">{b.text}</p>;
+                      }
+                      return (
+                        <p key={i} className="text-sm font-sans">
+                          {b.links.map((l, j) => (
+                            <span key={l.href}>
+                              {j > 0 && <span className="text-muted-foreground mx-2">·</span>}
+                              <a href={l.href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-foreground">
+                                {l.label} on GitHub
+                              </a>
+                            </span>
+                          ))}
+                        </p>
+                      );
+                    })}
+                  </div>
                 )}
               </article>
             ))}
@@ -138,6 +223,15 @@ const Docs = () => {
             <Link to="/stack"><Button variant="outline" className="rounded-full border-border bg-transparent h-11 px-6 font-sans">The stack</Button></Link>
             <a href="https://github.com/LocalHouseLLM" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="rounded-full border-border bg-transparent h-11 px-6 font-sans">GitHub</Button>
+            </a>
+            <a href={ORCHA_REPO} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="rounded-full border-border bg-transparent h-11 px-6 font-sans">ORCHA on GitHub</Button>
+            </a>
+            <a href={AICL_REPO} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="rounded-full border-border bg-transparent h-11 px-6 font-sans">AICL on GitHub</Button>
+            </a>
+            <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="rounded-full border-border bg-transparent h-11 px-6 font-sans">Community</Button>
             </a>
           </div>
         </div>
