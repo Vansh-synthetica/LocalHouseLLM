@@ -30,7 +30,7 @@ const timeline = [
 const socials = [
   { label: 'GitHub', href: 'https://github.com/LocalHouseLLM', desc: 'Follow our open source work' },
   { label: 'X (Twitter)', href: 'https://x.com/localhousellm', desc: 'Latest updates and news' },
-  { label: 'Instagram', href: 'https://www.instagram.com/localhousellm/', desc: 'Behind the scenes' },
+  { label: 'Instagram', href: 'https://www.instagram.com/localhousellm._com/', desc: 'Behind the scenes' },
   { label: 'Discord', href: '#', desc: 'Coming soon', comingSoon: true },
 ];
 
