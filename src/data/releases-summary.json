@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-26T15:57:00.046Z",
+  "syncedAt": "2026-10-29T22:04:34.535Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,82 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.22",
+      "latest": "v1.2.23",
       "releases": [
+        {
+          "tag": "v1.2.23",
+          "version": "1.2.23",
+          "name": "Anvira Notes 1.2.23",
+          "date": "2026-10-29T22:04:20Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.23",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.23.exe",
+            "size": 137883234,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.23/Anvira-Notes-Setup-1.2.23.exe",
+            "sha256": "5de6a6560a0fd41b4825c0f9ee7d65b6ba9bd3ab84faa0706df25b5c74568bea"
+          },
+          "summary": "What you share in a chat now comes with the thing itself, not just its title.",
+          "highlights": [
+            {
+              "kind": "Shared things can be opened now",
+              "text": "Pages"
+            },
+            {
+              "kind": "Shared things can be opened now",
+              "text": "Lessons"
+            },
+            {
+              "kind": "Shared things can be opened now",
+              "text": "Mock exams"
+            },
+            {
+              "kind": "Shared things can be opened now",
+              "text": "Notebooks"
+            },
+            {
+              "kind": "Pochi in your chats",
+              "text": "Catch me up"
+            },
+            {
+              "kind": "Pochi in your chats",
+              "text": "Turn this chat into notes"
+            },
+            {
+              "kind": "Messages",
+              "text": "Light mode"
+            },
+            {
+              "kind": "Messages",
+              "text": "Shared in this chat"
+            },
+            {
+              "kind": "Messages",
+              "text": "Small animations"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Shared things can be opened now",
+              "html": "<p>What you share in a chat now comes with the thing itself, not just its title.</p><ul><li><strong>Pages:</strong> <strong>Open</strong> to read it, <strong>Save to my notes</strong> to keep it in any notebook. Whiteboards and tables can be shared too, not only text pages.</li><li><strong>Lessons:</strong> <strong>Study these cards</strong> (or <strong>Take this quiz</strong>) saves the lesson into your notes and starts it straight away, with every card new for you.</li><li><strong>Mock exams:</strong> share one from the exam results or the grades list. Classmates get the questions to sit, never your answers or marks. <strong>Take this exam</strong> starts it.</li><li><strong>Notebooks:</strong> share a whole notebook from its menu (or the chat icon next to it in the sidebar). <strong>Save notebook</strong> adds it, with its pages and lessons.</li></ul><p>Shared items stay private to the chat, like its photos and files.</p>"
+            },
+            {
+              "title": "Pochi in your chats",
+              "html": "<p>Click ✨ at the top of a chat. It runs on the AI on your PC, and the chat never leaves it.</p><ul><li><strong>Catch me up:</strong> what you missed, in a few lines: what was decided, what people asked you, dates, and what was shared.</li><li><strong>Turn this chat into notes:</strong> a page of study notes from what the group worked out, with a to-do list, saved to the notebook you choose.</li></ul><p>Pochi only writes what the chat says: lines with numbers, dates or tasks the chat never had are left out. Tested on two study-group chats with Qwen2.5-Coder 3B (14 answers in all): no made-up numbers, dates or formulas got through, and once a catch-up line mixed up who would do a task. Each answer took 1–3 seconds on a GPU.</p>"
+            },
+            {
+              "title": "Messages",
+              "html": "<ul><li><strong>Light mode:</strong> Messages turns light when Notes is light (Settings → Notes → Light editor).</li><li><strong>Shared in this chat:</strong> chat info now lists every page, notebook, lesson and exam shared there, ready to open, then photos and files.</li><li><strong>Small animations:</strong> shared cards, menus, chat info and dialogs move a little when they appear, and Pochi shimmers while it reads. They are off when Windows is set to show fewer animations.</li><li>Long group names end in &quot;…&quot; in the pop-up chat instead of being cut off.</li></ul><p>Someone on an older Anvira Notes sees a shared item as a card with a file attached. They can open it once they update.</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.22",
           "version": "1.2.22",
           "name": "Anvira Notes 1.2.22",
           "date": "2026-10-26T15:56:44Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.22",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.22.exe",
             "size": 137883243,
@@ -31,12 +98,6 @@
             {
               "kind": "Pochi Club",
               "text": "Firefly Trail can be bought"
-            }
-          ],
-          "notes": [
-            {
-              "title": "Pochi Club",
-              "html": "<ul><li><strong>Gifts from Anvira</strong> now show up in Pochi Club: the coins land in your wallet, and a gift can open the whole shop, with every move and home.</li><li><strong>Firefly Trail can be bought.</strong> It costs 340 coins, and the account would not save a purchase over 300, so it disappeared after syncing. Fixed.</li><li>Big balances are easier to read (1,000,120, or 1M on the Study page).</li></ul>"
             }
           ]
         },
