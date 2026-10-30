@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-29T22:04:34.535Z",
+  "syncedAt": "2026-10-30T14:08:45.203Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,58 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.23",
+      "latest": "v1.2.24",
       "releases": [
+        {
+          "tag": "v1.2.24",
+          "version": "1.2.24",
+          "name": "Anvira Notes 1.2.24",
+          "date": "2026-10-30T14:08:31Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.24",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.24.exe",
+            "size": 137884574,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.24/Anvira-Notes-Setup-1.2.24.exe",
+            "sha256": "c3a22f0d88a71ae69b6079960cbab6e3f2232f824fe77378329ba4f108a86990"
+          },
+          "summary": "The Study page comes to life: its cards rise in one after another. Your streak, XP and today's goal count up, and the goal ring fills with them. The streak flame flickers, the week's days pop in, and today's day…",
+          "highlights": [
+            {
+              "kind": "Smoother, livelier Study",
+              "text": "The Study page comes to life"
+            },
+            {
+              "kind": "Smoother, livelier Study",
+              "text": "Lessons feel tactile"
+            },
+            {
+              "kind": "Smoother, livelier Study",
+              "text": "\"+XP\" after a lesson"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Smoother, livelier Study",
+              "html": "<ul><li><strong>The Study page comes to life:</strong> its cards rise in one after another. Your streak, XP and today's goal count up, and the goal ring fills with them. The streak flame flickers, the week's days pop in, and today's day gently pulses.</li><li><strong>Lessons feel tactile:</strong> answer choices arrive one by one. A right answer pops, a wrong one shakes, and the answer sheet bounces up. A light runs across the progress bar, and the score tiles pop in at the end.</li><li><strong>&quot;+XP&quot; after a lesson</strong> pops up and floats away, and is no longer half hidden under the window's title strip.</li><li>Notebook progress bars fill when they appear. Lab tiles, notebooks and buttons lift under the pointer and press in when clicked. Inside a notebook, the lesson path and &quot;Up next&quot; arrive in order.</li><li>The Chemistry, Physics and Math Labs and Pochi Club slide up into place when they open.</li></ul>"
+            },
+            {
+              "title": "Smoother Messages",
+              "html": "<ul><li>The chat list slides in and its chats arrive one after another. Switching chats settles the header in.</li><li>The actions beside a message grow out of it, and your sent tick lands with a little pop. Reactions pop in, a message that mentions you glows once, and the send button pops in when there is something to send.</li><li>Emoji pickers, and the people and chats in New chat, Share and Forward, come in one after another.</li><li>Fixed: in a narrow window, a sideways scrollbar could appear under the messages.</li></ul>"
+            },
+            {
+              "title": "Everywhere",
+              "html": "<ul><li>The icons in the left bar grow slightly under the pointer and pop when you switch section.</li></ul><p>All of it is quick, and it turns off when Windows is set to show fewer animations (Settings → Accessibility → Visual effects → Animation effects).</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.23",
           "version": "1.2.23",
           "name": "Anvira Notes 1.2.23",
           "date": "2026-10-29T22:04:20Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.23",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.23.exe",
             "size": 137883234,
