@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-30T14:08:45.203Z",
+  "syncedAt": "2026-10-30T14:18:46.769Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,50 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.24",
+      "latest": "v1.2.25",
       "releases": [
+        {
+          "tag": "v1.2.25",
+          "version": "1.2.25",
+          "name": "Anvira Notes 1.2.25",
+          "date": "2026-10-30T14:18:41Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.25",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.25.exe",
+            "size": 137882938,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.25/Anvira-Notes-Setup-1.2.25.exe",
+            "sha256": "84cff42eb094091efd922a25d9cbe309ad303e793e72408a6ac051e07ed093a1"
+          },
+          "summary": "Pochi in chats: the ✨ menu opened underneath the Catch me up panel, so the two showed through each other. The menu now opens on top.",
+          "highlights": [
+            {
+              "kind": "Fixes",
+              "text": "Pochi in chats"
+            },
+            {
+              "kind": "Fixes",
+              "text": "\"Reading messages…\""
+            },
+            {
+              "kind": "Fixes",
+              "text": "When the AI is not running,"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Fixes",
+              "html": "<ul><li><strong>Pochi in chats:</strong> the ✨ menu opened underneath the Catch me up panel, so the two showed through each other. The menu now opens on top.</li><li><strong>&quot;Reading messages…&quot;</strong> no longer slides under its dots while Pochi reads.</li><li><strong>When the AI is not running,</strong> Pochi now says so plainly (&quot;Start Anvira Runtime, or load a model in Settings → AI &amp; Models&quot;) instead of showing a technical server message.</li><li>The update panel and a few small chips elsewhere in the app had picked up Messages' animations since 1.2.23. They are back to their own.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.24",
           "version": "1.2.24",
           "name": "Anvira Notes 1.2.24",
           "date": "2026-10-30T14:08:31Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.24",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.24.exe",
             "size": 137884574,

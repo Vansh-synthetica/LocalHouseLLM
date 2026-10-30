@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-30T14:08:45.203Z",
+  "syncedAt": "2026-10-30T14:18:46.769Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,50 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.24",
+      "latest": "v1.2.25",
       "releases": [
+        {
+          "tag": "v1.2.25",
+          "version": "1.2.25",
+          "name": "Anvira Notes 1.2.25",
+          "date": "2026-10-30T14:18:41Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.25",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.25.exe",
+            "size": 137882938,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.25/Anvira-Notes-Setup-1.2.25.exe",
+            "sha256": "84cff42eb094091efd922a25d9cbe309ad303e793e72408a6ac051e07ed093a1"
+          },
+          "summary": "Pochi in chats: the ✨ menu opened underneath the Catch me up panel, so the two showed through each other. The menu now opens on top.",
+          "highlights": [
+            {
+              "kind": "Fixes",
+              "text": "Pochi in chats"
+            },
+            {
+              "kind": "Fixes",
+              "text": "\"Reading messages…\""
+            },
+            {
+              "kind": "Fixes",
+              "text": "When the AI is not running,"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Fixes",
+              "html": "<ul><li><strong>Pochi in chats:</strong> the ✨ menu opened underneath the Catch me up panel, so the two showed through each other. The menu now opens on top.</li><li><strong>&quot;Reading messages…&quot;</strong> no longer slides under its dots while Pochi reads.</li><li><strong>When the AI is not running,</strong> Pochi now says so plainly (&quot;Start Anvira Runtime, or load a model in Settings → AI &amp; Models&quot;) instead of showing a technical server message.</li><li>The update panel and a few small chips elsewhere in the app had picked up Messages' animations since 1.2.23. They are back to their own.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.24",
           "version": "1.2.24",
           "name": "Anvira Notes 1.2.24",
           "date": "2026-10-30T14:08:31Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.24",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.24.exe",
             "size": 137884574,
@@ -35,20 +70,6 @@
             {
               "kind": "Smoother, livelier Study",
               "text": "\"+XP\" after a lesson"
-            }
-          ],
-          "notes": [
-            {
-              "title": "Smoother, livelier Study",
-              "html": "<ul><li><strong>The Study page comes to life:</strong> its cards rise in one after another. Your streak, XP and today's goal count up, and the goal ring fills with them. The streak flame flickers, the week's days pop in, and today's day gently pulses.</li><li><strong>Lessons feel tactile:</strong> answer choices arrive one by one. A right answer pops, a wrong one shakes, and the answer sheet bounces up. A light runs across the progress bar, and the score tiles pop in at the end.</li><li><strong>&quot;+XP&quot; after a lesson</strong> pops up and floats away, and is no longer half hidden under the window's title strip.</li><li>Notebook progress bars fill when they appear. Lab tiles, notebooks and buttons lift under the pointer and press in when clicked. Inside a notebook, the lesson path and &quot;Up next&quot; arrive in order.</li><li>The Chemistry, Physics and Math Labs and Pochi Club slide up into place when they open.</li></ul>"
-            },
-            {
-              "title": "Smoother Messages",
-              "html": "<ul><li>The chat list slides in and its chats arrive one after another. Switching chats settles the header in.</li><li>The actions beside a message grow out of it, and your sent tick lands with a little pop. Reactions pop in, a message that mentions you glows once, and the send button pops in when there is something to send.</li><li>Emoji pickers, and the people and chats in New chat, Share and Forward, come in one after another.</li><li>Fixed: in a narrow window, a sideways scrollbar could appear under the messages.</li></ul>"
-            },
-            {
-              "title": "Everywhere",
-              "html": "<ul><li>The icons in the left bar grow slightly under the pointer and pop when you switch section.</li></ul><p>All of it is quick, and it turns off when Windows is set to show fewer animations (Settings → Accessibility → Visual effects → Animation effects).</p>"
             }
           ]
         },
