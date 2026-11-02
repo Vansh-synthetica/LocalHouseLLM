@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-30T14:18:46.769Z",
+  "syncedAt": "2026-11-02T15:46:04.401Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,58 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.25",
+      "latest": "v1.2.26",
       "releases": [
+        {
+          "tag": "v1.2.26",
+          "version": "1.2.26",
+          "name": "Anvira Notes 1.2.26",
+          "date": "2026-11-02T10:11:54Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.26",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.26.exe",
+            "size": 162537135,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.26/Anvira-Notes-Setup-1.2.26.exe",
+            "sha256": "bbbe196728fd9ce1eefa9d118e5ea17c3608ea7091a2252d1de6129a699af33c"
+          },
+          "summary": "A new lab in Study → Labs and exams for learning to code, step by step, the way Mimo and Sololearn teach it. It covers Python, JavaScript, Java, C and C++, and it works offline: your code really runs, right inside…",
+          "highlights": [
+            {
+              "kind": "New: Code Lab",
+              "text": "Learn"
+            },
+            {
+              "kind": "New: Code Lab",
+              "text": "Practice"
+            },
+            {
+              "kind": "New: Code Lab",
+              "text": "Playground"
+            },
+            {
+              "kind": "New: Code Lab",
+              "text": "Ask Pochi"
+            }
+          ],
+          "notes": [
+            {
+              "title": "New: Code Lab",
+              "html": "<p>A new lab in <strong>Study → Labs and exams</strong> for learning to code, step by step, the way Mimo and Sololearn teach it. It covers <strong>Python, JavaScript, Java, C and C++</strong>, and it works offline: your code really runs, right inside the app.</p><ul><li><strong>Learn:</strong> short lessons on a path. Read and run an example, answer &quot;what does this print?&quot;, fill in the blanks, then write the program yourself. Your code is checked by running it. When it is wrong, you see what was expected next to what your program printed, with the wrong line marked.</li><li><strong>Practice:</strong> 12 challenges, from easy to hard (FizzBuzz, palindromes, primes, a Caesar cipher, balanced brackets…). Solve each one in any of the five languages. Run tries your own input; Submit checks every test.</li><li><strong>Playground:</strong> write anything, give it input, and run it, with example programs for each language.</li><li><strong>Ask Pochi:</strong> a hint that doesn't give the answer away, an explanation of your code, or an explanation of an error (uses the AI model on your PC).</li><li>Every lesson example, answer and challenge solution was checked by running it in all five languages before release.</li></ul>"
+            },
+            {
+              "title": "Your Pochi, everywhere",
+              "html": "<p>The Pochi you dress up in <strong>Pochi Club</strong> (its colour and what it wears) now appears everywhere Pochi does: the Study desk, lessons, quizzes, flashcards, mock exams and the chat panels. It is no longer only in the small Club badge.</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.25",
           "version": "1.2.25",
           "name": "Anvira Notes 1.2.25",
           "date": "2026-10-30T14:18:41Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.25",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.25.exe",
             "size": 137882938,
