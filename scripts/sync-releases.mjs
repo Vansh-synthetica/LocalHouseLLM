@@ -21,6 +21,8 @@ const PRODUCTS = [
   { id: 'anvira-notes', name: 'Anvira Notes', repo: 'Vansh-synthetica/Anvira-Notes-release', page: '/anvira-notes', installer: /\.exe$/i },
   { id: 'anvira', name: 'Anvira', repo: 'Vansh-synthetica/Anvira-release', page: '/anvira', installer: /\.exe$/i },
   { id: 'anvira-runtime', name: 'Anvira Runtime', repo: 'Vansh-synthetica/Anvira-Runtime', page: '/anvira#runtime', installer: /win-x64\.zip$/i },
+  // The Android branch of Anvira Notes, published as signed .apk files (no .exe assets).
+  { id: 'anvira-notes-android', name: 'Anvira Notes for Android', repo: 'Vansh-synthetica/Anvira-Notes-Android-release', page: '/anvira-notes#mobile', installer: /\.apk$/i },
 ];
 
 // Sections that only make sense on GitHub ("download … below", upload checklists).

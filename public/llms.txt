@@ -8,12 +8,14 @@ Everything on localhousellm.com is open to search engines and AI crawlers for in
 
 - [Anvira Notes](https://localhousellm.com/anvira-notes): Free notes and study app for Windows 10 and 11. Notion-style pages, two-way Google Docs and Notion sync, a local lecture recorder (whisper.cpp), offline OCR, a study coach with FSRS flashcards and quizzes generated from the user's notes, graded mock exams with a grade per subject, and Messages for direct chats and study groups. AI runs on the user's PC through Anvira Runtime; a free account is required to sign in, and notes and files stay on the PC. Current release {{version:anvira-notes}} ({{date:anvira-notes}}).
 - [Anvira](https://localhousellm.com/anvira): Free local-first AI chat and coding agent for Windows 10 and 11. Runs GGUF models through llama.cpp on the user's GPU or CPU, works on project folders, and shows every agent change as a per-file diff that can be undone. Optional cloud providers and an optional account. Current release {{version:anvira}} ({{date:anvira}}).
+- [Anvira Notes for Android](https://localhousellm.com/anvira-notes#mobile): The touch app of Anvira Notes' android branch for Android 7.0+ phones (64-bit ARM), published as a signed .apk. Study notebooks, flashcards with spaced review, the Chemistry, Physics, Math and Code labs, messages, and an on-device AI: download a model (Qwen 2.5 1.5B is a good start) and Ask AI, flashcards, quizzes and lessons run on the phone with no internet needed; Qwen3 models can think before they answer (Off / Quick / Deep). The app checks for a newer .apk and updates itself; notebooks are kept. Current release {{version:anvira-notes-android}} ({{date:anvira-notes-android}}).
 - [Anvira Runtime](https://localhousellm.com/anvira#runtime): The local AI service both apps share — model management, ORCHA agent execution, Nomi memory, a local authenticated API, CLI, and Python and TypeScript SDKs. Current release {{version:anvira-runtime}} ({{date:anvira-runtime}}).
 
 ## Release notes
 
 - [All release notes](https://localhousellm.com/releases): Every version of every app, newest first, with installer sizes and SHA-256 checksums.
 - [Anvira Notes release notes](https://localhousellm.com/releases/anvira-notes)
+- [Anvira Notes for Android release notes](https://localhousellm.com/releases/anvira-notes-android)
 - [Anvira release notes](https://localhousellm.com/releases/anvira)
 - [Anvira Runtime release notes](https://localhousellm.com/releases/anvira-runtime)
 - Atom feed: https://localhousellm.com/releases.xml
@@ -42,7 +44,9 @@ Everything on localhousellm.com is open to search engines and AI crawlers for in
 
 - Anvira Notes installer: {{installer:anvira-notes}}
 - Anvira installer: {{installer:anvira}}
+- Anvira Notes for Android (.apk): {{installer:anvira-notes-android}}
 - All Anvira Notes releases: https://github.com/Vansh-synthetica/Anvira-Notes-release/releases
+- All Anvira Notes for Android releases: https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases
 - All Anvira releases: https://github.com/Vansh-synthetica/Anvira-release/releases
 
 ## Moved pages

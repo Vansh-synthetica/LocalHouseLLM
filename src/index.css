@@ -71,6 +71,10 @@
 
   h1, h2, h3 { scroll-margin-top: 5rem; }
 
+  /* Sections are the anchor targets on the product pages (#agent, #messages, …);
+     they must clear the fixed navbar the same way headlines do. */
+  [id] { scroll-margin-top: calc(5rem + 12px); }
+
 
   body {
     @apply bg-background text-foreground font-sans antialiased;

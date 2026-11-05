@@ -63,10 +63,13 @@ const CARD_COPY: Record<string, string> = {
     'The local agent workspace now updates itself and its runtime from one button, adds an optional account, and explains engine errors in plain language.',
   'anvira-runtime@1.0.2':
     'The local AI engine under both apps now serves several requests at once, so chat and Ask AI never wait behind an exam or lesson being written.',
+  'anvira-notes-android@1.1.0':
+    'The first release of the touch app: everything from the PC app on your phone — notebooks, flashcards with spaced review, the four labs, messages and an on-device AI that runs offline.',
 };
 
 const CARD_LINKS: Record<ProductId, { to: string; cta: string; category: string }> = {
   'anvira-notes': { to: '/anvira-notes', cta: 'Explore Anvira Notes', category: 'Product release' },
+  'anvira-notes-android': { to: '/anvira-notes#mobile', cta: 'Meet the Android app', category: 'Product release' },
   anvira: { to: '/anvira', cta: 'Explore Anvira', category: 'Product release' },
   'anvira-runtime': { to: '/anvira#runtime', cta: 'How the runtime works', category: 'Infrastructure' },
 };

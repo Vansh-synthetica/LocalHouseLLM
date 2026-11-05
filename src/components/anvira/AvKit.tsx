@@ -26,6 +26,15 @@ const triggerFileDownload = (url: string) => {
  * it asks GitHub for the current "latest" release first, in case a newer one
  * shipped since the site was built, and falls back to the synced file.
  */
+/**
+ * Which file a product's "latest" release should look for when the button asks
+ * GitHub for a fresh release. Android ships signed .apk files; every other
+ * product ships Windows .exe installers.
+ */
+const ASSET_RX: Partial<Record<ProductId, RegExp>> = {
+  'anvira-notes-android': /\.apk$/i,
+};
+
 export const DownloadButton = ({
   product,
   label,
@@ -50,7 +59,9 @@ export const DownloadButton = ({
       const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
       if (res.ok) {
         const data = await res.json();
-        const asset = (data.assets ?? []).find((a: { name: string }) => /\.exe$/i.test(a.name));
+        const asset = (data.assets ?? []).find((a: { name: string }) =>
+          (ASSET_RX[product] ?? /\.exe$/i).test(a.name),
+        );
         if (asset) url = asset.browser_download_url;
       }
     } catch {
@@ -150,8 +161,8 @@ export const InstallerFacts = ({
 };
 
 const revealUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export const Reveal = ({
@@ -167,7 +178,7 @@ export const Reveal = ({
     className={className}
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: '-60px' }}
+    viewport={{ once: true, margin: '0px 0px -64px 0px' }}
     variants={{
       hidden: revealUp.hidden,
       visible: { ...revealUp.visible, transition: { ...revealUp.visible.transition, delay } },
@@ -268,15 +279,26 @@ export const FeatureCard = ({
   title,
   children,
   delay = 0,
+  wide = false,
 }: {
   icon: ReactNode;
   title: string;
   children: ReactNode;
   delay?: number;
+  wide?: boolean;
 }) => (
-  <Reveal className="av-card" delay={delay}>
+  <Reveal className={`av-card ${wide ? 'av-card--wide' : ''}`} delay={delay}>
     <span className="av-card__icon">{icon}</span>
-    <h3>{title}</h3>
-    <p>{children}</p>
+    {wide ? (
+      <div>
+        <h3>{title}</h3>
+        <p>{children}</p>
+      </div>
+    ) : (
+      <>
+        <h3>{title}</h3>
+        <p>{children}</p>
+      </>
+    )}
   </Reveal>
 );

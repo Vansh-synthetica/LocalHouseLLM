@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, MotionConfig } from 'framer-motion';
 import {
   ArrowRight,
   Bot,
@@ -23,11 +23,11 @@ import {
   SectionHead,
   ShowcaseRow,
   FeatureCard,
-  Frame,
   Faq,
   DownloadButton,
   InstallerFacts,
 } from '@/components/anvira/AvKit';
+import AutoFilm from '@/components/anvira/Film';
 import { formatReleaseDate, formatSize, getProduct, isoDay, latestRelease, releaseAnchor } from '@/data/releases';
 
 import iconAnvira from '@/assets/anvira/icon-anvira.png';
@@ -36,6 +36,8 @@ import shotConversation from '@/assets/anvira/01-conversation-and-agent-run.png'
 import shotChanges from '@/assets/anvira/02-changes-diff-and-undo.png';
 import shotHome from '@/assets/anvira/03-home.png';
 import shotModels from '@/assets/anvira/04-settings-models.png';
+import anviraFilm from '@/assets/anvira/films/anvira-film.mp4';
+import anviraFilmPoster from '@/assets/anvira/films/anvira-film-poster.jpg';
 
 import '@/pages/anvira-premium.css';
 
@@ -169,7 +171,24 @@ const AnviraHero = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
       >
-        <Frame src={shotHome} alt="Anvira home screen with a project, model picker, and Chat/Agent switch" drift />
+        <div className="av-frame av-frame--drift">
+          <AutoFilm
+            src={anviraFilm}
+            poster={anviraFilmPoster}
+            preload="metadata"
+            // Version-free cut of the launch film: opens on the forest “Small models.”
+            // opener (echoing the headline), tours Chat→Agent, reviewable diffs, the
+            // model layer and Runtime, and ends on the “Every change reviewable”
+            // dusk card before the v1.0.1 download card.
+            label="Anvira film: Chat and Agent inside a project plan, write and verify work, every change lands as a reviewable diff, models and Anvira Runtime stay local, in motion"
+          />
+          <span className="av-stage__chip av-stage__chip--tr" aria-hidden="true">
+            <Cpu className="h-3.5 w-3.5" /> GPU-accelerated · llama.cpp
+          </span>
+          <span className="av-stage__chip av-stage__chip--bl" aria-hidden="true">
+            <GitBranch className="h-3.5 w-3.5" /> every change, a real diff
+          </span>
+        </div>
       </motion.div>
     </div>
   </section>
@@ -202,7 +221,7 @@ const FeatureGrid = () => (
       </SectionHead>
       <div className="av-grid">
         {features.map((f, i) => (
-          <FeatureCard icon={f.icon} title={f.title} key={f.title} delay={(i % 3) * 0.06}>
+          <FeatureCard icon={f.icon} title={f.title} key={f.title} delay={(i % 3) * 0.06} wide={i === features.length - 1}>
             {f.body}
           </FeatureCard>
         ))}
@@ -523,21 +542,23 @@ const Anvira = () => {
       />
 
       <div className="av av--blue">
-        <div className="av-glow" aria-hidden="true" />
-        <div className="av-noise" aria-hidden="true" />
-        <AnviraHero />
-        <ProofStrip />
-        <FeatureGrid />
-        <TestedSection />
-        <AgentSection />
-        <ChangesSection />
-        <ModelsSection />
-        <RuntimeSection />
-        <ChangelogSection />
-        <DownloadSection />
-        <FaqSection />
-        <CrossLinkSection />
-        <AnviraFinal />
+        <MotionConfig reducedMotion="user">
+          <div className="av-glow" aria-hidden="true" />
+          <div className="av-noise" aria-hidden="true" />
+          <AnviraHero />
+          <ProofStrip />
+          <FeatureGrid />
+          <TestedSection />
+          <AgentSection />
+          <ChangesSection />
+          <ModelsSection />
+          <RuntimeSection />
+          <ChangelogSection />
+          <DownloadSection />
+          <FaqSection />
+          <CrossLinkSection />
+          <AnviraFinal />
+        </MotionConfig>
       </div>
     </CleanLayout>
   );

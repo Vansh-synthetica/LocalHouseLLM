@@ -17,9 +17,17 @@ import { type ProductId, latestRelease } from '@/data/releases';
 import iconAnvira from '@/assets/anvira/icon-anvira.png';
 import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
 
-const downloadApps: { id: ProductId; name: string; to: string; icon: string; tagline: string }[] = [
-  { id: 'anvira-notes', name: 'Anvira Notes', to: '/anvira-notes', icon: iconAnviraNotes, tagline: 'notes & study' },
-  { id: 'anvira', name: 'Anvira', to: '/anvira', icon: iconAnvira, tagline: 'AI coding agent' },
+const downloadApps: { id: ProductId; name: string; to: string; icon: string; tagline: string; mobile?: boolean }[] = [
+  { id: 'anvira-notes', name: 'Anvira Notes', to: '/anvira-notes#download', icon: iconAnviraNotes, tagline: 'notes & study' },
+  { id: 'anvira', name: 'Anvira', to: '/anvira#download', icon: iconAnvira, tagline: 'AI coding agent' },
+  {
+    id: 'anvira-notes-android',
+    name: 'Anvira Notes for Android',
+    to: '/anvira-notes#mobile',
+    icon: iconAnviraNotes,
+    tagline: 'on your phone',
+    mobile: true,
+  },
 ];
 
 type NavLink = { to: string; label: string };
@@ -70,6 +78,22 @@ const Navbar = () => {
       active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
     }`;
   };
+
+  const desktopApps = downloadApps.filter((app) => !app.mobile);
+  const androidApp = downloadApps.find((app) => app.mobile);
+  const appItem = (app: (typeof downloadApps)[number]) => (
+    <DropdownMenuItem key={app.id} asChild className="rounded-xl p-2.5 cursor-pointer">
+      <Link to={app.to} className="flex items-center gap-3">
+        <img src={app.icon} alt="" width={36} height={36} className="h-9 w-9 rounded-[10px]" />
+        <span className="flex flex-col">
+          <span className="text-[14px] font-semibold text-foreground">{app.name}</span>
+          <span className="text-[12px] text-muted-foreground">
+            Version {latestRelease(app.id).version} · {app.tagline}
+          </span>
+        </span>
+      </Link>
+    </DropdownMenuItem>
+  );
 
   return (
     <>
@@ -173,19 +197,12 @@ const Navbar = () => {
                     <DropdownMenuLabel className="px-2.5 pt-1.5 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                       Free for Windows 10 &amp; 11
                     </DropdownMenuLabel>
-                    {downloadApps.map((app) => (
-                      <DropdownMenuItem key={app.id} asChild className="rounded-xl p-2.5 cursor-pointer">
-                        <Link to={`${app.to}#download`} className="flex items-center gap-3">
-                          <img src={app.icon} alt="" width={36} height={36} className="h-9 w-9 rounded-[10px]" />
-                          <span className="flex flex-col">
-                            <span className="text-[14px] font-semibold text-foreground">{app.name}</span>
-                            <span className="text-[12px] text-muted-foreground">
-                              Version {latestRelease(app.id).version} · {app.tagline}
-                            </span>
-                          </span>
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
+                    {desktopApps.map((app) => appItem(app))}
+                    <DropdownMenuSeparator className="my-1.5" />
+                    <DropdownMenuLabel className="px-2.5 pt-1.5 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                      On your Android phone
+                    </DropdownMenuLabel>
+                    {androidApp && appItem(androidApp)}
                     <DropdownMenuSeparator className="my-1.5" />
                     <DropdownMenuItem asChild className="rounded-xl px-2.5 py-2 cursor-pointer text-[13px]">
                       <Link to="/releases">Release notes for every version</Link>
@@ -245,6 +262,11 @@ const Navbar = () => {
                     <Link to="/anvira-notes#download">
                       <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90">
                         Download Anvira Notes
+                      </Button>
+                    </Link>
+                    <Link to="/anvira-notes#mobile">
+                      <Button variant="outline" className="w-full rounded-full">
+                        Download for Android
                       </Button>
                     </Link>
                     <Link to="/anvira#download">

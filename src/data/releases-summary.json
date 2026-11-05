@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-02T15:46:04.401Z",
+  "syncedAt": "2026-11-04T18:39:22.034Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -1565,6 +1565,59 @@
           },
           "summary": "Windows x64 self-contained package: its own Python, ORCHA, Nomi, AICL, CPU llama-server, and the Microsoft VC++ runtime (no installs needed). The -cuda zip adds NVIDIA GPU acceleration (needs an NVIDIA driver 525+);…",
           "highlights": []
+        }
+      ]
+    },
+    {
+      "id": "anvira-notes-android",
+      "name": "Anvira Notes for Android",
+      "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
+      "page": "/anvira-notes#mobile",
+      "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
+      "latest": "v1.1.0",
+      "releases": [
+        {
+          "tag": "v1.1.0",
+          "version": "1.1.0",
+          "name": "Anvira Notes 1.1.0",
+          "date": "2026-11-03T18:40:43Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.1.0",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.1.0.apk",
+            "size": 67612085,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.1.0/Anvira-Notes-1.1.0.apk",
+            "sha256": "9a17f48e3c1e62c1c2fbfb8f2a954d3fbe9fe3fcc24c88143c195b13893abcd4"
+          },
+          "summary": "Everything from the PC app, on your phone:",
+          "highlights": [
+            {
+              "kind": "Anvira Notes for Android: the first release",
+              "text": "On-device AI"
+            },
+            {
+              "kind": "Anvira Notes for Android: the first release",
+              "text": "Thinking in Ask AI"
+            },
+            {
+              "kind": "Anvira Notes for Android: the first release",
+              "text": "Labs made for the phone"
+            },
+            {
+              "kind": "Anvira Notes for Android: the first release",
+              "text": "Notes"
+            },
+            {
+              "kind": "Anvira Notes for Android: the first release",
+              "text": "Updates inside the app"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Anvira Notes for Android: the first release",
+              "html": "<p>Everything from the PC app, on your phone:</p><ul><li><strong>On-device AI:</strong> download a model in the AI tab, and Ask AI, flashcards, quizzes and lessons run right on the phone, offline.</li><li><strong>Thinking in Ask AI:</strong> Qwen3 models can think before they answer (Off / Quick / Deep). Study stays fast with thinking off.</li><li><strong>Labs made for the phone:</strong> Chemistry, Physics, Math and Code, laid out for touch.</li><li><strong>Notes:</strong> the &quot;/&quot; menu fits above the keyboard, with no handles in the way of your text.</li><li><strong>Updates inside the app:</strong> when a new version comes out, tap <strong>Update</strong> in the banner, and the app downloads it and installs it over this one. Your notebooks are kept.</li></ul>"
+            }
+          ]
         }
       ]
     }

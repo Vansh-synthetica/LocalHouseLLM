@@ -30,6 +30,13 @@ const META: Record<ProductId, { blurb: string; title: string; description: strin
     description:
       'What changed in every Anvira Notes release, newest first: new features, fixes, download sizes and SHA-256 checksums for the free AI notes and study app for Windows.',
   },
+  'anvira-notes-android': {
+    icon: iconAnviraNotes,
+    blurb: 'The touch app from Anvira Notes’ android branch: notebooks, labs, messages and on-device AI, free as a signed .apk.',
+    title: 'Anvira Notes for Android Release Notes — Every Version & Changelog',
+    description:
+      'What changed in every Anvira Notes for Android release, newest first: new features, fixes, APK sizes and SHA-256 checksums for the free AI notes and study app on Android phones.',
+  },
   anvira: {
     icon: iconAnvira,
     blurb: 'The local-first AI chat and coding agent workspace for Windows.',
@@ -148,7 +155,14 @@ const Releases = () => {
         isPartOf: { '@id': `${SITE}/#website` },
         publisher: { '@id': `${SITE}/#organization` },
         ...(newest && { dateModified: newest.date }),
-        ...(current && current.id !== 'anvira-runtime' && { about: { '@id': `${SITE}${current.page}#app` } }),
+        // A product whose page already carries an anchor (the Android app lives
+        // on the Anvira Notes page at /anvira-notes#mobile) links verbatim;
+        // plain pages link their #app outline.
+        ...(current && current.id !== 'anvira-runtime' && {
+          about: {
+            '@id': current.page.includes('#') ? `${SITE}${current.page}` : `${SITE}${current.page}#app`,
+          },
+        }),
         mainEntity: {
           '@type': 'ItemList',
           itemListOrder: 'https://schema.org/ItemListOrderDescending',

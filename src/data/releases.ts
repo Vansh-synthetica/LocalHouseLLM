@@ -8,7 +8,7 @@
  */
 import summary from './releases-summary.json';
 
-export type ProductId = 'anvira-notes' | 'anvira' | 'anvira-runtime';
+export type ProductId = 'anvira-notes' | 'anvira-notes-android' | 'anvira' | 'anvira-runtime';
 
 export interface Installer {
   name: string;

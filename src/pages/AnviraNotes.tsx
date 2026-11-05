@@ -16,7 +16,9 @@ import {
   Brain,
   CalendarCheck,
   Check,
+  Download,
   Flame,
+  FlaskConical,
   GraduationCap,
   Layers,
   LayoutTemplate,
@@ -29,16 +31,19 @@ import {
   RotateCcw,
   Route,
   ScanText,
-  Send,
+  ShieldCheck,
+  Smartphone,
   Table2,
   Timer,
   Trophy,
+  UserRound,
   Users,
   Zap,
 } from 'lucide-react';
 
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
+import AutoFilm from '@/components/anvira/Film';
 import { DownloadButton, InstallerFacts } from '@/components/anvira/AvKit';
 import {
   formatReleaseDate,
@@ -64,11 +69,17 @@ import shotLessonCard from '@/assets/anvira-notes/09-study-lesson-card.png';
 import shotQuizQuestion from '@/assets/anvira-notes/10-study-quiz-question.png';
 import shotQuizCorrect from '@/assets/anvira-notes/11-study-quiz-correct.png';
 import shotFlashcard from '@/assets/anvira-notes/12-study-flashcard.png';
+import notesFilm from '@/assets/anvira-notes/films/notes-film.mp4';
+import notesFilmPoster from '@/assets/anvira-notes/films/notes-film-poster.jpg';
+import messagesReel from '@/assets/anvira-notes/films/messages-reel.mp4';
+import messagesReelPoster from '@/assets/anvira-notes/films/messages-reel-poster.jpg';
 
 import '@/pages/anvira-notes.css';
 
 const PRODUCT = getProduct('anvira-notes');
 const latest = latestRelease('anvira-notes');
+// The Android branch of Anvira Notes — the touch app, released as signed .apk files.
+const androidLatest = latestRelease('anvira-notes-android');
 const REQUIRES = 'Windows 10 or 11 (64-bit)';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -91,10 +102,10 @@ const Pop = ({
 }) => (
   <motion.div
     className={className}
-    initial={{ opacity: 0, y, scale: 0.97 }}
-    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    viewport={{ once: true, margin: '-60px' }}
-    transition={{ type: 'spring', stiffness: 120, damping: 18, delay }}
+    initial={{ opacity: 0, y }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '0px 0px -48px 0px' }}
+    transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay }}
   >
     {children}
   </motion.div>
@@ -263,10 +274,15 @@ const HeroStage = () => {
     >
       <motion.div className="an-stage__blob" style={{ rotate: blobRotate }} aria-hidden="true" />
       <motion.div className="an-stage__frame" style={{ y: frameY, rotate: frameRotate }}>
-        <img src={shotEditor} alt="Anvira Notes editor open on a Biology 101 page, with sources and tags" />
+        <AutoFilm
+          src={notesFilm}
+          poster={notesFilmPoster}
+          preload="metadata"
+          // The film opens with the same “Write it once. Learn it for good.” card as the headline,
+          // then tours notebooks, mock exams, subject labs and Pochi Club.
+          label="Anvira Notes film: notebooks, mock exams, subject labs and Pochi Club in motion"
+        />
       </motion.div>
-      <Cursor name="Maya" color="purple" className="an-cursor--1" />
-      <Cursor name="Arjun" color="orange" className="an-cursor--2" />
       <motion.div className="an-sticker an-sticker--1" style={{ y: s1 }}>
         <Sticker icon={<Flame />} color="orange" delay={0} rotate={-6}>
           12 day streak
@@ -398,6 +414,7 @@ const CHIPS: { t: string; c: Color }[] = [
   { t: 'Word export', c: 'orange' },
   { t: 'Anki export', c: 'pink' },
   { t: 'Private local AI', c: 'yellow' },
+  { t: 'Now on Android', c: 'teal' },
 ];
 
 const Marquee = () => (
@@ -439,11 +456,11 @@ const Tile = ({
 }) => (
   <motion.article
     className={`an-tile c-${color} ${className}`}
-    initial={{ opacity: 0, y: 60, rotate: tilt }}
+    initial={{ opacity: 0, y: 56, rotate: tilt }}
     whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-    viewport={{ once: true, margin: '-60px' }}
-    transition={{ type: 'spring', stiffness: 100, damping: 17, delay }}
-    whileHover={{ y: -6 }}
+    viewport={{ once: true, margin: '0px 0px -48px 0px' }}
+    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay }}
+    whileHover={{ y: -5 }}
   >
     <div className="an-tile__text">
       <span className="an-tile__icon">{icon}</span>
@@ -1205,49 +1222,43 @@ const ExamVisual = () => (
   </div>
 );
 
-const ChatVisual = () => (
-  <div className="an-chat" aria-hidden="true">
-    <div className="an-chat__doc">
-      <span className="an-chat__doctitle">Lecture 6 – Cell energy</span>
-      {[92, 80, 86, 58, 74].map((w, i) => (
-        <i key={i} style={{ width: `${w}%` }} />
-      ))}
-    </div>
-    <div className="an-chat__pop">
-      <div className="an-chat__head">
-        <span className="an-chat__avatar" style={{ background: '#19b46c' }}>
-          B
-        </span>
-        <span>
-          <b>Bio study group</b>
-          <small>4 people · Maya is typing…</small>
-        </span>
-      </div>
-      <div className="an-chat__msgs">
-        <p className="an-msg">
-          <b>Maya</b>anyone done Q7 from the mock?
-        </p>
-        <p className="an-msg an-msg--me">ETC — about 28 ATP. Sharing my page 👇</p>
-        <p className="an-msg an-msg--me an-msg--card">
-          <BookOpen />
-          <span>
-            <b>Lecture 6 – Cell energy</b>
-            <small>Page · 5 blocks</small>
-          </span>
-        </p>
-        <span className="an-react">👍 2</span>
-      </div>
-      <div className="an-chat__input">
-        Message the group…
-        <Send />
-      </div>
-    </div>
-    <span className="an-chat__bubble an-bob">
-      A<em>3</em>
+const MessagesReelVisual = () => (
+  <div className="an-reel">
+    <span className="an-reel__badge an-bob" aria-hidden="true">
+      <MessageCircle /> Ctrl 3 · Messages
     </span>
+    <AutoFilm
+      src={messagesReel}
+      poster={messagesReelPoster}
+      preload="none"
+      // Vertical cut of the Messages film: share pages into chats, exam-mode bubble
+      // replies and study groups — it is a real phone-frame loop, not UI decoration.
+      label="Anvira Notes Messages reel: sharing a page into a chat, exam-mode pop-ups and study groups"
+    />
   </div>
 );
 
+const Messages = () => (
+  <Feature
+    id="messages"
+    color="blue"
+    pill="Messages"
+    icon={<MessageCircle />}
+    title={
+      <>
+        Study together, without leaving your notes.
+      </>
+    }
+    body="Direct chats and study groups inside Anvira Notes (Ctrl 3). A message that arrives while you write pops up as a small chat in the corner — your typing is never interrupted — and a page or lesson can be shared into a chat in one click."
+    points={[
+      'Find classmates by @username, or join a group with its invite code',
+      'Replies, reactions, edits, typing and Seen — a real messenger',
+      'Free groups hold up to 15 people; mute, block or turn pop-ups off any time',
+      'Only messages go through Anvira’s server — your notes and files stay on your PC',
+    ]}
+    visual={<MessagesReelVisual />}
+  />
+);
 const Exams = () => (
   <Feature
     id="exams"
@@ -1269,29 +1280,6 @@ const Exams = () => (
       'A grade per subject with a range that narrows as you sit more exams',
     ]}
     visual={<ExamVisual />}
-  />
-);
-
-const Messages = () => (
-  <Feature
-    id="messages"
-    color="blue"
-    pill="Messages"
-    icon={<MessageCircle />}
-    title={
-      <>
-        Study together, without leaving your notes.
-      </>
-    }
-    body="Direct chats and study groups inside Anvira Notes (Ctrl 3). A message that arrives while you write pops up as a small chat in the corner — your typing is never interrupted — and a page or lesson can be shared into a chat in one click."
-    points={[
-      'Find classmates by @username, or join a group with its invite code',
-      'Replies, reactions, edits, typing and Seen — a real messenger',
-      'Free groups hold up to 15 people; mute, block or turn pop-ups off any time',
-      'Only messages go through Anvira’s server — your notes and files stay on your PC',
-    ]}
-    visual={<ChatVisual />}
-    reverse
   />
 );
 
@@ -1415,6 +1403,222 @@ const Rows = () => (
 /* Stats, timeline, FAQ, final                                         */
 /* ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------ */
+/* Android                                                             */
+/* ------------------------------------------------------------------ */
+
+const ANDROID_CHECKS = [
+  'Study notebooks and FSRS flashcards, laid out for touch',
+  'The Chemistry, Physics, Math and Code labs, reworked for a phone screen',
+  'Messages in your pocket — direct chats and study groups on the go',
+  'On-device AI: download a model once, then Ask AI, flashcards and quizzes run offline',
+  'Qwen3 models can think before they answer in Ask AI — Off, Quick or Deep',
+];
+
+const ANDROID_STEPS: { icon: ReactNode; color: Color; title: string; body: string }[] = [
+  {
+    icon: <Download />,
+    color: 'teal',
+    title: 'Download the .apk',
+    body: 'One tap below gets the signed build straight from our releases page, checksum published with it.',
+  },
+  {
+    icon: <ShieldCheck />,
+    color: 'green',
+    title: 'Allow & install',
+    body: 'Android asks once: allow “unknown apps” for your browser or Files app, then tap Install.',
+  },
+  {
+    icon: <UserRound />,
+    color: 'purple',
+    title: 'Sign in & study',
+    body: 'Open Anvira Notes, sign in with the Anvira account you were given, and download a model in the AI tab.',
+  },
+];
+
+const PHONE_BOOKS = [
+  { n: 'Biology 101', c: '#19b46c', w: 84 },
+  { n: 'Calculus II', c: '#7c5cff', w: 62 },
+  { n: 'World History', c: '#ffc21a', w: 41 },
+];
+
+const AndroidPhoneVisual = () => (
+  <div
+    className="an-phone"
+    role="img"
+    aria-label="The Anvira Notes Android app on a phone: today’s 18 cards due with progress, three notebooks, the four subject labs, an on-device AI model and the app’s tab bar"
+  >
+    <span className="an-phone__tag an-phone__tag--1 an-bob" aria-hidden="true">
+      <ShieldCheck /> Signed .apk
+    </span>
+    <span className="an-phone__tag an-phone__tag--2 an-bob" aria-hidden="true">
+      <Brain /> Runs offline
+    </span>
+    <div className="an-phone__device">
+      <div className="an-phone__screen" aria-hidden="true">
+        <div className="an-phone__status">
+          <span>9:41</span>
+          <span className="an-phone__gauges">
+            <i />
+            <i />
+            <i />
+          </span>
+        </div>
+        <div className="an-phone__greet">
+          <span>
+            <b>Good evening, Maya</b>
+            <i>Wednesday · Term 2</i>
+          </span>
+          <span className="an-phone__streak">
+            <Flame /> 12
+          </span>
+        </div>
+        <div className="an-phone__today">
+          <b>Today</b>
+          <i>18 cards due · 1 quiz</i>
+          <div className="an-phone__meter">
+            <i style={{ width: '34%' }} />
+          </div>
+          <span className="an-phone__start">Start studying</span>
+        </div>
+        {PHONE_BOOKS.map((s) => (
+          <div key={s.n} className="an-phone__book">
+            <i style={{ background: s.c }} />
+            <div>
+              <b>{s.n}</b>
+              <div className="an-phone__bar">
+                <i style={{ width: `${s.w}%`, background: s.c }} />
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="an-phone__labs">
+          <span>Chem</span>
+          <span>Phys</span>
+          <span>Math</span>
+          <span>Code</span>
+        </div>
+        <div className="an-phone__ai">
+          <Brain />
+          <div>
+            <b>Qwen 2.5 1.5B</b>
+            <i>runs on this phone · offline</i>
+          </div>
+        </div>
+        <div className="an-phone__tabs">
+          <span>
+            <BookOpen />
+            <i>Notes</i>
+          </span>
+          <span>
+            <GraduationCap />
+            <i>Study</i>
+          </span>
+          <span>
+            <FlaskConical />
+            <i>Labs</i>
+          </span>
+          <span className="is-active">
+            <Brain />
+            <i>AI</i>
+          </span>
+          <span>
+            <MessageCircle />
+            <i>Chat</i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const Android = () => (
+  <section className="an-section an-section--feature" id="mobile">
+    <div className="an-shell">
+      <div className="an-row an-feature c-teal">
+        <div className="an-row__text">
+          <Pop>
+            <Pill color="teal" icon={<Smartphone />}>
+              New · Android
+            </Pill>
+          </Pop>
+          <Pop delay={0.05}>
+            <h2 className="an-feature__title">Your notebooks, now on your phone.</h2>
+          </Pop>
+          <Pop delay={0.1}>
+            <p>
+              Anvira Notes for Android is the touch app from Anvira Notes’ android branch, published
+              as a signed .apk. Study notebooks, flashcards with spaced review, the labs and messages
+              — with an AI that runs right on the phone, no internet needed after one model download.
+            </p>
+          </Pop>
+          <ul className="an-checks">
+            {ANDROID_CHECKS.map((p, i) => (
+              <motion.li
+                key={p}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 + i * 0.08, ease: EASE, duration: 0.5 }}
+              >
+                <i>
+                  <Check />
+                </i>
+                {p}
+              </motion.li>
+            ))}
+          </ul>
+          <Pop delay={0.18} className="an-actions an-actions--left">
+            <Magnetic>
+              <DownloadButton product="anvira-notes-android" label="Download for Android" className="an-btn an-btn--dark" />
+            </Magnetic>
+            <Link
+              to={`/releases/anvira-notes-android#${releaseAnchor('anvira-notes-android', androidLatest.version)}`}
+              className="an-btn an-btn--light"
+            >
+              What’s new in {androidLatest.version} <ArrowRight />
+            </Link>
+          </Pop>
+          <Pop delay={0.22}>
+            <p className="an-mobile__fine">
+              v{androidLatest.version}
+              {androidLatest.installer && <> · {formatSize(androidLatest.installer.size)}</>} · signed .apk ·
+              SHA-256 with every release · updates swap in with one tap, notebooks kept
+            </p>
+          </Pop>
+        </div>
+        <Pop className="an-row__panel" delay={0.08} y={50}>
+          <AndroidPhoneVisual />
+        </Pop>
+      </div>
+      <div className="an-steps">
+        {ANDROID_STEPS.map((s, i) => (
+          <Pop key={s.title} delay={i * 0.06} className={`an-steps__item c-${s.color}`}>
+            <span className="an-steps__icon" aria-hidden="true">
+              {s.icon}
+              <em>{i + 1}</em>
+            </span>
+            <div>
+              <strong>{s.title}</strong>
+              <p>{s.body}</p>
+            </div>
+          </Pop>
+        ))}
+      </div>
+      <Pop delay={0.1}>
+        <p className="an-mobile__req">
+          Needs Android 7.0 or later on a 64-bit ARM phone — nearly every phone from the last several
+          years. When a new version is out, a banner inside the app says so: tap <b>Update</b> and the
+          new build downloads itself and opens Android’s installer.{' '}
+          <Link to="/releases/anvira-notes-android">
+            Android releases &amp; checksums <ArrowRight />
+          </Link>
+        </p>
+      </Pop>
+    </div>
+  </section>
+);
+
 const STATS: { to: number; suffix?: string; label: string; color: Color }[] = [
   { to: 22, label: 'templates included, plus a web library', color: 'purple' },
   { to: 2, label: 'two-way syncs: Google Docs and Notion', color: 'green' },
@@ -1468,7 +1672,7 @@ const Timeline = () => (
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ type: 'spring', stiffness: 110, damping: 18, delay: i * 0.04 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.05 }}
           >
             <motion.span
               className="an-tl__dot"
@@ -1541,6 +1745,10 @@ const FAQS = [
     a: 'No. The AI runs on your processor; a first-run hardware scan only offers models your PC can handle (7B or smaller). If you have an NVIDIA GPU, Settings → AI & Models → Turn on GPU makes it much faster — a one-time download of about 650 MB.',
   },
   { q: 'Can I record a lecture?', a: 'Yes. The recorder transcribes on your PC with whisper.cpp and turns the transcript into lecture notes. Nothing is uploaded.' },
+  {
+    q: 'Is there a phone version?',
+    a: 'Yes — Anvira Notes for Android is the touch app from Anvira Notes’ android branch, free as a signed .apk from our releases. It needs Android 7.0 or later on a 64-bit ARM phone, and comes with study notebooks, FSRS flashcards, the Chemistry, Physics, Math and Code labs, messages, and an AI that runs right on the phone: download a model (Qwen 2.5 1.5B is a good start) and Ask AI, flashcards, quizzes and lessons work with no internet after that. When a new version is out, a banner in the app updates it for you; your notebooks are kept.',
+  },
   {
     q: 'Why does Windows show a SmartScreen warning?',
     a: 'The installer isn’t code-signed yet. Choose More info → Run anyway. It installs per user, doesn’t need administrator rights, and each release lists its SHA-256 checksum so you can verify the file.',
@@ -1662,7 +1870,7 @@ const AnviraNotes = () => (
       ogImageWidth={1200}
       ogImageHeight={630}
       modifiedTime={latest.date}
-      keywords="Anvira Notes, AI notes app, study app, mock exam generator, AI exam grader, flashcards app, FSRS spaced repetition, Anki export, study group chat, mind maps, lecture recorder, Google Docs sync, Notion sync, offline notes app, Notion alternative, AI study tool, LocalHouseLLM"
+      keywords="Anvira Notes, AI notes app, study app, mock exam generator, AI exam grader, flashcards app, FSRS spaced repetition, Anki export, study group chat, mind maps, lecture recorder, Google Docs sync, Notion sync, offline notes app, Notion alternative, AI study tool, Anvira Notes for Android, Android notes app, on-device AI phone, LocalHouseLLM"
       canonical="https://localhousellm.com/anvira-notes"
       schema={{
         '@context': 'https://schema.org',
@@ -1713,6 +1921,40 @@ const AnviraNotes = () => (
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
           },
           {
+            '@type': 'SoftwareApplication',
+            '@id': 'https://localhousellm.com/anvira-notes#app-android',
+            name: 'Anvira Notes for Android',
+            applicationCategory: 'EducationApplication',
+            applicationSubCategory: 'Note-taking and study',
+            operatingSystem: 'Android 7.0 or later (64-bit ARM)',
+            softwareVersion: androidLatest.version,
+            datePublished: isoDay(androidLatest.date),
+            dateModified: isoDay(androidLatest.date),
+            releaseNotes: 'https://localhousellm.com/releases/anvira-notes-android',
+            softwareRequirements: 'Android 7.0 or later on a 64-bit ARM phone.',
+            ...(androidLatest.installer && {
+              downloadUrl: androidLatest.installer.url,
+              fileSize: formatSize(androidLatest.installer.size),
+            }),
+            installUrl: 'https://localhousellm.com/anvira-notes#mobile',
+            image: 'https://localhousellm.com/og/anvira-notes.png',
+            isAccessibleForFree: true,
+            description:
+              'The touch app of Anvira Notes’ android branch, published as a signed .apk: study notebooks, flashcards with spaced review, the Chemistry, Physics, Math and Code labs, messages, and an on-device AI that runs offline after one model download. The app updates itself from new .apk releases.',
+            featureList: [
+              'Study notebooks and FSRS flashcards, laid out for touch',
+              'The Chemistry, Physics, Math and Code labs, reworked for a phone screen',
+              'Messages — direct chats and study groups on the go',
+              'On-device AI: one model download, then Ask AI, flashcards and quizzes run offline',
+              'Qwen3 thinking modes in Ask AI (Off / Quick / Deep)',
+              'Self-updating: a banner installs the next signed .apk, keeping notebooks',
+            ],
+            url: 'https://localhousellm.com/anvira-notes#mobile',
+            publisher: { '@id': 'https://localhousellm.com/#organization' },
+            author: { '@id': 'https://localhousellm.com/#organization' },
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+          },
+          {
             '@type': 'FAQPage',
             '@id': 'https://localhousellm.com/anvira-notes#faq',
             mainEntity: FAQS.map((f) => ({
@@ -1741,6 +1983,7 @@ const AnviraNotes = () => (
         <Exams />
         <Messages />
         <Rows />
+        <Android />
         <Stats />
         <Timeline />
         <DownloadPanel />
