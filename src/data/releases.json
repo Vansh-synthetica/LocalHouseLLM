@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-04T18:39:22.034Z",
+  "syncedAt": "2026-11-08T22:01:21.909Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -1953,15 +1953,57 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.1.0",
+      "latest": "v1.1.1",
       "releases": [
+        {
+          "tag": "v1.1.1",
+          "version": "1.1.1",
+          "name": "Anvira Notes 1.1.1",
+          "date": "2026-11-08T21:47:28Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.1.1",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.1.1.apk",
+            "size": 67613341,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.1.1/Anvira-Notes-1.1.1.apk",
+            "sha256": "4ea929d030159a448a1b161b3dedca7dcbf3821eed7371a6d82f2a2d787d776b"
+          },
+          "summary": "A fixes-only update: nothing about how the app looks has changed.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.1.1 for Android",
+              "html": "<p>A fixes-only update: nothing about how the app looks has changed.</p>"
+            },
+            {
+              "title": "Saving and pages",
+              "html": "<ul><li>A file is never deleted before its replacement is in place, so a failed save can no longer lose a notebook file.</li><li>A page sent to the trash can no longer come back on its own when a save that was already on its way lands late.</li><li>Opening another whiteboard or sheet no longer shows — and autosaves — the previous page's drawing into it.</li><li>Switching notebooks while one is reloading no longer mixes one notebook's pages into the other.</li><li>A folder that cannot be read is now reported instead of being taken as &quot;no notebooks&quot;, so an index rebuild can no longer empty the app.</li><li>Damaged files whose pages point at each other in a loop no longer break the page list, the trash or copying.</li><li>Page history: a read that failed says so (with <strong>Try again</strong>) instead of &quot;No earlier versions yet&quot;, scanned and picture-only pages get restore points, and the history panel closes when you open another page.</li></ul>"
+            },
+            {
+              "title": "Messages",
+              "html": "<ul><li>Signing out clears waiting read receipts and photo previews; a late receipt can no longer reach the server with no session.</li><li>A send that is retried after the server had already stored the message now succeeds instead of staying red.</li><li>Photos no longer flicker back to a placeholder when the server's copy of your message arrives.</li><li>A start that failed (you were offline, say) reconnects by itself when you are back online, and signing out during startup can no longer attach the wrong account's live channel.</li></ul>"
+            },
+            {
+              "title": "Study",
+              "html": "<ul><li>Mock-exam answers and study progress are written before the app is paused, so backgrounding right after an answer cannot lose it.</li></ul>"
+            },
+            {
+              "title": "AI engine and updates",
+              "html": "<ul><li>A model download resumes where it stopped instead of starting a 1–3 GB file over, refuses to run two downloads of the same file, and clears out abandoned partial files.</li><li>A model removed while it was warming up no longer leaves &quot;Loading model…&quot; on screen until restart.</li><li>The updater asks for <strong>Install unknown apps</strong> before downloading, resumes a broken APK download, and a release build without the signing key fails instead of producing an APK Android would refuse.</li></ul>"
+            },
+            {
+              "title": "Phone UI",
+              "html": "<ul><li>Android back with the Ask AI sheet open closes the sheet, not the page you are writing on.</li><li>Ask AI answers belong to the page they were asked on: switching pages mid-answer no longer inserts into (or undoes on) the wrong page.</li><li>Search, filters, tags, collapsed branches and scroll position survive a tab switch, and so do the Messages tab and its scroll.</li><li>Back on <strong>All study tools</strong> returns to Study Today, as its own button does.</li><li>The tab bar can no longer ride on top of the keyboard after rotating the phone.</li><li>The boot splash shows again.</li><li>Long-press menus no longer open for rows that have gone.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.1.0",
           "version": "1.1.0",
           "name": "Anvira Notes 1.1.0",
           "date": "2026-11-03T18:40:43Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.1.0",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.1.0.apk",
             "size": 67612085,
