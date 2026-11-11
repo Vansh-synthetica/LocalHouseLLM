@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-08T22:01:21.909Z",
+  "syncedAt": "2026-11-11T01:55:19.352Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,146 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.26",
+      "latest": "v1.2.27",
       "releases": [
+        {
+          "tag": "v1.2.27",
+          "version": "1.2.27",
+          "name": "Anvira Notes 1.2.27",
+          "date": "2026-11-10T21:18:45Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.27",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.27.exe",
+            "size": 162539141,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.27/Anvira-Notes-Setup-1.2.27.exe",
+            "sha256": "846fe4aa0c3c9a7d3585d44832a66501bf5123a983df64333d835f0a35b4f3e0"
+          },
+          "summary": "Taglish and Filipino transcription. A speech-recording session can now be set to Taglish (Filipino + English mixed in one sentence), Filipino/Tagalog, or the usual auto-detect and English. In Taglish mode every…",
+          "highlights": [
+            {
+              "kind": "New",
+              "text": "Taglish and Filipino transcription"
+            },
+            {
+              "kind": "New",
+              "text": "PC audio capture"
+            },
+            {
+              "kind": "New",
+              "text": "Offline OCR"
+            },
+            {
+              "kind": "New",
+              "text": "Sources: read text inside slide pictures"
+            },
+            {
+              "kind": "New",
+              "text": "Whiteboard brush stabilizer"
+            },
+            {
+              "kind": "New",
+              "text": "First-run guide"
+            },
+            {
+              "kind": "New",
+              "text": "Hardware scan and PC-sized models"
+            },
+            {
+              "kind": "New",
+              "text": "Speech: fix misheard words"
+            },
+            {
+              "kind": "New",
+              "text": "Citations fixed"
+            },
+            {
+              "kind": "Better",
+              "text": "Google Docs fidelity, both directions"
+            },
+            {
+              "kind": "Better",
+              "text": "Notes editor"
+            },
+            {
+              "kind": "Better",
+              "text": "Study: faster lessons for small models"
+            },
+            {
+              "kind": "Better",
+              "text": "Speech never loses a lecture"
+            },
+            {
+              "kind": "Better",
+              "text": "Cheaper page switches"
+            },
+            {
+              "kind": "Better",
+              "text": "Micro-animations"
+            },
+            {
+              "kind": "Better",
+              "text": "Crash-safe saves"
+            },
+            {
+              "kind": "Better",
+              "text": "Security audit (34 issues fixed)"
+            },
+            {
+              "kind": "Better",
+              "text": "Electron 44 readiness"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Notes editor bugs"
+            },
+            {
+              "kind": "Fixed",
+              "text": "\"/\" menu"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Whiteboard mind maps"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Google floating pictures"
+            },
+            {
+              "kind": "Fixed",
+              "text": "PDF export"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Google sync"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Study streaks"
+            }
+          ],
+          "notes": [
+            {
+              "title": "New",
+              "html": "<ul><li><strong>Taglish and Filipino transcription.</strong> A speech-recording session can now be set to Taglish (Filipino + English mixed in one sentence), Filipino/Tagalog, or the usual auto-detect and English. In Taglish mode every recorded part is read once as English and once as Tagalog and the surer reading is kept, so mixed sentences like &quot;kailangan muna nating understand yung concept&quot; come back exactly as spoken — nothing is translated, and Filipino expressions survive word for word. The AI notes system writes its notes in the languages the speaker actually used. Works for microphone and PC-audio recording alike. Also measured against Qwen3-ASR 0.6B as an alternative: the built-in Whisper pipeline kept more of the mixed speech intact on identical audio, so it stays.</li><li><strong>PC audio capture.</strong> Record a lecture from what the computer itself is playing — Zoom, Google Meet, YouTube, an online class — instead of the microphone. The sound is taken straight from the output device (WASAPI loopback), so it works with headphones, needs no external sound, and never opens the mic. Sentence-level live captions (text arrives about a second after each sentence is finished, for the microphone too), pause/resume, copy, and the same &quot;Turn into notes&quot; flow; nothing of what is played is stored, only the transcript.</li><li><strong>Offline OCR.</strong> Extract text from images and scanned documents directly on your PC — no internet required. Pictures with no writing are automatically ignored.</li><li><strong>Sources: read text inside slide pictures.</strong> View and copy text from images embedded in your sources.</li><li><strong>Whiteboard brush stabilizer.</strong> Off / Low / Medium / High smoothing (like Ibis Paint), drawing every pointer sample. Mind maps: two-sided layout with proper sizes and arrows that connect.</li><li><strong>First-run guide.</strong> Welcome guide on first run: what the app is → AI engine → AI model → tips. Skippable; reopen from Settings → AI &amp; Models → Setup guide.</li><li><strong>Hardware scan and PC-sized models.</strong> Memory, processor, graphics and disk are scanned before the engine is installed. Categories: High-end (up to 7B) · Standard (2B–4B) · Light (1B–2B) · Tiny (~0.5B) · No AI. Nothing above 7B is ever offered.</li><li><strong>Speech: fix misheard words.</strong> After recording, the local AI corrects terms and names using the topic. Careful decoding (beam search), language detected once and kept, raw microphone sound, repeated loops removed, whisper's invented lines dropped.</li><li><strong>Citations fixed.</strong> Study → Notebook Studio → Citations were broken in every style: fixed the loader and added the official MLA and Chicago style files.</li></ul>"
+            },
+            {
+              "title": "Better",
+              "html": "<ul><li><strong>Google Docs fidelity, both directions.</strong> Fonts, sizes, line spacing, paragraph spacing, page size and margins match the Google Doc. Inline pictures sit in the text; floating pictures keep their position. Formatting changed in Google is no longer reverted (three-way merge). A floating picture deleted in Anvira is deleted in the Google Doc too.</li><li><strong>Notes editor.</strong> Block handle follows the pointer smoothly with a larger target area. Drag and drop rewritten — a blue line shows where the block will land. Every page has its own save queue. Page breaks no longer jitter.</li><li><strong>Study: faster lessons for small models.</strong> Shorter prompts, trimmed input, near-duplicate removal, picking the densest parts of long PDFs, skipping sections with nothing to practise, a cache of finished sections. Cards appear as they are generated.</li><li><strong>Speech never loses a lecture.</strong> If the engine crashes it restarts and the part is retried; the transcript is kept while recording and can be recovered after a crash; audio is saved every 10 s.</li><li><strong>Cheaper page switches.</strong> Reduced resource usage when navigating between pages.</li><li><strong>Micro-animations.</strong> Refined UI feedback on buttons, menus, save status and tags.</li><li><strong>Crash-safe saves.</strong> Written to a temporary file, flushed, then renamed. Version history: one file per page, pictures stored once; a big page saves in ~7 ms (was ~0.5 s).</li><li><strong>Security audit (34 issues fixed).</strong> Dropped files no longer replace the app; notebook ids must be plain names; runtime bridge acts only on picked files; zip bombs refused at ~83 MB memory; PDFs over 150 MB and pictures over 50 MB refused; only microphone, clipboard writing and fullscreen permissions allowed.</li><li><strong>Electron 44 readiness.</strong> ~13–20% faster start-up, opening long pages and typing, ~20% faster OCR, ~10% less memory.</li></ul>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li><strong>Notes editor bugs.</strong> Block handle, drag and drop, saving, and page breaks all resolved.</li><li><strong>&quot;/&quot; menu</strong> appears and closes properly. Matches the compact design.</li><li><strong>Whiteboard mind maps</strong> work correctly.</li><li><strong>Google floating pictures</strong> deleted from Anvira are now deleted in the Google Doc too.</li><li><strong>PDF export</strong> never hangs on a picture that will not load (15 s limit).</li><li><strong>Google sync:</strong> big pushes keep their place when someone edits at the same time; half the API calls per round.</li><li><strong>Study streaks</strong> survive daylight saving; cards with broken due dates come back.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.26",
           "version": "1.2.26",
           "name": "Anvira Notes 1.2.26",
           "date": "2026-11-02T10:11:54Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.26",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.26.exe",
             "size": 162537135,
@@ -39,16 +170,6 @@
             {
               "kind": "New: Code Lab",
               "text": "Ask Pochi"
-            }
-          ],
-          "notes": [
-            {
-              "title": "New: Code Lab",
-              "html": "<p>A new lab in <strong>Study → Labs and exams</strong> for learning to code, step by step, the way Mimo and Sololearn teach it. It covers <strong>Python, JavaScript, Java, C and C++</strong>, and it works offline: your code really runs, right inside the app.</p><ul><li><strong>Learn:</strong> short lessons on a path. Read and run an example, answer &quot;what does this print?&quot;, fill in the blanks, then write the program yourself. Your code is checked by running it. When it is wrong, you see what was expected next to what your program printed, with the wrong line marked.</li><li><strong>Practice:</strong> 12 challenges, from easy to hard (FizzBuzz, palindromes, primes, a Caesar cipher, balanced brackets…). Solve each one in any of the five languages. Run tries your own input; Submit checks every test.</li><li><strong>Playground:</strong> write anything, give it input, and run it, with example programs for each language.</li><li><strong>Ask Pochi:</strong> a hint that doesn't give the answer away, an explanation of your code, or an explanation of an error (uses the AI model on your PC).</li><li>Every lesson example, answer and challenge solution was checked by running it in all five languages before release.</li></ul>"
-            },
-            {
-              "title": "Your Pochi, everywhere",
-              "html": "<p>The Pochi you dress up in <strong>Pochi Club</strong> (its colour and what it wears) now appears everywhere Pochi does: the Study desk, lessons, quizzes, flashcards, mock exams and the chat panels. It is no longer only in the small Club badge.</p>"
             }
           ]
         },
