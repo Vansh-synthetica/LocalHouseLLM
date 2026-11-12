@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-11T01:55:19.352Z",
+  "syncedAt": "2026-11-12T09:48:25.413Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,53 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.27",
+      "latest": "v1.2.28",
       "releases": [
+        {
+          "tag": "v1.2.28",
+          "version": "1.2.28",
+          "name": "Anvira Notes 1.2.28",
+          "date": "2026-11-12T08:42:21Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.28",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.28.exe",
+            "size": 162634143,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.28/Anvira-Notes-Setup-1.2.28.exe",
+            "sha256": "e04235b5ba0c888c721851504361ef1a88ea5e014125908d703a5de39be42c0d"
+          },
+          "summary": "Plan a research study step by step for III / Practical Research: topic ideas, a design finder (Descriptive, Correlational, Causal-Comparative, Experimental), and a title builder using the [Type of Study] + [Variable…",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "Research Studio (new, in Study)",
+              "html": "<ul><li>Plan a research study step by step for III / Practical Research: topic ideas, a design finder (Descriptive, Correlational, Causal-Comparative, Experimental), and a title builder using the [Type of Study] + [Variable A] + [Variable B] + [Target Group] + [Location] formula.</li><li>AI drafts of the Rationale (3–5 sentences), Objectives (written to fit the chosen design) and Beneficiaries &amp; Significance, with checks against the worksheet rules.</li><li>Find real sources in OpenAlex, Crossref, Semantic Scholar, DOAJ, Europe PMC, arXiv and the web at once, including a smart search built from your plan. Citations come out in APA, MLA or Chicago. The AI may only cite sources you saved and never invents one.</li><li>Export the plan to Word (.docx), Markdown or a note.</li></ul>"
+            },
+            {
+              "title": "AI check & humanizer (new)",
+              "html": "<ul><li>Shows how AI-like any text reads, sentence by sentence, with the reasons.</li><li>Quick fix for stock phrases, plus an AI rewrite in a student, academic or casual voice. It keeps your facts and citations and never adds a citation.</li></ul>"
+            },
+            {
+              "title": "Your own AI key (BYOK)",
+              "html": "<ul><li>Use OpenAI, Anthropic, Google Gemini, OpenRouter, Groq, Mistral, DeepSeek, xAI, Cerebras, Together, Fireworks, Perplexity, GitHub Models, Ollama, LM Studio or any OpenAI-compatible server instead of the local runtime.</li><li>Keys are stored encrypted on this PC. Free keys (Gemini, Groq) work on any computer.</li></ul>"
+            },
+            {
+              "title": "Lecture recording: faster and more reliable",
+              "html": "<ul><li>Accurate speech models now keep up with live speech. Part length adapts to how fast your PC transcribes, and the transcript output is twice as fast.</li><li>Recording starts at once, with no wait for the engine to warm up. Detecting or changing the language no longer restarts the engine.</li><li>Taglish mode now really compares the English and Filipino readings.</li><li>New: transcribe a recording you already have (mp3, m4a, wav, ogg or mp4 video).</li></ul>"
+            },
+            {
+              "title": "Also",
+              "html": "<ul><li>The update button now always appears. If the in-app download fails, it opens the installer download instead.</li><li>Paste or drop a photo of a problem into Pochi's desk to read it and solve it step by step.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.27",
           "version": "1.2.27",
           "name": "Anvira Notes 1.2.27",
           "date": "2026-11-10T21:18:45Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.27",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.27.exe",
             "size": 162539141,
@@ -123,20 +161,6 @@
             {
               "kind": "Fixed",
               "text": "Study streaks"
-            }
-          ],
-          "notes": [
-            {
-              "title": "New",
-              "html": "<ul><li><strong>Taglish and Filipino transcription.</strong> A speech-recording session can now be set to Taglish (Filipino + English mixed in one sentence), Filipino/Tagalog, or the usual auto-detect and English. In Taglish mode every recorded part is read once as English and once as Tagalog and the surer reading is kept, so mixed sentences like &quot;kailangan muna nating understand yung concept&quot; come back exactly as spoken — nothing is translated, and Filipino expressions survive word for word. The AI notes system writes its notes in the languages the speaker actually used. Works for microphone and PC-audio recording alike. Also measured against Qwen3-ASR 0.6B as an alternative: the built-in Whisper pipeline kept more of the mixed speech intact on identical audio, so it stays.</li><li><strong>PC audio capture.</strong> Record a lecture from what the computer itself is playing — Zoom, Google Meet, YouTube, an online class — instead of the microphone. The sound is taken straight from the output device (WASAPI loopback), so it works with headphones, needs no external sound, and never opens the mic. Sentence-level live captions (text arrives about a second after each sentence is finished, for the microphone too), pause/resume, copy, and the same &quot;Turn into notes&quot; flow; nothing of what is played is stored, only the transcript.</li><li><strong>Offline OCR.</strong> Extract text from images and scanned documents directly on your PC — no internet required. Pictures with no writing are automatically ignored.</li><li><strong>Sources: read text inside slide pictures.</strong> View and copy text from images embedded in your sources.</li><li><strong>Whiteboard brush stabilizer.</strong> Off / Low / Medium / High smoothing (like Ibis Paint), drawing every pointer sample. Mind maps: two-sided layout with proper sizes and arrows that connect.</li><li><strong>First-run guide.</strong> Welcome guide on first run: what the app is → AI engine → AI model → tips. Skippable; reopen from Settings → AI &amp; Models → Setup guide.</li><li><strong>Hardware scan and PC-sized models.</strong> Memory, processor, graphics and disk are scanned before the engine is installed. Categories: High-end (up to 7B) · Standard (2B–4B) · Light (1B–2B) · Tiny (~0.5B) · No AI. Nothing above 7B is ever offered.</li><li><strong>Speech: fix misheard words.</strong> After recording, the local AI corrects terms and names using the topic. Careful decoding (beam search), language detected once and kept, raw microphone sound, repeated loops removed, whisper's invented lines dropped.</li><li><strong>Citations fixed.</strong> Study → Notebook Studio → Citations were broken in every style: fixed the loader and added the official MLA and Chicago style files.</li></ul>"
-            },
-            {
-              "title": "Better",
-              "html": "<ul><li><strong>Google Docs fidelity, both directions.</strong> Fonts, sizes, line spacing, paragraph spacing, page size and margins match the Google Doc. Inline pictures sit in the text; floating pictures keep their position. Formatting changed in Google is no longer reverted (three-way merge). A floating picture deleted in Anvira is deleted in the Google Doc too.</li><li><strong>Notes editor.</strong> Block handle follows the pointer smoothly with a larger target area. Drag and drop rewritten — a blue line shows where the block will land. Every page has its own save queue. Page breaks no longer jitter.</li><li><strong>Study: faster lessons for small models.</strong> Shorter prompts, trimmed input, near-duplicate removal, picking the densest parts of long PDFs, skipping sections with nothing to practise, a cache of finished sections. Cards appear as they are generated.</li><li><strong>Speech never loses a lecture.</strong> If the engine crashes it restarts and the part is retried; the transcript is kept while recording and can be recovered after a crash; audio is saved every 10 s.</li><li><strong>Cheaper page switches.</strong> Reduced resource usage when navigating between pages.</li><li><strong>Micro-animations.</strong> Refined UI feedback on buttons, menus, save status and tags.</li><li><strong>Crash-safe saves.</strong> Written to a temporary file, flushed, then renamed. Version history: one file per page, pictures stored once; a big page saves in ~7 ms (was ~0.5 s).</li><li><strong>Security audit (34 issues fixed).</strong> Dropped files no longer replace the app; notebook ids must be plain names; runtime bridge acts only on picked files; zip bombs refused at ~83 MB memory; PDFs over 150 MB and pictures over 50 MB refused; only microphone, clipboard writing and fullscreen permissions allowed.</li><li><strong>Electron 44 readiness.</strong> ~13–20% faster start-up, opening long pages and typing, ~20% faster OCR, ~10% less memory.</li></ul>"
-            },
-            {
-              "title": "Fixed",
-              "html": "<ul><li><strong>Notes editor bugs.</strong> Block handle, drag and drop, saving, and page breaks all resolved.</li><li><strong>&quot;/&quot; menu</strong> appears and closes properly. Matches the compact design.</li><li><strong>Whiteboard mind maps</strong> work correctly.</li><li><strong>Google floating pictures</strong> deleted from Anvira are now deleted in the Google Doc too.</li><li><strong>PDF export</strong> never hangs on a picture that will not load (15 s limit).</li><li><strong>Google sync:</strong> big pushes keep their place when someone edits at the same time; half the API calls per round.</li><li><strong>Study streaks</strong> survive daylight saving; cards with broken due dates come back.</li></ul>"
             }
           ]
         },
