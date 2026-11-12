@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-12T09:48:25.413Z",
+  "syncedAt": "2026-11-12T18:18:23.158Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,81 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.28",
+      "latest": "v1.2.31",
       "releases": [
+        {
+          "tag": "v1.2.31",
+          "version": "1.2.31",
+          "name": "Anvira Notes 1.2.31",
+          "date": "2026-11-12T17:04:02Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.31",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.31.exe",
+            "size": 162689302,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.31/Anvira-Notes-Setup-1.2.31.exe",
+            "sha256": "3d548deff35c2c9f99ce3e03184a0466947dd2ff50a6ced10905249d1605b225"
+          },
+          "summary": "Lecture and meeting recording got a big upgrade, including transcripts that know who is speaking.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Lecture and meeting recording got a big upgrade, including transcripts that know who is speaking.</p>"
+            },
+            {
+              "title": "Who said what",
+              "html": "<ul><li>New &quot;Several people talking&quot; option: put your PC in the middle of a study group or meeting, and after Stop the transcript is split by speaker.</li><li>Each person gets a colour and a name (&quot;Speaker 1&quot;, &quot;Speaker 2&quot;…). Click a name to rename it.</li><li>The saved page shows how many people spoke and for how long, and the transcript reads &quot;[0:06] Rika: …&quot; turn by turn.</li><li>&quot;Turn into notes&quot; knows who asked and who answered.</li><li>If it heard the wrong number of people, choose how many and press &quot;Label again&quot;.</li><li>Runs entirely on this PC. The speaker model (54 MB) downloads once, in the background while you record. The temporary audio it reads is deleted when the recorder closes.</li></ul>"
+            },
+            {
+              "title": "Better transcripts",
+              "html": "<ul><li>Silence, fan noise and music no longer turn into made-up text like &quot;Thank you.&quot;, and quiet stretches are skipped faster.</li><li>Quiet or distant speakers (the back of a lecture hall, a soft video) are no longer dropped, and noisy rooms are cut at real sentence breaks.</li><li>Choose which microphone to use; the choice is remembered.</li><li>New &quot;Both&quot; source: PC audio and your microphone together, for an online class where you speak too.</li><li>A hint appears when nothing has been heard for a while (muted mic, wrong mic, paused video).</li></ul>"
+            },
+            {
+              "title": "Notes",
+              "html": "<ul><li>Drop files straight onto Sources in the sidebar.</li><li>Language menus follow the dark or light theme, and dropdowns open with a small animation.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.30",
+          "version": "1.2.30",
+          "name": "Anvira Notes 1.2.30",
+          "date": "2026-11-12T13:24:37Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.30",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.30.exe",
+            "size": 162665160,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.30/Anvira-Notes-Setup-1.2.30.exe",
+            "sha256": "96d680867b4796f2c71c3cde3345e83ee4fa0b245742b5fb1130a423ab143e72"
+          },
+          "summary": "A release all about the Notes section: every part of it was gone through, fixed and smoothed.",
+          "highlights": []
+        },
+        {
+          "tag": "v1.2.29",
+          "version": "1.2.29",
+          "name": "Anvira Notes 1.2.29",
+          "date": "2026-11-12T12:18:20Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.29",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.29.exe",
+            "size": 162639543,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.29/Anvira-Notes-Setup-1.2.29.exe",
+            "sha256": "fceca9aa3ee9608210ef02a6201340a8d485e05fc0cac7066459c8ceace92fd8"
+          },
+          "summary": "On PCs with an NVIDIA graphics card, speech to text can now run on the card: several times faster than the processor, so even the Most accurate speech model keeps up with live speech.",
+          "highlights": []
+        },
         {
           "tag": "v1.2.28",
           "version": "1.2.28",
           "name": "Anvira Notes 1.2.28",
           "date": "2026-11-12T08:42:21Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.28",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.28.exe",
             "size": 162634143,
@@ -23,29 +89,7 @@
             "sha256": "e04235b5ba0c888c721851504361ef1a88ea5e014125908d703a5de39be42c0d"
           },
           "summary": "Plan a research study step by step for III / Practical Research: topic ideas, a design finder (Descriptive, Correlational, Causal-Comparative, Experimental), and a title builder using the [Type of Study] + [Variable…",
-          "highlights": [],
-          "notes": [
-            {
-              "title": "Research Studio (new, in Study)",
-              "html": "<ul><li>Plan a research study step by step for III / Practical Research: topic ideas, a design finder (Descriptive, Correlational, Causal-Comparative, Experimental), and a title builder using the [Type of Study] + [Variable A] + [Variable B] + [Target Group] + [Location] formula.</li><li>AI drafts of the Rationale (3–5 sentences), Objectives (written to fit the chosen design) and Beneficiaries &amp; Significance, with checks against the worksheet rules.</li><li>Find real sources in OpenAlex, Crossref, Semantic Scholar, DOAJ, Europe PMC, arXiv and the web at once, including a smart search built from your plan. Citations come out in APA, MLA or Chicago. The AI may only cite sources you saved and never invents one.</li><li>Export the plan to Word (.docx), Markdown or a note.</li></ul>"
-            },
-            {
-              "title": "AI check & humanizer (new)",
-              "html": "<ul><li>Shows how AI-like any text reads, sentence by sentence, with the reasons.</li><li>Quick fix for stock phrases, plus an AI rewrite in a student, academic or casual voice. It keeps your facts and citations and never adds a citation.</li></ul>"
-            },
-            {
-              "title": "Your own AI key (BYOK)",
-              "html": "<ul><li>Use OpenAI, Anthropic, Google Gemini, OpenRouter, Groq, Mistral, DeepSeek, xAI, Cerebras, Together, Fireworks, Perplexity, GitHub Models, Ollama, LM Studio or any OpenAI-compatible server instead of the local runtime.</li><li>Keys are stored encrypted on this PC. Free keys (Gemini, Groq) work on any computer.</li></ul>"
-            },
-            {
-              "title": "Lecture recording: faster and more reliable",
-              "html": "<ul><li>Accurate speech models now keep up with live speech. Part length adapts to how fast your PC transcribes, and the transcript output is twice as fast.</li><li>Recording starts at once, with no wait for the engine to warm up. Detecting or changing the language no longer restarts the engine.</li><li>Taglish mode now really compares the English and Filipino readings.</li><li>New: transcribe a recording you already have (mp3, m4a, wav, ogg or mp4 video).</li></ul>"
-            },
-            {
-              "title": "Also",
-              "html": "<ul><li>The update button now always appears. If the in-app download fails, it opens the installer download instead.</li><li>Paste or drop a photo of a problem into Pochi's desk to read it and solve it step by step.</li></ul>"
-            }
-          ]
+          "highlights": []
         },
         {
           "tag": "v1.2.27",

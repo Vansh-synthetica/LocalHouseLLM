@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-12T09:48:25.413Z",
+  "syncedAt": "2026-11-12T18:18:23.158Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,113 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.28",
+      "latest": "v1.2.31",
       "releases": [
+        {
+          "tag": "v1.2.31",
+          "version": "1.2.31",
+          "name": "Anvira Notes 1.2.31",
+          "date": "2026-11-12T17:04:02Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.31",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.31.exe",
+            "size": 162689302,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.31/Anvira-Notes-Setup-1.2.31.exe",
+            "sha256": "3d548deff35c2c9f99ce3e03184a0466947dd2ff50a6ced10905249d1605b225"
+          },
+          "summary": "Lecture and meeting recording got a big upgrade, including transcripts that know who is speaking.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Lecture and meeting recording got a big upgrade, including transcripts that know who is speaking.</p>"
+            },
+            {
+              "title": "Who said what",
+              "html": "<ul><li>New &quot;Several people talking&quot; option: put your PC in the middle of a study group or meeting, and after Stop the transcript is split by speaker.</li><li>Each person gets a colour and a name (&quot;Speaker 1&quot;, &quot;Speaker 2&quot;…). Click a name to rename it.</li><li>The saved page shows how many people spoke and for how long, and the transcript reads &quot;[0:06] Rika: …&quot; turn by turn.</li><li>&quot;Turn into notes&quot; knows who asked and who answered.</li><li>If it heard the wrong number of people, choose how many and press &quot;Label again&quot;.</li><li>Runs entirely on this PC. The speaker model (54 MB) downloads once, in the background while you record. The temporary audio it reads is deleted when the recorder closes.</li></ul>"
+            },
+            {
+              "title": "Better transcripts",
+              "html": "<ul><li>Silence, fan noise and music no longer turn into made-up text like &quot;Thank you.&quot;, and quiet stretches are skipped faster.</li><li>Quiet or distant speakers (the back of a lecture hall, a soft video) are no longer dropped, and noisy rooms are cut at real sentence breaks.</li><li>Choose which microphone to use; the choice is remembered.</li><li>New &quot;Both&quot; source: PC audio and your microphone together, for an online class where you speak too.</li><li>A hint appears when nothing has been heard for a while (muted mic, wrong mic, paused video).</li></ul>"
+            },
+            {
+              "title": "Notes",
+              "html": "<ul><li>Drop files straight onto Sources in the sidebar.</li><li>Language menus follow the dark or light theme, and dropdowns open with a small animation.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.30",
+          "version": "1.2.30",
+          "name": "Anvira Notes 1.2.30",
+          "date": "2026-11-12T13:24:37Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.30",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.30.exe",
+            "size": 162665160,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.30/Anvira-Notes-Setup-1.2.30.exe",
+            "sha256": "96d680867b4796f2c71c3cde3345e83ee4fa0b245742b5fb1130a423ab143e72"
+          },
+          "summary": "A release all about the Notes section: every part of it was gone through, fixed and smoothed.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>A release all about the Notes section: every part of it was gone through, fixed and smoothed.</p>"
+            },
+            {
+              "title": "Pages in the sidebar",
+              "html": "<ul><li>Right-click a page (or use its ⋯ button) for Rename, Add sub-page, Duplicate, Move out to top level, Move to another notebook, Favourites and Move to trash.</li><li>Double-click a page to rename it. The sidebar follows the title as you type it.</li><li>Drag pages to reorder them, or drop one onto another to make it a sub-page.</li><li>A new page puts the cursor straight in its title.</li><li>An empty notebook offers a text page, a whiteboard, a sheet or a template.</li><li>Recent and Favourites show the right icon for boards and sheets.</li></ul>"
+            },
+            {
+              "title": "Writing",
+              "html": "<ul><li>The selection toolbar has Bold, Italic, Underline, Strike, Code, Highlight and Link, plus an &quot;Ask AI&quot; menu for rewriting.</li><li>Text colour and highlight use a palette that stays readable in dark and light mode (old highlights included).</li><li>Checkboxes, numbered lists and code are clearer in both themes; tables no longer vanish in light mode.</li><li>Code blocks have a language picker and a Copy button.</li><li>Toggles: Enter in the heading starts a line inside, Backspace on an empty toggle turns it back into a line, and closing a toggle no longer hides its heading.</li><li>Spell check: &quot;Add to dictionary&quot;, a working &quot;Ignore&quot;, and code is no longer marked as misspelled.</li><li>The &quot;/&quot; menu shows what each block is for.</li></ul>"
+            },
+            {
+              "title": "Sheets",
+              "html": "<ul><li>Sheets follow the dark or light theme instead of always being white.</li><li>Every change is saved, including column widths, row heights, merged cells and new or renamed tabs (only cell values were saved before).</li></ul>"
+            },
+            {
+              "title": "Ask AI and the rest",
+              "html": "<ul><li>Ask AI has a clear mode switch (Notebook, Edit page, Web, All notes) and suggested questions to start from.</li><li>Page history previews read cleanly.</li><li>PDF and CSV export tell you when the file was saved, or why it was not.</li></ul>"
+            },
+            {
+              "title": "Motion",
+              "html": "<ul><li>Small animations where things used to just appear: the selection toolbar, spelling popup, outline, sub-pages, new pages, Ask AI messages, opening toggles and ticking a to-do. They switch off when Windows is set to reduce motion.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.29",
+          "version": "1.2.29",
+          "name": "Anvira Notes 1.2.29",
+          "date": "2026-11-12T12:18:20Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.29",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.29.exe",
+            "size": 162639543,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.29/Anvira-Notes-Setup-1.2.29.exe",
+            "sha256": "fceca9aa3ee9608210ef02a6201340a8d485e05fc0cac7066459c8ceace92fd8"
+          },
+          "summary": "On PCs with an NVIDIA graphics card, speech to text can now run on the card: several times faster than the processor, so even the Most accurate speech model keeps up with live speech.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "Lecture recording on the NVIDIA graphics card (new)",
+              "html": "<ul><li>On PCs with an NVIDIA graphics card, speech to text can now run on the card: several times faster than the processor, so even the Most accurate speech model keeps up with live speech.</li><li>Turn it on in Record lecture → Speech model → &quot;Use the NVIDIA graphics card&quot;. It is a one-time download of about 260 MB, checked against the official whisper.cpp release before it is used.</li><li>If the card does not work on a PC (an old driver, too little graphics memory), the processor takes over by itself and the app says why. Recording never stops because of it.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.28",
           "version": "1.2.28",
           "name": "Anvira Notes 1.2.28",
           "date": "2026-11-12T08:42:21Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.28",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.28.exe",
             "size": 162634143,
