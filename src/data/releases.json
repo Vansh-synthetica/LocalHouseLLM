@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-13T09:29:16.436Z",
+  "syncedAt": "2026-11-13T17:43:58.362Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,87 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.31",
+      "latest": "v1.2.33",
       "releases": [
+        {
+          "tag": "v1.2.33",
+          "version": "1.2.33",
+          "name": "Anvira Notes 1.2.33",
+          "date": "2026-11-13T17:25:22Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.33",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.33.exe",
+            "size": 162726641,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.33/Anvira-Notes-Setup-1.2.33.exe",
+            "sha256": "9fe34e55267c8b2f9918d7e8d1fce383954f3b2a5782732ff9ee16514a9b7876"
+          },
+          "summary": "Ready for whole classes: signing in from a busy school network, and Messages for many students at once.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Ready for whole classes: signing in from a busy school network, and Messages for many students at once.</p>"
+            },
+            {
+              "title": "Signing in at school",
+              "html": "<ul><li>When lots of people sign in or create accounts on the same school network at once, the app now waits and tries again by itself, and says so (&quot;Lots of people are signing in on this network…&quot;), instead of failing with &quot;Too many attempts&quot;.</li><li>A busy network no longer signs you out: if keeping you signed in is refused for a moment, the app tries again a minute or two later.</li></ul>"
+            },
+            {
+              "title": "Messages",
+              "html": "<ul><li>Messages connects live only while a chat is on screen (in Messages, or a chat open at the bottom right). In Notes and Study the app holds no connection, so many more students can use Anvira at the same time.</li><li>After 5 minutes in the background or 10 minutes away, the live connection closes, and opens again as soon as you are back.</li><li>In between, new messages are checked every minute (every 3 minutes in the background): unread badges, chat pop-ups and notifications still arrive.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.32",
+          "version": "1.2.32",
+          "name": "Anvira Notes 1.2.32",
+          "date": "2026-11-13T16:31:43Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.32",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.32.exe",
+            "size": 162725720,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.32/Anvira-Notes-Setup-1.2.32.exe",
+            "sha256": "d62e5e4031075e914e4232ab178f254443807a4228e1b8aabedaeaf37db162e2"
+          },
+          "summary": "A safer, sturdier app, with a command palette and the fixes and features from this week's testing.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>A safer, sturdier app, with a command palette and the fixes and features from this week's testing.</p>"
+            },
+            {
+              "title": "Command palette",
+              "html": "<ul><li>Press Ctrl+P anywhere (or Ctrl+K when you are not typing in a text box) to jump to any page, or to run a command: go to Notes, Study, Messages or Settings, switch a theme, open AI &amp; models, see the shortcuts, check for updates, report a problem.</li><li>Type <code>&gt;</code> to see commands only.</li></ul>"
+            },
+            {
+              "title": "Safer",
+              "html": "<ul><li>The app now runs only its own code: a script hidden in a shared notebook, an imported document or a chat message is refused outright.</li><li>Exporting a page to PDF prints the page and never runs anything inside it.</li><li>A page with a missing or malformed id, or a damaged study-progress record, is refused with a clear message instead of being written into your notebook.</li></ul>"
+            },
+            {
+              "title": "Sturdier",
+              "html": "<ul><li>If the window ever stops or freezes, the app now says so and offers Reload, instead of leaving a blank window. Your notes are saved as you type.</li><li>A background error no longer puts up a technical error box; it is written to a log beside the app's data.</li><li>The &quot;Something went wrong&quot; screen has the right words for this app, a Try again button, and Copy details.</li></ul>"
+            },
+            {
+              "title": "Fixes",
+              "html": "<ul><li>Links in a note open only on Ctrl+click again (a second copy of the link feature could open them on a plain click).</li><li>The &quot;Ready for AI: high-end PC&quot; card was drawn in warning red; it is green, like the other &quot;ready&quot; cards.</li><li>The account menu stays attached to the side rail, and Escape closes it.</li><li>&quot;Moved to Trash · Undo&quot; and other messages stay while the pointer is on them, and a repeated message no longer stacks.</li><li>Notebook names are trimmed and kept to a sensible length.</li><li>Checkboxes and radio buttons in dialogs match the dark and light themes.</li><li>Messages (Ctrl 3) is listed in the keyboard shortcuts.</li></ul>"
+            },
+            {
+              "title": "From this week's testing",
+              "html": "<ul><li>Choose your school level (junior high, senior high, college): Pochi explains at that level, and Research Studio follows your school's format.</li><li>Research Studio: three methodologies and 23 research designs, with a question guide to help you choose.</li><li>Report a problem, from the account menu or Settings › About, with an optional screenshot. It is kept and sent later if you are offline.</li><li>Cheat sheets no longer repeat themselves, and formulas in chat are drawn properly instead of showing raw LaTeX.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.31",
           "version": "1.2.31",
           "name": "Anvira Notes 1.2.31",
           "date": "2026-11-12T17:04:02Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.31",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.31.exe",
             "size": 162689302,

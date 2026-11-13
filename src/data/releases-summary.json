@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-13T09:29:16.436Z",
+  "syncedAt": "2026-11-13T17:43:58.362Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,61 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.31",
+      "latest": "v1.2.33",
       "releases": [
+        {
+          "tag": "v1.2.33",
+          "version": "1.2.33",
+          "name": "Anvira Notes 1.2.33",
+          "date": "2026-11-13T17:25:22Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.33",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.33.exe",
+            "size": 162726641,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.33/Anvira-Notes-Setup-1.2.33.exe",
+            "sha256": "9fe34e55267c8b2f9918d7e8d1fce383954f3b2a5782732ff9ee16514a9b7876"
+          },
+          "summary": "Ready for whole classes: signing in from a busy school network, and Messages for many students at once.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Ready for whole classes: signing in from a busy school network, and Messages for many students at once.</p>"
+            },
+            {
+              "title": "Signing in at school",
+              "html": "<ul><li>When lots of people sign in or create accounts on the same school network at once, the app now waits and tries again by itself, and says so (&quot;Lots of people are signing in on this network…&quot;), instead of failing with &quot;Too many attempts&quot;.</li><li>A busy network no longer signs you out: if keeping you signed in is refused for a moment, the app tries again a minute or two later.</li></ul>"
+            },
+            {
+              "title": "Messages",
+              "html": "<ul><li>Messages connects live only while a chat is on screen (in Messages, or a chat open at the bottom right). In Notes and Study the app holds no connection, so many more students can use Anvira at the same time.</li><li>After 5 minutes in the background or 10 minutes away, the live connection closes, and opens again as soon as you are back.</li><li>In between, new messages are checked every minute (every 3 minutes in the background): unread badges, chat pop-ups and notifications still arrive.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.32",
+          "version": "1.2.32",
+          "name": "Anvira Notes 1.2.32",
+          "date": "2026-11-13T16:31:43Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.32",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.32.exe",
+            "size": 162725720,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.32/Anvira-Notes-Setup-1.2.32.exe",
+            "sha256": "d62e5e4031075e914e4232ab178f254443807a4228e1b8aabedaeaf37db162e2"
+          },
+          "summary": "A safer, sturdier app, with a command palette and the fixes and features from this week's testing.",
+          "highlights": []
+        },
         {
           "tag": "v1.2.31",
           "version": "1.2.31",
           "name": "Anvira Notes 1.2.31",
           "date": "2026-11-12T17:04:02Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.31",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.31.exe",
             "size": 162689302,
@@ -23,25 +69,7 @@
             "sha256": "3d548deff35c2c9f99ce3e03184a0466947dd2ff50a6ced10905249d1605b225"
           },
           "summary": "Lecture and meeting recording got a big upgrade, including transcripts that know who is speaking.",
-          "highlights": [],
-          "notes": [
-            {
-              "title": "",
-              "html": "<p>Lecture and meeting recording got a big upgrade, including transcripts that know who is speaking.</p>"
-            },
-            {
-              "title": "Who said what",
-              "html": "<ul><li>New &quot;Several people talking&quot; option: put your PC in the middle of a study group or meeting, and after Stop the transcript is split by speaker.</li><li>Each person gets a colour and a name (&quot;Speaker 1&quot;, &quot;Speaker 2&quot;…). Click a name to rename it.</li><li>The saved page shows how many people spoke and for how long, and the transcript reads &quot;[0:06] Rika: …&quot; turn by turn.</li><li>&quot;Turn into notes&quot; knows who asked and who answered.</li><li>If it heard the wrong number of people, choose how many and press &quot;Label again&quot;.</li><li>Runs entirely on this PC. The speaker model (54 MB) downloads once, in the background while you record. The temporary audio it reads is deleted when the recorder closes.</li></ul>"
-            },
-            {
-              "title": "Better transcripts",
-              "html": "<ul><li>Silence, fan noise and music no longer turn into made-up text like &quot;Thank you.&quot;, and quiet stretches are skipped faster.</li><li>Quiet or distant speakers (the back of a lecture hall, a soft video) are no longer dropped, and noisy rooms are cut at real sentence breaks.</li><li>Choose which microphone to use; the choice is remembered.</li><li>New &quot;Both&quot; source: PC audio and your microphone together, for an online class where you speak too.</li><li>A hint appears when nothing has been heard for a while (muted mic, wrong mic, paused video).</li></ul>"
-            },
-            {
-              "title": "Notes",
-              "html": "<ul><li>Drop files straight onto Sources in the sidebar.</li><li>Language menus follow the dark or light theme, and dropdowns open with a small animation.</li></ul>"
-            }
-          ]
+          "highlights": []
         },
         {
           "tag": "v1.2.30",
