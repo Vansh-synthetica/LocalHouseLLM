@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-13T01:03:36.674Z",
+  "syncedAt": "2026-11-13T09:29:16.436Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -1763,15 +1763,58 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.2.1",
+      "latest": "v1.2.2",
       "releases": [
+        {
+          "tag": "v1.2.2",
+          "version": "1.2.2",
+          "name": "Anvira Notes 1.2.2",
+          "date": "2026-11-13T09:27:55Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.2",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.2.2.apk",
+            "size": 94965464,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.2/Anvira-Notes-1.2.2.apk",
+            "sha256": "3d1e7d8ab2503801e6d7b55e06e75f3cf2dfc87e8101ac14757ca1f3f7459266"
+          },
+          "summary": "New first choice when you plan: Quantitative, Qualitative or Mixed methods. Then pick from the designs for that method.",
+          "highlights": [
+            {
+              "kind": "Research Studio: many more ways to do research",
+              "text": "23 research designs"
+            },
+            {
+              "kind": "Research Studio: many more ways to do research",
+              "text": "Ideas"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Research Studio: many more ways to do research",
+              "html": "<ul><li>New first choice when you plan: <strong>Quantitative</strong>, <strong>Qualitative</strong> or <strong>Mixed methods</strong>. Then pick from the designs for that method.</li><li><strong>23 research designs</strong> (was a handful): descriptive, correlational, quasi-experimental, true experimental, phenomenology, case study, ethnography, grounded theory, narrative inquiry, explanatory and exploratory sequential, action research, and more. Each one has its own title formula, the fields it needs, sample objectives and a difficulty level.</li><li>The <strong>Designs</strong> tab lists them all, with filters, search and a few questions that point you to a design that fits.</li><li><strong>Ideas</strong> has 44 topic ideas, filtered by method.</li></ul>"
+            },
+            {
+              "title": "Your school level",
+              "html": "<ul><li>Tell the app if you are in junior high, senior high or college (plus your grade and strand or course). Study and the AI answer at that level, and new research plans start with it filled in.</li></ul>"
+            },
+            {
+              "title": "Report a problem",
+              "html": "<ul><li>In <strong>Settings › About</strong> and the account menu: say what went wrong, add a screenshot if you like, and send it. With no signal, the report waits on the phone and is sent later.</li></ul>"
+            },
+            {
+              "title": "Fixes",
+              "html": "<ul><li>Cheat sheets no longer repeat the same entries or loop.</li><li>Formulas in chat and notes show as maths instead of raw LaTeX code.</li><li>The research title box grows with your title instead of looking cut off.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.1",
           "version": "1.2.1",
           "name": "Anvira Notes 1.2.1",
           "date": "2026-11-12T21:14:40Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.1",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.2.1.apk",
             "size": 94942791,
@@ -1779,17 +1822,7 @@
             "sha256": "bdebdf9f8a3fbbb0b84d44193a849147d496b597a0a8616c9dd967f99f7f30b1"
           },
           "summary": "On the Record screen, turn on Several people talking. After you stop, the transcript is split by who is speaking, each person with their own colour.",
-          "highlights": [],
-          "notes": [
-            {
-              "title": "Who said what: record a study group or a meeting",
-              "html": "<ul><li>On the Record screen, turn on <strong>Several people talking</strong>. After you stop, the transcript is split by who is speaking, each person with their own colour.</li><li>Tap a name to rename it (&quot;Speaker 1&quot; → &quot;Mimi&quot;). The names go into the page, into Copy, and into <strong>Turn into notes</strong>.</li><li>If it heard the wrong number of people, choose <strong>How many?</strong> and tap <strong>Again</strong>.</li><li>Works for files you transcribe too. It runs on the phone: a one-time 30 MB download, then offline. Nothing you record leaves the phone.</li></ul>"
-            },
-            {
-              "title": "Fixes",
-              "html": "<ul><li>Voice typing no longer glues your words onto the next word when you talk into the middle of a sentence.</li></ul>"
-            }
-          ]
+          "highlights": []
         },
         {
           "tag": "v1.2.0",
