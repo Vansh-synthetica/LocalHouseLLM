@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-12T18:18:23.158Z",
+  "syncedAt": "2026-11-13T01:03:36.674Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -2220,15 +2220,104 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.1.1",
+      "latest": "v1.2.1",
       "releases": [
+        {
+          "tag": "v1.2.1",
+          "version": "1.2.1",
+          "name": "Anvira Notes 1.2.1",
+          "date": "2026-11-12T21:14:40Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.1",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.2.1.apk",
+            "size": 94942791,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.1/Anvira-Notes-1.2.1.apk",
+            "sha256": "bdebdf9f8a3fbbb0b84d44193a849147d496b597a0a8616c9dd967f99f7f30b1"
+          },
+          "summary": "On the Record screen, turn on Several people talking. After you stop, the transcript is split by who is speaking, each person with their own colour.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "Who said what: record a study group or a meeting",
+              "html": "<ul><li>On the Record screen, turn on <strong>Several people talking</strong>. After you stop, the transcript is split by who is speaking, each person with their own colour.</li><li>Tap a name to rename it (&quot;Speaker 1&quot; → &quot;Mimi&quot;). The names go into the page, into Copy, and into <strong>Turn into notes</strong>.</li><li>If it heard the wrong number of people, choose <strong>How many?</strong> and tap <strong>Again</strong>.</li><li>Works for files you transcribe too. It runs on the phone: a one-time 30 MB download, then offline. Nothing you record leaves the phone.</li></ul>"
+            },
+            {
+              "title": "Fixes",
+              "html": "<ul><li>Voice typing no longer glues your words onto the next word when you talk into the middle of a sentence.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.0",
+          "version": "1.2.0",
+          "name": "Anvira Notes 1.2.0",
+          "date": "2026-11-12T20:22:17Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.0",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-1.2.0.apk",
+            "size": 68033369,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.0/Anvira-Notes-1.2.0.apk",
+            "sha256": "8e5d217942b9f7f49778d497fbbe9901cb1ad71c07fd0e6cb0bc8dd93dc39baf"
+          },
+          "summary": "Brings the phone up to date with the desktop's 1.2.27–1.2.31, adds lectures and voice typing that run on the phone, and gives the whole app a cleaner, more iPhone-like look.",
+          "highlights": [
+            {
+              "kind": "Record lectures on your phone",
+              "text": "Record a lecture"
+            },
+            {
+              "kind": "Record lectures on your phone",
+              "text": "Voice typing"
+            },
+            {
+              "kind": "Study",
+              "text": "Research Studio"
+            },
+            {
+              "kind": "Study",
+              "text": "AI check & humanizer"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.2.0 for Android",
+              "html": "<p>Brings the phone up to date with the desktop's 1.2.27–1.2.31, adds lectures and voice typing that run on the phone, and gives the whole app a cleaner, more iPhone-like look.</p>"
+            },
+            {
+              "title": "Record lectures on your phone",
+              "html": "<ul><li><strong>Record a lecture</strong> from the home screen or an empty notebook: speech to text runs on the phone itself (whisper), and the words appear a moment after each sentence.</li><li>Keeps recording with the screen off. Mark important moments while you listen, then <strong>Turn into notes</strong> to get a page with the transcript and the moments you marked.</li><li><strong>Voice typing</strong>: tap the mic in a page's format bar and talk instead of typing.</li><li>The speech model downloads once (from about 82 MB) and then works offline.</li></ul>"
+            },
+            {
+              "title": "Use your own AI key",
+              "html": "<ul><li>Settings → AI &amp; Models → <strong>Your own AI key</strong>: OpenAI, Claude, Gemini, Groq, OpenRouter, Mistral, DeepSeek and more. Gemini, Groq, OpenRouter, Mistral, Cerebras and GitHub Models have free tiers.</li><li>Good when the phone is too slow for a bigger model. The key stays in the phone's secure keystore, and replies stream in as they are written.</li><li>What you ask AI is sent to the provider you choose while the key is on. Turn it off to go back to the AI on the phone.</li></ul>"
+            },
+            {
+              "title": "Study",
+              "html": "<ul><li><strong>Research Studio</strong>: plan a research paper step by step: topic, design, sources and citations, with Word export.</li><li><strong>AI check &amp; humanizer</strong>: see how AI-like a piece of text reads, and fix it.</li><li>Ask AI and Research Studio can search the web.</li></ul>"
+            },
+            {
+              "title": "A new look for the labs",
+              "html": "<ul><li>Chemistry, Physics, Math, Code and Research Studio now look like an iPhone app: capsule tabs, segmented controls, clean cards, smooth sliders and number tiles.</li><li>Physics sims fit a phone screen, and their labels and graphs are easier to read.</li></ul>"
+            },
+            {
+              "title": "Notes",
+              "html": "<ul><li>Rename, reorder and nest pages from a page's menu (Move up / Move down, Add a page inside, Move out to top level).</li><li>An empty notebook offers a quick start: text page, whiteboard, sheet, template, lecture or file import.</li><li>Long page and notebook titles wrap instead of being cut off; a new page's title is ready to type.</li><li>The whiteboard follows light mode.</li><li>Boards and sheets show their own icons in Recent and Favourites.</li></ul>"
+            },
+            {
+              "title": "Easier to read",
+              "html": "<ul><li>Text no longer spills out of or gets cut off in buttons and rows on small phones.</li><li>Light mode: darker grey text and links throughout. Settings, the AI tab and Messages are fully light now.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.1.1",
           "version": "1.1.1",
           "name": "Anvira Notes 1.1.1",
           "date": "2026-11-08T21:47:28Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.1.1",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.1.1.apk",
             "size": 67613341,
