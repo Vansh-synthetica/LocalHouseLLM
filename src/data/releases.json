@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-13T17:43:58.362Z",
+  "syncedAt": "2026-11-13T23:31:15.883Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -2292,15 +2292,53 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.2.2",
+      "latest": "v1.2.3",
       "releases": [
+        {
+          "tag": "v1.2.3",
+          "version": "1.2.3",
+          "name": "Anvira Notes 1.2.3",
+          "date": "2026-11-13T18:18:09Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.3",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.2.3.apk",
+            "size": 94969635,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.3/Anvira-Notes-1.2.3.apk",
+            "sha256": "2e54e9e6b21e5cae6977b2096e69da23a11037ad14d3fb2d768c197837b1886c"
+          },
+          "summary": "Brings the phone up to date with the PC app's 1.2.32 and 1.2.33: safer, steadier, and ready for a whole school on one network.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.2.3 for Android",
+              "html": "<p>Brings the phone up to date with the PC app's 1.2.32 and 1.2.33: safer, steadier, and ready for a whole school on one network.</p>"
+            },
+            {
+              "title": "Safer",
+              "html": "<ul><li>The app only runs its own code. A script hidden in a shared notebook, an imported document or a chat message is blocked.</li><li>Pages and study sets with a damaged or suspicious name are refused instead of saved, and a damaged save can no longer wipe your study streak and XP.</li></ul>"
+            },
+            {
+              "title": "Steadier",
+              "html": "<ul><li>If something goes wrong, the &quot;Something went wrong&quot; screen is clearer: your notes are saved as you type, and you can try again, reload, or copy the details for a report.</li><li>&quot;Moved to Trash · Undo&quot; and similar messages stay while you are reading them, no longer pile up, and can be dismissed.</li></ul>"
+            },
+            {
+              "title": "Busy school networks",
+              "html": "<ul><li>Signing in or creating an account on a busy school network tries again by itself. After a few seconds it says so: &quot;Lots of people are signing in on this network. Hang on, it is trying again…&quot;</li><li>A busy network no longer signs you out.</li><li>Messages only stays connected while a chat is open. Unread badges and new-message pop-ups still arrive, checked every minute.</li></ul>"
+            },
+            {
+              "title": "Also",
+              "html": "<ul><li>Tapping a link in a note opens it.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.2",
           "version": "1.2.2",
           "name": "Anvira Notes 1.2.2",
           "date": "2026-11-13T09:27:55Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.2",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.2.2.apk",
             "size": 94965464,
