@@ -6,6 +6,7 @@ import SEO from '@/components/SEO';
 import NotFound from '@/pages/NotFound';
 import { CopyValue } from '@/components/anvira/AvKit';
 import data from '@/data/releases.json';
+import { trackProducts, useLiveReleases } from '@/data/liveReleases';
 import {
   type Product,
   type ProductId,
@@ -21,6 +22,8 @@ import './releases.css';
 
 const SITE = 'https://localhousellm.com';
 const products = data.products as Product<Release>[];
+// A release newer than the build is added here in the browser (see liveReleases.ts).
+trackProducts(products);
 
 const META: Record<ProductId, { blurb: string; title: string; description: string; icon?: string }> = {
   'anvira-notes': {
@@ -125,6 +128,7 @@ const ReleaseEntry = ({ product, release, showProduct }: Entry & { showProduct: 
 };
 
 const Releases = () => {
+  useLiveReleases();
   const { product: productParam } = useParams();
   const current = productParam ? products.find((p) => p.id === productParam) : undefined;
   if (productParam && !current) return <NotFound />;

@@ -1163,3 +1163,74 @@ div.lh-rise {
     font-size: 15px;
   }
 }
+
+
+/* ---- hero instrument caption + shipping rail */
+.lh-instrument {
+  position: absolute;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: hsl(var(--lh-ink) / 0.45);
+  pointer-events: none;
+}
+.lh-hero__visual-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(hsl(var(--lh-ink) / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--lh-ink) / 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(90% 80% at 50% 50%, #000 30%, transparent 80%);
+}
+@media (max-width: 640px) { .lh-instrument span:last-child { display: none; } }
+
+.lh-shipping {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border: 1px solid hsl(var(--lh-line));
+  border-radius: 14px;
+  background: hsl(var(--lh-surface) / 0.7);
+}
+.lh-shipping__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: hsl(var(--lh-ink-soft));
+}
+.lh-shipping__label i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: hsl(145 45% 42%);
+  box-shadow: 0 0 0 0 hsl(145 45% 42% / 0.5);
+  animation: lh-ping 2.4s ease-out infinite;
+}
+@keyframes lh-ping {
+  0% { box-shadow: 0 0 0 0 hsl(145 45% 42% / 0.45); }
+  70%, 100% { box-shadow: 0 0 0 7px hsl(145 45% 42% / 0); }
+}
+@media (prefers-reduced-motion: reduce) { .lh-shipping__label i { animation: none; } }
+.lh-shipping ul { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; margin: 0; padding: 0; }
+.lh-shipping a { display: inline-flex; align-items: baseline; gap: 8px; font-size: 13px; color: hsl(var(--lh-ink)); }
+.lh-shipping a b { font-weight: 600; }
+.lh-shipping a span { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: hsl(var(--lh-moss)); }
+.lh-shipping a time { font-size: 12px; color: hsl(var(--lh-ink-soft)); }
+.lh-shipping a:hover b { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) { .lh-shipping a time { display: none; } }

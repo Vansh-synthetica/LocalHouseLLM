@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { type ProductId, latestRelease } from '@/data/releases';
+import { useLiveReleases } from '@/data/liveReleases';
 import iconAnvira from '@/assets/anvira/icon-anvira.png';
 import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
 
@@ -79,6 +80,7 @@ const Navbar = () => {
     }`;
   };
 
+  useLiveReleases();
   const desktopApps = downloadApps.filter((app) => !app.mobile);
   const androidApp = downloadApps.find((app) => app.mobile);
   const appItem = (app: (typeof downloadApps)[number]) => (

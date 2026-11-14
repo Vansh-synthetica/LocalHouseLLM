@@ -28,7 +28,8 @@ import {
   InstallerFacts,
 } from '@/components/anvira/AvKit';
 import AutoFilm from '@/components/anvira/Film';
-import { formatReleaseDate, formatSize, getProduct, isoDay, latestRelease, releaseAnchor } from '@/data/releases';
+import { formatReleaseDate, formatSize, getProduct, isoDay, liveRelease, releaseAnchor } from '@/data/releases';
+import { useLiveReleases } from '@/data/liveReleases';
 
 import iconAnvira from '@/assets/anvira/icon-anvira.png';
 import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
@@ -41,8 +42,9 @@ import anviraFilmPoster from '@/assets/anvira/films/anvira-film-poster.jpg';
 
 import '@/pages/anvira-premium.css';
 
-const latest = latestRelease('anvira');
-const runtime = latestRelease('anvira-runtime');
+// Read at render time so a release newer than the build shows up (see liveReleases.ts).
+const latest = liveRelease('anvira');
+const runtime = liveRelease('anvira-runtime');
 const REQUIRES = 'Windows 10 or 11 (64-bit)';
 
 const features = [
@@ -465,6 +467,7 @@ const AnviraFinal = () => (
 );
 
 const Anvira = () => {
+  useLiveReleases();
   return (
     <CleanLayout>
       <SEO

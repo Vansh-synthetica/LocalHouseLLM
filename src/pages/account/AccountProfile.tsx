@@ -1,7 +1,7 @@
 import { type FormEvent, type ReactNode, useCallback, useEffect, useId, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { Session } from '@supabase/supabase-js';
-import { AtSign, Camera, Check, Loader2, LogOut, Trash2, X } from 'lucide-react';
+import { AtSign, Camera, Check, Loader2, Trash2, X } from 'lucide-react';
 
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
@@ -21,6 +21,7 @@ import {
   isPro,
 } from '@/integrations/anvira/client';
 import { useAnviraSession } from '@/integrations/anvira/useAnviraSession';
+import { AccountShell, AuthFrame } from '@/components/account/AccountShell';
 
 const BASE_COLS = 'user_id, display_name, handle, avatar_color, searchable';
 const DETAIL_COLS = `${BASE_COLS}, avatar_url, bio, school, website`;
@@ -48,13 +49,25 @@ const StatusLine = ({ status }: { status: Status }) => (
   </p>
 );
 
-const Section = ({ id, title, description, children }: { id: string; title: string; description?: string; children: ReactNode }) => (
-  <section aria-labelledby={id} className="rounded-2xl border border-border/70 bg-card p-5 sm:p-7">
-    <h2 id={id} className="text-lg font-semibold tracking-tight">
-      {title}
-    </h2>
-    {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
-    <div className="mt-6 space-y-5">{children}</div>
+const Section = ({
+  id,
+  anchor,
+  title,
+  description,
+  children,
+}: {
+  id: string;
+  anchor?: string;
+  title: string;
+  description?: string;
+  children: ReactNode;
+}) => (
+  <section id={anchor} aria-labelledby={id} className="acc-section">
+    <div className="acc-section__label">
+      <h2 id={id}>{title}</h2>
+      {description && <p>{description}</p>}
+    </div>
+    <div className="acc-section__body">{children}</div>
   </section>
 );
 
@@ -209,8 +222,9 @@ const SignIn = ({ initialMode = 'signin' }: { initialMode?: AuthMode }) => {
 
   if (confirming) {
     return (
-      <div className="mx-auto w-full max-w-md">
-        <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">Check your email</h1>
+      <AuthFrame>
+        <p className="acc-kicker">Anvira account</p>
+        <h1 className="mt-3 text-3xl md:text-4xl font-display font-semibold tracking-tight">Check your email</h1>
         <p className="mt-3 text-muted-foreground">
           We sent a confirmation link to <strong className="text-foreground">{confirming}</strong>. Open it to finish creating
           your account, then sign in here or in Anvira Notes.
@@ -234,16 +248,17 @@ const SignIn = ({ initialMode = 'signin' }: { initialMode?: AuthMode }) => {
             I’ve confirmed — sign in
           </Button>
         </div>
-      </div>
+      </AuthFrame>
     );
   }
 
   return (
-    <div className="mx-auto w-full max-w-md">
-      <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">{COPY[mode].title}</h1>
-      <p className="mt-3 text-muted-foreground">{COPY[mode].lead}</p>
+    <AuthFrame>
+      <p className="acc-kicker">{mode === 'signup' ? 'New account' : mode === 'forgot' ? 'Password reset' : 'Welcome back'}</p>
+      <h1 className="mt-3 text-3xl md:text-[34px] font-display font-semibold tracking-tight leading-[1.1]">{COPY[mode].title}</h1>
+      <p className="mt-3 font-sans text-[15px] leading-relaxed text-muted-foreground">{COPY[mode].lead}</p>
 
-      <form onSubmit={submit} noValidate className="mt-8 space-y-5 rounded-2xl border border-border/70 bg-card p-6 sm:p-8">
+      <form onSubmit={submit} noValidate className="mt-8 space-y-5">
         {mode === 'signup' && (
           <Field label="Your name" htmlFor="anv-name" hint="Shown to classmates in Messages. You can change it later.">
             <Input id="anv-name" autoComplete="name" value={name} maxLength={60} onChange={(e) => setName(e.target.value)} className="h-11" />
@@ -294,7 +309,7 @@ const SignIn = ({ initialMode = 'signin' }: { initialMode?: AuthMode }) => {
         )}
       </form>
 
-      <p className="mt-6 text-center text-sm text-muted-foreground">
+      <p className="mt-8 border-t border-border/70 pt-6 text-center font-sans text-sm text-muted-foreground">
         {mode === 'signup' ? 'Already have an account? ' : 'No account yet? '}
         <button
           type="button"
@@ -304,7 +319,7 @@ const SignIn = ({ initialMode = 'signin' }: { initialMode?: AuthMode }) => {
           {mode === 'signup' ? 'Sign in' : 'Create one free'}
         </button>
       </p>
-    </div>
+    </AuthFrame>
   );
 };
 
@@ -549,30 +564,39 @@ const ProfileEditor = ({ session }: { session: Session }) => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl [&_p]:font-sans">
-      <header className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-        <Avatar person={preview} />
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate text-3xl md:text-4xl font-display font-semibold tracking-tight">{name.trim() || 'Your profile'}</h1>
-          <p className="mt-1 text-muted-foreground">
-            {saved.handle ? `@${saved.handle}` : 'No @username yet'} · {pro ? 'Anvira Pro' : 'Free plan'}
+    <AccountShell
+      session={session}
+      active="profile"
+      title={
+        <span className="flex items-center gap-4">
+          <Avatar person={preview} size={52} />
+          <span className="min-w-0 truncate">{name.trim() || 'Your profile'}</span>
+        </span>
+      }
+      lead={`${saved.handle ? `@${saved.handle}` : 'No @username yet'} · ${pro ? 'Anvira Pro' : 'Free plan'} · One account for Anvira Notes, Anvira and this site.`}
+    >
+      <div className="acc-tiles">
+        <div className="acc-tile">
+          <p>Plan</p>
+          <p>{pro ? 'Anvira Pro' : 'Free'}</p>
+        </div>
+        <div className="acc-tile">
+          <p>Username</p>
+          <p>{saved.handle ? `@${saved.handle}` : 'Not set'}</p>
+        </div>
+        <div className="acc-tile">
+          <p>Messages search</p>
+          <p>{saved.searchable ? 'Findable' : 'Hidden'}</p>
+        </div>
+        <div className="acc-tile">
+          <p>Pochi Club</p>
+          <p>
+            <Link to="/account/study">Open the club</Link>
           </p>
         </div>
-        <Button variant="outline" className="rounded-full" onClick={() => anvira.auth.signOut()}>
-          <LogOut className="mr-2 h-4 w-4" /> Sign out
-        </Button>
-      </header>
-
-      <div className="mt-10 space-y-6">
-        <Section id={`${ids}-study`} title="Study" description="Pochi Club: the Tuna Coins you earn studying in Anvira Notes, Pochi's closet and moves.">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">The same Pochi as in the app. It works offline in the app and syncs here.</p>
-            <Button asChild className="rounded-full">
-              <Link to="/account/study">Open Pochi Club</Link>
-            </Button>
-          </div>
-        </Section>
-        <Section id={`${ids}-profile`} title="Profile" description="What people see when you chat in Anvira Notes.">
+      </div>
+      <div className="[&_p]:font-sans">
+        <Section id={`${ids}-profile`} anchor="profile" title="Profile" description="What people see when you chat in Anvira Notes.">
           <div className="flex flex-wrap items-center gap-4">
             <Avatar person={preview} size={64} />
             <div className="flex flex-wrap gap-2">
@@ -677,7 +701,7 @@ const ProfileEditor = ({ session }: { session: Session }) => {
           </form>
         </Section>
 
-        <Section id={`${ids}-messages`} title="Messages" description="How classmates find you and how you look in chats.">
+        <Section id={`${ids}-messages`} anchor="messages" title="Messages" description="How classmates find you and how you look in chats.">
           <div className="flex items-start justify-between gap-6">
             <div>
               <Label htmlFor={`${ids}-searchable`} className="text-[13px] font-medium">
@@ -721,7 +745,7 @@ const ProfileEditor = ({ session }: { session: Session }) => {
           </div>
         </Section>
 
-        <Section id={`${ids}-account`} title="Account" description="Private to you.">
+        <Section id={`${ids}-account`} anchor="security" title="Sign-in & security" description="Your email and password. Private to you.">
           <form onSubmit={saveAccount} className="space-y-5" noValidate>
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Email" htmlFor={`${ids}-email`} hint="Your sign-in email can’t be changed here.">
@@ -775,7 +799,7 @@ const ProfileEditor = ({ session }: { session: Session }) => {
           </form>
         </Section>
       </div>
-    </div>
+    </AccountShell>
   );
 };
 

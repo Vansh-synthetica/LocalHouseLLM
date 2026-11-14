@@ -18,6 +18,7 @@ import {
   recentHighlights,
   releaseProducts,
 } from '@/data/releases';
+import { useLiveReleases } from '@/data/liveReleases';
 import forestImage from '@/assets/video-poster.jpg';
 import iconAnvira from '@/assets/anvira/icon-anvira.png';
 import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
@@ -74,17 +75,22 @@ const CARD_LINKS: Record<ProductId, { to: string; cta: string; category: string 
   'anvira-runtime': { to: '/anvira#runtime', cta: 'How the runtime works', category: 'Infrastructure' },
 };
 
-const latestReleases = releaseProducts
+const getLatestReleases = () =>
+  releaseProducts
   .map((p) => {
     const r = latestRelease(p.id);
     return {
       key: p.id,
+      name: p.name,
+      version: r.version,
       title: `${p.name} ${r.version}`,
       description:
         CARD_COPY[`${p.id}@${r.version}`] ??
-        `${recentHighlights(p.id, 3)
+        (recentHighlights(p.id, 3)
           .map((h) => h.text)
-          .join(' · ')}.`,
+          .join(' · ') ||
+          r.summary ||
+          'Read what changed in this release') + '.',
       iso: r.date,
       date: formatReleaseDate(r.date),
       ...CARD_LINKS[p.id],
@@ -99,12 +105,13 @@ const releaseDays = Math.max(
   Math.round((Date.parse(allReleases[allReleases.length - 1]) - Date.parse(allReleases[0])) / 86_400_000),
 );
 
-const notesLatest = latestRelease('anvira-notes');
-const [notesNewest] = recentHighlights('anvira-notes', 1);
-const ANNOUNCE =
-  notesNewest?.text === 'Messages'
+const getAnnounce = () => {
+  const notesLatest = latestRelease('anvira-notes');
+  const [notesNewest] = recentHighlights('anvira-notes', 1);
+  return notesNewest?.text === 'Messages'
     ? { text: `Anvira Notes ${notesLatest.version}: study groups, mock exams and grades`, to: '/anvira-notes#messages' }
     : { text: `Anvira Notes ${notesLatest.version}: ${notesNewest?.text ?? 'what’s new'}`, to: '/releases/anvira-notes' };
+};
 
 const researchHighlights = [
   'localhousellm-master-report',
@@ -138,7 +145,29 @@ const SectionIntro = ({
   </Reveal>
 );
 
-const Hero = () => (
+/** The current version of every app, straight from the release feed (refreshed in the browser too). */
+const ShippingRail = () => (
+  <div className="lh-shipping" aria-label="Current releases">
+    <span className="lh-shipping__label">
+      <i aria-hidden="true" /> Shipping now
+    </span>
+    <ul>
+      {getLatestReleases().map((item) => (
+        <li key={item.key}>
+          <Link to={`/releases/${item.key}`}>
+            <b>{item.name}</b>
+            <span>v{item.version}</span>
+            <time dateTime={item.iso}>{item.date}</time>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const Hero = () => {
+  const ANNOUNCE = getAnnounce();
+  return (
   <section className="lh-hero">
     <div className="lh-shell">
       <Link to={ANNOUNCE.to} className="lh-announce lh-rise" style={{ ['--d' as string]: '0ms' }}>
@@ -178,11 +207,17 @@ const Hero = () => (
       <div className="lh-hero__visual lh-rise" style={{ ['--d' as string]: '360ms' }}>
         <div className="lh-hero__visual-inner">
           <NodeField />
+          <div className="lh-instrument" aria-hidden="true">
+            <span>Local inference graph</span>
+            <span>127.0.0.1 · on-device</span>
+          </div>
         </div>
+        <ShippingRail />
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const SpotlightBand = () => (
   <section className="lh-spotlight" aria-labelledby="spotlight-heading">
@@ -210,7 +245,7 @@ const LatestReleases = () => (
         <h2 className="lh-section-title">Latest releases</h2>
       </Reveal>
       <ul className="lh-release-grid">
-        {latestReleases.map((item) => (
+        {getLatestReleases().map((item) => (
           <li key={item.key}>
             <Reveal className="lh-release-card">
               <Link to={item.to} className="lh-release-card__link">
@@ -443,6 +478,8 @@ const FinalSection = () => (
 );
 
 const Index = () => {
+  useLiveReleases();
+  const latestReleases = getLatestReleases();
   const homeSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',

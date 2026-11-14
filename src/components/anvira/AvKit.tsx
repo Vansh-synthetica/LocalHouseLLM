@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Check, Copy, Download, Loader2 } from 'lucide-react';
 import { ParallaxStage, TiltCard } from './AvMotion';
 import { type ProductId, formatReleaseDate, formatSize, getProduct, latestRelease } from '@/data/releases';
+import { useLiveReleases } from '@/data/liveReleases';
 
 /**
  * Fires a direct file download via a throwaway <a download>, rather than
@@ -44,6 +45,7 @@ export const DownloadButton = ({
   label: string;
   className?: string;
 }) => {
+  useLiveReleases();
   const [state, setState] = useState<'idle' | 'loading'>('idle');
   const { repo } = getProduct(product);
   const known = latestRelease(product);
@@ -124,6 +126,7 @@ export const InstallerFacts = ({
   requires: string;
   className?: string;
 }) => {
+  useLiveReleases();
   const r = latestRelease(product);
   return (
     <dl className={className}>

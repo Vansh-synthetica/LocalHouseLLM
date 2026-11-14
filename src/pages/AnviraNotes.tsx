@@ -51,9 +51,11 @@ import {
   getProduct,
   isoDay,
   latestRelease,
+  liveRelease,
   recentHighlights,
   releaseAnchor,
 } from '@/data/releases';
+import { useLiveReleases } from '@/data/liveReleases';
 import { CountUp, Magnetic, ScrollProgress, TiltCard } from '@/components/anvira/AvMotion';
 
 import iconAnviraNotes from '@/assets/anvira-notes/icon-anvira-notes.png';
@@ -77,9 +79,10 @@ import messagesReelPoster from '@/assets/anvira-notes/films/messages-reel-poster
 import '@/pages/anvira-notes.css';
 
 const PRODUCT = getProduct('anvira-notes');
-const latest = latestRelease('anvira-notes');
+// Read at render time so a release newer than the build shows up (see liveReleases.ts).
+const latest = liveRelease('anvira-notes');
 // The Android branch of Anvira Notes — the touch app, released as signed .apk files.
-const androidLatest = latestRelease('anvira-notes-android');
+const androidLatest = liveRelease('anvira-notes-android');
 const REQUIRES = 'Windows 10 or 11 (64-bit)';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -1860,7 +1863,9 @@ const Final = () => (
 
 /* ------------------------------------------------------------------ */
 
-const AnviraNotes = () => (
+const AnviraNotes = () => {
+  useLiveReleases();
+  return (
   <CleanLayout>
     <SEO
       title="Anvira Notes — Free AI Notes, Flashcards & Mock Exams App"
@@ -1992,6 +1997,7 @@ const AnviraNotes = () => (
       </div>
     </MotionConfig>
   </CleanLayout>
-);
+  );
+};
 
 export default AnviraNotes;

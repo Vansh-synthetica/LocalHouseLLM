@@ -4,6 +4,7 @@
 // description, canonical URL and JSON-LD. Also emits 404.html, an app-only
 // shell, sitemap.xml and Netlify _redirects — all from src/seo/routes.ts.
 import { execSync } from 'node:child_process';
+import { htmlToMarkdown } from './html-to-md.mjs';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -65,6 +66,8 @@ const write = (file, contents) => {
 };
 
 const pageFile = (path) => (path === '/' ? resolve(dist, 'index.html') : resolve(dist, `_pages${path}.html`));
+// Markdown twin of each page for AI assistants: /anvira -> /anvira.md, / -> /index.md
+const mdPath = (path) => (path === '/' ? '/index.md' : `${path}.md`);
 const pageUrl = (path) => (path === '/' ? '/index.html' : `/_pages${path}.html`);
 
 // ---- lastmod from git (falls back to the route's declared date) ----
@@ -90,6 +93,9 @@ const lastmodFor = (route) => {
 rmSync(resolve(dist, '_pages'), { recursive: true, force: true });
 const problems = [];
 const rendered = [];
+const markdown = [];
+const decodeHead = (s) =>
+  s.replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
 for (const route of siteRoutes) {
   const { html, head } = render(route.path);
@@ -99,7 +105,15 @@ for (const route of siteRoutes) {
     problems.push(`${route.path}: canonical does not match its own URL`);
   }
   if (/noindex/.test(head)) problems.push(`${route.path}: marked noindex but listed as indexable`);
-  write(pageFile(route.path), fill(pageHead(route.path, head), html));
+  const mdLink = `\n    <link rel="alternate" type="text/markdown" href="${mdPath(route.path)}" title="This page as Markdown" />`;
+  write(pageFile(route.path), fill(pageHead(route.path, head) + mdLink, html));
+
+  const title = decodeHead(head.match(/<title[^>]*>([^<]+)<\/title>/)?.[1] ?? route.path);
+  const description = decodeHead(head.match(/<meta[^>]+name="description"[^>]+content="([^"]*)"/)?.[1] ?? '');
+  const url = SITE_URL + (route.path === '/' ? '/' : route.path);
+  const md = `# ${title}\n\n> ${description}\n\nURL: ${url}\nLast updated: ${lastmodFor(route)}\n\n${htmlToMarkdown(html, SITE_URL)}`;
+  write(resolve(dist, mdPath(route.path).slice(1)), md);
+  markdown.push({ path: route.path, url, title, description, md });
 
   const images = [...new Set([...html.matchAll(/<img[^>]+src="(\/assets\/[^"]+\.(?:png|jpe?g|webp))"/g)].map((m) => m[1]))];
   rendered.push({ route, images, lastmod: lastmodFor(route) });
@@ -188,7 +202,32 @@ const llms = readFileSync(resolve(root, 'public/llms.txt'), 'utf8').replace(
     return r.installer?.url ?? `https://github.com/${products.find((x) => x.id === id).repo}/releases/latest`;
   },
 );
-write(resolve(dist, 'llms.txt'), llms);
+const mdIndex = markdown.map((m) => `- [${m.title}](${SITE_URL}${mdPath(m.path)}): ${m.description}`).join('\n');
+write(
+  resolve(dist, 'llms.txt'),
+  `${llms.trimEnd()}\n\n## Every page as Markdown\n\nEach public page is also served as clean Markdown at the same URL plus .md. Everything in one file: ${SITE_URL}/llms-full.txt\n\n${mdIndex}\n`,
+);
+
+// ---- llms-full.txt: the whole public site plus every release note, as one Markdown file ----
+const releaseLog = products
+  .map((p) => {
+    const rows = p.releases.map((r) => {
+      const notes = (r.notes ?? [])
+        .map((n) => (n.title ? `#### ${n.title}\n\n` : '') + htmlToMarkdown(n.html, SITE_URL))
+        .join('\n');
+      const dl = r.installer
+        ? `Download: ${r.installer.url}${r.installer.sha256 ? ` (SHA-256 ${r.installer.sha256})` : ''}\n\n`
+        : '';
+      return `### ${p.name} ${r.version} (${r.date.slice(0, 10)})\n\n${dl}${notes}`;
+    });
+    return `## ${p.name} release history\n\nAll releases: ${p.releasesUrl}\n\n${rows.join('\n')}`;
+  })
+  .join('\n\n');
+const fullHeader = `# LocalHouseLLM: full site content\n\n> Every public page of ${SITE_URL} as Markdown, then the complete release history of Anvira, Anvira Notes, Anvira Notes for Android and Anvira Runtime. Generated at build time on ${new Date().toISOString().slice(0, 10)}. Index: ${SITE_URL}/llms.txt\n`;
+write(
+  resolve(dist, 'llms-full.txt'),
+  `${fullHeader}\n${markdown.map((m) => `---\n\n${m.md}`).join('\n')}\n---\n\n# Release history\n\n${releaseLog}\n`,
+);
 
 // The manifest was only needed to link page chunks above; don't publish it.
 rmSync(resolve(dist, '.vite'), { recursive: true, force: true });

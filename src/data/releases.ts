@@ -7,6 +7,7 @@
  * new release without code changes.
  */
 import summary from './releases-summary.json';
+import { trackProducts } from './liveReleases';
 
 export type ProductId = 'anvira-notes' | 'anvira-notes-android' | 'anvira' | 'anvira-runtime';
 
@@ -56,6 +57,8 @@ export interface Product<R extends ReleaseSummary = ReleaseSummary> {
 }
 
 export const releaseProducts = summary.products as Product[];
+// Newer releases found in the browser are added here in place (see liveReleases.ts).
+trackProducts(releaseProducts);
 export const releasesSyncedAt = summary.syncedAt;
 
 export const getProduct = (id: ProductId) => releaseProducts.find((p) => p.id === id)!;
@@ -65,6 +68,19 @@ export const latestRelease = (id: ProductId): ReleaseSummary => {
   const p = getProduct(id);
   return p.releases.find((r) => r.tag === p.latest) ?? p.releases[0];
 };
+
+/**
+ * The latest release of a product, read at use time. Module-level constants made
+ * with this stay current when the browser finds a newer release, as long as the
+ * page calls useLiveReleases() so it re-renders.
+ */
+export const liveRelease = (id: ProductId): ReleaseSummary =>
+  new Proxy({} as ReleaseSummary, {
+    get: (_, key) => latestRelease(id)[key as keyof ReleaseSummary],
+    has: (_, key) => key in latestRelease(id),
+    ownKeys: () => Reflect.ownKeys(latestRelease(id)),
+    getOwnPropertyDescriptor: (_, key) => Object.getOwnPropertyDescriptor(latestRelease(id), key),
+  });
 
 /** Most recent headline features across recent releases ("New" items first). */
 export const recentHighlights = (id: ProductId, count = 4, releases = 6) => {

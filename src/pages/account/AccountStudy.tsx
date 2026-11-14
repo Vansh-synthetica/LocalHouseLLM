@@ -1,10 +1,12 @@
 import { useMemo, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader2, X } from 'lucide-react';
+import type { Session } from '@supabase/supabase-js';
 
 import CleanLayout from '@/components/CleanLayout';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
+import { AccountShell, AuthFrame } from '@/components/account/AccountShell';
 import { anvira, anviraConfigured } from '@/integrations/anvira/client';
 import { useAnviraSession } from '@/integrations/anvira/useAnviraSession';
 import '@/pochi-club/pochi-club.css';
@@ -17,8 +19,12 @@ import { WELCOME_COINS } from '@/pochi-club/ledger';
  * Pochi Club on the website: the same club as Anvira Notes (src/pochi-club is shared with the app), on the same
  * Anvira account. Coins are earned by studying in the app; here people dress Pochi up, spend coins and look back.
  * Kept in this browser too, so it keeps working through a dropped connection and syncs when it comes back.
+ *
+ * The shared club files stay identical to the app's; the website's look (calmer palette, no emoji tabs, page-height
+ * layout) comes from the .acc-club overrides in src/components/account/account.css.
  */
-const Club = ({ userId }: { userId: string }) => {
+const Club = ({ session }: { session: Session }) => {
+  const userId = session.user.id;
   const club = useMemo(() => {
     const c = createClub({
       storage: browserStorage,
@@ -29,23 +35,46 @@ const Club = ({ userId }: { userId: string }) => {
     c.earn('welcome', WELCOME_COINS, 'first', 'Welcome to Pochi Club');
     return c;
   }, [userId]);
-  useSyncExternalStore(club.subscribe, club.get, club.get);
+  const { state: s } = useSyncExternalStore(club.subscribe, club.get, club.get);
+  const questsOpen = s.quests.filter((q) => !q.claimed).length;
 
   return (
-    <div data-lenis-prevent className="h-[calc(100vh-8rem)] min-h-[620px] overflow-hidden rounded-3xl border border-border/70 shadow-sm">
-      <PochiClubView
-        club={club}
-        host="web"
-        banner={
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-[#ebe4f8] bg-white/70 px-[18px] py-2 text-[13px] text-[#5d5674]">
-            <span>Tuna Coins come from studying in Anvira Notes. This is the same Pochi as in the app.</span>
-            <Link to="/anvira-notes#download" className="font-semibold text-[#6f5bd8] underline-offset-2 hover:underline">
-              Get Anvira Notes
-            </Link>
-          </div>
-        }
-      />
-    </div>
+    <AccountShell
+      session={session}
+      active="study"
+      title="Pochi Club"
+      lead="Your study companion. Tuna Coins come from studying in Anvira Notes; spend them here on Pochi's closet, homes and moves. Same Pochi, same account, in the app and on the web."
+    >
+      <div className="acc-club-stats">
+        <div className="acc-tile">
+          <p>Tuna Coins</p>
+          <p>{s.coins.toLocaleString()}</p>
+        </div>
+        <div className="acc-tile">
+          <p>Rank</p>
+          <p>{s.rank.name}</p>
+        </div>
+        <div className="acc-tile">
+          <p>Friendship</p>
+          <p>{s.bondTier.name}</p>
+        </div>
+        <div className="acc-tile">
+          <p>Study days</p>
+          <p>{s.studyDays.toLocaleString()}</p>
+        </div>
+        <div className="acc-tile">
+          <p>Quests today</p>
+          <p>{questsOpen ? `${questsOpen} open` : 'All done'}</p>
+        </div>
+      </div>
+      <div className="acc-club">
+        <PochiClubView club={club} host="web" />
+      </div>
+      <p className="acc-club-note">
+        <span>Coins are earned by studying in Anvira Notes. What you buy here shows up in the app, and the other way round.</span>
+        <Link to="/anvira-notes#download">Get Anvira Notes</Link>
+      </p>
+    </AccountShell>
   );
 };
 
@@ -54,18 +83,7 @@ const AccountStudy = () => {
   return (
     <CleanLayout>
       <SEO title="Study · Pochi Club — LocalHouseLLM" description="Your Pochi Club: the buddy, closet and Tuna Coins you earn by studying in Anvira Notes." noindex />
-      <div className="max-container mx-auto w-full max-w-6xl px-4 py-8 md:py-12">
-        <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">Your account · Study</p>
-            <h1 className="mt-1 text-3xl md:text-4xl font-display font-semibold tracking-tight">Pochi Club</h1>
-          </div>
-          {session && (
-            <Button asChild variant="outline" className="rounded-full">
-              <Link to="/account/profile">Profile</Link>
-            </Button>
-          )}
-        </div>
+      <div className="max-container px-4 py-10 md:py-16">
         {!anviraConfigured ? (
           <p className="mx-auto max-w-md py-16 text-center text-destructive">
             <X className="mr-1 inline h-4 w-4" /> Anvira sign-in is not configured on this site yet.
@@ -75,17 +93,24 @@ const AccountStudy = () => {
             <Loader2 className="h-4 w-4 animate-spin" /> Loading…
           </div>
         ) : session ? (
-          <Club key={session.user.id} userId={session.user.id} />
+          <Club key={session.user.id} session={session} />
         ) : (
-          <div className="mx-auto max-w-md rounded-2xl border border-border/70 bg-card p-7 text-center">
-            <p className="text-lg font-semibold">Sign in to meet your Pochi</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Pochi Club lives on your Anvira account: the coins you earn studying in Anvira Notes, the closet and the moves.
+          <AuthFrame>
+            <p className="acc-kicker">Pochi Club</p>
+            <h1 className="mt-3 text-3xl md:text-[34px] font-display font-semibold tracking-tight leading-[1.1]">Sign in to meet your Pochi</h1>
+            <p className="mt-3 font-sans text-[15px] leading-relaxed text-muted-foreground">
+              Pochi Club lives on your Anvira account: the Tuna Coins you earn studying in Anvira Notes, Pochi&rsquo;s closet,
+              homes and moves.
             </p>
-            <Button asChild className="mt-6 rounded-full">
-              <Link to="/account/signin?next=/account/study">Sign in</Link>
-            </Button>
-          </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild className="h-11 rounded-full bg-foreground px-6 text-background hover:bg-foreground/90">
+                <Link to="/account/signin?next=/account/study">Sign in</Link>
+              </Button>
+              <Button asChild variant="outline" className="h-11 rounded-full px-6">
+                <Link to="/account/signup?next=/account/study">Create a free account</Link>
+              </Button>
+            </div>
+          </AuthFrame>
         )}
       </div>
     </CleanLayout>

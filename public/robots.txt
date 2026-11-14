@@ -12,4 +12,8 @@
 User-agent: *
 Allow: /
 
+# For AI assistants: a site index at /llms.txt, everything in one file at
+# /llms-full.txt, and every page as Markdown at the same URL plus .md.
+
 Sitemap: https://localhousellm.com/sitemap.xml
+Sitemap: https://localhousellm.com/releases.xml
