@@ -179,11 +179,15 @@
 }
 
 /* ---- Pochi Club, website frame (the shared club files stay untouched) */
-.acc-club { border-radius: 20px; overflow: hidden; border: 1px solid hsl(var(--border) / 0.8); box-shadow: 0 1px 2px rgba(20, 22, 18, 0.05), 0 30px 70px -48px rgba(40, 30, 90, 0.45); }
+.acc-club { border-radius: 20px; overflow: hidden; overflow: clip; border: 1px solid hsl(var(--border) / 0.8); box-shadow: 0 1px 2px rgba(20, 22, 18, 0.05), 0 30px 70px -48px rgba(40, 30, 90, 0.45); }
 .acc-club .pc {
   height: auto;
   min-height: 0;
   overflow: visible;
+  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+}
+/* the website's calmer light palette; a dark club keeps its own graphite colours */
+.acc-club .pc:not([data-theme='dark']) {
   --pc-bg: #fbfaf8;
   --pc-soft: #f2f0f6;
   --pc-line: #e6e2ec;
@@ -193,16 +197,20 @@
   --pc-accent: #5b4fd1;
   --pc-accent-2: #8f84ec;
   --pc-shadow: 0 10px 28px -20px rgba(40, 30, 90, 0.45);
-  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
   background:
     radial-gradient(900px 380px at 12% -12%, rgba(143, 132, 236, 0.16), transparent 60%),
     radial-gradient(700px 360px at 110% 0%, rgba(214, 190, 150, 0.16), transparent 60%),
     var(--pc-bg);
 }
 .acc-club .pc-body { overflow: visible; }
+/* clip (not hidden) above keeps the shop mirror sticky against the page; it stops under the fixed navbar */
+.acc-club .pc-mirror { top: 4.25rem; }
+/* one column on tablets: the tall mirror would cover the cards, so it scrolls with them there (phones get a compact bar) */
+@media (min-width: 641px) and (max-width: 980px) { .acc-club .pc-shop .pc-mirror { position: static; } }
 .acc-club .pc-top { padding: 14px 20px; }
 .acc-club .pc-brand { display: none; }
-.acc-club .pc-tabs { margin-left: 0; margin-right: auto; background: #fff; }
+.acc-club .pc-tabs { margin-left: 0; margin-right: auto; }
+.acc-club .pc:not([data-theme='dark']) .pc-tabs { background: #fff; }
 .acc-club .pc-tabs button > span[aria-hidden] { display: none; }
 .acc-club .pc-tabs button { font-weight: 600; letter-spacing: -0.005em; }
 .acc-club .pc-tabs button.on { color: var(--pc-text); background: var(--pc-soft); box-shadow: inset 0 0 0 1px var(--pc-line); }

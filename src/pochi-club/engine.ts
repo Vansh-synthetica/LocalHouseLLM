@@ -174,7 +174,7 @@ export function createClub(opts: { storage: Storage; key: string; backend?: Back
     setLook(patch) {
       const s = get().state
       const next = sanitizeLook({ ...saved.look, ...patch }, s)
-      const styled = ['palette', 'equipped', 'home'].some((k) => k in patch)
+      const styled = ['palette', 'equipped', 'home', 'form'].some((k) => k in patch)
       saved = { ...saved, look: next, lookAt: now().toISOString(), lookPending: true }
       changed()
       if (styled) add({ id: `care:style:${day()}`, kind: 'care', reason: 'style', amount: 0, ref: day() })

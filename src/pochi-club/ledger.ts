@@ -102,9 +102,13 @@ export interface Look {
   favoriteMove: string
   /** a two-move routine */
   routine: [string, string]
+  /** Pochi's shape: the round blob (Pochi as always) or a cat. Looks saved before there was a choice: the blob. */
+  form?: PochiForm
 }
 
-export const DEFAULT_LOOK: Look = { nickname: 'Pochi', palette: 'lavender', equipped: {}, mood: 'happy', home: 'cloud', favoriteMove: 'hello', routine: ['hello', 'hop'] }
+export type PochiForm = 'blob' | 'cat'
+
+export const DEFAULT_LOOK: Look = { nickname: 'Pochi', palette: 'lavender', equipped: {}, mood: 'happy', home: 'cloud', favoriteMove: 'hello', routine: ['hello', 'hop'], form: 'blob' }
 
 // ── Reducing the ledger ─────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -334,5 +338,6 @@ export function sanitizeLook(raw: Partial<Look> | null | undefined, s: ClubState
     home: homeUnlocked(s, l.home) ? l.home : 'cloud',
     favoriteMove: move(l.favoriteMove, 'hello'),
     routine: [move(l.routine?.[0] ?? 'hello', 'hello'), move(l.routine?.[1] ?? 'hop', 'hello')],
+    form: l.form === 'cat' ? 'cat' : 'blob',
   }
 }
