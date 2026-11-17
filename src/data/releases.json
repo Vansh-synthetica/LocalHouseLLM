@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-13T23:31:15.883Z",
+  "syncedAt": "2026-11-17T20:52:01.787Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,53 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.33",
+      "latest": "v1.2.34",
       "releases": [
+        {
+          "tag": "v1.2.34",
+          "version": "1.2.34",
+          "name": "Anvira Notes 1.2.34",
+          "date": "2026-11-17T19:16:02Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.34",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.34.exe",
+            "size": 162744576,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.34/Anvira-Notes-Setup-1.2.34.exe",
+            "sha256": "46532b14c2d92c29242623e35374f3714ccc8c16ca8c6b09c10bd94ae6bbf90d"
+          },
+          "summary": "New Electricity and Magnetism sections in the Physics Lab.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>New Electricity and Magnetism sections in the Physics Lab.</p>"
+            },
+            {
+              "title": "Physics Lab: Electricity",
+              "html": "<ul><li>Ohm's law: set the resistance directly, or build it from a real wire (length, thickness, material). An ammeter and a voltmeter read along, next to the I–V graph.</li><li>Coulomb's law with charges you can drag around.</li><li>Electric field and potential.</li><li>Series and parallel circuits: click a resistor to burn it out and see what happens to the others.</li><li>Power and energy, including working out your electricity bill.</li><li>Capacitors and RC charging.</li><li>Kirchhoff's laws: walk each loop and watch the voltages add to zero.</li><li>Circuit builder: wires, resistors, bulbs, batteries, switches and capacitors, with ready-made circuits to start from.</li></ul>"
+            },
+            {
+              "title": "Physics Lab: Magnetism",
+              "html": "<ul><li>The magnetic field round a long wire, a solenoid and a moving charge.</li><li>The force on a wire in a field, two parallel wires, and a rod sliding through a field (how a generator works).</li></ul><p>Every simulation shows its formulas with your numbers, has worked examples with a <strong>Try it</strong> button, and works in Tagalog.</p>"
+            },
+            {
+              "title": "Solve",
+              "html": "<ul><li>Type problems about Ohm's law, power and bills, capacitors, Kirchhoff's laws, Coulomb's law and magnetic forces, and get the full working with a live simulation.</li></ul>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li>Math Lab: <strong>Systems of equations</strong> works again (it refused every pair of equations).</li><li>Physics Solve: &quot;a lamp draws 0.5 A from…&quot; no longer loses the current.</li><li>Clearer labels in Refraction and a few other simulations.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.33",
           "version": "1.2.33",
           "name": "Anvira Notes 1.2.33",
           "date": "2026-11-13T17:25:22Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.33",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.33.exe",
             "size": 162726641,
@@ -2292,15 +2330,62 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.2.3",
+      "latest": "v1.2.4",
       "releases": [
+        {
+          "tag": "v1.2.4",
+          "version": "1.2.4",
+          "name": "Anvira Notes 1.2.4",
+          "date": "2026-11-17T19:06:26Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.4",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.2.4.apk",
+            "size": 95005443,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.4/Anvira-Notes-1.2.4.apk",
+            "sha256": "3168e555112ebb74e38556d85ea2d6df19e2c867034dfc1875b5867571eaefe1"
+          },
+          "summary": "New electricity and magnetism labs, and every lab now fits a phone screen properly.",
+          "highlights": [
+            {
+              "kind": "Physics Lab: Electricity and Magnetism",
+              "text": "Electricity tab"
+            },
+            {
+              "kind": "Physics Lab: Electricity and Magnetism",
+              "text": "Magnetism tab"
+            },
+            {
+              "kind": "Physics Lab: Electricity and Magnetism",
+              "text": "Solve"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.2.4 for Android",
+              "html": "<p>New electricity and magnetism labs, and every lab now fits a phone screen properly.</p>"
+            },
+            {
+              "title": "Physics Lab: Electricity and Magnetism",
+              "html": "<ul><li><strong>Electricity tab:</strong> Ohm's law (set R directly or build it from a real wire), Coulomb's law with drag-able charges, electric field and potential, series and parallel circuits (tap a resistor to burn it out), power and energy with your electricity bill, capacitors and RC charging, Kirchhoff's laws, and the circuit builder.</li><li><strong>Magnetism tab:</strong> magnetic fields, the force on a wire, two parallel wires, and a rod sliding through a field (how generators work).</li><li>Every simulation has live formulas with your numbers, worked examples with a <strong>Try it</strong> button, and Tagalog.</li><li><strong>Solve:</strong> type problems about Ohm's law, power and bills, capacitors, Kirchhoff, Coulomb's law and magnetic forces and get the full working with a live simulation.</li></ul>"
+            },
+            {
+              "title": "Every lab looks right on a phone",
+              "html": "<ul><li>Lab panels show all their controls inside the card.</li><li>Buttons under a simulation wrap onto a second row instead of running off the screen.</li><li>Labels on simulations no longer overlap (Refraction, Kirchhoff, Power, Coulomb and more).</li><li>The whole periodic table fits the screen; tap an element to see its details.</li><li>Shorter example text in Chemistry search and Research Studio, so nothing is cut off.</li></ul>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li>Math Lab: <strong>Systems of equations</strong> works again (it refused every pair of equations).</li><li>Physics Solve: &quot;a lamp draws 0.5 A from…&quot; no longer loses the current.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.3",
           "version": "1.2.3",
           "name": "Anvira Notes 1.2.3",
           "date": "2026-11-13T18:18:09Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.3",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.2.3.apk",
             "size": 94969635,
