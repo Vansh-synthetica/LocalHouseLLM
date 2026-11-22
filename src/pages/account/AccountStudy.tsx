@@ -67,7 +67,7 @@ const Club = ({ session }: { session: Session }) => {
           <p>{questsOpen ? `${questsOpen} open` : 'All done'}</p>
         </div>
       </div>
-      <div className="acc-club">
+      <div className="acc-club" data-lenis-prevent>
         <PochiClubView club={club} host="web" />
       </div>
       <p className="acc-club-note">

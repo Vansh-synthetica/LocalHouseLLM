@@ -223,7 +223,8 @@ export function drawPochi(f: Fur, mood: string, u: string, layers: Layers, form:
       `<g class="pa-sparkles">${pf.sparks.map(([x, y], i) => `<g class="pa-pxtw" style="animation-delay:${((i * 0.7) % 2.8).toFixed(1)}s">${pix(plusRuns(x, y), c)}</g>`).join('')}</g>` +
       layers.back +
       `<g class="pa-breathe">` +
-      pix(PX_FEET, c) +
+      // each foot on its own (same pixels), so a move can step with them
+      PX_FEET.map((r, i) => `<g class="pa-foot f${i + 1}">${pix([r], c)}</g>`).join('') +
       `<g class="pa-wing-l">${pix(PX_WING_L, c)}</g><g class="pa-wing-r">${pix(PX_WING_R, c)}</g>` +
       `<g class="pa-antenna">${pix(PX_ANTENNA, c)}</g>` +
       pix(PX_BODY, c) +

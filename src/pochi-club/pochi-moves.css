@@ -1,0 +1,485 @@
+/* Pochi's moves, acted part by part (see moves.ts for which part plays what in each move). A move sets
+   --mv-body, --mv-wl, --mv-wr, --mv-ant, --mv-fa, --mv-fb, --mv-eyes, --mv-sh, --mv-sp on the sprite's <svg> and adds
+   .is-playing; parts with nothing to do keep still. Every move eases out of an anticipation and settles back to rest,
+   so they can be cut short or chained.
+   SHARED FILE: identical copies in Anvira Notes (src/pochi-club/) and the website (LocalHouseLLM src/pochi-club/). */
+
+.pc-sprite.is-playing .pochi-sprite,
+.pc-sprite.is-playing .pa-wing-l,
+.pc-sprite.is-playing .pa-wing-r,
+.pc-sprite.is-playing .pa-antenna,
+.pc-sprite.is-playing .pa-foot,
+.pc-sprite.is-playing .pa-eyes,
+.pc-sprite.is-playing .pa-shadow,
+.pc-sprite.is-playing .pa-sparkles {
+  transform-box: fill-box;
+  animation-duration: var(--pochi-move-duration, 1.5s);
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  animation-iteration-count: 1;
+}
+.pc-sprite.is-playing .pochi-sprite { transform-origin: 50% 100%; animation-name: var(--mv-body, none); }
+.pc-sprite.is-playing .pa-wing-l { transform-origin: 100% 40%; animation-name: var(--mv-wl, none); }
+.pc-sprite.is-playing .pa-wing-r { transform-origin: 0% 40%; animation-name: var(--mv-wr, none); }
+.pc-sprite.is-playing .pa-antenna { transform-origin: 50% 100%; animation-name: var(--mv-ant, none); }
+.pc-sprite.is-playing .pa-foot { transform-origin: 50% 100%; animation-name: var(--mv-fa, none); }
+.pc-sprite.is-playing .pa-foot.f2 { animation-name: var(--mv-fb, none); }
+.pc-sprite.is-playing .pa-eyes { transform-origin: 50% 50%; animation-name: var(--mv-eyes, none); }
+.pc-sprite.is-playing .pa-shadow { transform-origin: 50% 50%; animation-name: var(--mv-sh, none); }
+.pc-sprite.is-playing .pa-sparkles { transform-origin: 50% 60%; animation-name: var(--mv-sp, none); }
+
+/* ── body ─────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+/* a little wave: dip, lean into it, sway with the waving fin */
+@keyframes mv-b-wave {
+  0% { transform: none; }
+  10% { transform: translateY(2%) scale(1.05, 0.95); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1); }
+  24% { transform: translateY(-3%) rotate(-5deg) scale(0.98, 1.03); }
+  42% { transform: translateY(-1%) rotate(-7deg); }
+  60% { transform: translateY(-2%) rotate(-4deg); }
+  78% { transform: translateY(-1%) rotate(-6deg); }
+  90% { transform: translateY(1%) rotate(1deg) scale(1.03, 0.97); }
+  100% { transform: none; }
+}
+/* a shimmy: the bottom stays put and the top swings, quick and springy */
+@keyframes mv-b-shimmy {
+  0% { transform: none; }
+  10% { transform: scale(1.07, 0.93); }
+  20% { transform: skewX(9deg) translateX(-2%); }
+  30% { transform: skewX(-9deg) translateX(2%); }
+  40% { transform: skewX(8deg) translateX(-2%); }
+  50% { transform: skewX(-8deg) translateX(2%); }
+  60% { transform: skewX(6deg) translateX(-1%); }
+  70% { transform: skewX(-4deg); }
+  82% { transform: scale(1.05, 0.95); }
+  92% { transform: scale(0.98, 1.02); }
+  100% { transform: none; }
+}
+/* crouch, launch stretched, hang at the top, land squashed, settle */
+@keyframes mv-b-hop {
+  0% { transform: none; animation-timing-function: cubic-bezier(0.3, 0, 0.6, 1); }
+  18% { transform: translateY(2%) scale(1.16, 0.82); animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1); }
+  30% { transform: translateY(-30%) scale(0.86, 1.16); animation-timing-function: cubic-bezier(0.3, 0.6, 0.6, 1); }
+  44% { transform: translateY(-40%) scale(1, 1); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  60% { transform: translateY(-2%) scale(0.9, 1.1); animation-timing-function: linear; }
+  65% { transform: translateY(2%) scale(1.2, 0.8); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1.2); }
+  78% { transform: scale(0.95, 1.05); }
+  89% { transform: scale(1.02, 0.98); }
+  100% { transform: none; }
+}
+/* a bigger hop with a flip at the top */
+@keyframes mv-b-skyhop {
+  0% { transform: none; animation-timing-function: cubic-bezier(0.3, 0, 0.6, 1); }
+  14% { transform: translateY(3%) scale(1.2, 0.78); animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1); }
+  26% { transform: translateY(-46%) scale(0.84, 1.2); animation-timing-function: cubic-bezier(0.3, 0.6, 0.6, 1); }
+  42% { transform: translateY(-64%) rotate(180deg) scale(1, 1); animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+  54% { transform: translateY(-58%) rotate(360deg); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  68% { transform: translateY(-2%) rotate(360deg) scale(0.9, 1.1); animation-timing-function: linear; }
+  72% { transform: translateY(2%) rotate(360deg) scale(1.22, 0.78); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1.2); }
+  84% { transform: rotate(360deg) scale(0.96, 1.04); }
+  100% { transform: rotate(360deg); }
+}
+/* turning round on the spot, like a pixel sprite: squash, hop, flip to face away and back */
+@keyframes mv-b-turn {
+  0% { transform: none; }
+  12% { transform: translateY(2%) scale(1.12, 0.88); animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1); }
+  24% { transform: translateY(-16%) scale(0.95, 1.06); animation-timing-function: linear; }
+  34% { transform: translateY(-20%) scale(0.12, 1.04); animation-timing-function: linear; }
+  44% { transform: translateY(-21%) scale(-1, 1); animation-timing-function: linear; }
+  54% { transform: translateY(-20%) scale(-0.12, 1.04); animation-timing-function: linear; }
+  64% { transform: translateY(-16%) scale(1, 1); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  76% { transform: translateY(2%) scale(1.16, 0.84); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1.2); }
+  88% { transform: scale(0.97, 1.03); }
+  100% { transform: none; }
+}
+/* two quick turns, rising */
+@keyframes mv-b-spin2 {
+  0% { transform: none; }
+  10% { transform: scale(1.12, 0.88); }
+  20% { transform: translateY(-14%) scale(0.12, 1.06); animation-timing-function: linear; }
+  30% { transform: translateY(-20%) scale(-1, 1); animation-timing-function: linear; }
+  40% { transform: translateY(-24%) scale(0.12, 1.06); animation-timing-function: linear; }
+  50% { transform: translateY(-26%) scale(1, 1); animation-timing-function: linear; }
+  60% { transform: translateY(-26%) scale(-0.12, 1.06); animation-timing-function: linear; }
+  70% { transform: translateY(-22%) scale(-1, 1); animation-timing-function: linear; }
+  78% { transform: translateY(-14%) scale(1, 1); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  86% { transform: translateY(2%) scale(1.16, 0.84); }
+  94% { transform: scale(0.98, 1.02); }
+  100% { transform: none; }
+}
+/* on the beat: drop and pop up, leaning left, right, left, right, then a big finish */
+@keyframes mv-b-dance {
+  0% { transform: none; }
+  7% { transform: translateY(3%) scale(1.08, 0.92) rotate(-4deg); }
+  14% { transform: translateY(-12%) scale(0.95, 1.06) rotate(-9deg); }
+  21% { transform: translateY(3%) scale(1.08, 0.92) rotate(4deg); }
+  28% { transform: translateY(-12%) scale(0.95, 1.06) rotate(9deg); }
+  35% { transform: translateY(3%) scale(1.08, 0.92) rotate(-4deg); }
+  42% { transform: translateY(-12%) scale(0.95, 1.06) rotate(-9deg); }
+  49% { transform: translateY(3%) scale(1.08, 0.92) rotate(4deg); }
+  56% { transform: translateY(-12%) scale(0.95, 1.06) rotate(9deg); }
+  64% { transform: translateY(3%) scale(1.1, 0.9); }
+  72% { transform: translateY(-6%) scale(-1, 1); }
+  78% { transform: translateY(3%) scale(-1.1, 0.9); }
+  86% { transform: translateY(-22%) scale(0.92, 1.1); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  93% { transform: translateY(2%) scale(1.16, 0.84); }
+  100% { transform: none; }
+}
+/* gather, reach up tall and hold it (a little tremble), let go with a wobble */
+@keyframes mv-b-stretch {
+  0% { transform: none; }
+  16% { transform: translateY(2%) scale(1.12, 0.88); }
+  38% { transform: scale(0.84, 1.22); animation-timing-function: linear; }
+  48% { transform: scale(0.85, 1.21) rotate(-1.5deg); animation-timing-function: linear; }
+  56% { transform: scale(0.84, 1.22) rotate(1.5deg); animation-timing-function: linear; }
+  62% { transform: scale(0.85, 1.2); animation-timing-function: cubic-bezier(0.6, 0, 0.9, 0.4); }
+  70% { transform: translateY(2%) scale(1.16, 0.84); }
+  80% { transform: scale(0.96, 1.05); }
+  90% { transform: scale(1.02, 0.98); }
+  100% { transform: none; }
+}
+/* drift off: head tips, slow deep breaths, then a little startled wake-up */
+@keyframes mv-b-nap {
+  0% { transform: none; }
+  14% { transform: rotate(-4deg); }
+  26% { transform: translateY(3%) rotate(-10deg) scale(1.04, 0.96); }
+  40% { transform: translateY(4%) rotate(-10deg) scale(1.08, 0.92); }
+  54% { transform: translateY(3%) rotate(-10deg) scale(1.03, 0.97); }
+  68% { transform: translateY(4%) rotate(-10deg) scale(1.08, 0.92); }
+  80% { transform: translateY(3%) rotate(-9deg) scale(1.04, 0.96); animation-timing-function: cubic-bezier(0.2, 0.9, 0.3, 1.4); }
+  86% { transform: translateY(-8%) rotate(3deg) scale(0.94, 1.07); }
+  94% { transform: translateY(1%) scale(1.04, 0.96); }
+  100% { transform: none; }
+}
+/* two squishy love-hops */
+@keyframes mv-b-heart {
+  0% { transform: none; }
+  10% { transform: translateY(2%) scale(1.14, 0.86); animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1); }
+  22% { transform: translateY(-24%) scale(0.9, 1.12) rotate(-6deg); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  34% { transform: translateY(2%) scale(1.16, 0.84); animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1); }
+  46% { transform: translateY(-26%) scale(0.9, 1.12) rotate(6deg); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  58% { transform: translateY(2%) scale(1.18, 0.82); }
+  66% { transform: scale(1.08, 1.08); }
+  74% { transform: scale(0.97, 1.03); }
+  82% { transform: scale(1.05, 1.05); }
+  100% { transform: none; }
+}
+/* grows round with joy, then pops */
+@keyframes mv-b-pop {
+  0% { transform: none; }
+  20% { transform: scale(0.9, 0.86) translateY(3%); }
+  36% { transform: scale(1.16, 1.12); animation-timing-function: cubic-bezier(0.2, 0.9, 0.3, 1.5); }
+  42% { transform: translateY(-16%) scale(0.92, 1.12); }
+  58% { transform: translateY(-18%) scale(1, 1); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  70% { transform: translateY(2%) scale(1.14, 0.86); }
+  82% { transform: scale(0.97, 1.03); }
+  100% { transform: none; }
+}
+/* walking: a bob every step, out to one side, a turn, and back */
+@keyframes mv-b-walk {
+  0% { transform: none; }
+  8% { transform: translate(-5%, -3%) rotate(-3deg); }
+  16% { transform: translate(-10%, 0) rotate(2deg); }
+  24% { transform: translate(-15%, -3%) rotate(-3deg); }
+  32% { transform: translate(-19%, 0) rotate(2deg); }
+  40% { transform: translate(-19%, -2%) scaleX(0.1); animation-timing-function: linear; }
+  46% { transform: translate(-18%, 0) scaleX(-1); }
+  54% { transform: translate(-11%, -3%) scaleX(-1) rotate(-3deg); }
+  62% { transform: translate(-4%, 0) scaleX(-1) rotate(2deg); }
+  70% { transform: translate(3%, -3%) scaleX(-1) rotate(-3deg); }
+  78% { transform: translate(8%, 0) scaleX(-1) rotate(2deg); }
+  86% { transform: translate(6%, -2%) scaleX(0.1); animation-timing-function: linear; }
+  92% { transform: translate(2%, 0) scaleX(1); }
+  100% { transform: none; }
+}
+/* wandering to the window and back, slower, with a look round */
+@keyframes mv-b-wander {
+  0% { transform: none; }
+  9% { transform: translate(5%, -3%) rotate(3deg); }
+  18% { transform: translate(10%, 0) rotate(-2deg); }
+  27% { transform: translate(15%, -3%) rotate(3deg); }
+  36% { transform: translate(18%, 0); }
+  44% { transform: translate(18%, -2%) rotate(-6deg); }
+  52% { transform: translate(18%, 0) rotate(6deg); }
+  58% { transform: translate(18%, -2%) scaleX(0.1); animation-timing-function: linear; }
+  63% { transform: translate(17%, 0) scaleX(-1); }
+  72% { transform: translate(11%, -3%) scaleX(-1) rotate(-3deg); }
+  81% { transform: translate(5%, 0) scaleX(-1) rotate(2deg); }
+  90% { transform: translate(1%, -2%) scaleX(0.1); animation-timing-function: linear; }
+  100% { transform: none; }
+}
+/* scoots over in little bum-hops and plops down to sit */
+@keyframes mv-b-scoot {
+  0% { transform: none; }
+  12% { transform: scale(1.1, 0.9); }
+  22% { transform: translate(-6%, -8%) scale(0.95, 1.05); }
+  30% { transform: translate(-9%, 1%) scale(1.1, 0.9); }
+  40% { transform: translate(-13%, -7%) scale(0.95, 1.05); }
+  48% { transform: translate(-15%, 1%) scale(1.1, 0.9); }
+  60% { transform: translate(-8%, -9%) scale(0.95, 1.05); }
+  70% { transform: translate(0, 3%) scale(1.18, 0.82); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1.2); }
+  82% { transform: translateY(2%) scale(1.08, 0.92); }
+  100% { transform: none; }
+}
+/* leans to the book, then swings over as the page turns */
+@keyframes mv-b-pageflip {
+  0% { transform: none; }
+  18% { transform: translateX(-3%) rotate(-8deg) scale(1.03, 0.97); }
+  34% { transform: translateX(-4%) rotate(-10deg); animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
+  52% { transform: translate(3%, -6%) rotate(10deg) scale(0.97, 1.03); }
+  66% { transform: translateX(2%) rotate(3deg) scale(1.03, 0.97); }
+  80% { transform: rotate(-2deg); }
+  100% { transform: none; }
+}
+/* small sure nods, then a proud little lift */
+@keyframes mv-b-nod {
+  0% { transform: none; }
+  12% { transform: translateY(3%) scale(1.04, 0.96) rotate(2deg); }
+  22% { transform: translateY(-1%); }
+  34% { transform: translateY(3%) scale(1.04, 0.96) rotate(2deg); }
+  44% { transform: translateY(-1%); }
+  56% { transform: translateY(3%) scale(1.04, 0.96) rotate(2deg); }
+  68% { transform: translateY(0); }
+  80% { transform: translateY(-6%) scale(0.96, 1.06); animation-timing-function: cubic-bezier(0.2, 0.9, 0.3, 1.3); }
+  90% { transform: translateY(1%) scale(1.03, 0.97); }
+  100% { transform: none; }
+}
+/* hunched over a note, scribbling fast */
+@keyframes mv-b-scribble {
+  0% { transform: none; }
+  10% { transform: translateX(2%) rotate(6deg) scale(1.04, 0.96); }
+  16% { transform: translateX(2%) rotate(4deg) scale(1.04, 0.96); }
+  22% { transform: translateX(2%) rotate(7deg) scale(1.04, 0.96); }
+  28% { transform: translateX(2%) rotate(4deg) scale(1.04, 0.96); }
+  34% { transform: translateX(2%) rotate(7deg) scale(1.04, 0.96); }
+  40% { transform: translateX(2%) rotate(4deg) scale(1.04, 0.96); }
+  46% { transform: translateX(2%) rotate(7deg) scale(1.04, 0.96); }
+  52% { transform: translateX(2%) rotate(4deg) scale(1.04, 0.96); }
+  58% { transform: translateX(2%) rotate(7deg) scale(1.04, 0.96); }
+  64% { transform: translateX(2%) rotate(4deg) scale(1.04, 0.96); }
+  74% { transform: translateY(-5%) rotate(-3deg) scale(0.96, 1.05); }
+  86% { transform: translateY(1%) scale(1.03, 0.97); }
+  100% { transform: none; }
+}
+/* low and long, inching forward like a caterpillar, then flops */
+@keyframes mv-b-crawl {
+  0% { transform: none; }
+  12% { transform: translateY(4%) scale(1.16, 0.8); }
+  24% { transform: translate(-6%, 4%) scale(1.06, 0.86); }
+  36% { transform: translate(-6%, 4%) scale(1.2, 0.78); }
+  48% { transform: translate(-12%, 4%) scale(1.06, 0.86); }
+  60% { transform: translate(-12%, 4%) scale(1.2, 0.78); }
+  72% { transform: translate(-6%, 5%) scale(1.24, 0.76) rotate(-4deg); }
+  86% { transform: translate(-2%, 2%) scale(1.06, 0.94); }
+  100% { transform: none; }
+}
+/* tucks into a small ball and breathes */
+@keyframes mv-b-curl {
+  0% { transform: none; }
+  20% { transform: translateY(2%) scale(1.06, 0.9) rotate(-4deg); }
+  38% { transform: translateY(6%) scale(0.84, 0.78) rotate(-12deg); }
+  52% { transform: translateY(6%) scale(0.88, 0.76) rotate(-12deg); }
+  66% { transform: translateY(6%) scale(0.84, 0.78) rotate(-12deg); }
+  80% { transform: translateY(5%) scale(0.88, 0.76) rotate(-11deg); animation-timing-function: cubic-bezier(0.2, 0.9, 0.3, 1.3); }
+  90% { transform: translateY(-3%) scale(0.98, 1.04); }
+  100% { transform: none; }
+}
+/* claps: little bounces in time with the fins */
+@keyframes mv-b-clap {
+  0% { transform: none; }
+  10% { transform: translateY(-4%) scale(0.97, 1.03); }
+  18% { transform: translateY(1%) scale(1.05, 0.95); }
+  28% { transform: translateY(-4%) scale(0.97, 1.03); }
+  36% { transform: translateY(1%) scale(1.05, 0.95); }
+  46% { transform: translateY(-4%) scale(0.97, 1.03); }
+  54% { transform: translateY(1%) scale(1.05, 0.95); }
+  66% { transform: translateY(-12%) scale(0.94, 1.08); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  78% { transform: translateY(2%) scale(1.12, 0.88); }
+  90% { transform: scale(0.98, 1.02); }
+  100% { transform: none; }
+}
+/* trying something on: a quick look-at-me bounce */
+@keyframes mv-b-try {
+  0% { transform: none; }
+  20% { transform: translateY(2%) scale(1.1, 0.9); animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1); }
+  42% { transform: translateY(-10%) scale(0.94, 1.08) rotate(-3deg); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+  64% { transform: translateY(1%) scale(1.08, 0.92); }
+  82% { transform: scale(0.98, 1.02) rotate(2deg); }
+  100% { transform: none; }
+}
+/* shaking something off */
+@keyframes mv-b-shake {
+  0% { transform: none; }
+  15% { transform: rotate(-8deg); }
+  30% { transform: rotate(8deg); }
+  45% { transform: rotate(-6deg); }
+  60% { transform: rotate(5deg); }
+  75% { transform: rotate(-2deg) scale(1.04, 0.96); }
+  100% { transform: none; }
+}
+
+/* ── fins (wings): left raised = positive turn, right raised = negative ───────────────────────────────────────── */
+
+@keyframes mv-w-wave-r {
+  0% { transform: none; }
+  14% { transform: rotate(-80deg); animation-timing-function: cubic-bezier(0.3, 0, 0.3, 1); }
+  24% { transform: rotate(-45deg); }
+  34% { transform: rotate(-85deg); }
+  44% { transform: rotate(-45deg); }
+  54% { transform: rotate(-85deg); }
+  64% { transform: rotate(-50deg); }
+  76% { transform: rotate(-70deg); }
+  92% { transform: rotate(6deg); }
+  100% { transform: none; }
+}
+@keyframes mv-w-perk-l { 0%, 100% { transform: none; } 20% { transform: rotate(18deg); } 60% { transform: rotate(10deg); } 85% { transform: rotate(-6deg); } }
+@keyframes mv-w-perk-r { 0%, 100% { transform: none; } 20% { transform: rotate(-18deg); } 60% { transform: rotate(-10deg); } 85% { transform: rotate(6deg); } }
+@keyframes mv-w-flap-l {
+  0%, 100% { transform: none; }
+  10%, 30%, 50%, 70% { transform: rotate(40deg); }
+  20%, 40%, 60%, 80% { transform: rotate(-12deg); }
+}
+@keyframes mv-w-flap-r {
+  0%, 100% { transform: none; }
+  10%, 30%, 50%, 70% { transform: rotate(-12deg); }
+  20%, 40%, 60%, 80% { transform: rotate(40deg); }
+}
+@keyframes mv-w-air-l {
+  0% { transform: none; }
+  18% { transform: rotate(-20deg); }
+  30% { transform: rotate(60deg); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1); }
+  40% { transform: rotate(30deg); }
+  50% { transform: rotate(65deg); }
+  62% { transform: rotate(40deg); }
+  68% { transform: rotate(-25deg); }
+  82% { transform: rotate(8deg); }
+  100% { transform: none; }
+}
+@keyframes mv-w-air-r {
+  0% { transform: none; }
+  18% { transform: rotate(20deg); }
+  30% { transform: rotate(-60deg); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1); }
+  40% { transform: rotate(-30deg); }
+  50% { transform: rotate(-65deg); }
+  62% { transform: rotate(-40deg); }
+  68% { transform: rotate(25deg); }
+  82% { transform: rotate(-8deg); }
+  100% { transform: none; }
+}
+@keyframes mv-w-out-l { 0%, 100% { transform: none; } 12% { transform: rotate(-15deg); } 25%, 70% { transform: rotate(35deg); } 80% { transform: rotate(-10deg); } }
+@keyframes mv-w-out-r { 0%, 100% { transform: none; } 12% { transform: rotate(15deg); } 25%, 70% { transform: rotate(-35deg); } 80% { transform: rotate(10deg); } }
+@keyframes mv-w-dance-l {
+  0%, 100% { transform: none; }
+  7%, 21%, 35%, 49% { transform: rotate(10deg); }
+  14%, 42% { transform: rotate(80deg); }
+  28%, 56% { transform: rotate(5deg); }
+  72%, 86% { transform: rotate(85deg); }
+  93% { transform: rotate(-10deg); }
+}
+@keyframes mv-w-dance-r {
+  0%, 100% { transform: none; }
+  7%, 21%, 35%, 49% { transform: rotate(-10deg); }
+  14%, 42% { transform: rotate(-5deg); }
+  28%, 56% { transform: rotate(-80deg); }
+  72%, 86% { transform: rotate(-85deg); }
+  93% { transform: rotate(10deg); }
+}
+@keyframes mv-w-up-l { 0%, 100% { transform: none; } 16% { transform: rotate(-12deg); } 38%, 62% { transform: rotate(95deg); } 50% { transform: rotate(88deg); } 72% { transform: rotate(-15deg); } 86% { transform: rotate(6deg); } }
+@keyframes mv-w-up-r { 0%, 100% { transform: none; } 16% { transform: rotate(12deg); } 38%, 62% { transform: rotate(-95deg); } 50% { transform: rotate(-88deg); } 72% { transform: rotate(15deg); } 86% { transform: rotate(-6deg); } }
+@keyframes mv-w-tuck-l { 0%, 100% { transform: none; } 20%, 82% { transform: rotate(-30deg) translateX(30%); } }
+@keyframes mv-w-tuck-r { 0%, 100% { transform: none; } 20%, 82% { transform: rotate(30deg) translateX(-30%); } }
+@keyframes mv-w-swing-l { 0%, 100% { transform: none; } 8%, 24%, 54%, 70% { transform: rotate(25deg); } 16%, 32%, 62%, 78% { transform: rotate(-15deg); } }
+@keyframes mv-w-swing-r { 0%, 100% { transform: none; } 8%, 24%, 54%, 70% { transform: rotate(15deg); } 16%, 32%, 62%, 78% { transform: rotate(-25deg); } }
+@keyframes mv-w-turn-r { 0%, 100% { transform: none; } 30% { transform: rotate(-20deg); } 50% { transform: rotate(-100deg); } 62% { transform: rotate(-60deg); } 80% { transform: rotate(5deg); } }
+@keyframes mv-w-scribble-r {
+  0%, 100% { transform: none; }
+  10% { transform: rotate(-30deg); }
+  16%, 28%, 40%, 52%, 64% { transform: rotate(-42deg); }
+  22%, 34%, 46%, 58% { transform: rotate(-22deg); }
+  76% { transform: rotate(-70deg); }
+  88% { transform: rotate(5deg); }
+}
+@keyframes mv-w-row-l { 0%, 100% { transform: none; } 24%, 48% { transform: rotate(-35deg); } 36%, 60% { transform: rotate(25deg); } 72% { transform: rotate(-10deg); } }
+@keyframes mv-w-row-r { 0%, 100% { transform: none; } 24%, 48% { transform: rotate(35deg); } 36%, 60% { transform: rotate(-25deg); } 72% { transform: rotate(10deg); } }
+@keyframes mv-w-clap-l {
+  0%, 100% { transform: none; }
+  10%, 28%, 46% { transform: rotate(70deg); }
+  18%, 36%, 54% { transform: rotate(20deg); }
+  66% { transform: rotate(90deg); }
+  80% { transform: rotate(-12deg); }
+}
+@keyframes mv-w-clap-r {
+  0%, 100% { transform: none; }
+  10%, 28%, 46% { transform: rotate(-70deg); }
+  18%, 36%, 54% { transform: rotate(-20deg); }
+  66% { transform: rotate(-90deg); }
+  80% { transform: rotate(12deg); }
+}
+
+/* ── antenna: always a beat behind the body ──────────────────────────────────────────────────────────────────── */
+
+@keyframes mv-a-boing { 0%, 100% { transform: none; } 14% { transform: rotate(-22deg); } 28% { transform: rotate(26deg); } 42% { transform: rotate(-16deg); } 56% { transform: rotate(10deg); } 70% { transform: rotate(-5deg); } 84% { transform: rotate(2deg); } }
+@keyframes mv-a-shake { 0%, 100% { transform: none; } 10%, 30%, 50%, 70% { transform: rotate(-24deg); } 20%, 40%, 60%, 80% { transform: rotate(24deg); } 90% { transform: rotate(-6deg); } }
+@keyframes mv-a-lag { 0%, 100% { transform: none; } 18% { transform: scaleY(0.5) rotate(0); } 30% { transform: scaleY(1.5); } 44% { transform: rotate(-12deg); } 60% { transform: scaleY(1.3) rotate(6deg); } 66% { transform: scaleY(0.55); } 76% { transform: rotate(-18deg); } 86% { transform: rotate(10deg); } 94% { transform: rotate(-4deg); } }
+@keyframes mv-a-whip { 0%, 100% { transform: none; } 24% { transform: rotate(30deg); } 44% { transform: rotate(-35deg); } 64% { transform: rotate(30deg); } 78% { transform: rotate(-20deg); } 90% { transform: rotate(8deg); } }
+@keyframes mv-a-bop { 0%, 100% { transform: none; } 7%, 21%, 35%, 49%, 64% { transform: rotate(-20deg) scaleY(0.7); } 14%, 28%, 42%, 56%, 72% { transform: rotate(20deg) scaleY(1.2); } 86% { transform: scaleY(1.4); } 93% { transform: rotate(-10deg); } }
+@keyframes mv-a-reach { 0%, 100% { transform: none; } 16% { transform: scaleY(0.6); } 40%, 62% { transform: scaleY(1.6); } 72% { transform: rotate(-25deg); } 82% { transform: rotate(14deg); } 92% { transform: rotate(-5deg); } }
+@keyframes mv-a-droop { 0%, 100% { transform: none; } 26%, 80% { transform: rotate(-55deg); } 86% { transform: rotate(25deg) scaleY(1.3); } 94% { transform: rotate(-8deg); } }
+@keyframes mv-a-bounce { 0%, 100% { transform: none; } 8%, 24%, 54%, 70% { transform: rotate(-12deg) scaleY(1.15); } 16%, 32%, 62%, 78% { transform: rotate(10deg) scaleY(0.85); } }
+@keyframes mv-a-nod { 0%, 100% { transform: none; } 12%, 34%, 56% { transform: rotate(18deg) scaleY(0.8); } 22%, 44% { transform: rotate(-10deg); } 80% { transform: scaleY(1.4); } 90% { transform: rotate(-8deg); } }
+
+/* ── feet ────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+@keyframes mv-f-step-a { 0%, 100% { transform: none; } 10%, 30%, 50%, 70% { transform: translateY(-55%); } 20%, 40%, 60%, 80% { transform: none; } }
+@keyframes mv-f-step-b { 0%, 100% { transform: none; } 10%, 30%, 50%, 70% { transform: none; } 20%, 40%, 60%, 80% { transform: translateY(-55%); } }
+@keyframes mv-f-walk-a { 0%, 100% { transform: none; } 4%, 20%, 50%, 66% { transform: translateY(-60%); } 12%, 28%, 58%, 74% { transform: none; } }
+@keyframes mv-f-walk-b { 0%, 100% { transform: none; } 4%, 20%, 50%, 66% { transform: none; } 12%, 28%, 58%, 74% { transform: translateY(-60%); } }
+@keyframes mv-f-tuck { 0%, 18%, 100% { transform: none; } 28%, 58% { transform: translateY(-70%) scaleY(0.6); } 66% { transform: scaleY(0.7); } 76% { transform: none; } }
+
+/* ── eyes ────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+@keyframes mv-e-blink { 0%, 40%, 50%, 100% { transform: none; } 45% { transform: scaleY(0.12); } }
+@keyframes mv-e-blink-late { 0%, 70%, 82%, 100% { transform: none; } 76% { transform: scaleY(0.12); } }
+@keyframes mv-e-land { 0%, 60%, 74%, 100% { transform: none; } 66% { transform: scale(1.15, 0.3); } }
+@keyframes mv-e-squeeze { 0%, 100% { transform: none; } 20%, 70% { transform: scale(1.1, 0.4); } 30%, 60% { transform: scale(1.12, 0.32); } }
+
+/* ── the shadow on the floor: smaller and fainter the higher Pochi is ────────────────────────────────────────── */
+
+@keyframes mv-sh-hop { 0%, 100% { transform: none; } 18% { transform: scaleX(1.12); } 44% { transform: scale(0.55); opacity: 0.06; } 65% { transform: scaleX(1.18); } 80% { transform: none; } }
+@keyframes mv-sh-sky { 0%, 100% { transform: none; } 14% { transform: scaleX(1.15); } 42% { transform: scale(0.4); opacity: 0.04; } 54% { transform: scale(0.45); opacity: 0.05; } 72% { transform: scaleX(1.2); } 84% { transform: none; } }
+@keyframes mv-sh-small { 0%, 100% { transform: none; } 12% { transform: scaleX(1.1); } 30%, 70% { transform: scale(0.75); } 80% { transform: scaleX(1.12); } }
+@keyframes mv-sh-double { 0%, 100% { transform: none; } 22%, 46% { transform: scale(0.7); } 10%, 34%, 58% { transform: scaleX(1.14); } }
+@keyframes mv-sh-dance { 0%, 100% { transform: none; } 14%, 28%, 42%, 56% { transform: scale(0.88); } 7%, 21%, 35%, 49%, 64% { transform: scaleX(1.08); } 86% { transform: scale(0.7); } 93% { transform: scaleX(1.14); } }
+@keyframes mv-sh-breathe { 0%, 100% { transform: none; } 40%, 68% { transform: scaleX(1.1); } 54% { transform: scaleX(1.04); } }
+@keyframes mv-sh-walk { 0%, 100% { transform: none; } 32%, 46% { transform: translateX(-19%); } 78% { transform: translateX(8%); } }
+@keyframes mv-sh-wander { 0%, 100% { transform: none; } 36%, 63% { transform: translateX(18%); } 81% { transform: translateX(5%); } }
+@keyframes mv-sh-scoot { 0%, 100% { transform: none; } 48% { transform: translateX(-15%); } 70% { transform: scaleX(1.18); } }
+@keyframes mv-sh-crawl { 0%, 100% { transform: none; } 36%, 60% { transform: translateX(-12%) scaleX(1.2); } }
+
+/* ── the + sparkles round Pochi ──────────────────────────────────────────────────────────────────────────────── */
+
+@keyframes mv-s-glint { 0%, 100% { transform: none; opacity: 1; } 20% { transform: scale(1.12); } 40% { opacity: 0.4; } 60% { transform: scale(1.08); opacity: 1; } }
+@keyframes mv-s-burst { 0%, 100% { transform: none; } 30% { transform: scale(1.4) rotate(20deg); opacity: 0.9; } 55% { transform: scale(1.6) rotate(-10deg); opacity: 0.5; } 80% { transform: scale(0.9); opacity: 1; } }
+
+/* ── the pixel effects (PochiClubView's .pc-fx layer) ────────────────────────────────────────────────────────── */
+
+.pc-fx { position: absolute; inset: 0; container-type: size; pointer-events: none; overflow: visible; }
+.pc-fx i { position: absolute; display: block; width: calc(var(--s) * 1%); translate: -50% -50%; opacity: 0; animation: mv-fx var(--life) cubic-bezier(0.2, 0.7, 0.3, 1) var(--wait) both; }
+.pc-fx i svg { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.pc-fx i.fx-confetti { animation: mv-fx-fall var(--life) cubic-bezier(0.3, 0, 0.7, 1) var(--wait) both; }
+.pc-fx i.fx-zzz { animation: mv-fx-drift var(--life) ease-out var(--wait) both; }
+.pc-fx i.fx-note { animation: mv-fx-float var(--life) ease-out var(--wait) both; }
+.pc-fx i.fx-bang { animation: mv-fx-bang var(--life) cubic-bezier(0.2, 0.9, 0.3, 1.4) var(--wait) both; }
+.pc-fx i.fx-dust { animation: mv-fx-dust var(--life) ease-out var(--wait) both; }
+@keyframes mv-fx { 0% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0); } 18% { opacity: 1; transform: translate(calc(var(--dx) * 0.3cqw), calc(var(--dy) * 0.3cqh)) scale(1.15); } 100% { opacity: 0; transform: translate(calc(var(--dx) * 1cqw), calc(var(--dy) * 1cqh)) scale(0.7) rotate(calc(var(--rot) * 1deg)); } }
+@keyframes mv-fx-fall { 0% { opacity: 0; transform: translate(0, 0) rotate(0); } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(calc(var(--dx) * 1cqw), calc(var(--dy) * 1cqh)) rotate(calc(var(--rot) * 1deg)); } }
+@keyframes mv-fx-drift { 0% { opacity: 0; transform: translate(0, 0) scale(0.4); } 25% { opacity: 1; transform: translate(calc(var(--dx) * 0.3cqw), calc(var(--dy) * 0.25cqh)) scale(0.9) rotate(-8deg); } 60% { transform: translate(calc(var(--dx) * 0.6cqw), calc(var(--dy) * 0.6cqh)) scale(1.1) rotate(8deg); opacity: 0.9; } 100% { opacity: 0; transform: translate(calc(var(--dx) * 1cqw), calc(var(--dy) * 1cqh)) scale(1.3) rotate(-6deg); } }
+@keyframes mv-fx-float { 0% { opacity: 0; transform: translate(0, 0) scale(0.4); } 20% { opacity: 1; transform: translate(calc(var(--dx) * 0.2cqw + 4%), calc(var(--dy) * 0.2cqh)) scale(1); } 50% { transform: translate(calc(var(--dx) * 0.5cqw - 4%), calc(var(--dy) * 0.5cqh)) rotate(calc(var(--rot) * 1deg)); } 100% { opacity: 0; transform: translate(calc(var(--dx) * 1cqw), calc(var(--dy) * 1cqh)) rotate(0); } }
+@keyframes mv-fx-bang { 0% { opacity: 0; transform: scale(0.2); } 25% { opacity: 1; transform: translateY(calc(var(--dy) * 1cqh)) scale(1.3); } 45% { transform: translateY(calc(var(--dy) * 1cqh)) scale(1); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(calc(var(--dy) * 1cqh)) scale(1); } }
+@keyframes mv-fx-dust { 0% { opacity: 0; transform: scale(0.4); } 20% { opacity: 0.9; } 100% { opacity: 0; transform: translate(calc(var(--dx) * 1cqw), calc(var(--dy) * 1cqh)) scale(1.5); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-sprite.is-playing .pochi-sprite, .pc-sprite.is-playing .pa-wing-l, .pc-sprite.is-playing .pa-wing-r, .pc-sprite.is-playing .pa-antenna,
+  .pc-sprite.is-playing .pa-foot, .pc-sprite.is-playing .pa-eyes, .pc-sprite.is-playing .pa-shadow, .pc-sprite.is-playing .pa-sparkles { animation: none !important; }
+  .pc-fx { display: none; }
+}

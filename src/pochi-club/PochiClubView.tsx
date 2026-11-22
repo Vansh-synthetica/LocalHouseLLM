@@ -1,22 +1,29 @@
 /**
- * Pochi Club: Pochi's home, closet, move book, shop and quests, paid for in Tuna Coins earned by studying.
- * The same component in Anvira Notes (works offline) and on localhousellm.com/account/study (the same account).
+ * Pochi Club, the console: shelves of tiles you drive with the arrow keys (or the mouse), and a big stage above them
+ * that always shows Pochi with whatever you are looking at. Tuna Coins are earned by studying, never bought.
+ *
+ *   ↑ ↓  change shelf (Pochi, Wardrobe, Colours, Moves, Homes, Quests, Wallet)    ← →  move along it
+ *   Enter  the main thing for that tile (wear, try on, play, claim…)    B  buy it    Q / E  wardrobe category
+ *
+ * Trying on is free: anything (even what is not unlocked yet) goes into the fitting room, and Pochi wears all of it
+ * together on the stage. Buy one, or keep the whole look in one go.
  *
  * SHARED FILE: identical copies in Anvira Notes (src/pochi-club/) and the website (LocalHouseLLM src/pochi-club/).
- * Plain React and its own stylesheet (pochi-club.css), so it fits either host.
+ * Plain React and its own stylesheets (pochi-club.css, pochi-art.css), so it fits either host. ES2020 only.
  */
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react'
-import { HOMES, ITEMS, MOODS, MOVES, PACKS, PALETTES, VIEWBOX, type Item, type Mood, type Move, type Slot } from './catalog'
-import { COINS_PER_XP, EXAM_COINS, GOAL_BONUS, STREAK_BONUS, WELCOME_COINS, homeUnlocked, moveUnlocked, type ClubState, type Look, type PochiForm } from './ledger'
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from 'react'
+import { HOMES, ITEMS, MOODS, MOVES, PACKS, PALETTES, VIEWBOX, type Item, type Mood, type Slot } from './catalog'
+import { COINS_PER_XP, EXAM_COINS, GOAL_BONUS, STREAK_BONUS, WELCOME_COINS, homeUnlocked, moveUnlocked } from './ledger'
 import { FACE_BOX, SCENE_VIEWBOX, itemMarkup, pochiMarkup, sceneMarkup } from './render'
 import { uid } from './art'
-import { TunaCoin, coinMarkup } from './coin'
+import { TunaCoin } from './coin'
 import type { Club } from './engine'
+import { RIGS, particlesFor, type Particle } from './moves'
+import './pochi-art.css'
+import './pochi-moves.css'
 
-type Tab = 'buddy' | 'shop' | 'moves' | 'quests' | 'wallet'
-type ShopShelf = 'all' | Slot | 'colors' | 'homes' | 'packs'
-type Buy = (what: 'item' | 'palette' | 'pack', id: string, name: string, from?: Element | null) => boolean
-type Playing = { id: string; n: number; duration: number; effect?: string } | null
+// a move without its own rig borrows one that fits its mood
+const MOOD_RIG: Partial<Record<string, string>> = { happy: 'hello', sleepy: 'nap', thinking: 'focus-nod', excited: 'wiggle', proud: 'stretch', curious: 'page-flip', love: 'heartstorm' }
 
 export interface PochiClubProps {
   club: Club
@@ -25,188 +32,131 @@ export interface PochiClubProps {
   /** streak and today's XP, when the host knows them (the app) */
   stats?: { streak: number; todayXp: number; dailyGoal: number }
   onClose?: () => void
-  /** dark colours (the host's theme) */
+  /** graphite (default) or Study's light paper look */
   dark?: boolean
   /** something the host adds under the header (the website's "open Anvira Notes to study") */
   banner?: ReactNode
 }
 
+// ── The wardrobe's categories ───────────────────────────────────────────────────────────────────────────────────────
+
+type Cat = 'all' | 'headwear' | 'glasses' | 'face' | 'outfits' | 'back' | 'auras'
+const CATS: { id: Cat; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'headwear', label: 'Hats & bows' },
+  { id: 'glasses', label: 'Glasses' },
+  { id: 'face', label: 'Face' },
+  { id: 'outfits', label: 'Outfits' },
+  { id: 'back', label: 'Bags & wings' },
+  { id: 'auras', label: 'Auras' },
+]
+const GLASSES = /frames|glasses|goggles|specs|shades|monocle/
+function catOf(it: Item): Cat {
+  if (GLASSES.test(it.id)) return 'glasses'
+  return ({ Head: 'headwear', Face: 'face', Outfit: 'outfits', Back: 'back', Aura: 'auras' } as Record<Slot, Cat>)[it.slot] ?? 'all'
+}
+type Sort = 'shelf' | 'price' | 'owned'
+const SORTS: { id: Sort; label: string }[] = [
+  { id: 'shelf', label: 'By type' },
+  { id: 'price', label: 'Cheapest first' },
+  { id: 'owned', label: 'Yours first' },
+]
+const RARITY_ORDER = ['Common', 'Rare', 'Epic', 'Legendary', 'Festival']
+
 const MOOD_LABEL: Record<string, string> = { happy: 'Happy', excited: 'Excited', proud: 'Proud', curious: 'Curious', thinking: 'Thinking', sleepy: 'Sleepy', love: 'Lovey' }
-const SLOT_LABEL: Record<string, string> = { Head: 'Hats', Face: 'Face', Outfit: 'Outfits', Back: 'Back', Aura: 'Auras' }
-const SLOTS: Slot[] = ['Head', 'Face', 'Outfit', 'Back', 'Aura']
-const BOOP_LINES = ['Hehe, that tickles!', 'Mrrp?', 'Purrrr…', 'Boop right back!', 'I like it when you visit.']
-
-const calm = () => typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-// ── little icons ───────────────────────────────────────────────────────────────────────────────────────────────────
-
-const ICON: Record<string, string> = {
-  back: 'M15 18l-6-6 6-6',
-  buddy: 'M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z',
-  shop: 'M5.5 8.5h13l-1.1 11.1a1 1 0 0 1-1 .9H7.6a1 1 0 0 1-1-.9zM9 8.5V7a3 3 0 0 1 6 0v1.5',
-  moves: 'M9 17.5V6.2l10-2.2v11.2M9 17.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M19 15.2a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0',
-  quests: 'M6 21V4.5M6 4.5h11.5l-2.2 4 2.2 4H6',
-  wallet: 'M4.5 7.5h14a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18V8M4 8l11-3.5v3M16.5 13.5h.01',
-  lock: 'M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z',
-  play: 'M8 5.5v13l10.5-6.5z',
-  star: 'M12 3.8l2.5 5.1 5.6.8-4 4 1 5.6-5.1-2.7-5 2.7 1-5.6-4.1-4 5.6-.8z',
-  check: 'M5 12.5l4.2 4.2L19 7',
-  x: 'M7 7l10 10M17 7 7 17',
-  hand: 'M8 13V6.5a1.5 1.5 0 0 1 3 0V12M11 11V5a1.5 1.5 0 0 1 3 0v6M14 11V6.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-.5a5.5 5.5 0 0 1-4.4-2.2L4.5 15.6a1.5 1.5 0 0 1 2.3-1.9L8 15',
-  film: 'M4 5h16v14H4zM4 9h16M4 15h16M8 5v14M16 5v14',
-  sync: 'M20 11a8 8 0 0 0-14.3-4.3L4 9M4 4v5h5M4 13a8 8 0 0 0 14.3 4.3L20 15M20 20v-5h-5',
-  search: 'M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM20 20l-4-4',
+const HOME_NOTE: Record<string, string> = {
+  cloud: 'Soft clouds and a warm rug. Where every Pochi starts.',
+  moon: 'A quiet night garden with a big moon and glowing blooms.',
+  jelly: 'Underwater light, drifting jellies and swaying kelp.',
+  stars: 'A round window full of stars and a little telescope.',
 }
-function Icon({ name, size = 16, fill }: { name: string; size?: number; fill?: boolean }) {
+
+// ── Shelves and tiles ───────────────────────────────────────────────────────────────────────────────────────────────
+
+type ShelfId = 'pochi' | 'wardrobe' | 'colours' | 'moves' | 'homes' | 'quests' | 'wallet'
+const SHELVES: { id: ShelfId; label: string }[] = [
+  { id: 'pochi', label: 'Pochi' },
+  { id: 'wardrobe', label: 'Wardrobe' },
+  { id: 'colours', label: 'Colours' },
+  { id: 'moves', label: 'Moves' },
+  { id: 'homes', label: 'Homes' },
+  { id: 'quests', label: 'Quests' },
+  { id: 'wallet', label: 'Wallet' },
+]
+
+type QuestId = 'hello' | 'lesson' | 'goal' | 'style'
+type Tile =
+  | { k: 'item'; id: string; group?: string }
+  | { k: 'pal'; id: string }
+  | { k: 'move'; id: string }
+  | { k: 'pack'; id: string }
+  | { k: 'home'; id: string }
+  | { k: 'mood'; id: Mood }
+  | { k: 'act'; id: 'hello' | 'routine' | 'rename' | 'stats' }
+  | { k: 'quest'; id: QuestId }
+  | { k: 'earn'; id: 'how' }
+  | { k: 'bal'; id: 'balance' }
+  | { k: 'hist'; id: string }
+
+const tileKey = (t: Tile) => `${t.k}:${t.id}`
+
+/** What Pochi is trying on: per slot, and a colour. Free, and only on the stage. */
+interface Fitting {
+  equipped: Partial<Record<string, string>>
+  palette?: string
+}
+const NO_FIT: Fitting = { equipped: {} }
+
+// ── Little drawings ────────────────────────────────────────────────────────────────────────────────────────────────
+
+const Ico = ({ d, size = 18 }: { d: string; size?: number }) => (
+  <svg className="pc-ico" width={size} height={size} viewBox="0 0 24 24" aria-hidden dangerouslySetInnerHTML={{ __html: d }} />
+)
+const IC = {
+  back: '<path d="M15 6l-6 6 6 6"/>',
+  lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+  check: '<path d="M5 12l4 4 10-10"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  play: '<path d="M8 5l11 7-11 7z" fill="currentColor" stroke="none"/>',
+  hand: '<path d="M8 13V6a1.5 1.5 0 013 0v5M11 11V4.5a1.5 1.5 0 013 0V11M14 11V6a1.5 1.5 0 013 0v7a6 6 0 01-6 6h-1a6 6 0 01-5-3l-2-4a1.5 1.5 0 012.5-1.5L8 13"/>',
+  book: '<path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 19V5"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
+  ribbon: '<path d="M12 12c-3-4-8-4-8-1s5 3 8 1zm0 0c3-4 8-4 8-1s-5 3-8 1zm0 0l-3 8m3-8l3 8"/>',
+  film: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4"/>',
+  pen: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',
+  sync: '<path d="M20 12a8 8 0 01-14 5.3M4 12a8 8 0 0114-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+  hanger: '<path d="M12 7a2 2 0 112-2c0 1-2 1.5-2 3"/><path d="M12 8l9 7H3z"/>',
+  fish: '<path d="M3 12c3-4 8-5 12-3l4-3v12l-4-3c-4 2-9 1-12-3z"/><circle cx="8" cy="11" r=".8" fill="currentColor"/>',
+}
+const QUEST_IC: Record<string, string> = { hello: IC.hand, lesson: IC.book, goal: IC.sun, style: IC.ribbon }
+
+/** The study star, in pixels like Pochi. */
+function Star({ size = 14 }: { size?: number }) {
+  const rows = ['...s...', '...s...', 'sssssss', '.sssss.', '..sss..', '.ss.ss.', 's.....s']
   return (
-    <svg className="pc-ic" width={size} height={size} viewBox="0 0 24 24" fill={fill ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={fill ? 0 : 1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d={ICON[name]} />
+    <svg className="pc-star" width={size} height={size} viewBox="0 0 7 7" shapeRendering="crispEdges" aria-hidden>
+      {rows.map((r, y) => r.split('').map((c, x) => (c === 's' ? <rect key={`${x}-${y}`} x={x} y={y} width="1.02" height="1.02" /> : null)))}
     </svg>
   )
 }
-
-/** The little shapes a move or a boop throws (hearts, sparkles, clouds, moons, z's). */
-function Glyph({ ch }: { ch: string }) {
-  if (ch === '♥' || ch === '♡')
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden>
-        <path d="M12 21C5 15.6 2 12.4 2 8.7 2 5.9 4.2 3.7 7 3.7c2 0 3.6 1 5 2.8 1.4-1.8 3-2.8 5-2.8 2.8 0 5 2.2 5 5 0 3.7-3 6.9-10 12.3Z" fill={ch === '♥' ? '#f0628f' : '#ff9cbc'} />
-        <ellipse cx="7.5" cy="8" rx="2" ry="1.3" fill="#fff" opacity=".6" transform="rotate(-30 7.5 8)" />
-      </svg>
-    )
-  if (ch === '☁')
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden>
-        <path d="M6.5 18a4 4 0 0 1-.6-8 5.5 5.5 0 0 1 10.6-1.2A4.6 4.6 0 0 1 17.5 18Z" fill="#fff" stroke="#c9c2e6" strokeWidth="1.2" />
-      </svg>
-    )
-  if (ch === '☾')
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden>
-        <path d="M14 3a9 9 0 1 0 7 13A7.5 7.5 0 0 1 14 3Z" fill="#f6cf6a" />
-      </svg>
-    )
-  if (ch === 'z') return <b className="pc-z">z</b>
+function Hearts({ value, of = 5 }: { value: number; of?: number }) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden>
-      <path d="M12 2Q13.6 10.4 22 12Q13.6 13.6 12 22Q10.4 13.6 2 12Q10.4 10.4 12 2Z" fill={ch === '✿' ? '#c9b8ff' : '#f6c453'} />
-    </svg>
-  )
-}
-
-// ── Pochi at home ──────────────────────────────────────────────────────────────────────────────────────────────────
-
-interface Particle {
-  k: string
-  x: number
-  y: number
-  d: number
-  ch: string
-  s: number
-}
-
-/**
- * Pochi in a home: the room drawn behind, Pochi on the rug. Pochi plays `move` when it changes, follows the pointer
- * with its eyes (`follow`), and squishes when booped.
- */
-function Stage({ look, home, move, preview, follow, onBoop, className = '', label, children }: { look: Look; home: string; move?: Playing; preview?: string; follow?: boolean; onBoop?: () => void; className?: string; label?: string; children?: ReactNode }) {
-  const ref = useRef<SVGSVGElement>(null)
-  const [particles, setParticles] = useState<Particle[]>([])
-  const worn = JSON.stringify(look.equipped)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const markup = useMemo(() => pochiMarkup(look, { preview }), [look.palette, look.mood, look.form, worn, preview])
-  const scene = useMemo(() => sceneMarkup(home, uid(`scene|${home}`)), [home])
-  const burst = (ch: string, n: number, tag: string) => {
-    if (calm()) return
-    setParticles(Array.from({ length: n }, (_, i) => {
-      const a = (i / n) * Math.PI * 2 - Math.PI / 2 + (Math.random() - 0.5) * 0.6
-      return { k: `${tag}-${i}`, x: Math.cos(a) * (70 + Math.random() * 40), y: Math.sin(a) * 60 - 40, d: i * 55, ch, s: 0.8 + Math.random() * 0.6 }
-    }))
-  }
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el || !move) return
-    el.dataset.move = move.id
-    el.style.setProperty('--pochi-move-duration', `${move.duration}ms`)
-    el.classList.remove('is-playing')
-    void el.getBoundingClientRect()
-    el.classList.add('is-playing')
-    if (move.effect) burst(move.effect, 8, `m${move.n}`)
-    const t = setTimeout(() => {
-      el.classList.remove('is-playing')
-      setParticles([])
-    }, move.duration + 160)
-    return () => clearTimeout(t)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [move])
-
-  // the eyes follow the pointer, a little
-  useEffect(() => {
-    if (!follow || calm()) return
-    let raf = 0
-    const on = (e: PointerEvent) => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        const el = ref.current
-        if (!el) return
-        const r = el.getBoundingClientRect()
-        const dx = e.clientX - (r.left + r.width / 2)
-        const dy = e.clientY - (r.top + r.height * 0.5)
-        const d = Math.hypot(dx, dy) || 1
-        const k = Math.min(1, d / 240)
-        el.style.setProperty('--pa-lx', `${((dx / d) * k * 2.8).toFixed(2)}px`)
-        el.style.setProperty('--pa-ly', `${((dy / d) * k * 2.4).toFixed(2)}px`)
-      })
-    }
-    window.addEventListener('pointermove', on, { passive: true })
-    return () => {
-      window.removeEventListener('pointermove', on)
-      cancelAnimationFrame(raf)
-    }
-  }, [follow])
-
-  const boop = () => {
-    const el = ref.current
-    if (!el || !onBoop) return
-    el.classList.remove('is-booped')
-    void el.getBoundingClientRect()
-    el.classList.add('is-booped')
-    burst('♡', 5, `b${Date.now()}`)
-    onBoop()
-  }
-
-  return (
-    <section className={`pc-stage pcs-${home} ${className}`} aria-label={label}>
-      <svg className="pc-scene" viewBox={SCENE_VIEWBOX} preserveAspectRatio="xMidYMax slice" aria-hidden>
-        <g className="pa-scene" dangerouslySetInnerHTML={{ __html: scene }} />
-        <svg ref={ref} className={`pc-sprite ${onBoop ? 'is-boopable' : ''}`} x="104" y="114" width="192" height="158.6" viewBox={VIEWBOX} overflow="visible" onClick={boop} dangerouslySetInnerHTML={{ __html: markup }} />
-      </svg>
-      <div className="pc-particles" aria-hidden>
-        {particles.map((p) => (
-          <span key={p.k} className="pc-particle" style={{ '--x': `${p.x}px`, '--y': `${p.y}px`, '--wait': `${p.d}ms`, '--s': p.s } as CSSProperties}>
-            <Glyph ch={p.ch} />
-          </span>
-        ))}
-      </div>
-      {children}
-    </section>
-  )
-}
-
-/** Pochi's face in a mood (the mood buttons, the header). */
-function Face({ look, mood, className = '' }: { look: Look; mood?: Mood; className?: string }) {
-  const html = useMemo(() => pochiMarkup({ palette: look.palette, equipped: {}, mood: mood ?? look.mood, form: look.form }, { box: FACE_BOX }), [look.palette, look.mood, look.form, mood])
-  return <svg className={`pc-face ${className}`} viewBox={VIEWBOX} aria-hidden dangerouslySetInnerHTML={{ __html: html }} />
-}
-
-function Coin({ n, big }: { n: number; big?: boolean }) {
-  return (
-    <span className={`pc-coin ${big ? 'big' : ''}`}>
-      <TunaCoin size={big ? 22 : 15} />
-      <b>{n.toLocaleString()}</b>
+    <span className="pc-hearts" aria-hidden>
+      {Array.from({ length: of }, (_, i) => (
+        <svg key={i} viewBox="0 0 7 6" width="11" height="10" shapeRendering="crispEdges" className={i < value ? 'on' : ''}>
+          <path d="M1 0h2v1h1V0h2v1h1v2H6v1H5v1H4v1H3V5H2V4H1V3H0V1h1z" />
+        </svg>
+      ))}
     </span>
   )
+}
+
+/** An svg of Pochi-art markup. */
+const Art = ({ html, box = VIEWBOX }: { html: string; box?: string }) => <svg className="pc-art" viewBox={box} aria-hidden dangerouslySetInnerHTML={{ __html: html }} />
+
+function SceneArt({ home, dark }: { home: string; dark: boolean }) {
+  const html = useMemo(() => sceneMarkup(home, uid(`tile|${home}`)), [home])
+  return <svg className={`pc-scene pa-scene pcs-${home}${dark ? ' pcs-dark' : ''}`} viewBox={SCENE_VIEWBOX} preserveAspectRatio="xMidYMax slice" aria-hidden dangerouslySetInnerHTML={{ __html: html }} />
 }
 
 /** A number that rolls to its new value. */
@@ -217,16 +167,11 @@ function useRolling(value: number) {
     const a = from.current
     const b = value
     if (a === b) return
-    if (calm()) {
-      from.current = b
-      setShown(b)
-      return
-    }
     const t0 = performance.now()
     let raf = 0
     const step = (t: number) => {
-      const k = Math.min(1, (t - t0) / 750)
-      setShown(Math.round(a + (b - a) * (1 - (1 - k) ** 3)))
+      const k = Math.min(1, (t - t0) / 650)
+      setShown(Math.round(a + (b - a) * (1 - Math.pow(1 - k, 3))))
       if (k < 1) raf = requestAnimationFrame(step)
       else from.current = b
     }
@@ -236,82 +181,70 @@ function useRolling(value: number) {
   return shown
 }
 
-function Meter({ value, max, tone }: { value: number; max: number; tone?: 'pink' | 'gold' | 'warm' }) {
-  return (
-    <span className={`pc-meter ${tone ?? ''}`} role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={max}>
-      <i style={{ width: `${Math.max(3, Math.min(100, (value / Math.max(1, max)) * 100))}%` }} />
-    </span>
-  )
-}
-
-/** Tuna Coins flying from one place to another (into the wallet when earned, out of it when spent). */
-function flyCoins(root: HTMLElement | null, from: Element | null | undefined, to: Element | null | undefined, n: number) {
-  if (!root || !from || !to || calm() || typeof root.animate !== 'function') return
-  const R = root.getBoundingClientRect()
-  const a = from.getBoundingClientRect()
-  const b = to.getBoundingClientRect()
-  const sx = a.left + a.width / 2 - R.left
-  const sy = a.top + a.height / 2 - R.top
-  const dx = b.left + b.width / 2 - R.left - sx
-  const dy = b.top + b.height / 2 - R.top - sy
-  for (let i = 0; i < n; i++) {
-    const el = document.createElement('span')
-    el.className = 'pc-flycoin'
-    el.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20">${coinMarkup(`fly${i}`)}</svg>`
-    el.style.left = `${sx - 10}px`
-    el.style.top = `${sy - 10}px`
-    root.appendChild(el)
-    const jx = (Math.random() - 0.5) * 60
-    const lift = -50 - Math.random() * 50
-    const anim = el.animate(
-      [
-        { transform: 'translate(0,0) scale(.4) rotate(0deg)', opacity: 0 },
-        { transform: `translate(${jx}px, ${lift}px) scale(1.05) rotate(90deg)`, opacity: 1, offset: 0.3 },
-        { transform: `translate(${dx}px, ${dy}px) scale(.55) rotate(260deg)`, opacity: 0.95 },
-      ],
-      { duration: 820 + Math.random() * 180, delay: i * 70, easing: 'cubic-bezier(.45,0,.25,1)', fill: 'both' },
-    )
-    anim.onfinish = () => {
-      el.remove()
-      if (i === n - 1) {
-        to.classList.remove('is-hit')
-        void (to as HTMLElement).offsetWidth
-        to.classList.add('is-hit')
-      }
-    }
+function historyTitle(e: { kind: string; reason: string; ref: string; note?: string }): string {
+  if (e.note) return e.note
+  if (e.kind === 'spend') {
+    const name = e.reason === 'item' ? ITEMS.find((i) => i.id === e.ref)?.name : e.reason === 'palette' ? PALETTES.find((p) => p.id === e.ref)?.name : PACKS.find((p) => p.id === e.ref)?.name
+    return `Bought ${name ?? e.ref}`
   }
+  return ({ welcome: 'Welcome gift', study: 'Studied', goal: 'Daily goal reached', streak: `${e.ref.split(':')[1] ?? ''}-day streak`, exam: 'Mock exam finished', quest: 'Quest claimed', gift: 'A gift from Anvira' } as Record<string, string>)[e.reason] ?? e.reason
 }
 
-export default function PochiClubView({ club, host, stats, onClose, dark, banner }: PochiClubProps) {
+const when = (iso: string) => {
+  if (!iso) return ''
+  const d = new Date(iso)
+  const today = new Date()
+  const y = new Date(today.getTime() - 86400000)
+  const same = (a: Date, b: Date) => a.toDateString() === b.toDateString()
+  const t = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
+  return same(d, today) ? `Today, ${t}` : same(d, y) ? `Yesterday, ${t}` : d.toLocaleDateString([], { month: 'short', day: 'numeric' })
+}
+
+const itemOf = (id: string) => ITEMS.find((i) => i.id === id)
+
+// ── The console ────────────────────────────────────────────────────────────────────────────────────────────────────
+
+export default function PochiClubView({ club, host, stats, onClose, banner, dark = true }: PochiClubProps) {
   const snap = useSyncExternalStore(club.subscribe, club.get, club.get)
   const { state: s, look } = snap
-  const [tab, setTab] = useState<Tab>('buddy')
-  const [move, setMove] = useState<Playing>(null)
-  const [line, setLine] = useState<{ text: string; n: number } | null>(null)
-  const [toast, setToast] = useState<{ text: string; tone: 'good' | 'info' | 'warn'; n: number } | null>(null)
-  const [burst, setBurst] = useState<{ n: number; amount: number } | null>(null)
-  const [confetti, setConfetti] = useState(0)
   const coins = useRolling(s.coins)
-  const nPlays = useRef(0)
-  const rootRef = useRef<HTMLDivElement>(null)
-  const walletRef = useRef<HTMLDivElement>(null)
 
-  const say = (text: string, tone: 'good' | 'info' | 'warn' = 'info') => setToast({ text, tone, n: Date.now() })
+  const [shelf, setShelf] = useState<ShelfId>('wardrobe')
+  const [sel, setSel] = useState<Record<string, string>>({})
+  const [cat, setCat] = useState<Cat>('all')
+  const [sort, setSort] = useState<Sort>('shelf')
+  const [fit, setFit] = useState<Fitting>(NO_FIT)
+  const [confirmAll, setConfirmAll] = useState(false)
+  const [renaming, setRenaming] = useState(false)
+  const [toast, setToast] = useState<{ text: string; n: number } | null>(null)
+  const [line, setLine] = useState<{ text: string; n: number } | null>(null)
+  const [burst, setBurst] = useState<{ n: number; text: string; minus?: boolean } | null>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
+  const stripRef = useRef<HTMLDivElement>(null)
+  const nToast = useRef(0)
+
+  const say = (text: string) => setToast({ text, n: ++nToast.current })
   useEffect(() => {
     if (!toast) return
-    const t = setTimeout(() => setToast(null), 3200)
+    const t = setTimeout(() => setToast(null), 2600)
     return () => clearTimeout(t)
   }, [toast])
   useEffect(() => {
     if (!line) return
-    const t = setTimeout(() => setLine(null), 5200)
+    const t = setTimeout(() => setLine(null), 3400)
     return () => clearTimeout(t)
   }, [line])
+  useEffect(() => {
+    if (!confirmAll) return
+    const t = setTimeout(() => setConfirmAll(false), 4000)
+    return () => clearTimeout(t)
+  }, [confirmAll])
 
-  // coins coming in (studying, a claimed quest): the number rolls and a "+N" rises from the wallet
+  // coins coming in (studying, a claimed quest) or going out
   const lastCoins = useRef(s.coins)
   useEffect(() => {
-    if (s.coins > lastCoins.current) setBurst({ n: Date.now(), amount: s.coins - lastCoins.current })
+    if (s.coins > lastCoins.current) setBurst({ n: Date.now(), text: `+${s.coins - lastCoins.current}` })
+    else if (s.coins < lastCoins.current) setBurst({ n: Date.now(), text: `−${lastCoins.current - s.coins}`, minus: true })
     lastCoins.current = s.coins
   }, [s.coins])
 
@@ -323,782 +256,932 @@ export default function PochiClubView({ club, host, stats, onClose, dark, banner
     return () => window.removeEventListener('online', on)
   }, [club])
 
-  const play = (m: Move | undefined, opts: { hello?: boolean } = {}) => {
+  // ── what things are ──
+  const itemOpen = (it: Item) => s.everything || s.stars >= it.unlockAt
+  const owns = (t: Tile) => (t.k === 'item' ? s.owned.has(t.id) : t.k === 'pal' ? s.palettes.has(t.id) : t.k === 'pack' ? s.packs.has(t.id) || s.everything : true)
+  const wearing = (t: Tile) => (t.k === 'item' ? Object.values(look.equipped).includes(t.id) : t.k === 'pal' ? look.palette === t.id : t.k === 'home' ? look.home === t.id : t.k === 'mood' ? look.mood === t.id : false)
+  const trying = (t: Tile) => (t.k === 'item' ? Object.values(fit.equipped).includes(t.id) : t.k === 'pal' ? fit.palette === t.id : false)
+
+  // ── the shelves' tiles ──
+  const wardrobe = useMemo(() => {
+    const order = (it: Item) => CATS.findIndex((c) => c.id === catOf(it))
+    const list = ITEMS.filter((it) => cat === 'all' || catOf(it) === cat).sort((a, b) => {
+      if (sort === 'price') return a.price - b.price
+      if (sort === 'owned') return Number(s.owned.has(b.id)) - Number(s.owned.has(a.id)) || order(a) - order(b) || a.price - b.price
+      return order(a) - order(b) || a.unlockAt - b.unlockAt || RARITY_ORDER.indexOf(a.rarity) - RARITY_ORDER.indexOf(b.rarity) || a.price - b.price
+    })
+    let last: Cat | null = null
+    return list.map((it): Tile => {
+      const c = catOf(it)
+      const group = cat === 'all' && sort === 'shelf' && c !== last ? CATS.find((x) => x.id === c)?.label : undefined
+      last = c
+      return { k: 'item', id: it.id, group }
+    })
+  }, [cat, sort, s.owned])
+
+  const tilesOf = (id: ShelfId): Tile[] => {
+    switch (id) {
+      case 'pochi':
+        return [{ k: 'act', id: 'stats' }, { k: 'act', id: 'hello' }, { k: 'act', id: 'routine' }, ...MOODS.map((m): Tile => ({ k: 'mood', id: m })), { k: 'act', id: 'rename' }]
+      case 'wardrobe':
+        return wardrobe
+      case 'colours':
+        return PALETTES.map((p): Tile => ({ k: 'pal', id: p.id }))
+      case 'moves':
+        return [...MOVES.filter((m) => !m.packId).map((m): Tile => ({ k: 'move', id: m.id })), ...PACKS.map((p): Tile => ({ k: 'pack', id: p.id }))]
+      case 'homes':
+        return HOMES.map((h): Tile => ({ k: 'home', id: h.id }))
+      case 'quests':
+        return [...s.quests.map(({ quest }): Tile => ({ k: 'quest', id: quest.id })), { k: 'earn', id: 'how' }]
+      case 'wallet':
+        return [{ k: 'bal', id: 'balance' }, ...s.history.filter((e) => e.kind !== 'care').slice(0, 30).map((e): Tile => ({ k: 'hist', id: e.id }))]
+    }
+  }
+  const tiles = tilesOf(shelf)
+  const at = Math.max(0, tiles.findIndex((t) => tileKey(t) === sel[shelf]))
+  const tile = tiles[at] as Tile | undefined
+  const tk = tile ? tileKey(tile) : ''
+
+  // ── focus: the selected tile of the shelf is the one that takes the keys (a roving tab stop) ──
+  // on opening, the keys go straight to the shelf
+  const wantFocus = useRef(true)
+  const focusTile = () => stripRef.current?.querySelector<HTMLElement>('.pc-tile.is-sel')?.focus({ preventScroll: true })
+  // keep the selected tile in view, a couple of tiles in from the left
+  useEffect(() => {
+    const strip = stripRef.current
+    const slot = strip?.querySelector<HTMLElement>('.pc-tile.is-sel')?.parentElement
+    if (strip && slot) {
+      const left = Math.max(0, slot.offsetLeft - (slot.offsetWidth + 14) * 2)
+      if (Math.abs(strip.scrollLeft - left) > 2) strip.scrollTo({ left, behavior: 'smooth' })
+    }
+    if (wantFocus.current) {
+      wantFocus.current = false
+      focusTile()
+    }
+  })
+
+  const select = (sh: ShelfId, t: Tile | undefined, focus = true) => {
+    if (!t) return
+    setSel((x) => ({ ...x, [sh]: tileKey(t) }))
+    setConfirmAll(false)
+    wantFocus.current = focus
+  }
+  const goShelf = (sh: ShelfId, focus = true) => {
+    setShelf(sh)
+    setRenaming(false)
+    wantFocus.current = focus
+  }
+  const setCategory = (c: Cat) => {
+    setCat(c)
+    setSel((x) => ({ ...x, wardrobe: '' }))
+    wantFocus.current = true
+  }
+
+  // ── moves on the stage ──
+  const nPlay = useRef(0)
+  const [fx, setFx] = useState<Particle[]>([])
+  // each move is acted part by part: body, fins, antenna, feet, eyes, the shadow and the sparkles all get their own
+  // keyframes (pochi-moves.css), and its pixel effects (hearts, notes, dust...) are timed to it
+  const animate = (moveId: string, duration: number) => {
+    const el = stageRef.current?.querySelector<SVGSVGElement>('svg.pc-sprite')
+    if (!el) return
+    const m = MOVES.find((x) => x.id === moveId)
+    const rig = RIGS[moveId] ?? (m && RIGS[MOOD_RIG[m.mood] ?? '']) ?? RIGS['try-on']
+    el.dataset.move = moveId
+    el.style.setProperty('--pochi-move-duration', `${duration}ms`)
+    const parts: [string, string | undefined][] = [
+      ['--mv-body', rig.body], ['--mv-wl', rig.wingL], ['--mv-wr', rig.wingR], ['--mv-ant', rig.antenna], ['--mv-fa', rig.feetA],
+      ['--mv-fb', rig.feetB ?? rig.feetA], ['--mv-eyes', rig.eyes], ['--mv-sh', rig.shadow], ['--mv-sp', rig.sparkles],
+    ]
+    for (const [k, v] of parts) el.style.setProperty(k, v ?? 'none')
+    el.classList.remove('is-playing')
+    void el.getBoundingClientRect()
+    el.classList.add('is-playing')
+    const n = ++nPlay.current
+    const ps = particlesFor(rig, duration)
+    setFx(ps)
+    const end = Math.max(duration, ...ps.map((p) => p.wait + p.life)) + 80
+    window.setTimeout(() => {
+      if (n !== nPlay.current) return
+      el.classList.remove('is-playing')
+      setFx([])
+    }, end)
+    window.setTimeout(() => n === nPlay.current && el.classList.remove('is-playing'), duration + 80)
+  }
+  const play = (id: string, opts: { hello?: boolean; quiet?: boolean } = {}) => {
+    const m = MOVES.find((x) => x.id === id)
     if (!m) return
     if (!moveUnlocked(s, m.id)) {
-      say(m.packId ? `${m.name} comes in the ${PACKS.find((p) => p.id === m.packId)?.name} pack.` : `${m.name} unlocks at ${m.unlockAt} study stars${m.bond ? ` and a bond of ${m.bond}` : ''}.`)
+      if (!opts.quiet) say(m.packId ? `${m.name} comes in the ${PACKS.find((p) => p.id === m.packId)?.name} pack.` : `${m.name} unlocks at ${m.unlockAt} study stars${m.bond ? ` and a bond of ${m.bond}` : ''}.`)
       return
     }
-    nPlays.current += 1
-    setMove({ id: m.id, n: nPlays.current, duration: m.duration, effect: m.effect })
-    setLine({ text: m.line.split('Pochi').join(look.nickname), n: nPlays.current })
-    club.setLook({ mood: m.mood })
+    animate(m.id, m.duration)
+    if (opts.quiet) return
+    setLine({ text: m.line.split('Pochi').join(look.nickname), n: Date.now() })
+    if (m.mood !== look.mood) club.setLook({ mood: m.mood })
     if (opts.hello) club.hello()
   }
   const playRoutine = async () => {
     for (const id of look.routine) {
       const m = MOVES.find((x) => x.id === id)
       if (!m) continue
-      play(m)
+      play(m.id)
       await new Promise((r) => setTimeout(r, m.duration + 250))
     }
   }
-  const boop = () => {
-    nPlays.current += 1
-    setLine({ text: BOOP_LINES[nPlays.current % BOOP_LINES.length], n: nPlays.current })
-  }
+  // landing on a move (or a pack) previews it, without changing anything
+  useEffect(() => {
+    if (!tile || (tile.k !== 'move' && tile.k !== 'pack')) return
+    const id = tile.k === 'move' ? tile.id : PACKS.find((p) => p.id === tile.id)?.moves[0]
+    const m = MOVES.find((x) => x.id === id)
+    if (!m) return
+    const t = setTimeout(() => animate(m.id, m.duration), 280)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shelf, tk])
 
-  const buy: Buy = (what, id, name, from) => {
-    const r = club.buy(what, id)
-    if (!r.ok) {
-      say(r.why ?? 'Not yet.', 'warn')
-      return false
+  // ── doing things ──
+  const wear = (it: Item) => {
+    club.setLook({ equipped: { ...look.equipped, [it.slot]: it.id } })
+    setFit((f) => ({ ...f, equipped: { ...f.equipped, [it.slot]: undefined } }))
+    animate('try-on', 900)
+  }
+  const takeOff = (it: Item) => {
+    const next = { ...look.equipped }
+    delete next[it.slot]
+    club.setLook({ equipped: next })
+    animate('take-off', 700)
+  }
+  const tryOn = (t: Tile) => {
+    if (t.k === 'item') {
+      const it = itemOf(t.id)!
+      setFit((f) => ({ ...f, equipped: { ...f.equipped, [it.slot]: f.equipped[it.slot] === it.id ? undefined : it.id } }))
+    } else if (t.k === 'pal') setFit((f) => ({ ...f, palette: f.palette === t.id ? undefined : t.id }))
+    setConfirmAll(false)
+    animate('try-on', 800)
+  }
+  const buy = (t: Tile, quiet = false): boolean => {
+    const what = t.k === 'item' ? 'item' : t.k === 'pal' ? 'palette' : t.k === 'pack' ? 'pack' : null
+    if (!what) return false
+    if (t.k === 'item') {
+      const it = itemOf(t.id)!
+      if (it.event) return say('The Moon Jelly Crown is a festival prize: study five days in all and it is yours.'), false
+      if (!itemOpen(it)) return say(`${it.name} unlocks at ${it.unlockAt} study stars. You have ${s.stars}.`), false
     }
-    flyCoins(rootRef.current, walletRef.current, from, 6)
-    setConfetti(Date.now())
-    say(`${name} is yours!`, 'good')
-    if (what === 'item') {
-      const it = ITEMS.find((i) => i.id === id)
-      if (it) club.setLook({ equipped: { ...look.equipped, [it.slot]: it.id } })
-    } else if (what === 'palette') club.setLook({ palette: id })
-    play(MOVES.find((m) => m.id === (moveUnlocked(s, 'dance') ? 'dance' : 'hello')))
+    const r = club.buy(what, t.id)
+    if (!r.ok) return say(r.why ?? 'Not yet.'), false
+    wantFocus.current = true
+    // what you buy, she wears
+    if (t.k === 'item') {
+      const it = itemOf(t.id)!
+      club.setLook({ equipped: { ...club.get().look.equipped, [it.slot]: it.id } })
+      setFit((f) => ({ ...f, equipped: { ...f.equipped, [it.slot]: undefined } }))
+    } else if (t.k === 'pal') {
+      club.setLook({ palette: t.id })
+      setFit((f) => ({ ...f, palette: undefined }))
+    }
+    if (!quiet) {
+      const name = t.k === 'item' ? itemOf(t.id)?.name : t.k === 'pal' ? PALETTES.find((p) => p.id === t.id)?.name : PACKS.find((p) => p.id === t.id)?.name
+      say(t.k === 'pack' ? `${name} is yours: five new moves` : `${name} is yours`)
+      if (t.k === 'pack') play(PACKS.find((p) => p.id === t.id)!.moves[0])
+      else animate('got-it', 1000)
+    }
     return true
   }
-  const claim = (id: 'hello' | 'lesson' | 'style', reward: number, from: Element | null) => {
-    if (!club.claimQuest(id)) return
-    flyCoins(rootRef.current, from, walletRef.current, Math.min(10, 3 + Math.round(reward / 5)))
-    setConfetti(Date.now())
-    say(`+${reward} Tuna Coins`, 'good')
+
+  // the fitting room: what is being tried, and what of it can be bought now
+  const fitting = useMemo(() => {
+    const rows: { t: Tile; name: string; price: number; can: boolean; why?: string; art: string }[] = []
+    for (const id of Object.values(fit.equipped)) {
+      const it = id ? itemOf(id) : undefined
+      if (!it) continue
+      const mine = s.owned.has(it.id)
+      const why = mine ? undefined : it.event ? 'Festival prize' : !(s.everything || s.stars >= it.unlockAt) ? `Opens at ${it.unlockAt} stars` : undefined
+      rows.push({ t: { k: 'item', id: it.id }, name: it.name, price: mine ? 0 : it.price, can: !why, why, art: itemMarkup(it.id) })
+    }
+    if (fit.palette) {
+      const p = PALETTES.find((x) => x.id === fit.palette)
+      if (p) rows.push({ t: { k: 'pal', id: p.id }, name: p.name, price: s.palettes.has(p.id) ? 0 : p.price, can: true, art: pochiMarkup({ palette: p.id, equipped: {}, mood: 'happy' }, { box: FACE_BOX }) })
+    }
+    const total = rows.filter((r) => r.can).reduce((a, r) => a + r.price, 0)
+    return { rows, total, buyable: rows.filter((r) => r.can).length, blocked: rows.filter((r) => !r.can).length }
+  }, [fit, s])
+
+  const keepLook = () => {
+    if (!fitting.buyable) return
+    if (fitting.total > s.coins) return say(`You need ${fitting.total - s.coins} more Tuna Coins for all of it. Study a little and they come in.`)
+    if (!confirmAll && fitting.total > 0) return setConfirmAll(true)
+    setConfirmAll(false)
+    let n = 0
+    for (const r of fitting.rows) {
+      if (!r.can) continue
+      if (r.price === 0 || buy(r.t, true)) n++
+    }
+    // put everything on at once
+    const cur = club.get().look
+    const eq = { ...cur.equipped }
+    let palette = cur.palette
+    for (const r of fitting.rows) {
+      if (!r.can) continue
+      if (r.t.k === 'item') eq[itemOf(r.t.id)!.slot] = r.t.id
+      else palette = r.t.id
+    }
+    club.setLook({ equipped: eq, palette })
+    // what could not be bought yet stays on the stage
+    const left: Fitting = { equipped: {} }
+    for (const r of fitting.rows) if (!r.can && r.t.k === 'item') left.equipped[itemOf(r.t.id)!.slot] = r.t.id
+    setFit(left)
+    wantFocus.current = true
+    if (n) {
+      say(n === 1 ? 'Kept the new look' : `Kept all ${n}: Pochi is wearing them`)
+      play(moveUnlocked(s, 'dance') ? 'dance' : 'hello', { quiet: true })
+    }
   }
 
-  const goalPct = stats ? Math.min(100, Math.round((stats.todayXp / Math.max(1, stats.dailyGoal)) * 100)) : null
-  const questsReady = s.quests.filter((q) => q.done && !q.claimed && q.quest.id !== 'goal').length
-  const questsDone = s.quests.filter((q) => q.claimed || (q.done && q.quest.id === 'goal')).length
+  const claim = (id: 'hello' | 'lesson' | 'style') => {
+    if (club.claimQuest(id)) {
+      const q = s.quests.find((x) => x.quest.id === id)
+      say(`+${q ? q.quest.reward : ''} Tuna Coins`)
+      animate('quest-clap', 1400)
+    }
+  }
+
+  // ── the stage: Pochi as she is, with the fitting room, with what you are looking at ──
+  const stageLook = useMemo(() => {
+    const eq: Partial<Record<string, string>> = { ...look.equipped }
+    for (const [slot, id] of Object.entries(fit.equipped)) if (id) eq[slot] = id
+    let palette = fit.palette ?? look.palette
+    let mood: Mood = look.mood
+    let home = look.home
+    if (tile) {
+      if (tile.k === 'item') {
+        const it = itemOf(tile.id)
+        if (it) eq[it.slot] = it.id
+      } else if (tile.k === 'pal') palette = tile.id
+      else if (tile.k === 'home') home = tile.id
+      else if (tile.k === 'mood') mood = tile.id
+      else if (tile.k === 'move') mood = MOVES.find((m) => m.id === tile.id)?.mood ?? mood
+      else if (tile.k === 'pack') mood = MOVES.find((m) => m.id === PACKS.find((p) => p.id === tile.id)?.moves[0])?.mood ?? mood
+    }
+    return { palette, equipped: eq, mood, home, form: look.form }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [look, fit, shelf, tk])
+  const spriteHtml = useMemo(() => pochiMarkup(stageLook), [stageLook])
+  const sceneHtml = useMemo(() => sceneMarkup(stageLook.home, uid(`stage|${stageLook.home}`)), [stageLook.home])
+
+  // ── the hero text and its buttons, for the selected tile ──
+  type Btn = { label: ReactNode; run: () => void; off?: boolean; key?: string }
+  const coin = (n: number) => (
+    <>
+      <TunaCoin size={16} /> {n.toLocaleString()}
+    </>
+  )
+  const lock = (n: number, more = '') => (
+    <>
+      <Ico d={IC.lock} size={14} /> {n} stars{more}
+    </>
+  )
+  const hero = ((): { kicker: ReactNode; title: ReactNode; body: ReactNode; main?: Btn; second?: Btn; extra?: ReactNode; enter?: string } => {
+    if (!tile) return { kicker: null, title: '', body: '' }
+    if (tile.k === 'item') {
+      const it = itemOf(tile.id)!
+      const own = s.owned.has(it.id)
+      const on = wearing(tile)
+      const tr = trying(tile)
+      const open = itemOpen(it)
+      const kicker = (
+        <>
+          <span className={`pc-rar r-${it.rarity}`}>{it.rarity}</span>
+          <span>{CATS.find((c) => c.id === catOf(it))?.label}</span>
+        </>
+      )
+      if (own) return { kicker, title: it.name, body: it.note, enter: on ? 'take off' : 'wear', main: { label: on ? 'Take off' : 'Wear', run: () => (on ? takeOff(it) : wear(it)) }, extra: <span className="pc-state"><Ico d={IC.check} size={14} /> Yours</span> }
+      return {
+        kicker,
+        title: it.name,
+        body: it.note,
+        enter: tr ? 'take off' : 'try on',
+        main: { label: tr ? 'Take it off' : 'Try on', run: () => tryOn(tile) },
+        second: it.event ? { label: 'Festival prize', run: () => buy(tile), off: true } : open ? { label: <>Buy {coin(it.price)}</>, run: () => buy(tile), key: 'B' } : { label: lock(it.unlockAt), run: () => buy(tile), off: true },
+        extra: it.event ? <span className="pc-state">Study five days in all to earn it</span> : !open ? <span className="pc-state">Try it on now; buy it once you have {it.unlockAt} stars.</span> : null,
+      }
+    }
+    if (tile.k === 'pal') {
+      const p = PALETTES.find((x) => x.id === tile.id)!
+      const body = 'Changes Pochi all over, outfits included.'
+      if (s.palettes.has(p.id)) {
+        const on = wearing(tile)
+        return { kicker: <span>Colour</span>, title: p.name, body, enter: on ? undefined : 'wear', main: { label: on ? 'Wearing it' : 'Wear', run: () => !on && club.setLook({ palette: p.id }), off: on } }
+      }
+      const tr = trying(tile)
+      return { kicker: <span>Colour</span>, title: p.name, body, enter: tr ? 'take off' : 'try on', main: { label: tr ? 'Stop trying' : 'Try on', run: () => tryOn(tile) }, second: { label: <>Buy {coin(p.price)}</>, run: () => buy(tile), key: 'B' } }
+    }
+    if (tile.k === 'move') {
+      const m = MOVES.find((x) => x.id === tile.id)!
+      const ok = moveUnlocked(s, m.id)
+      const fav = look.favoriteMove === m.id
+      return {
+        kicker: (
+          <>
+            <span>Move</span>
+            <span>{(m.duration / 1000).toFixed(1)} s</span>
+            <span>{MOOD_LABEL[m.mood] ?? m.mood}</span>
+          </>
+        ),
+        title: m.name,
+        body: m.note,
+        enter: ok ? 'play' : undefined,
+        main: ok ? { label: <><Ico d={IC.play} size={13} /> Play</>, run: () => play(m.id) } : { label: lock(m.unlockAt, m.bond ? ` · bond ${m.bond}` : ''), run: () => play(m.id), off: true },
+        second: ok ? { label: fav ? 'Her hello move' : 'Use for hello', run: () => { if (!fav) { club.setLook({ favoriteMove: m.id }); say(`${look.nickname} says hello with ${m.name} now`) } }, off: fav } : undefined,
+      }
+    }
+    if (tile.k === 'pack') {
+      const p = PACKS.find((x) => x.id === tile.id)!
+      const own = owns(tile)
+      const names = p.moves.map((id) => MOVES.find((m) => m.id === id)?.name).filter(Boolean).join(' · ')
+      return {
+        kicker: (
+          <>
+            <span>Move pack</span>
+            <span>{p.task}</span>
+          </>
+        ),
+        title: p.name,
+        body: (
+          <>
+            {p.description}
+            <small className="pc-hero-sub">{names}</small>
+          </>
+        ),
+        enter: own ? 'play' : 'buy',
+        main: own ? { label: <><Ico d={IC.play} size={13} /> Play the first</>, run: () => play(p.moves[0]) } : { label: <>Buy {coin(p.price)}</>, run: () => buy(tile) },
+        extra: own ? <span className="pc-state"><Ico d={IC.check} size={14} /> Yours: its moves are on this shelf's pack</span> : null,
+      }
+    }
+    if (tile.k === 'home') {
+      const h = HOMES.find((x) => x.id === tile.id)!
+      const ok = homeUnlocked(s, h.id)
+      const on = look.home === h.id
+      return {
+        kicker: <span>Home</span>,
+        title: h.name,
+        body: HOME_NOTE[h.id] ?? '',
+        enter: ok && !on ? 'move here' : undefined,
+        main: on ? { label: 'Home now', run: () => undefined, off: true } : ok ? { label: 'Move here', run: () => club.setLook({ home: h.id }) } : { label: lock(h.unlockAt), run: () => undefined, off: true },
+        extra: !ok ? <span className="pc-state">Just visiting: it opens at {h.unlockAt} study stars.</span> : null,
+      }
+    }
+    if (tile.k === 'mood') {
+      const on = look.mood === tile.id
+      return { kicker: <span>Mood</span>, title: MOOD_LABEL[tile.id] ?? tile.id, body: 'How Pochi feels when you open the club. Moves change it too.', enter: on ? undefined : 'set mood', main: { label: on ? 'Her mood now' : 'Set mood', run: () => { if (!on) club.setLook({ mood: tile.id }) }, off: on } }
+    }
+    if (tile.k === 'act') {
+      if (tile.id === 'stats') {
+        const goal = stats ? Math.min(100, Math.round((stats.todayXp / Math.max(1, stats.dailyGoal)) * 100)) : null
+        const hearts = Math.round(((s.bond - s.bondTier.from) / Math.max(1, (s.bondTier.next ?? s.bond + 1) - s.bondTier.from)) * 5)
+        const pct = Math.max(3, Math.min(100, ((s.stars - s.rank.at) / Math.max(1, (s.rank.next ?? s.stars + 1) - s.rank.at)) * 100))
+        return {
+          kicker: (
+            <>
+              <span>{s.rank.name}</span>
+              <span>{s.bondTier.name}</span>
+            </>
+          ),
+          title: look.nickname,
+          body: (
+            <span className="pc-meters">
+              <span className="pc-mrow">
+                <span>
+                  <Star size={12} /> Study stars
+                </span>
+                <b>
+                  {s.stars.toLocaleString()}
+                  {s.rank.next !== null ? ` / ${s.rank.next.toLocaleString()}` : ''}
+                </b>
+              </span>
+              <span className="pc-meter">
+                <i style={{ width: `${pct}%` }} />
+              </span>
+              <span className="pc-mrow">
+                <span>Friendship · bond {s.bond}</span>
+                <b>
+                  <Hearts value={hearts} />
+                </b>
+              </span>
+              {stats && (
+                <span className="pc-mrow">
+                  <span>{stats.streak}-day streak</span>
+                  <b>{goal}% of today's goal</b>
+                </span>
+              )}
+              {s.moments.length > 0 && <span className="pc-mrow pc-mem">Latest memory: {s.moments[0].title}</span>}
+            </span>
+          ),
+        }
+      }
+      if (tile.id === 'hello')
+        return { kicker: <span>Pochi</span>, title: 'Say hello', body: `${look.nickname} answers with ${MOVES.find((m) => m.id === look.favoriteMove)?.name ?? 'a wave'}. Saying hello once a day is one of today's quests.`, enter: 'say hello', main: { label: <><Ico d={IC.hand} size={15} /> Say hello</>, run: () => play(look.favoriteMove, { hello: true }) } }
+      if (tile.id === 'routine') {
+        const names = look.routine.map((id) => MOVES.find((m) => m.id === id)?.name ?? id).join(', then ')
+        return { kicker: <span>Pochi</span>, title: 'Her routine', body: `${names}.`, enter: 'play', main: { label: <><Ico d={IC.play} size={13} /> Play routine</>, run: () => void playRoutine() } }
+      }
+      return { kicker: <span>Pochi</span>, title: renaming ? 'A new name' : 'Rename', body: `She is called ${look.nickname}.`, enter: renaming ? undefined : 'rename', main: renaming ? undefined : { label: <><Ico d={IC.pen} size={14} /> Rename</>, run: () => setRenaming(true) } }
+    }
+    if (tile.k === 'quest') {
+      const q = s.quests.find((x) => x.quest.id === tile.id)!
+      const ready = q.done && !q.claimed && tile.id !== 'goal'
+      const todo: Btn =
+        tile.id === 'hello'
+          ? { label: <><Ico d={IC.hand} size={15} /> Say hello</>, run: () => play(look.favoriteMove, { hello: true }) }
+          : tile.id === 'style'
+            ? { label: 'Open the wardrobe', run: () => goShelf('wardrobe') }
+            : { label: 'Not done yet', run: () => undefined, off: true }
+      return {
+        kicker: (
+          <>
+            <span>Today's quest</span>
+            <span>+{q.quest.reward} coins</span>
+          </>
+        ),
+        title: q.quest.title,
+        body: tile.id === 'goal' ? `${q.quest.detail}. The bonus comes in by itself.` : host === 'web' && tile.id === 'lesson' ? `${q.quest.detail}. It shows up here the next time it syncs.` : q.quest.detail,
+        enter: ready ? 'claim' : q.claimed || todo.off ? undefined : 'go',
+        main: q.claimed ? { label: <><Ico d={IC.check} size={14} /> Claimed</>, run: () => undefined, off: true } : ready ? { label: <>Claim {coin(q.quest.reward)}</>, run: () => claim(tile.id as 'hello' | 'lesson' | 'style') } : todo,
+      }
+    }
+    if (tile.k === 'earn') {
+      return {
+        kicker: <span>Tuna Coins</span>,
+        title: 'How coins come in',
+        body: (
+          <span className="pc-earn">
+            <span>
+              A lesson, quiz or review <b>1 per {Math.round(1 / COINS_PER_XP)} XP</b>
+            </span>
+            <span>
+              Reach your daily goal <b>+{GOAL_BONUS}</b>
+            </span>
+            <span>
+              Finish a mock exam <b>+{EXAM_COINS}</b>
+            </span>
+            <span>
+              Streaks{' '}
+              <b>
+                {STREAK_BONUS.slice(0, 3)
+                  .map(([d, c]) => `${d} days +${c}`)
+                  .join(' · ')}
+                …
+              </b>
+            </span>
+            <span>
+              Welcome gift <b>+{WELCOME_COINS}</b>
+            </span>
+            <small className="pc-hero-sub">Coins only come from studying; they can never be bought.</small>
+          </span>
+        ),
+      }
+    }
+    if (tile.k === 'bal') {
+      return {
+        kicker: <span>Wallet</span>,
+        title: (
+          <span className="pc-bal">
+            <TunaCoin size={34} /> {s.coins.toLocaleString()}
+          </span>
+        ),
+        body: (
+          <span className="pc-earn">
+            <span>
+              Earned ever <b>{s.earned.toLocaleString()}</b>
+            </span>
+            <span>
+              Today <b>{s.todayEarned.toLocaleString()}</b>
+            </span>
+            <span>
+              Study days <b>{s.studyDays}</b>
+            </span>
+            <small className="pc-hero-sub">
+              {snap.pending ? `${snap.pending} change${snap.pending === 1 ? '' : 's'} waiting to sync. ` : ''}
+              {snap.lastSync ? `Last synced ${new Date(snap.lastSync).toLocaleString()}.` : 'Kept on this device until it can sync.'}
+            </small>
+          </span>
+        ),
+        main: { label: <><Ico d={IC.sync} size={14} /> {snap.syncing ? 'Syncing…' : 'Sync now'}</>, run: () => void club.sync(), off: snap.syncing },
+      }
+    }
+    const e = s.history.find((x) => x.id === tile.id)
+    if (!e) return { kicker: null, title: '', body: '' }
+    return {
+      kicker: <span>{e.kind === 'earn' ? 'Came in' : 'Spent'}</span>,
+      title: historyTitle(e),
+      body: (
+        <>
+          {new Date(e.at).toLocaleString()}
+          {!e.ok && <small className="pc-hero-sub">Not counted: it went over a limit (the daily cap, or a buy without enough coins on another device).</small>}
+        </>
+      ),
+      extra: <span className={`pc-amount ${e.kind === 'earn' ? 'plus' : ''}`}>{e.ok ? (e.kind === 'earn' ? '+' : '−') + e.amount.toLocaleString() : 'not counted'}</span>,
+    }
+  })()
+
+  // ── keys ──
+  const onKey = (e: Pick<ReactKeyboardEvent, 'key' | 'target' | 'ctrlKey' | 'metaKey' | 'altKey' | 'preventDefault'>) => {
+    const target = e.target as HTMLElement
+    if (target.closest('input, textarea, select')) return
+    if (e.ctrlKey || e.metaKey || e.altKey) return
+    const k = e.key
+    if (k === 'ArrowLeft' || k === 'ArrowRight') {
+      e.preventDefault()
+      const dir = k === 'ArrowLeft' ? -1 : 1
+      // in a row of buttons (categories, the hero's buttons, the fitting room): along that row
+      const row = target.closest<HTMLElement>('.pc-cats, .pc-fit, .pc-hero-acts, .pc-shelves')
+      if (row) {
+        const list = Array.from(row.querySelectorAll<HTMLElement>('button:not(:disabled)'))
+        list[list.indexOf(target) + dir]?.focus()
+        return
+      }
+      const n = tiles[at + dir]
+      if (n) select(shelf, n)
+      else focusTile()
+      return
+    }
+    if (k === 'ArrowUp' || k === 'ArrowDown') {
+      e.preventDefault()
+      const i = SHELVES.findIndex((x) => x.id === shelf) + (k === 'ArrowUp' ? -1 : 1)
+      if (i >= 0 && i < SHELVES.length) goShelf(SHELVES[i].id)
+      else focusTile()
+      return
+    }
+    if (shelf === 'wardrobe' && 'qQeE[]'.indexOf(k) >= 0 && k.length === 1) {
+      e.preventDefault()
+      const i = CATS.findIndex((c) => c.id === cat) + ('qQ['.indexOf(k) >= 0 ? -1 : 1)
+      setCategory(CATS[(i + CATS.length) % CATS.length].id)
+      return
+    }
+    if ((k === 'b' || k === 'B') && tile && (tile.k === 'item' || tile.k === 'pal' || tile.k === 'pack') && !owns(tile)) {
+      e.preventDefault()
+      buy(tile)
+      return
+    }
+    if ((k === 'Home' || k === 'End') && target.closest('.pc-strip')) {
+      e.preventDefault()
+      select(shelf, k === 'Home' ? tiles[0] : tiles[tiles.length - 1])
+    }
+  }
+
+  // when nothing has focus (a button that did its job and went away), the keys still drive the console
+  const onKeyRef = useRef(onKey)
+  onKeyRef.current = onKey
+  useEffect(() => {
+    const on = (e: KeyboardEvent) => {
+      const a = document.activeElement
+      if (e.defaultPrevented || (a && a !== document.body)) return
+      onKeyRef.current(e as unknown as ReactKeyboardEvent)
+    }
+    window.addEventListener('keydown', on)
+    return () => window.removeEventListener('keydown', on)
+  }, [])
+
+  // a tile pressed: the first press selects it, a press on the selected one does its main thing (Enter, a 2nd click)
+  const press = (t: Tile, i: number) => {
+    if (i !== at) return select(shelf, t)
+    if (hero.main && !hero.main.off) hero.main.run()
+  }
+
+  // ── tile drawings ──
+  const face = (palette: string, mood: Mood) => <Art html={pochiMarkup({ palette, equipped: {}, mood }, { box: FACE_BOX })} />
+  const tileArt = (t: Tile): ReactNode => {
+    if (t.k === 'item') return <Art html={itemMarkup(t.id)} />
+    if (t.k === 'pal') return face(t.id, 'happy')
+    if (t.k === 'move') return face(look.palette, MOVES.find((m) => m.id === t.id)?.mood ?? 'happy')
+    if (t.k === 'pack') {
+      const p = PACKS.find((x) => x.id === t.id)!
+      return <span className="pc-pack-art">{p.moves.slice(0, 3).map((id) => <span key={id}>{face(look.palette, MOVES.find((m) => m.id === id)?.mood ?? 'happy')}</span>)}</span>
+    }
+    if (t.k === 'home') return <SceneArt home={t.id} dark={dark} />
+    if (t.k === 'mood') return face(look.palette, t.id)
+    if (t.k === 'act') {
+      if (t.id === 'stats') return <Art html={pochiMarkup({ palette: look.palette, equipped: look.equipped, mood: look.mood })} />
+      return <Ico d={t.id === 'hello' ? IC.hand : t.id === 'routine' ? IC.film : IC.pen} size={30} />
+    }
+    if (t.k === 'quest') return <Ico d={QUEST_IC[t.id]} size={28} />
+    if (t.k === 'earn') return <Ico d={IC.fish} size={28} />
+    if (t.k === 'bal') return <TunaCoin size={36} />
+    const e = s.history.find((x) => x.id === t.id)
+    return e && e.kind === 'spend' && e.reason === 'item' ? <Art html={itemMarkup(e.ref)} /> : <TunaCoin size={26} />
+  }
+  const tileName = (t: Tile): string => {
+    if (t.k === 'item') return itemOf(t.id)?.name ?? t.id
+    if (t.k === 'pal') return PALETTES.find((p) => p.id === t.id)?.name ?? t.id
+    if (t.k === 'move') return MOVES.find((m) => m.id === t.id)?.name ?? t.id
+    if (t.k === 'pack') return PACKS.find((p) => p.id === t.id)?.name ?? t.id
+    if (t.k === 'home') return HOMES.find((h) => h.id === t.id)?.name ?? t.id
+    if (t.k === 'mood') return MOOD_LABEL[t.id] ?? t.id
+    if (t.k === 'act') return ({ stats: look.nickname, hello: 'Say hello', routine: 'Routine', rename: 'Rename' } as Record<string, string>)[t.id]
+    if (t.k === 'quest') return s.quests.find((q) => q.quest.id === t.id)?.quest.title ?? t.id
+    if (t.k === 'earn') return 'How coins come in'
+    if (t.k === 'bal') return 'Balance'
+    const e = s.history.find((x) => x.id === t.id)
+    return e ? historyTitle(e) : ''
+  }
+  const badge = (cls: string, d: string) => (
+    <span className={`pc-badge ${cls}`}>
+      <Ico d={d} size={12} />
+    </span>
+  )
+  const lockMark = (
+    <span className="pc-lock">
+      <Ico d={IC.lock} size={13} />
+    </span>
+  )
+  /** the small mark in a tile's corner, its price line, and whether it is dimmed */
+  const tileMark = (t: Tile): { mark?: ReactNode; dim?: boolean; tag?: ReactNode } => {
+    if (t.k === 'item' || t.k === 'pal') {
+      if (wearing(t)) return { mark: badge('on', IC.check) }
+      if (trying(t)) return { mark: badge('try', IC.hanger) }
+      if (owns(t)) return { tag: 'Yours' }
+      if (t.k === 'pal') return { tag: <><TunaCoin size={12} /> {PALETTES.find((p) => p.id === t.id)?.price}</> }
+      const it = itemOf(t.id)!
+      if (it.event) return { dim: true, tag: 'Festival' }
+      if (!itemOpen(it)) return { dim: true, mark: lockMark, tag: <><Star size={10} /> {it.unlockAt}</> }
+      return { tag: <><TunaCoin size={12} /> {it.price}</> }
+    }
+    if (t.k === 'move') {
+      const m = MOVES.find((x) => x.id === t.id)!
+      return moveUnlocked(s, m.id) ? { tag: look.favoriteMove === m.id ? 'Hello move' : undefined } : { dim: true, mark: lockMark, tag: <><Star size={10} /> {m.unlockAt}</> }
+    }
+    if (t.k === 'pack') return owns(t) ? { tag: 'Yours' } : { tag: <><TunaCoin size={12} /> {PACKS.find((p) => p.id === t.id)?.price}</> }
+    if (t.k === 'home') {
+      if (look.home === t.id) return { mark: badge('on', IC.check) }
+      return homeUnlocked(s, t.id) ? {} : { dim: true, mark: lockMark, tag: <><Star size={10} /> {HOMES.find((h) => h.id === t.id)?.unlockAt}</> }
+    }
+    if (t.k === 'mood') return look.mood === t.id ? { mark: badge('on', IC.check) } : {}
+    if (t.k === 'quest') {
+      const q = s.quests.find((x) => x.quest.id === t.id)!
+      if (q.claimed) return { mark: badge('on', IC.check), tag: `+${q.quest.reward}` }
+      if (q.done && t.id !== 'goal') return { mark: <span className="pc-badge ready">!</span>, tag: `Claim +${q.quest.reward}` }
+      return { tag: `+${q.quest.reward}` }
+    }
+    if (t.k === 'hist') {
+      const e = s.history.find((x) => x.id === t.id)
+      if (!e) return {}
+      return { dim: !e.ok, tag: e.ok ? `${e.kind === 'earn' ? '+' : '−'}${e.amount.toLocaleString()}` : 'not counted' }
+    }
+    return {}
+  }
+
+  const ready = s.quests.filter((q) => q.done && !q.claimed && q.quest.id !== 'goal').length
+  const textTiles = shelf === 'quests' || shelf === 'wallet'
+  const catCount = (c: Cat) => {
+    const list = ITEMS.filter((it) => c === 'all' || catOf(it) === c)
+    return `${list.filter((it) => s.owned.has(it.id)).length}/${list.length}`
+  }
 
   return (
-    <div ref={rootRef} className="pc" data-theme={dark ? 'dark' : 'light'}>
+    <div
+      className="pc pc-console"
+      data-theme={dark ? 'dark' : 'light'}
+      onKeyDown={onKey}
+      // a click on the stage or empty space keeps the keys where they were, like a console
+      onMouseDown={(e) => {
+        if (!(e.target as HTMLElement).closest('button, input, a')) e.preventDefault()
+      }}
+    >
+      {/* the stage: the home, Pochi, what she says */}
+      <div className="pc-stage" ref={stageRef}>
+        <svg className={`pc-scene pa-scene pcs-${stageLook.home}${dark ? ' pcs-dark' : ''}`} viewBox={SCENE_VIEWBOX} preserveAspectRatio="xMidYMax slice" aria-hidden dangerouslySetInnerHTML={{ __html: sceneHtml }} />
+        <div className="pc-shade" aria-hidden />
+        <div className="pc-pochi" onClick={() => play(look.favoriteMove, { hello: true })} title={`Say hello to ${look.nickname}`}>
+          <svg className="pc-sprite" viewBox={VIEWBOX} role="img" aria-label={look.nickname} dangerouslySetInnerHTML={{ __html: spriteHtml }} />
+          <div className="pc-fx" aria-hidden>
+            {fx.map((p) => (
+              <i key={p.key} className={`fx-${p.kind}`} style={{ left: `${p.x}%`, top: `${p.y}%`, ["--s" as string]: p.size, ["--dx" as string]: p.dx, ["--dy" as string]: p.dy, ["--rot" as string]: p.rot, ["--wait" as string]: `${p.wait}ms`, ["--life" as string]: `${p.life}ms` } as CSSProperties} dangerouslySetInnerHTML={{ __html: p.html }} />
+            ))}
+          </div>
+          {line && (
+            <p key={line.n} className="pc-speech">
+              {line.text}
+            </p>
+          )}
+        </div>
+      </div>
+
       <header className="pc-top">
         {onClose && (
-          <button type="button" className="pc-icon" onClick={onClose} aria-label="Close Pochi Club" title="Back (Esc)">
-            <Icon name="back" size={18} />
+          <button type="button" className="pc-round" onClick={onClose} aria-label="Close Pochi Club" title="Back (Esc)">
+            <Ico d={IC.back} />
           </button>
         )}
-        <div className="pc-brand">
-          <span className="pc-avatar" aria-hidden>
-            <Face look={look} mood="happy" />
-          </span>
-          <div>
-            <b>Pochi Club</b>
-            <small>
-              {s.rank.name} · {s.bondTier.name}
-            </small>
-          </div>
-        </div>
-        <nav className="pc-tabs" role="tablist" aria-label="Pochi Club">
-          {(
-            [
-              ['buddy', 'Buddy'],
-              ['shop', 'Shop'],
-              ['moves', 'Moves'],
-              ['quests', 'Quests'],
-              ['wallet', 'Wallet'],
-            ] as [Tab, string][]
-          ).map(([id, label]) => (
-            <button key={id} type="button" role="tab" aria-selected={tab === id} className={tab === id ? 'on' : ''} onClick={() => setTab(id)}>
-              <Icon name={id} size={16} />
-              <span>{label}</span>
-              {id === 'quests' && questsReady > 0 && <em className="pc-dot">{questsReady}</em>}
+        <span className="pc-brand">
+          {face(look.palette, 'happy')}
+          Pochi Club
+        </span>
+        <nav className="pc-shelves" aria-label="Shelves">
+          {SHELVES.map((x) => (
+            <button key={x.id} type="button" tabIndex={-1} className={x.id === shelf ? 'on' : ''} aria-current={x.id === shelf} onClick={() => goShelf(x.id)}>
+              {x.label}
+              {x.id === 'quests' && ready > 0 && <em>{ready}</em>}
             </button>
           ))}
         </nav>
-        <div ref={walletRef} className="pc-wallet" title="Tuna Coins: earned by studying" onAnimationEnd={(e) => e.target === e.currentTarget && e.currentTarget.classList.remove('is-hit')}>
-          <Coin n={coins} big />
-          {burst && (
-            <span key={`burst-${burst.n}`} className="pc-burst" aria-hidden>
-              +{burst.amount}
-            </span>
-          )}
-        </div>
+        <span className="pc-purse">
+          <span className="pc-coins" title="Tuna Coins, earned by studying">
+            <TunaCoin size={20} />
+            <b>{coins.toLocaleString()}</b>
+            {burst && (
+              <i key={burst.n} className={`pc-burst ${burst.minus ? 'minus' : ''}`} aria-hidden>
+                {burst.text}
+              </i>
+            )}
+          </span>
+          <span className="pc-stars" title="Study stars: every coin you have earned by studying. They open new things.">
+            <Star size={15} />
+            <b>{s.stars.toLocaleString()}</b>
+          </span>
+          <small>{s.rank.name}</small>
+        </span>
       </header>
 
-      {banner}
-      {!snap.online && <div className="pc-strip">You are offline: everything works, and it syncs when you are back online.</div>}
+      {banner && <div className="pc-banner">{banner}</div>}
+      {!snap.online && <div className="pc-note">You are offline: everything works, and it syncs when you are back online.</div>}
       {snap.error && snap.online && (
-        <div className="pc-strip warn" title={snap.error}>
+        <div className="pc-note warn" title={snap.error}>
           Not synced with your account yet. Your coins and closet are safe on this device and sync later.
         </div>
       )}
 
-      <main className="pc-body">
-        {tab === 'buddy' && (
-          <div className="pc-buddy pc-in">
-            <Stage look={look} home={look.home} move={move} follow onBoop={boop} className="big" label={`${look.nickname}'s home`}>
-              <div className="pc-stage-tag">
-                <b>{look.nickname}</b>
-                <span>
-                  {MOOD_LABEL[look.mood] ?? 'Happy'} · {HOMES.find((h) => h.id === look.home)?.name}
-                </span>
-              </div>
-              {line && (
-                <p key={`line-${line.n}`} className="pc-speech">
-                  {line.text}
-                </p>
-              )}
-              <div className="pc-stage-bar">
-                <button type="button" className="pc-btn primary" onClick={() => play(MOVES.find((m) => m.id === look.favoriteMove), { hello: true })}>
-                  <Icon name="hand" size={17} /> Say hello
-                </button>
-                <button type="button" className="pc-btn glass" onClick={() => void playRoutine()}>
-                  <Icon name="film" size={16} /> Play routine
-                </button>
-              </div>
-            </Stage>
+      <section className="pc-hero" key={`${shelf}|${tk}`}>
+        <div className="pc-kicker">{hero.kicker}</div>
+        <h2>{hero.title}</h2>
+        {renaming && tile && tile.k === 'act' && tile.id === 'rename' ? (
+          <input
+            className="pc-name"
+            autoFocus
+            defaultValue={look.nickname}
+            maxLength={18}
+            aria-label="Pochi's name"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const v = (e.target as HTMLInputElement).value.trim()
+                if (v && v !== look.nickname) club.setLook({ nickname: v })
+                setRenaming(false)
+                wantFocus.current = true
+              } else if (e.key === 'Escape') {
+                e.stopPropagation()
+                e.nativeEvent.stopImmediatePropagation()
+                setRenaming(false)
+                wantFocus.current = true
+              }
+            }}
+            onBlur={() => setRenaming(false)}
+          />
+        ) : (
+          <div className="pc-body">{hero.body}</div>
+        )}
+        <div className="pc-hero-acts">
+          {hero.main && (
+            <button type="button" className="pc-btn pri" disabled={hero.main.off} onClick={hero.main.run}>
+              {hero.main.label}
+            </button>
+          )}
+          {hero.second && (
+            <button type="button" className="pc-btn" disabled={hero.second.off} onClick={hero.second.run}>
+              {hero.second.label}
+              {hero.second.key && !hero.second.off && <kbd>{hero.second.key}</kbd>}
+            </button>
+          )}
+          {hero.extra}
+        </div>
+      </section>
 
-            <aside className="pc-side">
-              <div className="pc-card">
-                <label className="pc-label" htmlFor="pc-name">
-                  Name
-                </label>
-                <input id="pc-name" className="pc-input" defaultValue={look.nickname} maxLength={18} onBlur={(e) => e.target.value.trim() && e.target.value.trim() !== look.nickname && club.setLook({ nickname: e.target.value })} onKeyDown={(e) => e.key === 'Enter' && (e.target as HTMLInputElement).blur()} />
-                <p className="pc-label">Shape</p>
-                <div className="pc-forms" role="radiogroup" aria-label="Pochi's shape">
-                  {(
-                    [
-                      ['blob', 'Blob', 'Pochi as always'],
-                      ['cat', 'Cat', 'Ears, whiskers, a tail'],
-                    ] as [PochiForm, string, string][]
-                  ).map(([f, name, note]) => (
-                    <button key={f} type="button" role="radio" aria-checked={(look.form ?? 'blob') === f} className={`pc-form ${(look.form ?? 'blob') === f ? 'on' : ''}`} onClick={() => club.setLook({ form: f })}>
-                      <Face look={{ ...look, form: f }} mood="happy" />
-                      <span>
-                        <b>{name}</b>
-                        <small>{note}</small>
-                      </span>
-                    </button>
-                  ))}
-                </div>
-                <p className="pc-label">Mood</p>
-                <div className="pc-moods">
-                  {(MOODS as Mood[]).map((m) => (
-                    <button key={m} type="button" className={`pc-mood ${look.mood === m ? 'on' : ''}`} onClick={() => club.setLook({ mood: m })} aria-pressed={look.mood === m}>
-                      <Face look={look} mood={m} />
-                      <span>{MOOD_LABEL[m] ?? m}</span>
-                    </button>
-                  ))}
-                </div>
-                <p className="pc-label">Home</p>
-                <div className="pc-homes">
-                  {HOMES.map((h) => {
-                    const ok = homeUnlocked(s, h.id)
-                    return (
-                      <button key={h.id} type="button" className={`pc-home ${look.home === h.id ? 'on' : ''}`} disabled={!ok} title={ok ? h.name : `Unlocks at ${h.unlockAt} study stars`} onClick={() => club.setLook({ home: h.id })}>
-                        <HomeThumb home={h.id} />
-                        <span>
-                          {!ok && <Icon name="lock" size={11} />} {h.name}
-                        </span>
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="pc-card">
-                <div className="pc-row">
-                  <b>Friendship</b>
-                  <span>{s.bondTier.name}</span>
-                </div>
-                <Meter value={s.bond - s.bondTier.from} max={(s.bondTier.next ?? s.bond + 1) - s.bondTier.from} tone="pink" />
-                <p className="pc-small">
-                  Bond {s.bond}
-                  {s.bondTier.next !== null ? ` · ${s.bondTier.next - s.bond} to the next chapter` : ' · the very last chapter'}. It grows each day you study and say hello, and it never goes down.
-                </p>
-                <div className="pc-row" style={{ marginTop: 14 }}>
-                  <b>Study stars</b>
-                  <span>{s.rank.name}</span>
-                </div>
-                <Meter value={s.stars - s.rank.at} max={(s.rank.next ?? s.stars + 1) - s.rank.at} />
-                <p className="pc-small">
-                  {s.stars} stars{s.rank.next !== null ? ` · ${s.rank.next - s.stars} to the next rank` : ''}. Stars come from studying and unlock moves, homes and rare accessories.
-                </p>
-                {stats && (
-                  <>
-                    <div className="pc-row" style={{ marginTop: 14 }}>
-                      <b>{stats.streak}-day streak</b>
-                      <span>{goalPct}% of today</span>
-                    </div>
-                    <Meter value={stats.todayXp} max={stats.dailyGoal} tone="warm" />
-                  </>
-                )}
-              </div>
-
-              <div className="pc-card">
-                <p className="pc-label">Memories</p>
-                {s.moments.length === 0 ? (
-                  <p className="pc-small">Your first memories together start with your first lesson.</p>
-                ) : (
-                  <ul className="pc-memories">
-                    {s.moments.slice(0, 6).map((m, i) => (
-                      <li key={i} style={{ animationDelay: `${i * 50}ms` }}>
-                        <span className="pc-memory-dot" aria-hidden>
-                          {m.icon}
-                        </span>
-                        <span>{m.title}</span>
-                        <small>{new Date(m.at).toLocaleDateString()}</small>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </aside>
+      <div className="pc-dock">
+        {shelf === 'wardrobe' && (
+          <div className="pc-cats" role="tablist" aria-label="Wardrobe categories">
+            <kbd className="pc-shoulder" aria-hidden>
+              Q
+            </kbd>
+            {CATS.map((c) => (
+              <button key={c.id} type="button" role="tab" tabIndex={-1} aria-selected={cat === c.id} className={cat === c.id ? 'on' : ''} onClick={() => setCategory(c.id)}>
+                {c.label}
+                <span>{catCount(c.id)}</span>
+              </button>
+            ))}
+            <kbd className="pc-shoulder" aria-hidden>
+              E
+            </kbd>
+            <button type="button" tabIndex={-1} className="pc-sort" onClick={() => setSort(SORTS[(SORTS.findIndex((x) => x.id === sort) + 1) % SORTS.length].id)} title="Change the order">
+              {SORTS.find((x) => x.id === sort)?.label}
+            </button>
           </div>
         )}
 
-        {tab === 'shop' && <Shop s={s} look={look} club={club} buy={buy} />}
-
-        {tab === 'moves' && <Moves s={s} look={look} club={club} play={play} move={move} buy={buy} />}
-
-        {tab === 'quests' && (
-          <div className="pc-grid-2 pc-in">
-            <section className="pc-card">
-              <header className="pc-quest-head">
-                <span className={`pc-avatar lg ${questsReady ? 'is-eager' : ''}`} aria-hidden>
-                  <Face look={look} mood={questsReady ? 'excited' : questsDone === s.quests.length ? 'proud' : 'happy'} />
-                </span>
-                <div>
-                  <h3 className="pc-h">Today’s quests</h3>
-                  <p className="pc-small" style={{ marginTop: 0 }}>
-                    {questsDone} of {s.quests.length} done{questsReady ? ` · ${questsReady} ready to claim` : ''}
-                  </p>
-                </div>
-                <Ring value={questsDone} max={s.quests.length} />
-              </header>
-              <ul className="pc-quests">
-                {s.quests.map(({ quest, done, claimed }, i) => (
-                  <li key={quest.id} className={claimed ? 'is-claimed' : done ? 'is-done' : ''} style={{ animationDelay: `${i * 60}ms` }}>
-                    <span className="pc-quest-icon" aria-hidden>
-                      {claimed ? (
-                        <svg viewBox="0 0 24 24" className="pc-tick">
-                          <path d="M5 12.5l4.2 4.2L19 7" />
-                        </svg>
-                      ) : (
-                        quest.icon
-                      )}
+        <div className={`pc-strip ${textTiles ? 'is-text' : ''}`} ref={stripRef} role="listbox" aria-label={SHELVES.find((x) => x.id === shelf)?.label} key={shelf + cat + sort}>
+          {tiles.map((t, i) => {
+            const m = tileMark(t)
+            const isSel = i === at
+            const words = t.k === 'quest' || t.k === 'earn' || t.k === 'hist' || t.k === 'bal'
+            return (
+              <div key={tileKey(t)} className={`pc-slot ${words ? 'is-words' : ''}`} style={{ animationDelay: `${Math.min(i, 10) * 22}ms` }}>
+                {t.k === 'item' && t.group && <span className="pc-group">{t.group}</span>}
+                <button type="button" role="option" aria-selected={isSel} aria-label={tileName(t)} tabIndex={isSel ? 0 : -1} className={`pc-tile k-${t.k} ${isSel ? 'is-sel' : ''} ${m.dim ? 'is-dim' : ''}`} onClick={() => press(t, i)} onFocus={() => i !== at && select(shelf, t, false)}>
+                  <span className="pc-tile-art">{tileArt(t)}</span>
+                  {m.mark}
+                  {words && (
+                    <span className="pc-tile-text">
+                      <b>{tileName(t)}</b>
+                      {t.k === 'hist' && <small>{when(s.history.find((x) => x.id === t.id)?.at ?? '')}</small>}
                     </span>
-                    <div>
-                      <b>{quest.title}</b>
-                      <small>{quest.detail}</small>
-                    </div>
-                    {claimed ? (
-                      <span className="pc-tag good">
-                        <TunaCoin size={13} /> +{quest.reward}
-                      </span>
-                    ) : done && quest.id !== 'goal' ? (
-                      <button type="button" className="pc-btn primary sm pc-claim" onClick={(e) => claim(quest.id as 'hello' | 'lesson' | 'style', quest.reward, e.currentTarget)}>
-                        Claim <TunaCoin size={14} /> {quest.reward}
-                      </button>
-                    ) : (
-                      <span className="pc-tag">
-                        <TunaCoin size={13} /> {quest.reward}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-              {host === 'web' && <p className="pc-small">Lessons and the daily goal count when you study in Anvira Notes. They show up here the next time it syncs.</p>}
-            </section>
-            <section className="pc-card">
-              <h3 className="pc-h">How Tuna Coins come in</h3>
-              <ul className="pc-earn">
-                <li>
-                  <span>Finish a lesson, quiz or review</span>
-                  <b>1 per {Math.round(1 / COINS_PER_XP)} XP</b>
-                </li>
-                <li>
-                  <span>Reach your daily goal</span>
-                  <b>+{GOAL_BONUS}</b>
-                </li>
-                <li>
-                  <span>Finish a mock exam</span>
-                  <b>+{EXAM_COINS}</b>
-                </li>
-                {STREAK_BONUS.map(([d, c]) => (
-                  <li key={d}>
-                    <span>{d}-day streak</span>
-                    <b>+{c}</b>
-                  </li>
-                ))}
-                <li>
-                  <span>Welcome gift</span>
-                  <b>+{WELCOME_COINS}</b>
-                </li>
-              </ul>
-              <p className="pc-small">Coins can only be earned by studying, never bought. Study five days in all and Pochi gets the Moon Jelly Crown.</p>
-            </section>
+                  )}
+                  {m.tag && <span className="pc-tag">{m.tag}</span>}
+                </button>
+                {!words && <span className="pc-tile-name">{tileName(t)}</span>}
+              </div>
+            )
+          })}
+        </div>
+
+        {fitting.rows.length > 0 && (
+          <div className="pc-fit" aria-label="Trying on">
+            <span className="pc-fit-title">
+              <Ico d={IC.hanger} size={16} /> Trying on
+            </span>
+            <span className="pc-fit-list">
+              {fitting.rows.map((r) => (
+                <button key={tileKey(r.t)} type="button" className={`pc-fit-chip ${r.can ? '' : 'is-off'}`} onClick={() => tryOn(r.t)} title={`Take off ${r.name}`}>
+                  <Art html={r.art} />
+                  <span>
+                    {r.name}
+                    <small>{r.why ? r.why : r.price ? <>{coin(r.price)}</> : 'Yours'}</small>
+                  </span>
+                  <Ico d={IC.x} size={12} />
+                </button>
+              ))}
+            </span>
+            <span className="pc-fit-acts">
+              <button
+                type="button"
+                className="pc-btn ghost"
+                onClick={() => {
+                  setFit(NO_FIT)
+                  setConfirmAll(false)
+                  wantFocus.current = true
+                }}
+              >
+                Clear
+              </button>
+              <button type="button" className={`pc-btn pri ${confirmAll ? 'is-confirm' : ''}`} disabled={!fitting.buyable} onClick={keepLook} title={fitting.blocked ? `${fitting.blocked} of them can't be bought yet` : undefined}>
+                {confirmAll ? (
+                  <>Spend {coin(fitting.total)}?</>
+                ) : fitting.total ? (
+                  <>
+                    {fitting.buyable > 1 ? `Buy all ${fitting.buyable}` : 'Buy it'} {coin(fitting.total)}
+                  </>
+                ) : (
+                  'Wear these'
+                )}
+              </button>
+            </span>
           </div>
         )}
 
-        {tab === 'wallet' && (
-          <div className="pc-grid-2 pc-in">
-            <section className="pc-card pc-vault">
-              <div className="pc-vault-coin" aria-hidden>
-                <TunaCoin size={64} />
-              </div>
-              <small>Balance</small>
-              <strong>{coins.toLocaleString()}</strong>
-              <span className="pc-small" style={{ marginTop: 0 }}>
-                Tuna Coins
-              </span>
-              <div className="pc-stats">
-                <div>
-                  <small>Earned ever</small>
-                  <Coin n={s.earned} />
-                </div>
-                <div>
-                  <small>Today</small>
-                  <Coin n={s.todayEarned} />
-                </div>
-                <div>
-                  <small>Study days</small>
-                  <b>{s.studyDays}</b>
-                </div>
-              </div>
-              <p className="pc-small">
-                {snap.pending ? `${snap.pending} change${snap.pending === 1 ? '' : 's'} waiting to sync. ` : ''}
-                {snap.lastSync ? `Last synced ${new Date(snap.lastSync).toLocaleString()}.` : 'Kept on this device until it can sync.'}{' '}
-                <button type="button" className={`pc-link ${snap.syncing ? 'is-busy' : ''}`} onClick={() => void club.sync()} disabled={snap.syncing}>
-                  <Icon name="sync" size={13} /> {snap.syncing ? 'Syncing…' : 'Sync now'}
-                </button>
-              </p>
-            </section>
-            <section className="pc-card">
-              <h3 className="pc-h">History</h3>
-              <ul className="pc-history">
-                {s.history
-                  .filter((e) => e.kind !== 'care')
-                  .slice(0, 40)
-                  .map((e, i) => (
-                    <li key={e.id} className={e.ok ? '' : 'is-void'} style={{ animationDelay: `${Math.min(i, 12) * 30}ms` }}>
-                      <span className={`pc-history-dot ${e.kind}`} aria-hidden />
-                      <span>
-                        {historyTitle(e)}
-                        <small>{new Date(e.at).toLocaleString()}</small>
-                      </span>
-                      <b className={e.kind === 'earn' ? 'plus' : 'minus'}>{!e.ok ? 'not counted' : e.amount ? (e.kind === 'earn' ? '+' : '−') + e.amount.toLocaleString() : 'free'}</b>
-                    </li>
-                  ))}
-                {s.history.length === 0 && <li className="pc-small">Nothing yet: finish a lesson and the first coins come in.</li>}
-              </ul>
-            </section>
-          </div>
-        )}
-      </main>
+        <div className="pc-hints" aria-hidden>
+          <span>
+            <kbd>←</kbd>
+            <kbd>→</kbd> move
+          </span>
+          <span>
+            <kbd>↑</kbd>
+            <kbd>↓</kbd> shelf
+          </span>
+          {hero.enter && (
+            <span>
+              <kbd>Enter</kbd> {hero.enter}
+            </span>
+          )}
+          {hero.second && hero.second.key === 'B' && !hero.second.off && (
+            <span>
+              <kbd>B</kbd> buy
+            </span>
+          )}
+          {shelf === 'wardrobe' && (
+            <span>
+              <kbd>Q</kbd>
+              <kbd>E</kbd> category
+            </span>
+          )}
+          {onClose && (
+            <span>
+              <kbd>Esc</kbd> back
+            </span>
+          )}
+        </div>
+      </div>
 
       {toast && (
-        <div key={`toast-${toast.n}`} className={`pc-toast ${toast.tone}`} role="status">
-          {toast.tone === 'good' && <TunaCoin size={16} />}
+        <div key={`pc-toast-${toast.n}`} className="pc-toast" role="status">
           {toast.text}
         </div>
       )}
-      {confetti > 0 && <Confetti key={`confetti-${confetti}`} />}
-    </div>
-  )
-}
-
-function Ring({ value, max }: { value: number; max: number }) {
-  const r = 15
-  const c = 2 * Math.PI * r
-  return (
-    <svg className="pc-ring" width="40" height="40" viewBox="0 0 40 40" role="img" aria-label={`${value} of ${max}`}>
-      <circle cx="20" cy="20" r={r} fill="none" strokeWidth="4" className="track" />
-      <circle cx="20" cy="20" r={r} fill="none" strokeWidth="4" strokeLinecap="round" className="fill" strokeDasharray={c} strokeDashoffset={c * (1 - value / Math.max(1, max))} transform="rotate(-90 20 20)" />
-    </svg>
-  )
-}
-
-function HomeThumb({ home }: { home: string }) {
-  const html = useMemo(() => sceneMarkup(home, uid(`scene|${home}`)), [home])
-  return <svg className={`pc-home-thumb pcs-${home}`} viewBox="40 40 320 240" preserveAspectRatio="xMidYMid slice" aria-hidden dangerouslySetInnerHTML={{ __html: `<g class="pa-scene">${html}</g>` }} />
-}
-
-function historyTitle(e: { kind: string; reason: string; ref: string; note?: string }): string {
-  if (e.note) return e.note
-  if (e.kind === 'spend') {
-    const name = e.reason === 'item' ? ITEMS.find((i) => i.id === e.ref)?.name : e.reason === 'palette' ? PALETTES.find((p) => p.id === e.ref)?.name : PACKS.find((p) => p.id === e.ref)?.name
-    return `Bought ${name ?? e.ref}`
-  }
-  return { welcome: 'Welcome gift', study: 'Studied', goal: 'Daily goal reached', streak: `${e.ref.split(':')[1] ?? ''}-day streak`, exam: 'Mock exam finished', quest: 'Quest claimed', gift: 'A gift from Anvira' }[e.reason] ?? e.reason
-}
-
-function Confetti() {
-  const bits = useMemo(
-    () =>
-      Array.from({ length: 30 }, (_, i) => ({
-        i,
-        x: 8 + Math.random() * 84,
-        d: Math.random() * 0.35,
-        dx: (Math.random() - 0.5) * 160,
-        r: 360 + Math.random() * 540,
-        k: i % 3,
-        c: ['#b9a9ff', '#f4b9a8', '#a5dbc6', '#f2d278', '#e9a7cd', '#9dceee'][i % 6],
-      })),
-    [],
-  )
-  if (calm()) return null
-  return (
-    <div className="pc-confetti" aria-hidden>
-      {bits.map((b) => (
-        <i key={b.i} className={`k${b.k}`} style={{ left: `${b.x}%`, animationDelay: `${b.d}s`, background: b.c, '--dx': `${b.dx}px`, '--r': `${b.r}deg` } as CSSProperties} />
-      ))}
-    </div>
-  )
-}
-
-// ── Shop ────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-function Shop({ s, look, club, buy }: { s: ClubState; look: Look; club: Club; buy: Buy }) {
-  const [shelf, setShelf] = useState<ShopShelf>('all')
-  const [q, setQ] = useState('')
-  const [sort, setSort] = useState<'price' | 'rarity' | 'name'>('price')
-  // what a click picked to try on, and what a mouse is resting on: hover previews, a click keeps it on
-  const [picked, setPicked] = useState<string | undefined>()
-  const [hovered, setHovered] = useState<string | undefined>()
-  const trying = hovered ?? picked
-  const [fresh, setFresh] = useState<string | null>(null)
-  const rarity = ['Common', 'Rare', 'Epic', 'Legendary', 'Festival']
-  const items = ITEMS.filter((i) => (shelf === 'all' || i.slot === shelf) && (!q || `${i.name} ${i.note} ${i.rarity}`.toLowerCase().includes(q.toLowerCase()))).sort((a, b) =>
-    sort === 'price' ? a.price - b.price : sort === 'rarity' ? rarity.indexOf(a.rarity) - rarity.indexOf(b.rarity) : a.name.localeCompare(b.name),
-  )
-  const wear = (it: Item) => {
-    const on = look.equipped[it.slot] === it.id
-    club.setLook({ equipped: { ...look.equipped, [it.slot]: on ? undefined : it.id } })
-  }
-  const get: Buy = (what, id, name, from) => {
-    const ok = buy(what, id, name, from)
-    if (ok) {
-      setFresh(id)
-      setPicked(undefined)
-      setHovered(undefined)
-    }
-    return ok
-  }
-  const tried = trying ? ITEMS.find((i) => i.id === trying) : null
-  return (
-    <div className="pc-shop pc-in">
-      <aside className="pc-mirror">
-        <Stage look={look} home={look.home} preview={trying} className="mirror" label="Mirror">
-          <div className={`pc-mirror-note ${tried ? 'on' : ''}`}>{tried ? `Trying on: ${tried.name}` : 'Tap an item to try it on'}</div>
-        </Stage>
-        <div className="pc-slots" aria-label="Wearing">
-          {SLOTS.map((slot) => {
-            const id = look.equipped[slot]
-            const it = id ? ITEMS.find((i) => i.id === id) : null
-            return (
-              <button key={slot} type="button" className={`pc-slot ${it ? 'on' : ''}`} disabled={!it} onClick={() => club.setLook({ equipped: { ...look.equipped, [slot]: undefined } })} title={it ? `Take off ${it.name}` : `${SLOT_LABEL[slot]}: nothing on`}>
-                {it ? <svg viewBox={VIEWBOX} aria-hidden dangerouslySetInnerHTML={{ __html: itemMarkup(it.id, look.form) }} /> : <i />}
-                <span>{SLOT_LABEL[slot]}</span>
-                {it && (
-                  <em aria-hidden>
-                    <Icon name="x" size={10} />
-                  </em>
-                )}
-              </button>
-            )
-          })}
-        </div>
-      </aside>
-      <section>
-        <div className="pc-shop-bar">
-          <div className="pc-shelves" role="tablist" aria-label="Shelves">
-            {(['all', 'Head', 'Face', 'Outfit', 'Back', 'Aura', 'colors', 'homes', 'packs'] as ShopShelf[]).map((sh) => (
-              <button key={sh} type="button" role="tab" aria-selected={shelf === sh} className={`pc-chip ${shelf === sh ? 'on' : ''}`} onClick={() => setShelf(sh)}>
-                {sh === 'all' ? 'Everything' : sh === 'colors' ? 'Colours' : sh === 'homes' ? 'Homes' : sh === 'packs' ? 'Animation packs' : SLOT_LABEL[sh]}
-              </button>
-            ))}
-          </div>
-          {!['colors', 'homes', 'packs'].includes(shelf) && (
-            <div className="pc-shop-tools">
-              <label className="pc-search">
-                <Icon name="search" size={15} />
-                <input placeholder="Search the shop" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search the shop" />
-              </label>
-              <select className="pc-input" value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} aria-label="Sort">
-                <option value="price">Price</option>
-                <option value="rarity">Rarity</option>
-                <option value="name">Name</option>
-              </select>
-            </div>
-          )}
-        </div>
-
-        {!['colors', 'homes', 'packs'].includes(shelf) && (
-          <div className="pc-cards" key={`shelf-${shelf}`}>
-            {items.map((it, i) => {
-              const own = s.owned.has(it.id)
-              const locked = !own && s.stars < it.unlockAt
-              const worn = look.equipped[it.slot] === it.id
-              return (
-                <article
-                  key={it.id}
-                  className={`pc-item r-${it.rarity.toLowerCase()} ${own ? 'is-own' : ''} ${locked ? 'is-locked' : ''} ${trying === it.id ? 'is-trying' : ''} ${fresh === it.id ? 'is-fresh' : ''}`}
-                  style={{ animationDelay: `${Math.min(i, 14) * 35}ms` }}
-                  onPointerEnter={(e) => e.pointerType === 'mouse' && setHovered(it.id)}
-                  onPointerLeave={(e) => e.pointerType === 'mouse' && setHovered(undefined)}
-                >
-                  <button type="button" className="pc-item-art" onClick={() => {
-                      setHovered(undefined)
-                      setPicked(picked === it.id ? undefined : it.id)
-                    }} aria-label={`Try on ${it.name}`}>
-                    <svg viewBox={VIEWBOX} aria-hidden dangerouslySetInnerHTML={{ __html: itemMarkup(it.id, look.form) }} />
-                    <span className="pc-rarity">{it.rarity}</span>
-                    {own && (
-                      <span className={`pc-owned ${worn ? 'worn' : ''}`} title={worn ? 'Wearing' : 'Yours'}>
-                        <Icon name="check" size={11} />
-                      </span>
-                    )}
-                  </button>
-                  <div className="pc-item-meta">
-                    <b>{it.name}</b>
-                    <small>{it.note}</small>
-                  </div>
-                  <div className="pc-item-foot">
-                    {it.event ? (
-                      own ? (
-                        <button type="button" className={`pc-btn sm ${worn ? '' : 'primary'}`} onClick={() => wear(it)}>
-                          {worn ? 'Take off' : 'Wear'}
-                        </button>
-                      ) : (
-                        <span className="pc-tag">Study 5 days to earn it</span>
-                      )
-                    ) : own ? (
-                      <>
-                        <span className="pc-tag good">{worn ? 'Wearing' : 'Yours'}</span>
-                        <button type="button" className={`pc-btn sm ${worn ? '' : 'primary'}`} onClick={() => wear(it)}>
-                          {worn ? 'Take off' : 'Wear'}
-                        </button>
-                      </>
-                    ) : locked ? (
-                      <span className="pc-lock">
-                        <span>
-                          <Icon name="lock" size={12} /> {it.unlockAt} study stars
-                        </span>
-                        <Meter value={s.stars} max={it.unlockAt} />
-                      </span>
-                    ) : (
-                      <>
-                        <span className="pc-price">
-                          <TunaCoin size={15} /> {it.price}
-                        </span>
-                        <button type="button" className="pc-btn primary sm" disabled={s.coins < it.price} onClick={(e) => get('item', it.id, it.name, e.currentTarget)}>
-                          Buy
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </article>
-              )
-            })}
-            {items.length === 0 && <p className="pc-small">Nothing in the shop matches “{q}”.</p>}
-          </div>
-        )}
-
-        {shelf === 'colors' && (
-          <div className="pc-cards" key="shelf-colors">
-            {PALETTES.map((p, i) => {
-              const own = s.palettes.has(p.id)
-              const on = look.palette === p.id
-              return (
-                <article key={p.id} className={`pc-item ${own ? 'is-own' : ''} ${fresh === p.id ? 'is-fresh' : ''}`} style={{ animationDelay: `${i * 35}ms` }}>
-                  <div className="pc-item-art" style={{ '--swatch': p.color } as CSSProperties}>
-                    <Face look={{ ...look, palette: p.id }} mood="happy" />
-                    {own && (
-                      <span className={`pc-owned ${on ? 'worn' : ''}`}>
-                        <Icon name="check" size={11} />
-                      </span>
-                    )}
-                  </div>
-                  <div className="pc-item-meta">
-                    <b>
-                      <span className="pc-swatch" style={{ background: p.color }} /> {p.name}
-                    </b>
-                  </div>
-                  <div className="pc-item-foot">
-                    {own ? (
-                      <button type="button" className={`pc-btn sm ${on ? '' : 'primary'}`} disabled={on} onClick={() => club.setLook({ palette: p.id })}>
-                        {on ? 'Wearing' : 'Wear'}
-                      </button>
-                    ) : (
-                      <>
-                        <span className="pc-price">
-                          <TunaCoin size={15} /> {p.price}
-                        </span>
-                        <button type="button" className="pc-btn primary sm" disabled={s.coins < p.price} onClick={(e) => get('palette', p.id, p.name, e.currentTarget)}>
-                          Buy
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </article>
-              )
-            })}
-          </div>
-        )}
-
-        {shelf === 'homes' && (
-          <div className="pc-cards wide" key="shelf-homes">
-            {HOMES.map((h, i) => {
-              const ok = homeUnlocked(s, h.id)
-              return (
-                <article key={h.id} className={`pc-item ${ok ? 'is-own' : 'is-locked'}`} style={{ animationDelay: `${i * 40}ms` }}>
-                  <div className="pc-item-art scene">
-                    <HomeThumb home={h.id} />
-                    {!ok && (
-                      <span className="pc-home-lock">
-                        <Icon name="lock" size={18} />
-                      </span>
-                    )}
-                  </div>
-                  <div className="pc-item-meta">
-                    <b>{h.name}</b>
-                    <small>{ok ? (s.stars >= h.unlockAt ? 'Unlocked by studying' : 'A gift from Anvira') : `Unlocks at ${h.unlockAt} study stars`}</small>
-                  </div>
-                  <div className="pc-item-foot">
-                    {ok ? (
-                      <button type="button" className={`pc-btn sm ${look.home === h.id ? '' : 'primary'}`} disabled={look.home === h.id} onClick={() => club.setLook({ home: h.id })}>
-                        {look.home === h.id ? 'Home now' : 'Move in'}
-                      </button>
-                    ) : (
-                      <span className="pc-lock">
-                        <Meter value={s.stars} max={h.unlockAt} />
-                      </span>
-                    )}
-                  </div>
-                </article>
-              )
-            })}
-          </div>
-        )}
-
-        {shelf === 'packs' && <Packs s={s} buy={get} />}
-      </section>
-    </div>
-  )
-}
-
-function Packs({ s, buy }: { s: ClubState; buy: Buy }) {
-  return (
-    <div className="pc-packs">
-      {PACKS.map((p, i) => {
-        const own = s.packs.has(p.id)
-        return (
-          <article key={p.id} className={`pc-pack ${own ? 'is-own' : ''}`} style={{ animationDelay: `${i * 50}ms` }}>
-            <header>
-              <span className="pc-pack-icon" aria-hidden>
-                {p.icon}
-              </span>
-              <div>
-                <small>{p.task}</small>
-                <b>{p.name}</b>
-              </div>
-            </header>
-            <p className="pc-small">{p.description}</p>
-            <ul>
-              {p.moves.map((id) => {
-                const m = MOVES.find((x) => x.id === id)!
-                return (
-                  <li key={id}>
-                    <span aria-hidden>{m.icon}</span> {m.name}
-                  </li>
-                )
-              })}
-            </ul>
-            {own ? (
-              <span className="pc-tag good">
-                <Icon name="check" size={12} /> In your move book
-              </span>
-            ) : (
-              <button type="button" className="pc-btn primary" disabled={s.coins < p.price} onClick={(e) => buy('pack', p.id, p.name, e.currentTarget)}>
-                Get all 5 moves · <TunaCoin size={15} /> {p.price}
-              </button>
-            )}
-          </article>
-        )
-      })}
-    </div>
-  )
-}
-
-// ── Moves ───────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-function Moves({ s, look, club, play, move, buy }: { s: ClubState; look: Look; club: Club; play: (m: Move | undefined) => void; move: Playing; buy: Buy }) {
-  const unlocked = MOVES.filter((m) => moveUnlocked(s, m.id))
-  return (
-    <div className="pc-movebook pc-in">
-      <aside className="pc-mirror">
-        <Stage look={look} home={look.home} move={move} className="mirror" label="Stage" />
-        <div className="pc-card">
-          <p className="pc-label">Routine (plays two moves in a row)</p>
-          {[0, 1].map((k) => (
-            <select
-              key={k}
-              className="pc-input"
-              value={look.routine[k]}
-              onChange={(e) => club.setLook({ routine: (k === 0 ? [e.target.value, look.routine[1]] : [look.routine[0], e.target.value]) as [string, string] })}
-              aria-label={`Routine move ${k + 1}`}
-            >
-              {unlocked.map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.icon} {m.name}
-                </option>
-              ))}
-            </select>
-          ))}
-          <p className="pc-small">
-            {unlocked.length} of {MOVES.length} moves unlocked. ★ marks the move Pochi does when you say hello.
-          </p>
-        </div>
-      </aside>
-      <section>
-        <div className="pc-cards moves">
-          {MOVES.map((m, i) => {
-            const ok = moveUnlocked(s, m.id)
-            const pack = m.packId ? PACKS.find((p) => p.id === m.packId) : null
-            const fav = look.favoriteMove === m.id
-            return (
-              <article key={m.id} className={`pc-move ${ok ? '' : 'is-locked'} ${fav ? 'is-fav' : ''} ${move?.id === m.id ? 'is-playing' : ''}`} style={{ animationDelay: `${Math.min(i, 14) * 30}ms` }}>
-                <span className="pc-move-icon" aria-hidden>
-                  {m.icon}
-                </span>
-                <b>{m.name}</b>
-                <small>{m.note}</small>
-                <div className="pc-move-actions">
-                  <button type="button" className="pc-btn sm primary" onClick={() => play(m)} disabled={!ok}>
-                    <Icon name="play" size={12} fill /> Play
-                  </button>
-                  {ok && (
-                    <button type="button" className={`pc-btn sm pc-fav ${fav ? 'on' : ''}`} onClick={() => club.setLook({ favoriteMove: m.id })} title="Pochi does this when you say hello" aria-pressed={fav}>
-                      <Icon name="star" size={14} fill={fav} />
-                    </button>
-                  )}
-                </div>
-                {!ok &&
-                  (pack ? (
-                    <span className="pc-tag">
-                      {pack.icon} {pack.name} pack
-                    </span>
-                  ) : (
-                    <span className="pc-tag">
-                      <Icon name="lock" size={11} /> {m.unlockAt} stars{m.bond ? ` · bond ${m.bond}` : ''}
-                    </span>
-                  ))}
-              </article>
-            )
-          })}
-        </div>
-        <h3 className="pc-h" style={{ marginTop: 22 }}>
-          Animation packs
-        </h3>
-        <Packs s={s} buy={buy} />
-      </section>
     </div>
   )
 }
