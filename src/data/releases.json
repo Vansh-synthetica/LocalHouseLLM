@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-23T00:17:11.372Z",
+  "syncedAt": "2026-11-23T08:58:44.481Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,41 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.35",
+      "latest": "v1.2.36",
       "releases": [
+        {
+          "tag": "v1.2.36",
+          "version": "1.2.36",
+          "name": "Anvira Notes 1.2.36",
+          "date": "2026-11-23T08:05:30Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.36",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.36.exe",
+            "size": 173342010,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.36/Anvira-Notes-Setup-1.2.36.exe",
+            "sha256": "33fdb5cded738a251ff54b191233b5d2171cb27dc88feda03fa4e21bd5419bcc"
+          },
+          "summary": "Recording lectures works with antivirus programs.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Recording lectures works with antivirus programs.</p>"
+            },
+            {
+              "title": "Record a lecture",
+              "html": "<ul><li>The speech engine now comes with the app, so recording no longer has to download a program the first time. Some antivirus programs (Avast, AVG) flagged that downloaded engine by mistake as a threat. The first setup now only downloads the speech model.</li><li>If an antivirus still stops the engine, Anvira says so plainly: it's a false alarm, and you can allow the engine's folder in your antivirus. An <strong>Open the engine folder</strong> button takes you straight there.</li><li>If capturing the PC audio fails, the message now says what Windows reported, and suggests the microphone instead.</li></ul><p>The speech engine is whisper.cpp's official, unchanged open-source build. The app checks it against a pinned checksum, and everything is still transcribed on your PC.</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.35",
           "version": "1.2.35",
           "name": "Anvira Notes 1.2.35",
           "date": "2026-11-22T20:42:39Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.35",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.35.exe",
             "size": 162778297,
