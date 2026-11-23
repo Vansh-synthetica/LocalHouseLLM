@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-17T20:52:01.787Z",
+  "syncedAt": "2026-11-23T00:17:11.372Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,62 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.34",
+      "latest": "v1.2.35",
       "releases": [
+        {
+          "tag": "v1.2.35",
+          "version": "1.2.35",
+          "name": "Anvira Notes 1.2.35",
+          "date": "2026-11-22T20:42:39Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.35",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.35.exe",
+            "size": 162778297,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.35/Anvira-Notes-Setup-1.2.35.exe",
+            "sha256": "1a5d4ba88231635a2fe2e4c2a62d5378c7634b28f66e225d245c5aa0e8f03d82"
+          },
+          "summary": "A brand new Pochi Club, and a smoother, more satisfying Notes.",
+          "highlights": [
+            {
+              "kind": "Pochi Club, redesigned",
+              "text": "Wardrobe categories"
+            },
+            {
+              "kind": "Pochi Club, redesigned",
+              "text": "Try before you buy"
+            },
+            {
+              "kind": "Pochi Club, redesigned",
+              "text": "Pochi really moves now"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>A brand new Pochi Club, and a smoother, more satisfying Notes.</p>"
+            },
+            {
+              "title": "Pochi Club, redesigned",
+              "html": "<ul><li>A new console-style home for Pochi: shelves along the bottom, Pochi on her stage, and a big card for whatever you pick. Drive it all with the arrow keys, or click.</li><li><strong>Wardrobe categories</strong>: Hats &amp; bows, Glasses, Face, Outfits, Bags &amp; wings and Auras, plus All. Each shows how many you own. Sort by shelf, price or what you own.</li><li><strong>Try before you buy</strong>: try on as many things as you like, even ones you can't buy yet. Keep the look with one <strong>Buy all</strong> using your Tuna Coins, or clear it.</li><li><strong>Pochi really moves now</strong>: every move is acted out with her fins, antenna, feet and eyes, with squash and stretch, and little pixel hearts, notes, stars, dust and confetti.</li><li>Quests and the wallet have their own shelves.</li><li>Light mode: the club follows Study's light and dark setting.</li></ul>"
+            },
+            {
+              "title": "Notes",
+              "html": "<ul><li>The editor toolbar stays on one row and tucks tools away neatly as the window gets narrower.</li><li>Menus and dropdowns fade in and out, and work with the arrow keys and Enter.</li><li>Arrow keys move through the sidebar and the page tree.</li><li>Optional tap sounds (Settings → Sounds): soft <strong>Felt</strong> or <strong>Pebble</strong>, with a volume slider.</li></ul>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li>The AI edit panel no longer shows a bare <code>{}</code> instead of an answer.</li><li>The sidebar now opens over the labs and the Pochi Club.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.34",
           "version": "1.2.34",
           "name": "Anvira Notes 1.2.34",
           "date": "2026-11-17T19:16:02Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.34",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.34.exe",
             "size": 162744576,
@@ -23,29 +70,7 @@
             "sha256": "46532b14c2d92c29242623e35374f3714ccc8c16ca8c6b09c10bd94ae6bbf90d"
           },
           "summary": "New Electricity and Magnetism sections in the Physics Lab.",
-          "highlights": [],
-          "notes": [
-            {
-              "title": "",
-              "html": "<p>New Electricity and Magnetism sections in the Physics Lab.</p>"
-            },
-            {
-              "title": "Physics Lab: Electricity",
-              "html": "<ul><li>Ohm's law: set the resistance directly, or build it from a real wire (length, thickness, material). An ammeter and a voltmeter read along, next to the I–V graph.</li><li>Coulomb's law with charges you can drag around.</li><li>Electric field and potential.</li><li>Series and parallel circuits: click a resistor to burn it out and see what happens to the others.</li><li>Power and energy, including working out your electricity bill.</li><li>Capacitors and RC charging.</li><li>Kirchhoff's laws: walk each loop and watch the voltages add to zero.</li><li>Circuit builder: wires, resistors, bulbs, batteries, switches and capacitors, with ready-made circuits to start from.</li></ul>"
-            },
-            {
-              "title": "Physics Lab: Magnetism",
-              "html": "<ul><li>The magnetic field round a long wire, a solenoid and a moving charge.</li><li>The force on a wire in a field, two parallel wires, and a rod sliding through a field (how a generator works).</li></ul><p>Every simulation shows its formulas with your numbers, has worked examples with a <strong>Try it</strong> button, and works in Tagalog.</p>"
-            },
-            {
-              "title": "Solve",
-              "html": "<ul><li>Type problems about Ohm's law, power and bills, capacitors, Kirchhoff's laws, Coulomb's law and magnetic forces, and get the full working with a live simulation.</li></ul>"
-            },
-            {
-              "title": "Fixed",
-              "html": "<ul><li>Math Lab: <strong>Systems of equations</strong> works again (it refused every pair of equations).</li><li>Physics Solve: &quot;a lamp draws 0.5 A from…&quot; no longer loses the current.</li><li>Clearer labels in Refraction and a few other simulations.</li></ul>"
-            }
-          ]
+          "highlights": []
         },
         {
           "tag": "v1.2.33",
