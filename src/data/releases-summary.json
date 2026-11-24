@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-23T08:58:44.481Z",
+  "syncedAt": "2026-11-24T05:20:51.985Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,50 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.36",
+      "latest": "v1.2.37",
       "releases": [
+        {
+          "tag": "v1.2.37",
+          "version": "1.2.37",
+          "name": "Anvira Notes 1.2.37",
+          "date": "2026-11-23T21:47:20Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.37",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.37.exe",
+            "size": 173348537,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.37/Anvira-Notes-Setup-1.2.37.exe",
+            "sha256": "27f73aebdddc9eaa1711154c3f9ac7c404d0edf094c829f0afa40bbd48802353"
+          },
+          "summary": "Lessons are ready sooner.",
+          "highlights": [
+            {
+              "kind": "Study",
+              "text": "Prepare lessons while idle"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Lessons are ready sooner.</p>"
+            },
+            {
+              "title": "Study",
+              "html": "<ul><li><strong>Prepare lessons while idle.</strong> When you're away from the PC, Anvira quietly writes flashcards and quiz questions for the notebooks you changed recently. Later, <strong>Make a lesson</strong> finds most of the work already done. Flashcards then take about a second instead of several, and a quiz takes about half as long.</li><li>It's built to go easy on your PC:<ul><li>It runs only when the whole PC has been idle for a while, it's plugged in, and the model runs on a graphics card. It never runs on battery or when the model is on the CPU.</li><li>It works in short bursts with long rests in between, so the graphics card stays cool and quiet. Busy programs make the rests longer.</li><li>It stops at once when you touch the keyboard or mouse, unplug, or the PC gets hot. Work it already finished is kept.</li><li>Each notebook is prepared once per change.</li></ul></li><li>You can turn it off in <strong>Settings → Study → Prepare lessons while idle</strong>.</li></ul>"
+            },
+            {
+              "title": "With Anvira Runtime 1.0.3",
+              "html": "<p>On an NVIDIA graphics card, the runtime now writes repetitive text, like flashcards, up to about 1.7× faster. It does this by reusing phrases that already appear in the notes and in its own answer. Answers come out the same, and on a CPU nothing changes. Click <strong>Runtime update</strong> at the top right to get it. Anvira Notes 1.2.37 also works with Runtime 1.0.2.</p><p>If you have an earlier Anvira Notes, it offers this update by itself: click <strong>Update available</strong> at the top right, then <strong>Restart to update</strong>. Or download Anvira-Notes-Setup-1.2.37.exe below. Your notes, lessons and settings are kept.</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.36",
           "version": "1.2.36",
           "name": "Anvira Notes 1.2.36",
           "date": "2026-11-23T08:05:30Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.36",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.36.exe",
             "size": 173342010,
@@ -23,17 +58,7 @@
             "sha256": "33fdb5cded738a251ff54b191233b5d2171cb27dc88feda03fa4e21bd5419bcc"
           },
           "summary": "Recording lectures works with antivirus programs.",
-          "highlights": [],
-          "notes": [
-            {
-              "title": "",
-              "html": "<p>Recording lectures works with antivirus programs.</p>"
-            },
-            {
-              "title": "Record a lecture",
-              "html": "<ul><li>The speech engine now comes with the app, so recording no longer has to download a program the first time. Some antivirus programs (Avast, AVG) flagged that downloaded engine by mistake as a threat. The first setup now only downloads the speech model.</li><li>If an antivirus still stops the engine, Anvira says so plainly: it's a false alarm, and you can allow the engine's folder in your antivirus. An <strong>Open the engine folder</strong> button takes you straight there.</li><li>If capturing the PC audio fails, the message now says what Windows reported, and suggests the microphone instead.</li></ul><p>The speech engine is whisper.cpp's official, unchanged open-source build. The app checks it against a pinned checksum, and everything is still transcribed on your PC.</p>"
-            }
-          ]
+          "highlights": []
         },
         {
           "tag": "v1.2.35",
@@ -1770,15 +1795,42 @@
       "repo": "Vansh-synthetica/Anvira-Runtime",
       "page": "/anvira#runtime",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases",
-      "latest": "v1.0.2",
+      "latest": "v1.0.3",
       "releases": [
+        {
+          "tag": "v1.0.3",
+          "version": "1.0.3",
+          "name": "Anvira Runtime 1.0.3",
+          "date": "2026-11-23T21:49:42Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/tag/v1.0.3",
+          "latest": true,
+          "installer": {
+            "name": "AnviraRuntime-1.0.3-win-x64.zip",
+            "size": 49017643,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/download/v1.0.3/AnviraRuntime-1.0.3-win-x64.zip",
+            "sha256": "145a0402b5166e649695d86bd3debdb5d2bdf7d089488527720c7c1be8419e6b"
+          },
+          "summary": "Repetitive text is written up to about 1.7× faster. When the model runs fully on an NVIDIA GPU, llama-server now guesses the next few words from phrases already in the prompt and in its own answer, then checks them…",
+          "highlights": [
+            {
+              "kind": "Faster on a graphics card",
+              "text": "Repetitive text is written up to about 1.7× faster"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Faster on a graphics card",
+              "html": "<ul><li><strong>Repetitive text is written up to about 1.7× faster.</strong> When the model runs fully on an NVIDIA GPU, llama-server now guesses the next few words from phrases already in the prompt and in its own answer, then checks them all in one step (n-gram speculation, no extra model). Flashcards, quiz questions and other structured answers gain the most. On an RTX 3050 with a 3B model, a flashcard set went from 19.5 s to 11.4 s. The answers are the same as before.</li><li>On the processor it slowed things down in our tests, so it stays off there. It also stays off when part of the model sits outside the GPU, or when the llama-server build doesn't support it.</li><li>New setting <code>models.speculative</code>: <code>auto</code> (default), <code>off</code> or <code>on</code>. Example: <code>anvira config set models.speculative off</code>.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.0.2",
           "version": "1.0.2",
           "name": "Anvira Runtime 1.0.2",
           "date": "2026-10-13T11:31:06Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/tag/v1.0.2",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "AnviraRuntime-1.0.2-win-x64.zip",
             "size": 49241429,
@@ -1790,12 +1842,6 @@
             {
               "kind": "Faster",
               "text": "The AI serves more than one request at a time"
-            }
-          ],
-          "notes": [
-            {
-              "title": "Faster",
-              "html": "<ul><li><strong>The AI serves more than one request at a time.</strong> llama-server now runs several slots over one shared context pool: 4 on a GPU with a 16k context, 2 on the processor (whose context grows to 8k for this: a few hundred MB of memory for a small model), 1 when the context is smaller. Chat, Ask AI and ghost text no longer wait behind an exam or lesson being written, and every slot can still use the whole context, so a long prompt never gets less room than before.</li><li>New setting <code>models.parallel</code> (default: automatic) to choose the number of slots yourself: <code>anvira config set models.parallel 2</code>.</li></ul>"
             }
           ]
         },
