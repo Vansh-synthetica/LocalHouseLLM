@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-24T05:20:51.985Z",
+  "syncedAt": "2026-11-25T22:28:42.497Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,71 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.37",
+      "latest": "v1.2.39",
       "releases": [
+        {
+          "tag": "v1.2.39",
+          "version": "1.2.39",
+          "name": "Anvira Notes 1.2.39",
+          "date": "2026-11-25T19:44:38Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.39",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.39.exe",
+            "size": 173335459,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.39/Anvira-Notes-Setup-1.2.39.exe",
+            "sha256": "e0c79806fa25391de9532761f20fe4a322d8b0e4a67eca91049fabafd317c5b9"
+          },
+          "summary": "Speaker labels and page edits work again.",
+          "highlights": [
+            {
+              "kind": "Record a lecture",
+              "text": "Label speakers"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Speaker labels and page edits work again.</p>"
+            },
+            {
+              "title": "Record a lecture",
+              "html": "<ul><li><strong>Label speakers</strong> works again. The open-source project behind the speaker model updated its file on 19 November, and from then on the download was turned down with &quot;did not match its checksum&quot;. Anvira now accepts the new version as well as the old one, so labels that already work keep working.</li></ul>"
+            },
+            {
+              "title": "Edit page",
+              "html": "<ul><li>Asking the AI to rewrite a page no longer shows a jumble of code in the chat. When the AI's edits contained quoted titles or line breaks, Anvira couldn't read them and showed them as text instead. It now reads them and applies the changes. If an edit still can't be used, you're told plainly that nothing was changed.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.38",
+          "version": "1.2.38",
+          "name": "Anvira Notes 1.2.38",
+          "date": "2026-11-25T19:07:27Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.38",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.38.exe",
+            "size": 173342085,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.38/Anvira-Notes-Setup-1.2.38.exe",
+            "sha256": "ef0e0e394f61f90dca78abc1f1f0e0caea59f71a775dc0bef2ed33cedb6db52b"
+          },
+          "summary": "Recording the PC audio works again.",
+          "highlights": [
+            {
+              "kind": "Record a lecture",
+              "text": "PC audio"
+            }
+          ]
+        },
         {
           "tag": "v1.2.37",
           "version": "1.2.37",
           "name": "Anvira Notes 1.2.37",
           "date": "2026-11-23T21:47:20Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.37",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.37.exe",
             "size": 173348537,
@@ -27,20 +83,6 @@
             {
               "kind": "Study",
               "text": "Prepare lessons while idle"
-            }
-          ],
-          "notes": [
-            {
-              "title": "",
-              "html": "<p>Lessons are ready sooner.</p>"
-            },
-            {
-              "title": "Study",
-              "html": "<ul><li><strong>Prepare lessons while idle.</strong> When you're away from the PC, Anvira quietly writes flashcards and quiz questions for the notebooks you changed recently. Later, <strong>Make a lesson</strong> finds most of the work already done. Flashcards then take about a second instead of several, and a quiz takes about half as long.</li><li>It's built to go easy on your PC:<ul><li>It runs only when the whole PC has been idle for a while, it's plugged in, and the model runs on a graphics card. It never runs on battery or when the model is on the CPU.</li><li>It works in short bursts with long rests in between, so the graphics card stays cool and quiet. Busy programs make the rests longer.</li><li>It stops at once when you touch the keyboard or mouse, unplug, or the PC gets hot. Work it already finished is kept.</li><li>Each notebook is prepared once per change.</li></ul></li><li>You can turn it off in <strong>Settings → Study → Prepare lessons while idle</strong>.</li></ul>"
-            },
-            {
-              "title": "With Anvira Runtime 1.0.3",
-              "html": "<p>On an NVIDIA graphics card, the runtime now writes repetitive text, like flashcards, up to about 1.7× faster. It does this by reusing phrases that already appear in the notes and in its own answer. Answers come out the same, and on a CPU nothing changes. Click <strong>Runtime update</strong> at the top right to get it. Anvira Notes 1.2.37 also works with Runtime 1.0.2.</p><p>If you have an earlier Anvira Notes, it offers this update by itself: click <strong>Update available</strong> at the top right, then <strong>Restart to update</strong>. Or download Anvira-Notes-Setup-1.2.37.exe below. Your notes, lessons and settings are kept.</p>"
             }
           ]
         },
