@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-25T22:28:42.497Z",
+  "syncedAt": "2026-11-26T23:48:42.119Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,103 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.39",
+      "latest": "v1.2.42",
       "releases": [
+        {
+          "tag": "v1.2.42",
+          "version": "1.2.42",
+          "name": "Anvira Notes 1.2.42",
+          "date": "2026-11-26T19:31:53Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.42",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.42.exe",
+            "size": 173357578,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.42/Anvira-Notes-Setup-1.2.42.exe",
+            "sha256": "18fb08cf5f4fa2c758f75d95382765936717f2f76ee4fcb37f23d044c62f1624"
+          },
+          "summary": "A small fix for how the window looks while a dialog is open.",
+          "highlights": [
+            {
+              "kind": "Fixed",
+              "text": "Even dimming behind dialogs"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Window buttons match"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>A small fix for how the window looks while a dialog is open.</p>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li><strong>Even dimming behind dialogs:</strong> when a dialog opens, the side rail now darkens with the rest of the window, so there's no bright strip down the left edge.</li><li><strong>Window buttons match:</strong> the minimise, maximise and close buttons darken too, so the top-right corner no longer shows a lighter box.</li></ul><p>This works with both the usual look and the Mac-style look preview (Settings → Look).</p>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.41",
+          "version": "1.2.41",
+          "name": "Anvira Notes 1.2.41",
+          "date": "2026-11-26T18:48:19Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.41",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.41.exe",
+            "size": 173355258,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.41/Anvira-Notes-Setup-1.2.41.exe",
+            "sha256": "bdcaf02084ac086c29f025a71181c5704873ad030e6442770a951e7a866b53e1"
+          },
+          "summary": "Try a new, Mac-style look for Anvira. It's a preview: switch it on or off whenever you like.",
+          "highlights": [
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Cleaner type"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "One sidebar"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Calmer greys"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Smooth section switching"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Settings like System Settings"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.40",
+          "version": "1.2.40",
+          "name": "Anvira Notes 1.2.40",
+          "date": "2026-11-26T17:40:00Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.40",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.40.exe",
+            "size": 173356195,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.40/Anvira-Notes-Setup-1.2.40.exe",
+            "sha256": "183336c2516ae04e44c96cb479e98fd0fe63f6c4e863632bffa80690035d8371"
+          },
+          "summary": "Smoother everywhere: fewer flashes, no blank starts and clearer AI states.",
+          "highlights": []
+        },
         {
           "tag": "v1.2.39",
           "version": "1.2.39",
           "name": "Anvira Notes 1.2.39",
           "date": "2026-11-25T19:44:38Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.39",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.39.exe",
             "size": 173335459,
@@ -27,20 +115,6 @@
             {
               "kind": "Record a lecture",
               "text": "Label speakers"
-            }
-          ],
-          "notes": [
-            {
-              "title": "",
-              "html": "<p>Speaker labels and page edits work again.</p>"
-            },
-            {
-              "title": "Record a lecture",
-              "html": "<ul><li><strong>Label speakers</strong> works again. The open-source project behind the speaker model updated its file on 19 November, and from then on the download was turned down with &quot;did not match its checksum&quot;. Anvira now accepts the new version as well as the old one, so labels that already work keep working.</li></ul>"
-            },
-            {
-              "title": "Edit page",
-              "html": "<ul><li>Asking the AI to rewrite a page no longer shows a jumble of code in the chat. When the AI's edits contained quoted titles or line breaks, Anvira couldn't read them and showed them as text instead. It now reads them and applies the changes. If an edit still can't be used, you're told plainly that nothing was changed.</li></ul>"
             }
           ]
         },
@@ -1936,15 +2010,45 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.2.4",
+      "latest": "v1.2.5",
       "releases": [
+        {
+          "tag": "v1.2.5",
+          "version": "1.2.5",
+          "name": "Anvira Notes 1.2.5",
+          "date": "2026-11-26T18:18:09Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.5",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.2.5.apk",
+            "size": 95006955,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.5/Anvira-Notes-1.2.5.apk",
+            "sha256": "4292e1c72d76379064d8038d351dd4737e35ed4a8ad50c1dd6143f2d9abd1b02"
+          },
+          "summary": "A calmer, softer look, and everything is easier to tap.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.2.5 for Android",
+              "html": "<p>A calmer, softer look, and everything is easier to tap.</p>"
+            },
+            {
+              "title": "A calmer, softer look",
+              "html": "<ul><li>Floating parts (the tab bar, round buttons, sheets and the iPad sidebar) are now soft frosted glass, and cards sit gently raised on the page. A faint, still wash of colour sits behind everything. It is easy on the eyes and costs no battery, because nothing moves.</li><li>Settings looks like iPhone Settings: each section has its own coloured icon, and grey hint text is easier to read in dark mode.</li><li>On the Notes home, the new-page cards (doc, board, sheet, template, record, import) each have their own colour. The search field is pressed into the page, and the All / Docs / Boards / Sheets filter slides.</li><li>Content fades out under the status bar as you scroll, instead of being cut off at a hard line.</li></ul>"
+            },
+            {
+              "title": "Easier to tap",
+              "html": "<ul><li>Buttons and choices in Settings were sized for a mouse. They are now finger-sized: choices are taller, buttons bigger, and small buttons react to a tap anywhere close to them.</li><li>Long choice rows (school level, language) move under their label on a phone instead of squeezing.</li><li>Checked on small phones (iPhone SE size), large phones and tablets, in light and dark.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.4",
           "version": "1.2.4",
           "name": "Anvira Notes 1.2.4",
           "date": "2026-11-17T19:06:26Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.4",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.2.4.apk",
             "size": 95005443,
@@ -1964,24 +2068,6 @@
             {
               "kind": "Physics Lab: Electricity and Magnetism",
               "text": "Solve"
-            }
-          ],
-          "notes": [
-            {
-              "title": "Anvira Notes 1.2.4 for Android",
-              "html": "<p>New electricity and magnetism labs, and every lab now fits a phone screen properly.</p>"
-            },
-            {
-              "title": "Physics Lab: Electricity and Magnetism",
-              "html": "<ul><li><strong>Electricity tab:</strong> Ohm's law (set R directly or build it from a real wire), Coulomb's law with drag-able charges, electric field and potential, series and parallel circuits (tap a resistor to burn it out), power and energy with your electricity bill, capacitors and RC charging, Kirchhoff's laws, and the circuit builder.</li><li><strong>Magnetism tab:</strong> magnetic fields, the force on a wire, two parallel wires, and a rod sliding through a field (how generators work).</li><li>Every simulation has live formulas with your numbers, worked examples with a <strong>Try it</strong> button, and Tagalog.</li><li><strong>Solve:</strong> type problems about Ohm's law, power and bills, capacitors, Kirchhoff, Coulomb's law and magnetic forces and get the full working with a live simulation.</li></ul>"
-            },
-            {
-              "title": "Every lab looks right on a phone",
-              "html": "<ul><li>Lab panels show all their controls inside the card.</li><li>Buttons under a simulation wrap onto a second row instead of running off the screen.</li><li>Labels on simulations no longer overlap (Refraction, Kirchhoff, Power, Coulomb and more).</li><li>The whole periodic table fits the screen; tap an element to see its details.</li><li>Shorter example text in Chemistry search and Research Studio, so nothing is cut off.</li></ul>"
-            },
-            {
-              "title": "Fixed",
-              "html": "<ul><li>Math Lab: <strong>Systems of equations</strong> works again (it refused every pair of equations).</li><li>Physics Solve: &quot;a lamp draws 0.5 A from…&quot; no longer loses the current.</li></ul>"
             }
           ]
         },

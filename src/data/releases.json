@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-25T22:28:42.497Z",
+  "syncedAt": "2026-11-26T23:48:42.119Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,131 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.39",
+      "latest": "v1.2.42",
       "releases": [
+        {
+          "tag": "v1.2.42",
+          "version": "1.2.42",
+          "name": "Anvira Notes 1.2.42",
+          "date": "2026-11-26T19:31:53Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.42",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.42.exe",
+            "size": 173357578,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.42/Anvira-Notes-Setup-1.2.42.exe",
+            "sha256": "18fb08cf5f4fa2c758f75d95382765936717f2f76ee4fcb37f23d044c62f1624"
+          },
+          "summary": "A small fix for how the window looks while a dialog is open.",
+          "highlights": [
+            {
+              "kind": "Fixed",
+              "text": "Even dimming behind dialogs"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Window buttons match"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>A small fix for how the window looks while a dialog is open.</p>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li><strong>Even dimming behind dialogs:</strong> when a dialog opens, the side rail now darkens with the rest of the window, so there's no bright strip down the left edge.</li><li><strong>Window buttons match:</strong> the minimise, maximise and close buttons darken too, so the top-right corner no longer shows a lighter box.</li></ul><p>This works with both the usual look and the Mac-style look preview (Settings → Look).</p>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.41",
+          "version": "1.2.41",
+          "name": "Anvira Notes 1.2.41",
+          "date": "2026-11-26T18:48:19Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.41",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.41.exe",
+            "size": 173355258,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.41/Anvira-Notes-Setup-1.2.41.exe",
+            "sha256": "bdcaf02084ac086c29f025a71181c5704873ad030e6442770a951e7a866b53e1"
+          },
+          "summary": "Try a new, Mac-style look for Anvira. It's a preview: switch it on or off whenever you like.",
+          "highlights": [
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Cleaner type"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "One sidebar"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Calmer greys"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Smooth section switching"
+            },
+            {
+              "kind": "New: Mac-style look (preview)",
+              "text": "Settings like System Settings"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Try a new, Mac-style look for Anvira. It's a preview: switch it on or off whenever you like.</p>"
+            },
+            {
+              "title": "New: Mac-style look (preview)",
+              "html": "<p>Turn it on in <strong>Settings → Look → Mac-style look (preview)</strong>. It's off until you switch it on, and turning it off puts everything back exactly as it was.</p><ul><li><strong>Cleaner type:</strong> the app uses Inter, a crisp font close to the one on Apple devices, with tighter large titles.</li><li><strong>One sidebar:</strong> the section rail and the Notes sidebar share one tone that runs to the top of the window, and the top bar blends into the toolbar under it, like a Mac app.</li><li><strong>Calmer greys:</strong> slightly cooler dark greys and thin dividers instead of boxes. Sidebar headings read &quot;Recent&quot; and &quot;Pages&quot; instead of capitals.</li><li><strong>Smooth section switching:</strong> the highlight glides from Notes to Study to Messages instead of jumping.</li><li><strong>Settings like System Settings:</strong> each section has its own coloured icon.</li></ul><p>The first time you switch it on, Anvira downloads the Inter font (a small file). Until then, and when you're offline, it uses the usual font.</p><p>Tell us what you think with <strong>Report a problem</strong> in the account menu: we'd like to know whether it should become the default.</p>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.40",
+          "version": "1.2.40",
+          "name": "Anvira Notes 1.2.40",
+          "date": "2026-11-26T17:40:00Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.40",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.40.exe",
+            "size": 173356195,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.40/Anvira-Notes-Setup-1.2.40.exe",
+            "sha256": "183336c2516ae04e44c96cb479e98fd0fe63f6c4e863632bffa80690035d8371"
+          },
+          "summary": "Smoother everywhere: fewer flashes, no blank starts and clearer AI states.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>Smoother everywhere: fewer flashes, no blank starts and clearer AI states.</p>"
+            },
+            {
+              "title": "Everywhere",
+              "html": "<ul><li>Switching between Study and Notes, Messages or Settings no longer flashes grey on the way.</li><li>The app opens faster: the start-up animation now takes about a second instead of two.</li><li>Empty screens (no notebooks, no chats yet) ease in instead of popping up, and loading spinners fade in gently. A quick load no longer flickers.</li></ul>"
+            },
+            {
+              "title": "Notes",
+              "html": "<ul><li>Anvira reopens the page you were on last, instead of a blank new page.</li><li>When a notebook takes a moment to open, a quiet placeholder appears instead of the empty draft.</li><li>In the sidebar, Recent shows which notebook a page is in when two pages have the same name.</li><li>With Ask AI open on a laptop screen, the toolbar stays on one row, so the page no longer jumps down. The list buttons are also in <strong>Format → Lists</strong>.</li></ul>"
+            },
+            {
+              "title": "Ask AI",
+              "html": "<ul><li>While the AI is starting or a model is still loading, Ask AI says so (&quot;Waiting for … to load&quot;) instead of showing &quot;…&quot;.</li><li>When the AI can't answer, you get the reason in plain words with <strong>Try again</strong> and <strong>AI settings</strong> buttons. Before, it showed &quot;Error: …&quot; as if it were an answer, with an &quot;Insert into page&quot; button. Stopping an answer now just says &quot;Stopped.&quot;</li><li>The Study chat explains AI problems in plain words too.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.39",
           "version": "1.2.39",
           "name": "Anvira Notes 1.2.39",
           "date": "2026-11-25T19:44:38Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.39",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.39.exe",
             "size": 173335459,
@@ -2531,15 +2647,45 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.2.4",
+      "latest": "v1.2.5",
       "releases": [
+        {
+          "tag": "v1.2.5",
+          "version": "1.2.5",
+          "name": "Anvira Notes 1.2.5",
+          "date": "2026-11-26T18:18:09Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.5",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.2.5.apk",
+            "size": 95006955,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.5/Anvira-Notes-1.2.5.apk",
+            "sha256": "4292e1c72d76379064d8038d351dd4737e35ed4a8ad50c1dd6143f2d9abd1b02"
+          },
+          "summary": "A calmer, softer look, and everything is easier to tap.",
+          "highlights": [],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.2.5 for Android",
+              "html": "<p>A calmer, softer look, and everything is easier to tap.</p>"
+            },
+            {
+              "title": "A calmer, softer look",
+              "html": "<ul><li>Floating parts (the tab bar, round buttons, sheets and the iPad sidebar) are now soft frosted glass, and cards sit gently raised on the page. A faint, still wash of colour sits behind everything. It is easy on the eyes and costs no battery, because nothing moves.</li><li>Settings looks like iPhone Settings: each section has its own coloured icon, and grey hint text is easier to read in dark mode.</li><li>On the Notes home, the new-page cards (doc, board, sheet, template, record, import) each have their own colour. The search field is pressed into the page, and the All / Docs / Boards / Sheets filter slides.</li><li>Content fades out under the status bar as you scroll, instead of being cut off at a hard line.</li></ul>"
+            },
+            {
+              "title": "Easier to tap",
+              "html": "<ul><li>Buttons and choices in Settings were sized for a mouse. They are now finger-sized: choices are taller, buttons bigger, and small buttons react to a tap anywhere close to them.</li><li>Long choice rows (school level, language) move under their label on a phone instead of squeezing.</li><li>Checked on small phones (iPhone SE size), large phones and tablets, in light and dark.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.4",
           "version": "1.2.4",
           "name": "Anvira Notes 1.2.4",
           "date": "2026-11-17T19:06:26Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.4",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.2.4.apk",
             "size": 95005443,
