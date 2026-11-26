@@ -9,8 +9,8 @@ import { Reveal, SectionIntro } from '@/components/system/Motion';
 
 const leadership = [
   { name: 'Vansh Bukkarwal', role: 'CEO & Founder' },
-  { name: 'Shandie', role: 'Co-Founder' },
-  { name: 'Genesis', role: 'Co-Founder' },
+  { name: 'Shandie', role: 'CDO & Co-Founder' },
+  { name: 'Genesis', role: 'CBO & Co-Founder' },
   { name: 'Mimi', role: 'tuna eater'},
 ];
 
