@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-11-26T23:48:42.119Z",
+  "syncedAt": "2026-11-27T18:55:23.539Z",
   "products": [
     {
       "id": "anvira-notes",
@@ -7,15 +7,89 @@
       "repo": "Vansh-synthetica/Anvira-Notes-release",
       "page": "/anvira-notes",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases",
-      "latest": "v1.2.42",
+      "latest": "v1.2.44",
       "releases": [
+        {
+          "tag": "v1.2.44",
+          "version": "1.2.44",
+          "name": "Anvira Notes 1.2.44",
+          "date": "2026-11-27T15:18:44Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.44",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.44.exe",
+            "size": 173356922,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.44/Anvira-Notes-Setup-1.2.44.exe",
+            "sha256": "f8b8e36672ced8b57f859e29ded00e78a7aae0111a9ced5cc05c94c6e0c4a501"
+          },
+          "summary": "A fix for shared notes in Messages.",
+          "highlights": [
+            {
+              "kind": "Fixed",
+              "text": "Shared notes open again"
+            },
+            {
+              "kind": "Fixed",
+              "text": "No more lag while it is open"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Double-click to select"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>A fix for shared notes in Messages.</p>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li><strong>Shared notes open again:</strong> tapping <strong>Open</strong> (or <strong>Look inside</strong> on a shared notebook) on a page someone shared in a chat now shows it over the whole window. Before, the preview got squeezed into the small card and flickered, so the note seemed not to open.</li><li><strong>No more lag while it is open:</strong> the flicker kept redrawing the blurred background behind the preview, which slowed the whole app down. That is gone.</li><li><strong>Double-click to select:</strong> double-clicking a word in a shared page's preview now selects it, instead of sending a ❤️ to the message underneath.</li><li>The photo viewer in Messages always fills the window too.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.43",
+          "version": "1.2.43",
+          "name": "Anvira Notes 1.2.43",
+          "date": "2026-11-27T14:54:27Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.43",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-Setup-1.2.43.exe",
+            "size": 173358088,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/download/v1.2.43/Anvira-Notes-Setup-1.2.43.exe",
+            "sha256": "cae5a0920092a99b98e18c375ac8ddf7141930427960a15a28855069d313fbbe"
+          },
+          "summary": "A small fix to Research Studio's examples.",
+          "highlights": [
+            {
+              "kind": "Fixed",
+              "text": "Anonymous school examples"
+            }
+          ],
+          "notes": [
+            {
+              "title": "",
+              "html": "<p>A small fix to Research Studio's examples.</p>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li><strong>Anonymous school examples:</strong> the example titles, the sample project and the AI's worked examples in Research Studio no longer name real schools. They now say things like &quot;a public high school&quot; or &quot;a private senior high school&quot;, so a generated title or paper won't pick up a real school's name by accident.</li><li>The school box now suggests keeping it anonymous. You can still type your own school's name if you want it in your paper.</li></ul>"
+            },
+            {
+              "title": "Also out today: Anvira Runtime 1.0.4",
+              "html": "<p>Loading an AI model can no longer freeze the PC. The Runtime now sizes the model to the memory that is actually free, leaves processor cores for Windows, runs at low priority and stops retrying a model that won't fit. If there isn't enough room, it tells you so instead of loading. Anvira will offer the Runtime update on its own.</p>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.42",
           "version": "1.2.42",
           "name": "Anvira Notes 1.2.42",
           "date": "2026-11-26T19:31:53Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-release/releases/tag/v1.2.42",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-Setup-1.2.42.exe",
             "size": 173357578,
@@ -2526,15 +2600,54 @@
       "repo": "Vansh-synthetica/Anvira-Runtime",
       "page": "/anvira#runtime",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases",
-      "latest": "v1.0.3",
+      "latest": "v1.0.4",
       "releases": [
+        {
+          "tag": "v1.0.4",
+          "version": "1.0.4",
+          "name": "Anvira Runtime 1.0.4",
+          "date": "2026-11-27T14:49:23Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/tag/v1.0.4",
+          "latest": true,
+          "installer": {
+            "name": "AnviraRuntime-1.0.4-win-x64.zip",
+            "size": 49243996,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/download/v1.0.4/AnviraRuntime-1.0.4-win-x64.zip",
+            "sha256": "7caf8af144a97e7e890c07d4e5b8fe3f538ae2ff80ff87c6f7846da5cb7b6b20"
+          },
+          "summary": "A tester's whole PC froze (only the mouse still moved) when Anvira Notes opened during a Discord call. Opening the app starts the Runtime, which loads your AI model straight away, and that load could take more than…",
+          "highlights": [
+            {
+              "kind": "Loading a model can no longer freeze your PC",
+              "text": "Graphics card"
+            },
+            {
+              "kind": "Loading a model can no longer freeze your PC",
+              "text": "System memory"
+            },
+            {
+              "kind": "Loading a model can no longer freeze your PC",
+              "text": "Processor"
+            },
+            {
+              "kind": "Loading a model can no longer freeze your PC",
+              "text": "No reload loops"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Loading a model can no longer freeze your PC",
+              "html": "<p>A tester's whole PC froze (only the mouse still moved) when Anvira Notes opened during a Discord call. Opening the app starts the Runtime, which loads your AI model straight away, and that load could take more than the PC had to spare. Now it only takes what's actually free:</p><ul><li><strong>Graphics card:</strong> the share for the model is worked out from the card's <em>free</em> memory, keeping room for the display and the apps already using it (at least 768 MB, or 10% of the card). Before, it was based on the card's <em>total</em> memory, and the model's working memory (its KV cache) was underestimated 30–40 times. If the card overflowed, Windows stalled the whole screen. A card that's already busy now gets fewer layers, or none, and the model runs on the processor.</li><li><strong>System memory:</strong> before loading, the Runtime checks the model fits in the free memory and still leaves about 1 GB (or 6% of RAM) for Windows and your apps. If it doesn't fit, it tries a smaller context. If it still doesn't fit, it doesn't load and tells you why: <em>&quot;Not enough free memory to load this model…&quot;</em>, with what to do. New setting <code>models.memory_guard</code> (default <code>true</code>); <code>anvira config set models.memory_guard false</code> loads anyway.</li><li><strong>Processor:</strong> the model always leaves at least two processor threads free and runs at below-normal priority, so Windows, your calls and your browser always come first. When nothing else is busy, it runs just as fast.</li><li><strong>No reload loops:</strong> a model that's busy answering is never killed for being slow to reply to a health check. If it really crashes, it's restarted once, not five times, since each reload re-reads gigabytes.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.0.3",
           "version": "1.0.3",
           "name": "Anvira Runtime 1.0.3",
           "date": "2026-11-23T21:49:42Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Runtime/releases/tag/v1.0.3",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "AnviraRuntime-1.0.3-win-x64.zip",
             "size": 49017643,
@@ -2647,15 +2760,85 @@
       "repo": "Vansh-synthetica/Anvira-Notes-Android-release",
       "page": "/anvira-notes#mobile",
       "releasesUrl": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases",
-      "latest": "v1.2.5",
+      "latest": "v1.2.7",
       "releases": [
+        {
+          "tag": "v1.2.7",
+          "version": "1.2.7",
+          "name": "Anvira Notes 1.2.7 for Android",
+          "date": "2026-11-27T15:23:03Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.7",
+          "latest": true,
+          "installer": {
+            "name": "Anvira-Notes-1.2.7.apk",
+            "size": 95007103,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.7/Anvira-Notes-1.2.7.apk",
+            "sha256": "207d50c045306764a109d2e806c67eb00f44e16ff42f8ebe9183f499d04957fd"
+          },
+          "summary": "A fix for shared notes in Messages.",
+          "highlights": [
+            {
+              "kind": "Fixed",
+              "text": "Shared notes open again"
+            },
+            {
+              "kind": "Fixed",
+              "text": "No more lag while it is open"
+            },
+            {
+              "kind": "Fixed",
+              "text": "Double-tap to select"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.2.7 for Android",
+              "html": "<p>A fix for shared notes in Messages.</p>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li><strong>Shared notes open again:</strong> tapping <strong>Open</strong> (or <strong>Look inside</strong> on a shared notebook) on a page someone shared in a chat now shows it over the whole screen. Before, the preview got squeezed into the small card and flickered, so the note seemed not to open.</li><li><strong>No more lag while it is open:</strong> the flicker kept redrawing the blurred background behind the preview, which slowed the app down. That is gone.</li><li><strong>Double-tap to select:</strong> double-tapping a word in a shared page's preview now selects it, instead of sending a ❤️ to the message underneath.</li><li>The photo viewer in Messages always fills the screen too.</li></ul>"
+            }
+          ]
+        },
+        {
+          "tag": "v1.2.6",
+          "version": "1.2.6",
+          "name": "Anvira Notes 1.2.6 for Android",
+          "date": "2026-11-27T15:00:13Z",
+          "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.6",
+          "latest": false,
+          "installer": {
+            "name": "Anvira-Notes-1.2.6.apk",
+            "size": 95007199,
+            "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/download/v1.2.6/Anvira-Notes-1.2.6.apk",
+            "sha256": "a4e2a083e272efedece23c9853d30e2f7989d7f78166d4eb74e03efdf79c639c"
+          },
+          "summary": "A small fix to Research Studio's examples.",
+          "highlights": [
+            {
+              "kind": "Fixed",
+              "text": "Anonymous school examples"
+            }
+          ],
+          "notes": [
+            {
+              "title": "Anvira Notes 1.2.6 for Android",
+              "html": "<p>A small fix to Research Studio's examples.</p>"
+            },
+            {
+              "title": "Fixed",
+              "html": "<ul><li><strong>Anonymous school examples:</strong> the example titles, the sample project and the AI's worked examples in Research Studio no longer name real schools. They now say things like &quot;a public high school&quot; or &quot;a private senior high school&quot;, so a generated title or paper won't pick up a real school's name by accident.</li><li>The school box now suggests keeping it anonymous. You can still type your own school's name if you want it in your paper.</li></ul>"
+            }
+          ]
+        },
         {
           "tag": "v1.2.5",
           "version": "1.2.5",
           "name": "Anvira Notes 1.2.5",
           "date": "2026-11-26T18:18:09Z",
           "url": "https://github.com/Vansh-synthetica/Anvira-Notes-Android-release/releases/tag/v1.2.5",
-          "latest": true,
+          "latest": false,
           "installer": {
             "name": "Anvira-Notes-1.2.5.apk",
             "size": 95006955,
